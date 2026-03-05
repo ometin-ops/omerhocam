@@ -173,11 +173,12 @@ h6 {
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  background-color: white;
-  border-top: 1px solid var(--border-color);
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
   padding: 0.75rem 1rem;
-  z-index: 60;
+  z-index: 9999;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -224,18 +225,20 @@ h6 {
 }
 
 /* Floating Middle Button Styling */
-.mobile-menu li:nth-child(3) {
+.mobile-menu li.center-button {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
-.mobile-menu li:nth-child(3) a {
+.mobile-menu li.center-button a {
   position: absolute;
   top: -30px;
   width: 64px;
   height: 64px;
-  background-color: var(--primary);
+  background-color: #38b6ff !important;
   border-radius: 50%;
-  border: 4px solid white;
+  border: 4px solid #ffffff;
   box-shadow: 0 4px 15px rgba(56, 182, 255, 0.4);
   color: white !important;
   display: flex;
@@ -244,32 +247,44 @@ h6 {
   flex-direction: column;
 }
 
-.mobile-menu li:nth-child(3) a span {
-  display: none;
-  /* Hide text for a cleaner floating circle */
+.mobile-menu li.center-button a span {
+  display: block !important;
+  position: absolute;
+  top: 70px;
+  /* Positions the text exactly 6px below the 64px tall circle (64px + 6px gap) */
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-.mobile-menu li:nth-child(3) a svg {
+.mobile-menu li.center-button a svg {
   stroke: white !important;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   transform: none !important;
   margin: 0;
 }
 
-.mobile-menu li:nth-child(3) a:hover {
+.mobile-menu li.center-button a:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(56, 182, 255, 0.6);
 }
 
 /* Responsive Media Queries */
 @media (max-width: 768px) {
+  body {
+    padding-bottom: 0;
+    /* Remove unnecessary space, let bottom nav sit directly on top */
+  }
+
   .desktop-menu {
     display: none;
   }
 
   .desktop-header {
     padding: 0.75rem 0;
+    background-color: transparent !important;
   }
 
   .nav-container {
@@ -277,13 +292,31 @@ h6 {
   }
 
   .mobile-nav {
-    display: block;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 80px !important;
+    background: #ffffff !important;
+    z-index: 999999 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border-top: none;
+    /* User specified shadow over border-top basically, but box-shadow handles it */
   }
 
   .main-content {
-    padding-top: 6.5rem;
-    padding-bottom: 80px;
-    /* Crucial: space for bottom nav */
+    padding-top: 100px;
+    padding-bottom: 2rem;
+  }
+
+  .main-footer {
+    padding-bottom: 90px !important;
+    /* Move the space INSIDE the dark footer so no white bar appears below it */
   }
 
   .container {

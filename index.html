@@ -178,217 +178,270 @@
                     <li><a href="#">KVKK Aydınlatma</a></li>
                     <li><a href="#">Çerez Politikası</a></li>
                 </ul>
-    </nav>
+                </nav>
 
-    <style>
-        /* Responsive adjustments for Hero section inline */
-        @media (max-width: 992px) {
-            .hero .container {
-                flex-direction: column !important;
-                text-align: center;
-                gap: 2rem !important;
-                padding-top: 2rem;
-            }
-
-            .hero-content {
-                order: 1;
-            }
-
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-image {
-                order: 2;
-                justify-content: center !important;
-            }
-        }
-
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            background: white;
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(56, 182, 255, 0.15);
-            /* Soft premium shadow */
-            border: 1px solid rgba(56, 182, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Glare Effect */
-        .stats-grid::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-25deg);
-            z-index: 1;
-            transition: left 0.7s ease-in-out;
-            pointer-events: none;
-        }
-
-        .stats-grid:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(56, 182, 255, 0.25);
-            /* Enhanced shadow on hover */
-        }
-
-        .stats-grid:hover::before {
-            left: 200%;
-        }
-
-        .stat-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 0.75rem;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-number-wrapper {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1.2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-label {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 992px) {
-            .stats-section {
-                margin-top: 40px !important;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                padding: 2rem;
-            }
-        }
-
-        /* Typewriter Cursor styling */
-        .blinking-cursor {
-            animation: blink 1s step-end infinite;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @keyframes blink {
-
-            from,
-            to {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Typewriter Effect ---
-            const text1 = "BAŞARIYI ";
-            const text2 = "HEDEFLEYENLERE";
-            const line1El = document.getElementById('typewriter-line1');
-            const line2El = document.getElementById('typewriter-line2');
-            const cursor1El = document.getElementById('cursor-line1');
-            const cursor2El = document.getElementById('cursor-line2');
-
-            let charIndex1 = 0;
-            let charIndex2 = 0;
-            const typingSpeed = 120; // milliseconds per character
-
-            function typeWriter() {
-                if (charIndex1 < text1.length) {
-                    line1El.textContent += text1.charAt(charIndex1);
-                    charIndex1++;
-                    setTimeout(typeWriter, typingSpeed);
-                } else if (charIndex2 === 0) {
-                    // Finished line 1, switch cursors and pause before line 2
-                    cursor1El.classList.add('hidden');
-                    cursor2El.classList.remove('hidden');
-                    setTimeout(() => {
-                        line2El.textContent += text2.charAt(charIndex2);
-                        charIndex2++;
-                        setTimeout(typeWriter, typingSpeed);
-                    }, 400); // slight pause between lines
-                } else if (charIndex2 < text2.length) {
-                    line2El.textContent += text2.charAt(charIndex2);
-                    charIndex2++;
-                    setTimeout(typeWriter, typingSpeed);
-                }
-            }
-
-            // Start typing effect shortly after page loads
-            setTimeout(typeWriter, 400);
-
-            // --- Stats Counter Effect ---
-            const counters = document.querySelectorAll('.stat-number');
-            const duration = 2000; // 2 seconds
-
-            const animateCounters = () => {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-target');
-                    const startTime = performance.now();
-
-                    const updateCount = (currentTime) => {
-                        const elapsedTime = currentTime - startTime;
-                        const progress = Math.min(elapsedTime / duration, 1);
-
-                        // Ease out curve
-                        const easeOut = progress * (2 - progress);
-
-                        counter.innerText = Math.floor(easeOut * target);
-
-                        if (progress < 1) {
-                            requestAnimationFrame(updateCount);
-                        } else {
-                            counter.innerText = target;
+                <style>
+                    /* Responsive adjustments for Hero section inline */
+                    @media (max-width: 992px) {
+                        .hero .container {
+                            flex-direction: column !important;
+                            text-align: center;
+                            gap: 2rem !important;
+                            padding-top: 2rem;
                         }
-                    };
-                    requestAnimationFrame(updateCount);
-                });
-            };
 
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    animateCounters();
-                    observer.disconnect();
-                }
-            }, { threshold: 0.1 });
+                        .hero-content {
+                            order: 1;
+                        }
 
-            const statsSection = document.querySelector('.stats-section');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-        });
-    </script>
+                        .hero-content p {
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+
+                        .hero-image {
+                            order: 2;
+                            justify-content: center !important;
+                        }
+
+                        .stats-grid {
+                            margin-top: 40px;
+                        }
+                    }
+
+                    /* Stats Section */
+                    .stats-grid {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 2rem;
+                        background: white;
+                        padding: 2.5rem;
+                        border-radius: 24px;
+                        box-shadow: 0 4px 20px rgba(56, 182, 255, 0.15);
+                        /* Soft premium shadow */
+                        border: 1px solid rgba(56, 182, 255, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    /* Glare Effect */
+                    .stats-grid::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -150%;
+                        width: 50%;
+                        height: 100%;
+                        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
+                        transform: skewX(-25deg);
+                        z-index: 1;
+                        transition: left 0.7s ease-in-out;
+                        pointer-events: none;
+                    }
+
+                    .stats-grid:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 15px 35px rgba(56, 182, 255, 0.25);
+                        /* Enhanced shadow on hover */
+                    }
+
+                    .stats-grid:hover::before {
+                        left: 200%;
+                    }
+
+                    .stat-card {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        gap: 0.75rem;
+                    }
+
+                    .stat-icon {
+                        width: 48px;
+                        height: 48px;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .stat-number-wrapper {
+                        font-size: 3.5rem;
+                        font-weight: 800;
+                        color: var(--primary);
+                        line-height: 1.2;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .stat-label {
+                        font-size: 1.125rem;
+                        font-weight: 600;
+                        color: var(--text-muted);
+                    }
+
+                    @media (max-width: 992px) {
+                        .stats-section {
+                            margin-top: 40px !important;
+                        }
+
+                        .stats-grid {
+                            grid-template-columns: 1fr;
+                            gap: 2.5rem;
+                            padding: 2rem;
+                        }
+                    }
+
+                    /* Typewriter Cursor styling */
+                    .blinking-cursor {
+                        animation: blink 1s step-end infinite;
+                    }
+
+                    .hidden {
+                        display: none;
+                    }
+
+                    @keyframes blink {
+
+                        from,
+                        to {
+                            opacity: 1;
+                        }
+
+                        50% {
+                            opacity: 0;
+                        }
+                    }
+                </style>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        // --- Typewriter Effect ---
+                        const text1 = "BAŞARIYI ";
+                        const text2 = "HEDEFLEYENLERE";
+                        const line1El = document.getElementById('typewriter-line1');
+                        const line2El = document.getElementById('typewriter-line2');
+                        const cursor1El = document.getElementById('cursor-line1');
+                        const cursor2El = document.getElementById('cursor-line2');
+
+                        let charIndex1 = 0;
+                        let charIndex2 = 0;
+                        const typingSpeed = 120; // milliseconds per character
+
+                        function typeWriter() {
+                            if (charIndex1 < text1.length) {
+                                line1El.textContent += text1.charAt(charIndex1);
+                                charIndex1++;
+                                setTimeout(typeWriter, typingSpeed);
+                            } else if (charIndex2 === 0) {
+                                // Finished line 1, switch cursor before line 2
+                                cursor1El.classList.add('hidden');
+                                cursor2El.classList.remove('hidden');
+                                setTimeout(() => {
+                                    line2El.textContent += text2.charAt(charIndex2);
+                                    charIndex2++;
+                                    setTimeout(typeWriter, typingSpeed);
+                                }, 400); // slight pause
+                            } else if (charIndex2 < text2.length) {
+                                line2El.textContent += text2.charAt(charIndex2);
+                                charIndex2++;
+                                setTimeout(typeWriter, typingSpeed);
+                            }
+                        }
+
+                        // Start typing shortly after load
+                        setTimeout(typeWriter, 400);
+
+                        // --- Stats Counter Effect ---
+                        const counters = document.querySelectorAll('.stat-number');
+                        const duration = 2000; // 2 seconds
+
+                        const animateCounters = () => {
+                            counters.forEach(counter => {
+                                const target = +counter.getAttribute('data-target');
+                                const startTime = performance.now();
+
+                                const updateCount = (currentTime) => {
+                                    const elapsedTime = currentTime - startTime;
+                                    const progress = Math.min(elapsedTime / duration, 1);
+
+                                    // Ease out curve
+                                    const easeOut = progress * (2 - progress);
+                                    counter.innerText = Math.floor(easeOut * target);
+
+                                    if (progress < 1) {
+                                        requestAnimationFrame(updateCount);
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+                                requestAnimationFrame(updateCount);
+                            });
+                        };
+
+                        const observer = new IntersectionObserver((entries) => {
+                            if (entries[0].isIntersecting) {
+                                animateCounters();
+                                observer.disconnect();
+                            }
+                        }, { threshold: 0.5 });
+
+                        // Note: In index.html the selector for stats grid might have been stats-grid or container
+                        const statsSection = document.querySelector('.stats-grid');
+                        if (statsSection) {
+                            observer.observe(statsSection);
+                        }
+                    });
+                </script>
+<nav class="mobile-nav">
+        <ul class="mobile-menu">
+            <li>
+                <a href="blog.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="yorumlar.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Yorumlar</span>
+                </a>
+            </li>
+            <li class="center-button">
+                <a href="ozel-ders.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                    <span>Özel Ders</span>
+                </a>
+            </li>
+            <li>
+                <a href="sss.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>SSS</span>
+                </a>
+            </li>
+            <li>
+                <a href="iletisim.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>İletişim</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </body>
 
 </html>
