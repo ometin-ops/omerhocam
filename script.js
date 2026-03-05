@@ -134,117 +134,120 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsContainer = document.getElementById('carousel-dots');
 
     let currentIndex = 0;
-    let visibleCards = Array.from(testimonialCards);
-    let cardsPerPage = getCardsPerPage();
 
-    function getCardsPerPage() {
-        if (window.innerWidth <= 768) return 1;
-        if (window.innerWidth <= 992) return 2;
-        return 3; // Desktop
-    }
+    if (track) {
+        let visibleCards = Array.from(testimonialCards);
+        let cardsPerPage = getCardsPerPage();
 
-    function updateCarousel() {
-        cardsPerPage = getCardsPerPage();
-        const totalCards = visibleCards.length;
-        const maxIndex = Math.max(0, totalCards - cardsPerPage);
-
-        // Ensure currentIndex is within bounds
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
+        function getCardsPerPage() {
+            if (window.innerWidth <= 768) return 1;
+            if (window.innerWidth <= 992) return 2;
+            return 3; // Desktop
         }
 
-        // Calculate slide distance
-        if (visibleCards.length > 0) {
-            // Get the width of the first visible card + gap (32px)
-            const cardWidth = visibleCards[0].offsetWidth;
-            const gap = 32;
-            const moveX = currentIndex * (cardWidth + gap);
-            track.style.transform = `translateX(-${moveX}px)`;
-        } else {
-            track.style.transform = `translateX(0px)`;
+        function updateCarousel() {
+            cardsPerPage = getCardsPerPage();
+            const totalCards = visibleCards.length;
+            const maxIndex = Math.max(0, totalCards - cardsPerPage);
+
+            // Ensure currentIndex is within bounds
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            // Calculate slide distance
+            if (visibleCards.length > 0) {
+                // Get the width of the first visible card + gap (32px)
+                const cardWidth = visibleCards[0].offsetWidth;
+                const gap = 32;
+                const moveX = currentIndex * (cardWidth + gap);
+                track.style.transform = `translateX(-${moveX}px)`;
+            } else {
+                track.style.transform = `translateX(0px)`;
+            }
+
+            // Update Dots
+            const totalDots = Math.max(0, totalCards - cardsPerPage + 1);
+            dotsContainer.innerHTML = '';
+
+            if (totalCards > cardsPerPage) {
+                for (let i = 0; i < totalDots; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateCarousel();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            // Update Arrow states
+            if (prevBtn && nextBtn) {
+                prevBtn.style.opacity = currentIndex === 0 ? "0.3" : "1";
+                prevBtn.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
+
+                nextBtn.style.opacity = currentIndex >= maxIndex || maxIndex === 0 ? "0.3" : "1";
+                nextBtn.style.pointerEvents = currentIndex >= maxIndex || maxIndex === 0 ? "none" : "auto";
+            }
         }
 
-        // Update Dots
-        const totalDots = Math.max(0, totalCards - cardsPerPage + 1);
-        dotsContainer.innerHTML = '';
-
-        if (totalCards > cardsPerPage) {
-            for (let i = 0; i < totalDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === currentIndex) dot.classList.add('active');
-                dot.addEventListener('click', () => {
-                    currentIndex = i;
+        // Arrow Event Listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
                     updateCarousel();
-                });
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        // Update Arrow states
-        if (prevBtn && nextBtn) {
-            prevBtn.style.opacity = currentIndex === 0 ? "0.3" : "1";
-            prevBtn.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
-
-            nextBtn.style.opacity = currentIndex >= maxIndex || maxIndex === 0 ? "0.3" : "1";
-            nextBtn.style.pointerEvents = currentIndex >= maxIndex || maxIndex === 0 ? "none" : "auto";
-        }
-    }
-
-    // Arrow Event Listeners
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const maxIndex = Math.max(0, visibleCards.length - cardsPerPage);
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-    }
-
-    // Listen to resize to recalculate widths
-    window.addEventListener('resize', () => {
-        updateCarousel();
-    });
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            visibleCards = [];
-            testimonialCards.forEach(card => {
-                if (filterValue === 'all') {
-                    card.classList.remove('hide');
-                    visibleCards.push(card);
-                } else if (card.getAttribute('data-category') === filterValue) {
-                    card.classList.remove('hide');
-                    visibleCards.push(card);
-                } else {
-                    card.classList.add('hide');
                 }
             });
+        }
 
-            currentIndex = 0; // Reset parameter
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const maxIndex = Math.max(0, visibleCards.length - cardsPerPage);
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+        }
 
-            // Allow DOM to update display:none, then recalculate
-            setTimeout(updateCarousel, 50);
+        // Listen to resize to recalculate widths
+        window.addEventListener('resize', () => {
+            updateCarousel();
         });
-    });
 
-    // Initial setup
-    setTimeout(updateCarousel, 100);
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                visibleCards = [];
+                testimonialCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.classList.remove('hide');
+                        visibleCards.push(card);
+                    } else if (card.getAttribute('data-category') === filterValue) {
+                        card.classList.remove('hide');
+                        visibleCards.push(card);
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+
+                currentIndex = 0; // Reset parameter
+
+                // Allow DOM to update display:none, then recalculate
+                setTimeout(updateCarousel, 50);
+            });
+        });
+
+        // Initial setup
+        setTimeout(updateCarousel, 100);
+    }
 });

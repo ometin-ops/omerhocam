@@ -949,6 +949,27 @@ h5 {
     gap: 16px;
 }
 
+.footer-legal .legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-legal .legal-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+.footer-legal .legal-links a:hover {
+    color: var(--neon-green);
+}
+
 .social-link {
     width: 48px;
     height: 48px;

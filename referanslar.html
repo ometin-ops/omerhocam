@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ömer Hoca - Yapay Zeka Destekli Özel Ders ve Profesyonel Öğrenci Koçluğu">
+    <title>Ömer Hoca | Matematik Eğitimi & Öğrenci Koçluğu</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="logo-final.png" alt="Ömer Hoca Logo">
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="ozel-ders.html" class="nav-link">Özel Ders</a></li>
+                    <li><a href="ogrenci-koclugu.html" class="nav-link">Öğrenci Koçluğu</a></li>
+                    <li><a href="referanslar.html" class="nav-link">Yorumlar</a></li>
+                    <li><a href="sss.html" class="nav-link">SSS</a></li>
+                    <li><a href="iletisim.html" class="nav-link btn-contact">İletişim</a></li>
+                </ul>
+                <div class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+<section id="yorumlar" class="section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <h2>Öğrenci ve Veli Değerlendirmeleri</h2>
+                    <p>Bizimle başarıyı yakalayanların hikayeleri.</p>
+                </div>
+
+                <div class="testimonial-filters fade-in">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="student">Öğrenci Yorumları</button>
+                    <button class="filter-btn" data-filter="parent">Veli Yorumları</button>
+                </div>
+
+                <div class="carousel-container fade-in delay-1">
+                    <button class="carousel-arrow prev" aria-label="Önceki"><i class='bx bx-chevron-left'></i></button>
+                    <div class="carousel-view">
+                        <div class="testimonials-track" id="testimonials-track">
+                            <div class="testimonial-card" data-category="student">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Ömer Hoca ile çalışmaya başladıktan sonra matematikteki
+                                    netlerim
+                                    gözle görülür şekilde arttı. Yapay zeka destekli sistemin soru analizleri gerçekten
+                                    çok
+                                    faydalı, tavsiye ederim."</p>
+                                <h4 class="testimonial-author">Ayşe Y.</h4>
+                                <span class="testimonial-role">YKS Öğrencisi</span>
+                            </div>
+                            <div class="testimonial-card" data-category="parent">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Kızımın LGS hazırlık sürecinde koçluk desteği alması en
+                                    doğru
+                                    kararımızdı. Stres yönetiminden ders çalışma programlarına kadar her şey mükemmeldi,
+                                    çok
+                                    teşekkür ederiz."</p>
+                                <h4 class="testimonial-author">Mehmet A.</h4>
+                                <span class="testimonial-role">Veli</span>
+                            </div>
+                            <div class="testimonial-card" data-category="student">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Ara sınıf olmama rağmen matematik temelimi burada çok
+                                    sağlam attık.
+                                    Dersler hiç sıkıcı geçmiyor, yeni nesil sorulara olan bakış açım tamamen değişti."
+                                </p>
+                                <h4 class="testimonial-author">Burak K.</h4>
+                                <span class="testimonial-role">10. Sınıf Öğrencisi</span>
+                            </div>
+                            <div class="testimonial-card" data-category="parent">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Oğlumun matematik korkusunu Ömer Hoca sayesinde yendik.
+                                    Özellikle
+                                    detaylı deneme analizleri ve haftalık takipler çok profesyonel. Emekleriniz için
+                                    minnettarız."</p>
+                                <h4 class="testimonial-author">Zeynep T.</h4>
+                                <span class="testimonial-role">Veli</span>
+                            </div>
+                            <div class="testimonial-card" data-category="student">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Matematiği bu kadar seveceğimi hiç düşünmezdim. Yeni nesil
+                                    sorulara
+                                    yaklaşım taktikleri ve yapay zeka destekli soru havuzu LGS'de çok işime yaradı!"</p>
+                                <h4 class="testimonial-author">Elif S.</h4>
+                                <span class="testimonial-role">8. Sınıf Öğrencisi</span>
+                            </div>
+                            <div class="testimonial-card" data-category="student">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Kişiye özel hazırlanan çalışma programları sayesinde
+                                    eksiklerimi
+                                    çok daha hızlı kapatıyorum. Netlerimdeki artış inanılmaz."</p>
+                                <h4 class="testimonial-author">Caner D.</h4>
+                                <span class="testimonial-role">YKS Öğrencisi</span>
+                            </div>
+                            <div class="testimonial-card" data-category="parent">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Kızımın YKS sürecindeki koçluk desteği bize derin bir nefes
+                                    aldırdı. Sistemli ilerleyişi ve 7/24 soru sorabilme imkanı harika bir güven
+                                    veriyor."</p>
+                                <h4 class="testimonial-author">Ali Rıza C.</h4>
+                                <span class="testimonial-role">Veli</span>
+                            </div>
+                            <div class="testimonial-card" data-category="student">
+                                <div class="quote-icon"><i class='bx bxs-quote-alt-left'></i></div>
+                                <div class="stars">
+                                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                                </div>
+                                <p class="testimonial-text">"Dersler çok interaktif ve verimli geçiyor. Haftalık birebir
+                                    mentorluk görüşmeleri çalışma motivasyonumu hep en üstte tutuyor."</p>
+                                <h4 class="testimonial-author">Melis B.</h4>
+                                <span class="testimonial-role">11. Sınıf Öğrencisi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow next" aria-label="Sonraki"><i
+                            class='bx bx-chevron-right'></i></button>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                </div>
+            </div>
+        </section>
+</main>
+
+    <!-- İletişim & Footer -->
+    <footer id="iletisim" class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="logo.png" alt="Ömer Hoca">
+                </a>
+                <p>Yeni nesil eğitim anlayışıyla, matematikte başarıyı şansa bırakmayın. Eğitimde doğru rehberlik,
+                    başarılı bir geleceğin ilk adımıdır.</p>
+            </div>
+
+            <div class="footer-links-container">
+                <div class="footer-contact">
+                    <h3>İletişim</h3>
+                    <a href="mailto:omerhocatv@gmail.com" class="contact-link">
+                        <div class="icon-box"><i class='bx bx-envelope'></i></div>
+                        <span>omerhocatv@gmail.com</span>
+                    </a>
+                </div>
+
+                <div class="footer-social">
+                    <h3>Bizi Takip Edin</h3>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/omerhoca.tv/?hl=tr" target="_blank" class="social-link"
+                            aria-label="Instagram">
+                            <i class='bx bxl-instagram'></i>
+                        </a>
+                        <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="social-link"
+                            aria-label="YouTube">
+                            <i class='bx bxl-youtube'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-legal">
+                    <h3>Yasal</h3>
+                    <ul class="legal-links">
+                        <li><a href="index.html">Gizlilik Politikası</a></li>
+                        <li><a href="index.html">Kullanım Şartları</a></li>
+                        <li><a href="index.html">KVKK Aydınlatma</a></li>
+                        <li><a href="index.html">Çerez Politikası</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Ömer Hoca. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobil Alt Navigasyon (Bottom Tab Bar) -->
+    <nav class="mobile-bottom-nav">
+        <a href="ogrenci-koclugu.html" class="bottom-nav-link">
+            <i class='bx bx-user'></i>
+            <span>Koçluk</span>
+        </a>
+        <a href="referanslar.html" class="bottom-nav-link">
+            <i class='bx bx-comment-detail'></i>
+            <span>Yorumlar</span>
+        </a>
+        <a href="ozel-ders.html" class="bottom-nav-link action-btn">
+            <div class="action-btn-inner">
+                <i class='bx bx-book-open'></i>
+            </div>
+            <span>Özel Ders</span>
+        </a>
+        <a href="sss.html" class="bottom-nav-link">
+            <i class='bx bx-help-circle'></i>
+            <span>SSS</span>
+        </a>
+        <a href="iletisim.html" class="bottom-nav-link">
+            <i class='bx bx-envelope'></i>
+            <span>İletişim</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
