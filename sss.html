@@ -4,208 +4,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ömer Hoca - Yapay Zeka Destekli Özel Ders ve Profesyonel Öğrenci Koçluğu">
-    <title>Ömer Hoca | Matematik Eğitimi & Öğrenci Koçluğu</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- Custom CSS -->
+    <title>Sıkça Sorulan Sorular | Ömer Hoca</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Boxicons for icons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        details {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        details:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        details[open] {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        summary {
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            /* remove default triangle */
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+            /* remove default triangle for Webkit */
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        details[open] summary::after {
+            content: '-';
+            color: var(--primary);
+            transform: rotate(180deg);
+        }
+
+        .faq-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            border-top: 1px solid transparent;
+        }
+
+        details[open] .faq-content {
+            border-top-color: var(--border-color);
+            padding-top: 1rem;
+            animation: fadeInDown 0.3s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container header-content">
-            <a href="index.html" class="logo">
-                <img src="logo-final.png" alt="Ömer Hoca Logo">
-            </a>
-            <nav class="nav-menu">
-                <ul class="nav-list" id="nav-list">
-                    <li><a href="ozel-ders.html" class="nav-link">Özel Ders</a></li>
-                    <li><a href="ogrenci-koclugu.html" class="nav-link">Öğrenci Koçluğu</a></li>
-                    <li><a href="referanslar.html" class="nav-link">Yorumlar</a></li>
-                    <li><a href="sss.html" class="nav-link">SSS</a></li>
-                    <li><a href="iletisim.html" class="nav-link btn-contact">İletişim</a></li>
-                </ul>
-                <div class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class='bx bx-menu'></i>
-                </div>
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="images/logo2_transparent.png" alt="ÖMER HOCA"></a>
+            <nav class="desktop-menu">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="ozel-ders.html">Özel Ders</a>
+                <a href="kocluk.html">Koçluk</a>
+                <a href="yorumlar.html">Yorumlar</a>
+                <a href="sss.html" class="active">SSS</a>
+                <a href="iletisim.html">İletişim</a>
             </nav>
         </div>
     </header>
 
-    <main>
-<section id="sss" class="section bg-light">
-            <div class="container">
-                <div class="section-title fade-in">
-                    <h2>Sıkça Sorulan Sorular</h2>
-                    <p>Aklınıza takılan soruların cevapları burada.</p>
-                </div>
+    <main class="main-content container animate-fade-in" style="padding-top: 7rem; padding-bottom: 4rem;">
+        <h1 class="section-title">Sıkça Sorulan <span class="text-primary">Sorular</span></h1>
+        <p class="section-subtitle">Süreç ve işleyiş hakkında merak ettiğiniz tüm detaylar</p>
 
-                <div class="faq-accordion fade-in delay-1">
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Dersler nerede yapılıyor?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>Derslerimiz online platformlar üzerinden veya yüz yüze tercih eden öğrencilerimiz
-                                    için Bolu içinde gerçekleştirilmektedir.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Bir ders saati kaç dakika sürüyor?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>Genelde 40+40 veya 60 dakika gibi.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Hangi seviyelere ders veriyorsunuz?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>LGS, YKS, ara sınıf öğrencilerine ve mezunlara yönelik dersler veriyorum.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Öğrenci takibi nasıl yapılıyor?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>Yapay zeka destekli sistemlerimiz ve düzenli gelişim raporlarıyla öğrencinin ödev,
-                                    deneme ve konu eksikleri haftalık olarak detaylıca takip edilir.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Hangi kaynakları kullanıyorsunuz?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>MEB müfredatına ve yeni nesil soru tarzlarına tam uyumlu, özenle seçilmiş kaynaklar
-                                    ve yapay zeka destekli soru havuzumuzu kullanıyoruz.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>Ücretlendirme ve ödeme planı nasıl?</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body">
-                                <p>Ücretlendirme, seçilen pakete ve ders sıklığına göre değişiklik göstermektedir.
-                                    Detaylı bilgi için iletişim kanallarımızdan ulaşabilirsiniz.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="faq-container">
+            <details>
+                <summary>Dersler nasıl işleniyor?</summary>
+                <div class="faq-content">
+                    Derslerimizi öğrencinin seviyesine göre tamamen kişiselleştirilmiş, yeni nesil sorulara odaklanan
+                    interaktif bir sistemle işliyoruz.
                 </div>
-            </div>
-        </section>
-</main>
+            </details>
 
-    <!-- İletişim & Footer -->
-    <footer id="iletisim" class="footer">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <a href="index.html" class="logo footer-logo">
-                    <img src="logo.png" alt="Ömer Hoca">
+            <details>
+                <summary>Hangi seviyelere ders veriyorsunuz?</summary>
+                <div class="faq-content">
+                    LGS, YKS ve 5. sınıftan 11. sınıfa kadar tüm ara sınıflar için özel çalışma programlarımız
+                    mevcuttur.
+                </div>
+            </details>
+
+            <details>
+                <summary>Koçluk sistemi neleri kapsıyor?</summary>
+                <div class="faq-content">
+                    Haftalık ders çalışma programı hazırlama, deneme analizi, motivasyon görüşmeleri ve 7/24 soru
+                    sorabilme imkanı sunuyoruz.
+                </div>
+            </details>
+
+            <details>
+                <summary>Ücretlendirme nasıl yapılıyor?</summary>
+                <div class="faq-content">
+                    Ücretlendirme seçilen paket ve ders saatine göre değişmektedir. Detaylı bilgi için iletişim formunu
+                    doldurabilirsiniz.
+                </div>
+            </details>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <!-- Sol Sütun -->
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <img src="images/logo2_transparent.png" alt="ÖMER HOCA">
                 </a>
-                <p>Yeni nesil eğitim anlayışıyla, matematikte başarıyı şansa bırakmayın. Eğitimde doğru rehberlik,
-                    başarılı bir geleceğin ilk adımıdır.</p>
-            </div>
-
-            <div class="footer-links-container">
-                <div class="footer-contact">
-                    <h3>İletişim</h3>
-                    <a href="mailto:omerhocatv@gmail.com" class="contact-link">
-                        <div class="icon-box"><i class='bx bx-envelope'></i></div>
-                        <span>omerhocatv@gmail.com</span>
+                <p class="footer-desc">Yapay zekanın analitik gücü ile kişiye özel eğitimde başarıya giden yol
+                    haritanızı inşa ediyoruz.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                    <a href="mailto:omerhocatv@gmail.com" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                     </a>
                 </div>
-
-                <div class="footer-social">
-                    <h3>Bizi Takip Edin</h3>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/omerhoca.tv/?hl=tr" target="_blank" class="social-link"
-                            aria-label="Instagram">
-                            <i class='bx bxl-instagram'></i>
-                        </a>
-                        <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="social-link"
-                            aria-label="YouTube">
-                            <i class='bx bxl-youtube'></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-legal">
-                    <h3>Yasal</h3>
-                    <ul class="legal-links">
-                        <li><a href="index.html">Gizlilik Politikası</a></li>
-                        <li><a href="index.html">Kullanım Şartları</a></li>
-                        <li><a href="index.html">KVKK Aydınlatma</a></li>
-                        <li><a href="index.html">Çerez Politikası</a></li>
-                    </ul>
-                </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2026 Ömer Hoca. Tüm hakları saklıdır.</p>
+
+            <!-- Orta Sütun -->
+            <div class="footer-col">
+                <h3 class="footer-title">Hızlı Linkler</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="ozel-ders.html">Özel Ders</a></li>
+                    <li><a href="kocluk.html">Öğrenci Koçluğu</a></li>
+                    <li><a href="yorumlar.html">Referanslar</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </div>
+
+            <!-- Sağ Sütun -->
+            <div class="footer-col">
+                <h3 class="footer-title">Yasal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                    <li><a href="#">KVKK Aydınlatma</a></li>
+                    <li><a href="#">Çerez Politikası</a></li>
+                </ul>
             </div>
         </div>
     </footer>
 
-    <!-- Mobil Alt Navigasyon (Bottom Tab Bar) -->
-    <nav class="mobile-bottom-nav">
-        <a href="ogrenci-koclugu.html" class="bottom-nav-link">
-            <i class='bx bx-user'></i>
-            <span>Koçluk</span>
-        </a>
-        <a href="referanslar.html" class="bottom-nav-link">
-            <i class='bx bx-comment-detail'></i>
-            <span>Yorumlar</span>
-        </a>
-        <a href="ozel-ders.html" class="bottom-nav-link action-btn">
-            <div class="action-btn-inner">
-                <i class='bx bx-book-open'></i>
-            </div>
-            <span>Özel Ders</span>
-        </a>
-        <a href="sss.html" class="bottom-nav-link">
-            <i class='bx bx-help-circle'></i>
-            <span>SSS</span>
-        </a>
-        <a href="iletisim.html" class="bottom-nav-link">
-            <i class='bx bx-envelope'></i>
-            <span>İletişim</span>
-        </a>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <ul class="mobile-menu">
+            <li>
+                <a href="index.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Ana Sayfa</span>
+                </a>
+            </li>
+            <li>
+                <a href="ozel-ders.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                    </svg>
+                    <span>Özel Ders</span>
+                </a>
+            </li>
+            <li>
+                <a href="yorumlar.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Yorumlar</span>
+                </a>
+            </li>
+            <li>
+                <a href="sss.html" class="active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>SSS</span>
+                </a>
+            </li>
+            <li>
+                <a href="iletisim.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>İletişim</span>
+                </a>
+            </li>
+        </ul>
     </nav>
-
-    <script src="script.js"></script>
+    <script src="split-text.js"></script>
 </body>
 
 </html>

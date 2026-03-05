@@ -4,113 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim | Ömer Hoca</title>
+    <title>Öğrenci Koçluğu | Ömer Hoca</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
-            background: white;
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-info-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            color: var(--text-muted);
-            padding: 1rem;
-            border-radius: 12px;
-            background-color: var(--surface);
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        .contact-item:hover {
-            color: var(--primary);
-            background-color: white;
-            border-color: var(--primary);
-            box-shadow: var(--shadow-sm);
-            transform: translateX(5px);
-        }
-
-        .contact-item svg {
-            width: 24px;
-            height: 24px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            flex-shrink: 0;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 0.95rem;
-        }
-
-        .form-control {
-            padding: 0.875rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background-color: var(--surface);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            color: var(--text-main);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: white;
-            box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        @media (max-width: 768px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
-                gap: 2.5rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -121,84 +16,27 @@
             <nav class="desktop-menu">
                 <a href="index.html">Ana Sayfa</a>
                 <a href="ozel-ders.html">Özel Ders</a>
-                <a href="kocluk.html">Koçluk</a>
+                <a href="kocluk.html" class="active">Koçluk</a>
                 <a href="yorumlar.html">Yorumlar</a>
                 <a href="sss.html">SSS</a>
-                <a href="iletisim.html" class="active">İletişim</a>
+                <a href="iletisim.html">İletişim</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-content container animate-fade-in" style="padding-top: 7rem; padding-bottom: 4rem;">
-        <h1 class="section-title">Bize <span class="text-primary">Ulaşın</span></h1>
-        <p class="section-subtitle">Sorularınız, paket detayları veya kayıt için aşağıdaki formdan veya iletişim
-            kanallarından bize ulaşabilirsiniz.</p>
+    <main class="main-content container animate-fade-in"
+        style="padding-top: 7rem; padding-bottom: 4rem; text-align: center;">
+        <h1 class="section-title">Öğrenci <span class="text-primary">Koçluğu</span></h1>
+        <p class="section-subtitle">Stresli sınav maratonunda hedefe ulaşmanıza yardımcı olacak profesyonel rehberlik ve
+            takip sistemi.</p>
 
-        <div class="contact-container">
-            <!-- Left Info Side -->
-            <div class="contact-info">
-                <h2 class="contact-info-title">İletişim Kanalları</h2>
-
-                <a href="https://www.instagram.com/omerhoca.tv/?hl=tr" target="_blank" rel="noopener noreferrer"
-                    class="contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                    <span>Instagram'da Takip Et</span>
-                </a>
-
-                <a href="https://www.youtube.com/@omerhocatv" target="_blank" rel="noopener noreferrer"
-                    class="contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path
-                            d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
-                        </path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                    </svg>
-                    <span>YouTube Kanalımız</span>
-                </a>
-
-                <a href="mailto:omerhocatv@gmail.com" class="contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span>omerhocatv@gmail.com</span>
-                </a>
-            </div>
-
-            <!-- Right Form Side -->
-            <form class="contact-form" action="mailto:omerhocatv@gmail.com" method="GET" enctype="text/plain">
-                <h2 class="contact-info-title">Mesaj Gönder</h2>
-
-                <div class="form-group">
-                    <label for="name" class="form-label">Ad Soyad</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Adınız Soyadınız"
-                        required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="form-label">E-posta</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="ornek@email.com"
-                        required>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject" class="form-label">Konu</label>
-                    <input type="text" id="subject" name="subject" class="form-control"
-                        placeholder="Hangi konu hakkında ulaşmak istiyorsunuz?" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="body" class="form-label">Mesaj</label>
-                    <textarea id="body" name="body" class="form-control" placeholder="Mesajınızı buraya yazınız..."
-                        required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Mesajı Gönder</button>
-            </form>
+        <div class="star-border-container"
+            style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 2.5rem; background: white; padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
+            <img src="images/kocluk paket.png" alt="Öğrenci Koçluğu Paketi"
+                style="max-width: 100%; height: auto; border-radius: 12px; transition: transform 0.3s ease; position: relative; z-index: 10;"
+                onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <a href="iletisim.html" class="btn btn-primary"
+                style="width: 100%; max-width: 300px; position: relative; z-index: 10;">Bilgi Al</a>
         </div>
     </main>
 
@@ -290,7 +128,7 @@
                 </a>
             </li>
             <li>
-                <a href="kocluk.html">
+                <a href="kocluk.html" class="active">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -311,7 +149,7 @@
                 </a>
             </li>
             <li>
-                <a href="iletisim.html" class="active">
+                <a href="iletisim.html">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>

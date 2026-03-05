@@ -4,160 +4,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ömer Hoca - Yapay Zeka Destekli Özel Ders ve Profesyonel Öğrenci Koçluğu">
-    <title>Ömer Hoca | Matematik Eğitimi & Öğrenci Koçluğu</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- Custom CSS -->
+    <title>Ömer Hoca | Başarıyı Hedefleyenlere</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Boxicons for icons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container header-content">
-            <a href="index.html" class="logo">
-                <img src="logo-final.png" alt="Ömer Hoca Logo">
-            </a>
-            <nav class="nav-menu">
-                <ul class="nav-list" id="nav-list">
-                    <li><a href="ozel-ders.html" class="nav-link">Özel Ders</a></li>
-                    <li><a href="ogrenci-koclugu.html" class="nav-link">Öğrenci Koçluğu</a></li>
-                    <li><a href="referanslar.html" class="nav-link">Yorumlar</a></li>
-                    <li><a href="sss.html" class="nav-link">SSS</a></li>
-                    <li><a href="iletisim.html" class="nav-link btn-contact">İletişim</a></li>
-                </ul>
-                <div class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class='bx bx-menu'></i>
-                </div>
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="images/logo2_transparent.png" alt="ÖMER HOCA"></a>
+            <nav class="desktop-menu">
+                <a href="index.html" class="active">Ana Sayfa</a>
+                <a href="ozel-ders.html">Özel Ders</a>
+                <a href="kocluk.html">Koçluk</a>
+                <a href="yorumlar.html">Yorumlar</a>
+                <a href="sss.html">SSS</a>
+                <a href="iletisim.html">İletişim</a>
             </nav>
         </div>
     </header>
 
-    <main>
-<section id="hero" class="hero-section">
-            <div class="container hero-container">
-                <div class="hero-content fade-in">
-                    <h1 class="hero-title">Başarıyı Hedefleyenlere...</h1>
-                    <p class="hero-desc">Yapay zekanın analitik gücü ile kişiye özel eğitimin buluştuğu noktadasınız.
-                        Yeni nesil matematik özel dersleriyle eksiklerinizi nokta atışı kapatırken, profesyonel öğrenci
-                        koçluğu ile sınav sürecinizi stratejik olarak yönetiyoruz. Sadece ders anlatmıyor, başarıya
-                        giden dijital bir yol haritası inşa ediyoruz.</p>
-                    <div class="hero-btns">
-                        <a href="iletisim.html" class="btn btn-primary">Hemen Başla</a>
-                        <a href="ozel-ders.html" class="btn btn-outline">Paketleri İncele</a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero " style="min-height: calc(100vh - 8rem); display: flex; align-items: center;">
+            <div class="container"
+                style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 4rem;">
+
+                <!-- Text Content -->
+                <div class="hero-content animate-fade-in" style="flex: 1;">
+                    <h1 id="hero-heading"
+                        style="font-size: clamp(3rem, 5vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: var(--text-main); letter-spacing: -1px; min-height: 2.2em;">
+                        <span id="typewriter-line1"></span><span id="cursor-line1" class="blinking-cursor"
+                            style="font-weight: 400; opacity: 0.6;">|</span><br>
+                        <span id="typewriter-line2" class="text-primary"></span><span id="cursor-line2"
+                            class="blinking-cursor hidden text-primary" style="font-weight: 400; opacity: 0.6;">|</span>
+                    </h1>
+                    <p
+                        style="font-size: clamp(1.25rem, 2vw, 1.5rem); color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 400; max-width: 500px;">
+                        Adım adım mantığını kavra, karmaşayı çöz.
+                    </p>
+                    <a href="iletisim.html" class="btn btn-primary btn-glowing"
+                        style="padding: 1rem 2.5rem; font-size: 1.25rem;">İlk Adımı At</a>
+                </div>
+
+                <!-- Image Showcase -->
+                <div class="hero-image animate-fade-in"
+                    style="flex: 1; display: flex; justify-content: flex-end; position: relative; animation-delay: 0.2s;">
+                    <!-- Decorational background circle -->
+                    <div
+                        style="position: absolute; width: 80%; height: 80%; background-color: rgba(56, 182, 255, 0.1); border-radius: 50%; top: 10%; right: 5%; z-index: -1; filter: blur(40px);">
                     </div>
 
-                    <div class="hero-stats fade-in delay-2">
-                        <div class="stat-circle">
-                            <h3 class="counter" data-target="100">0</h3><span>+</span>
-                            <p>Öğrenci</p>
-                        </div>
-                        <div class="stat-circle">
-                            <h3 class="counter" data-target="2500">0</h3><span>+</span>
-                            <p>Saat Ders</p>
-                        </div>
-                        <div class="stat-circle">
-                            <h3 class="counter" data-target="98">0</h3><span>%</span>
-                            <p>Veli Memnuniyeti</p>
-                        </div>
+                    <div class="star-border-container"
+                        style="border-radius: 26px; padding: 3px; display: inline-flex; box-shadow: var(--shadow-2xl); background: var(--bg-color);">
+                        <img src="images/profıl.png" alt="Ömer Hoca"
+                            style="max-width: 100%; height: auto; border-radius: 23px; object-fit: contain; max-height: 70vh; display: block; position: relative; z-index: 10;">
                     </div>
                 </div>
-                <div class="hero-image-wrapper fade-in delay-1">
-                    <img src="hero-image.png" alt="ÖMER HOCA - Özel Ders ve Koçluk" class="hero-img">
+
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section container animate-fade-in"
+            style="margin-top: -2rem; margin-bottom: 4rem; position: relative; z-index: 10; animation-delay: 0.4s;">
+            <div class="stats-grid">
+                <!-- Stat 1 -->
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="stat-icon">
+                        <path
+                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                        </path>
+                    </svg>
+                    <div class="stat-number-wrapper">
+                        <span class="stat-prefix">%</span>
+                        <span class="stat-number" data-target="99">0</span>
+                    </div>
+                    <div class="stat-label">Veli Memnuniyeti</div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="stat-icon">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="100">0</span>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <div class="stat-label">Öğrenci Sayısı</div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="stat-card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="stat-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <div class="stat-number-wrapper">
+                        <span class="stat-number" data-target="2500">0</span>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <div class="stat-label">Ders Saati</div>
                 </div>
             </div>
         </section>
-</main>
+    </main>
 
-    <!-- İletişim & Footer -->
-    <footer id="iletisim" class="footer">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <a href="index.html" class="logo footer-logo">
-                    <img src="logo.png" alt="Ömer Hoca">
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <!-- Sol Sütun -->
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <img src="images/logo2_transparent.png" alt="ÖMER HOCA">
                 </a>
-                <p>Yeni nesil eğitim anlayışıyla, matematikte başarıyı şansa bırakmayın. Eğitimde doğru rehberlik,
-                    başarılı bir geleceğin ilk adımıdır.</p>
-            </div>
-
-            <div class="footer-links-container">
-                <div class="footer-contact">
-                    <h3>İletişim</h3>
-                    <a href="mailto:omerhocatv@gmail.com" class="contact-link">
-                        <div class="icon-box"><i class='bx bx-envelope'></i></div>
-                        <span>omerhocatv@gmail.com</span>
+                <p class="footer-desc">Yapay zekanın analitik gücü ile kişiye özel eğitimde başarıya giden yol
+                    haritanızı inşa ediyoruz.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                    <a href="mailto:omerhocatv@gmail.com" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                     </a>
                 </div>
-
-                <div class="footer-social">
-                    <h3>Bizi Takip Edin</h3>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/omerhoca.tv/?hl=tr" target="_blank" class="social-link"
-                            aria-label="Instagram">
-                            <i class='bx bxl-instagram'></i>
-                        </a>
-                        <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="social-link"
-                            aria-label="YouTube">
-                            <i class='bx bxl-youtube'></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-legal">
-                    <h3>Yasal</h3>
-                    <ul class="legal-links">
-                        <li><a href="index.html">Gizlilik Politikası</a></li>
-                        <li><a href="index.html">Kullanım Şartları</a></li>
-                        <li><a href="index.html">KVKK Aydınlatma</a></li>
-                        <li><a href="index.html">Çerez Politikası</a></li>
-                    </ul>
-                </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2026 Ömer Hoca. Tüm hakları saklıdır.</p>
+
+            <!-- Orta Sütun -->
+            <div class="footer-col">
+                <h3 class="footer-title">Hızlı Linkler</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="ozel-ders.html">Özel Ders</a></li>
+                    <li><a href="kocluk.html">Öğrenci Koçluğu</a></li>
+                    <li><a href="yorumlar.html">Referanslar</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="iletisim.html">İletişim</a></li>
+                </ul>
+            </div>
+
+            <!-- Sağ Sütun -->
+            <div class="footer-col">
+                <h3 class="footer-title">Yasal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                    <li><a href="#">KVKK Aydınlatma</a></li>
+                    <li><a href="#">Çerez Politikası</a></li>
+                </ul>
             </div>
         </div>
     </footer>
 
-    <!-- Mobil Alt Navigasyon (Bottom Tab Bar) -->
-    <nav class="mobile-bottom-nav">
-        <a href="ogrenci-koclugu.html" class="bottom-nav-link">
-            <i class='bx bx-user'></i>
-            <span>Koçluk</span>
-        </a>
-        <a href="referanslar.html" class="bottom-nav-link">
-            <i class='bx bx-comment-detail'></i>
-            <span>Yorumlar</span>
-        </a>
-        <a href="ozel-ders.html" class="bottom-nav-link action-btn">
-            <div class="action-btn-inner">
-                <i class='bx bx-book-open'></i>
-            </div>
-            <span>Özel Ders</span>
-        </a>
-        <a href="sss.html" class="bottom-nav-link">
-            <i class='bx bx-help-circle'></i>
-            <span>SSS</span>
-        </a>
-        <a href="iletisim.html" class="bottom-nav-link">
-            <i class='bx bx-envelope'></i>
-            <span>İletişim</span>
-        </a>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <ul class="mobile-menu">
+            <li>
+                <a href="ozel-ders.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                    </svg>
+                    <span>Özel Ders</span>
+                </a>
+            </li>
+            <li>
+                <a href="kocluk.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>Koçluk</span>
+                </a>
+            </li>
+            <li>
+                <a href="yorumlar.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Yorumlar</span>
+                </a>
+            </li>
+            <li>
+                <a href="sss.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>SSS</span>
+                </a>
+            </li>
+            <li>
+                <a href="iletisim.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>İletişim</span>
+                </a>
+            </li>
+        </ul>
     </nav>
 
-    <script src="script.js"></script>
+    <style>
+        /* Responsive adjustments for Hero section inline */
+        @media (max-width: 992px) {
+            .hero .container {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 2rem !important;
+                padding-top: 2rem;
+            }
+
+            .hero-content {
+                order: 1;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image {
+                order: 2;
+                justify-content: center !important;
+            }
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(56, 182, 255, 0.15);
+            /* Soft premium shadow */
+            border: 1px solid rgba(56, 182, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glare Effect */
+        .stats-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            z-index: 1;
+            transition: left 0.7s ease-in-out;
+            pointer-events: none;
+        }
+
+        .stats-grid:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(56, 182, 255, 0.25);
+            /* Enhanced shadow on hover */
+        }
+
+        .stats-grid:hover::before {
+            left: 200%;
+        }
+
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.75rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number-wrapper {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 992px) {
+            .stats-section {
+                margin-top: 40px !important;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Typewriter Cursor styling */
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Typewriter Effect ---
+            const text1 = "BAŞARIYI ";
+            const text2 = "HEDEFLEYENLERE";
+            const line1El = document.getElementById('typewriter-line1');
+            const line2El = document.getElementById('typewriter-line2');
+            const cursor1El = document.getElementById('cursor-line1');
+            const cursor2El = document.getElementById('cursor-line2');
+
+            let charIndex1 = 0;
+            let charIndex2 = 0;
+            const typingSpeed = 120; // milliseconds per character
+
+            function typeWriter() {
+                if (charIndex1 < text1.length) {
+                    line1El.textContent += text1.charAt(charIndex1);
+                    charIndex1++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else if (charIndex2 === 0) {
+                    // Finished line 1, switch cursors and pause before line 2
+                    cursor1El.classList.add('hidden');
+                    cursor2El.classList.remove('hidden');
+                    setTimeout(() => {
+                        line2El.textContent += text2.charAt(charIndex2);
+                        charIndex2++;
+                        setTimeout(typeWriter, typingSpeed);
+                    }, 400); // slight pause between lines
+                } else if (charIndex2 < text2.length) {
+                    line2El.textContent += text2.charAt(charIndex2);
+                    charIndex2++;
+                    setTimeout(typeWriter, typingSpeed);
+                }
+            }
+
+            // Start typing effect shortly after page loads
+            setTimeout(typeWriter, 400);
+
+            // --- Stats Counter Effect ---
+            const counters = document.querySelectorAll('.stat-number');
+            const duration = 2000; // 2 seconds
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const startTime = performance.now();
+
+                    const updateCount = (currentTime) => {
+                        const elapsedTime = currentTime - startTime;
+                        const progress = Math.min(elapsedTime / duration, 1);
+
+                        // Ease out curve
+                        const easeOut = progress * (2 - progress);
+
+                        counter.innerText = Math.floor(easeOut * target);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    requestAnimationFrame(updateCount);
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                }
+            }, { threshold: 0.1 });
+
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+    </script>
 </body>
 
 </html>
