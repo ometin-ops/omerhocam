@@ -115,6 +115,60 @@
                 </div>
             </div>
         </section>
+
+        <!-- Features Slider Section -->
+        <section class="features-slider-section container animate-fade-in"
+            style="margin-top: 4rem; margin-bottom: 4rem; border-radius: 20px; overflow: hidden; padding: 0;">
+            <div class="slider-container">
+                <!-- Left: Images -->
+                <div class="slider-images">
+                    <img src="reklam1.png" alt="Özel Olarak Hazırlanmış PDF'ler" class="slider-img active">
+                    <img src="reklam2.png" alt="Günlük Disiplin ve Takip" class="slider-img">
+                    <img src="reklam3.png" alt="AI Destekli Deneme Analizi" class="slider-img">
+                    <img src="reklam4.png" alt="7/24 Soru Sorabilme İmkanı" class="slider-img">
+                    <img src="reklam5.png" alt="Kitap ve Doküman Desteği" class="slider-img">
+                </div>
+
+                <!-- Right: Content and Dots -->
+                <div class="slider-content-wrapper">
+                    <div class="slider-texts">
+                        <div class="slider-text active">
+                            <h3>Özel Olarak Hazırlanmış PDF'ler</h3>
+                            <p>Öğrencinin seviyesine ve hedeflerine uygun, ezberden uzak, tamamen yeni nesil sorularla
+                                donatılmış kişiye özel dijital kaynaklar.</p>
+                        </div>
+                        <div class="slider-text">
+                            <h3>Günlük Disiplin ve Takip</h3>
+                            <p>Haftalık programlar ile öğrencinin ne zaman, ne çalışacağı bellidir. Günlük ödev takibi
+                                ile çalışma disiplini kalıcı bir alışkanlığa dönüşür.</p>
+                        </div>
+                        <div class="slider-text">
+                            <h3>AI Destekli Deneme Analizi</h3>
+                            <p>Çözülen her deneme detaylıca analiz edilir. Yapay zeka algoritmamızla eksik kazanımlar
+                                nokta atışı tespit edilip stratejik çalışma planı oluşturulur.</p>
+                        </div>
+                        <div class="slider-text">
+                            <h3>7/24 Soru Sorabilme İmkanı</h3>
+                            <p>Takıldığınız hiçbir soru cevapsız kalmasın! Öğrencilerim, çözemedikleri soruları
+                                diledikleri zaman bana ileterek anında destek alabilirler.</p>
+                        </div>
+                        <div class="slider-text">
+                            <h3>Kitap ve Doküman Desteği</h3>
+                            <p>'Planlama Defterim' ve 21 günlük alışkanlık çizelgeleriyle sürecin her adımı kontrol
+                                altında. Başarı için gereken tüm materyaller elinizin altında.</p>
+                        </div>
+                    </div>
+
+                    <div class="slider-dots">
+                        <div class="slider-dot active" data-index="0"></div>
+                        <div class="slider-dot" data-index="1"></div>
+                        <div class="slider-dot" data-index="2"></div>
+                        <div class="slider-dot" data-index="3"></div>
+                        <div class="slider-dot" data-index="4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -391,57 +445,115 @@
                         if (statsSection) {
                             observer.observe(statsSection);
                         }
+
+                        // --- Features Slider Logic ---
+                        const dots = document.querySelectorAll('.slider-dot');
+                        const images = document.querySelectorAll('.slider-img');
+                        const texts = document.querySelectorAll('.slider-text');
+                        let slideIndex = 0;
+                        let slideInterval;
+
+                        function showSlide(index) {
+                            // remove active class from all
+                            dots.forEach(d => d.classList.remove('active'));
+                            images.forEach(i => i.classList.remove('active'));
+                            texts.forEach(t => t.classList.remove('active'));
+
+                            // Set active to clicked
+                            slideIndex = index;
+                            if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+                            if (images[slideIndex]) images[slideIndex].classList.add('active');
+                            if (texts[slideIndex]) texts[slideIndex].classList.add('active');
+                        }
+
+                        function nextSlide() {
+                            let newIndex = slideIndex + 1;
+                            if (newIndex >= dots.length) newIndex = 0;
+                            showSlide(newIndex);
+                        }
+
+                        function startInterval() {
+                            slideInterval = setInterval(nextSlide, 4000);
+                        }
+
+                        // Click events
+                        dots.forEach((dot, idx) => {
+                            dot.addEventListener('click', () => {
+                                clearInterval(slideInterval);
+                                showSlide(idx);
+                                startInterval();
+                            });
+                        });
+
+                        // Start auto sliding
+                        if (dots.length > 0) {
+                            startInterval();
+                        }
                     });
                 </script>
-<nav class="mobile-nav">
-        <ul class="mobile-menu">
-            <li>
-                <a href="blog.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                    <span>Blog</span>
-                </a>
-            </li>
-            <li>
-                <a href="yorumlar.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <span>Yorumlar</span>
-                </a>
-            </li>
-            <li class="center-button">
-                <a href="ozel-ders.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                    </svg>
-                    <span>Özel Ders</span>
-                </a>
-            </li>
-            <li>
-                <a href="sss.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                    <span>SSS</span>
-                </a>
-            </li>
-            <li>
-                <a href="iletisim.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="iletisim.html" class="floating-contact-btn" aria-label="İletişime Geç">
+                    <svg viewBox="0 0 24 24">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span>İletişim</span>
+                    <span>İletişime Geç</span>
                 </a>
-            </li>
-        </ul>
-    </nav>
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
+                        <li>
+                            <a href="blog.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                                <span>Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="yorumlar.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                <span>Yorumlar</span>
+                            </a>
+                        </li>
+                        <li class="center-button">
+                            <a href="ozel-ders.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                </svg>
+                                <span>Özel Ders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sss.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                <span>SSS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="iletisim.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <span>İletişim</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
 </body>
 
 </html>
