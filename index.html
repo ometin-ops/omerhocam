@@ -22,27 +22,67 @@
                 <a href="sss.html">SSS</a>
                 <a href="iletisim.html">İletişim</a>
             </nav>
+            <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
+
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
+        <!-- Boxed Carousel Section -->
+        <section class="boxed-carousel-section animate-fade-in"
+            style="margin-bottom: 4rem; animation-delay: 0.1s; position: relative; z-index: 10;">
+            <div class="carousel-container">
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        <img src="tanitim1.png" alt="Tanıtım 1" class="carousel-slide">
+                        <img src="tanitim2.png" alt="Tanıtım 2" class="carousel-slide">
+                        <img src="tanitim3.png" alt="Tanıtım 3" class="carousel-slide">
+                        <img src="tanitim4.png" alt="Tanıtım 4" class="carousel-slide">
+                        <img src="tanitim5.png" alt="Tanıtım 5" class="carousel-slide">
+                    </div>
+                </div>
+
+                <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="Önceki">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="carousel-btn next-btn" id="carouselNext" aria-label="Sonraki">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="carousel-pagination" id="carouselPagination">
+                    <div class="carousel-dot active" data-index="0"></div>
+                    <div class="carousel-dot" data-index="1"></div>
+                    <div class="carousel-dot" data-index="2"></div>
+                    <div class="carousel-dot" data-index="3"></div>
+                    <div class="carousel-dot" data-index="4"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- Hero Section -->
-        <section class="hero " style="min-height: calc(100vh - 8rem); display: flex; align-items: center;">
+        <section class="hero "
+            style="min-height: calc(100vh - 8rem); display: flex; align-items: center; background-color: #0f172a; border-radius: 24px; margin: 0 1rem; padding: 50px 20px; position: relative; overflow: visible;">
+            <!-- 3D Decorative Object -->
+            <div class="hero-decorative-3d"></div>
             <div class="container"
                 style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 4rem;">
 
                 <!-- Text Content -->
                 <div class="hero-content animate-fade-in" style="flex: 1;">
                     <h1 id="hero-heading"
-                        style="font-size: clamp(2.3rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: var(--text-main); letter-spacing: -1px; min-height: 2.2em; word-break: break-word; overflow-wrap: break-word; hyphens: auto;">
+                        style="font-size: clamp(2.3rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: #ffffff !important; letter-spacing: -1px; min-height: 2.2em; word-break: break-word; overflow-wrap: break-word; hyphens: auto; position: relative; z-index: 2;">
                         <span id="typewriter-line1"></span><span id="cursor-line1" class="blinking-cursor"
-                            style="font-weight: 400; opacity: 0.6;">|</span><br>
+                            style="font-weight: 400; opacity: 0.6; color: #ffffff;">|</span><br>
                         <span id="typewriter-line2" class="text-primary"></span><span id="cursor-line2"
                             class="blinking-cursor hidden text-primary" style="font-weight: 400; opacity: 0.6;">|</span>
                     </h1>
                     <p
-                        style="font-size: clamp(1.25rem, 2vw, 1.5rem); color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 400; max-width: 500px;">
+                        style="font-size: clamp(1.25rem, 2vw, 1.5rem); color: #f8fafc; margin-bottom: 2.5rem; font-weight: 400; max-width: 500px;">
                         Adım adım mantığını kavra, karmaşayı çöz.
                     </p>
                     <a href="iletisim.html" class="btn btn-primary btn-glowing"
@@ -54,7 +94,7 @@
                     style="flex: 1; display: flex; justify-content: flex-end; position: relative; animation-delay: 0.2s;">
                     <!-- Decorational background circle -->
                     <div
-                        style="position: absolute; width: 80%; height: 80%; background-color: rgba(56, 182, 255, 0.1); border-radius: 50%; top: 10%; right: 5%; z-index: -1; filter: blur(40px);">
+                        style="position: absolute; width: 80%; height: 80%; background-color: rgba(24, 165, 246, 0.1); border-radius: 50%; top: 10%; right: 5%; z-index: -1; filter: blur(40px);">
                     </div>
 
                     <div class="star-border-container"
@@ -67,108 +107,114 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section container animate-fade-in"
-            style="margin-top: -2rem; margin-bottom: 4rem; position: relative; z-index: 10; animation-delay: 0.4s;">
-            <div class="stats-grid">
-                <!-- Stat 1 -->
-                <div class="stat-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="stat-icon">
-                        <path
-                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
-                        </path>
-                    </svg>
-                    <div class="stat-number-wrapper">
-                        <span class="stat-prefix">%</span>
-                        <span class="stat-number" data-target="99">0</span>
+        <!-- Testimonials Section (Neden Farklıyız?) -->
+        <section class="testimonials-section container" style="padding: 4rem 0 6rem;">
+            <h2 style="text-align: center; font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+                Neden <span style="color: var(--primary);">Farklıyız?</span></h2>
+            <p style="text-align: center; color: #64748b; font-size: 1.05rem; margin-bottom: 2.5rem;">Ömer Hoca ile
+                başarıya ulaşanlar deneyimlerini paylaşıyor...</p>
+
+            <div class="testimonials-wrapper" style="position: relative;">
+                <div class="testimonials-track" id="testimonialsTrack">
+
+                    <!-- Card 1 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">Ömer Hoca ile tanıştıktan sonra kızımın matematiğe olan önyargısı kırıldı.
+                            LGS sürecindeki koçluğu muazzamdı.</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Ayşe T.</span>
+                            <span class="tcard-badge">VELİ</span>
+                        </div>
                     </div>
-                    <div class="stat-label">Veli Memnuniyeti</div>
+
+                    <!-- Card 2 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">Deneme analizleri sayesinde hangi konularda eksiğim olduğunu nokta atışı
+                            gördüm. YKS'de hedefime ulaştım!</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Burak M.</span>
+                            <span class="tcard-badge">ÖĞRENCİ - YKS</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">Oğlumun ders çalışma alışkanlığı yoktu. Yapay zeka destekli takip sistemi
+                            ve Ömer Hoca'nın ilgisiyle bunu başardık.</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Kemal S.</span>
+                            <span class="tcard-badge">VELİ</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">Ara sınıfta olmama rağmen temelimi çok sağlam attık. Artık yeni nesil
+                            sorulardan korkmuyorum.</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Elif K.</span>
+                            <span class="tcard-badge">ÖĞRENCİ - ARA SINIF</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">7/24 takıldığım soruyu sorabilmek ve anında mantığını öğrenmek harika bir
+                            ayrıcalık.</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Caner D.</span>
+                            <span class="tcard-badge">ÖĞRENCİ - LGS</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="testimonial-card">
+                        <div class="tcard-quote"
+                            style="color: var(--primary); font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem;">
+                            "</div>
+                        <p class="tcard-text">Ömer Hoca'nın verdiği haftalık programı bire bir uyguladık, sanki özel bir
+                            antrenör gibiydi.</p>
+                        <div class="tcard-author">
+                            <span class="tcard-name">Zeynep A.</span>
+                            <span class="tcard-badge">VELİ</span>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Stat 2 -->
-                <div class="stat-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="stat-icon">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                    </svg>
-                    <div class="stat-number-wrapper">
-                        <span class="stat-number" data-target="100">0</span>
-                        <span class="stat-suffix">+</span>
-                    </div>
-                    <div class="stat-label">Öğrenci Sayısı</div>
-                </div>
-
-                <!-- Stat 3 -->
-                <div class="stat-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="stat-icon">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                    <div class="stat-number-wrapper">
-                        <span class="stat-number" data-target="2500">0</span>
-                        <span class="stat-suffix">+</span>
-                    </div>
-                    <div class="stat-label">Ders Saati</div>
+                <!-- Navigation Arrows -->
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+                    <button class="tcard-nav-btn" id="tPrev" aria-label="Önceki">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="tcard-nav-btn" id="tNext" aria-label="Sonraki">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Features Slider Section -->
-        <section class="features-slider-section container animate-fade-in"
-            style="margin-top: 4rem; margin-bottom: 4rem; border-radius: 20px; overflow: hidden; padding: 0;">
-            <div class="slider-container">
-                <!-- Left: Images -->
-                <div class="slider-images">
-                    <img src="reklam1.png" alt="Özel Olarak Hazırlanmış PDF'ler" class="slider-img active">
-                    <img src="reklam2.png" alt="Günlük Disiplin ve Takip" class="slider-img">
-                    <img src="reklam3.png" alt="AI Destekli Deneme Analizi" class="slider-img">
-                    <img src="reklam4.png" alt="7/24 Soru Sorabilme İmkanı" class="slider-img">
-                    <img src="reklam5.png" alt="Kitap ve Doküman Desteği" class="slider-img">
-                </div>
-
-                <!-- Right: Content and Dots -->
-                <div class="slider-content-wrapper">
-                    <div class="slider-texts">
-                        <div class="slider-text active">
-                            <h3>Özel Olarak Hazırlanmış PDF'ler</h3>
-                            <p>Öğrencinin seviyesine ve hedeflerine uygun, ezberden uzak, tamamen yeni nesil sorularla
-                                donatılmış kişiye özel dijital kaynaklar.</p>
-                        </div>
-                        <div class="slider-text">
-                            <h3>Günlük Disiplin ve Takip</h3>
-                            <p>Haftalık programlar ile öğrencinin ne zaman, ne çalışacağı bellidir. Günlük ödev takibi
-                                ile çalışma disiplini kalıcı bir alışkanlığa dönüşür.</p>
-                        </div>
-                        <div class="slider-text">
-                            <h3>AI Destekli Deneme Analizi</h3>
-                            <p>Çözülen her deneme detaylıca analiz edilir. Yapay zeka algoritmamızla eksik kazanımlar
-                                nokta atışı tespit edilip stratejik çalışma planı oluşturulur.</p>
-                        </div>
-                        <div class="slider-text">
-                            <h3>7/24 Soru Sorabilme İmkanı</h3>
-                            <p>Takıldığınız hiçbir soru cevapsız kalmasın! Öğrencilerim, çözemedikleri soruları
-                                diledikleri zaman bana ileterek anında destek alabilirler.</p>
-                        </div>
-                        <div class="slider-text">
-                            <h3>Kitap ve Doküman Desteği</h3>
-                            <p>'Planlama Defterim' ve 21 günlük alışkanlık çizelgeleriyle sürecin her adımı kontrol
-                                altında. Başarı için gereken tüm materyaller elinizin altında.</p>
-                        </div>
-                    </div>
-
-                    <div class="slider-dots">
-                        <div class="slider-dot active" data-index="0"></div>
-                        <div class="slider-dot" data-index="1"></div>
-                        <div class="slider-dot" data-index="2"></div>
-                        <div class="slider-dot" data-index="3"></div>
-                        <div class="slider-dot" data-index="4"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -233,6 +279,8 @@
                     <li><a href="#">Çerez Politikası</a></li>
                 </ul>
                 </nav>
+                <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
+
 
                 <style>
                     /* Responsive adjustments for Hero section inline */
@@ -271,9 +319,9 @@
                         background: white;
                         padding: 2.5rem;
                         border-radius: 24px;
-                        box-shadow: 0 4px 20px rgba(56, 182, 255, 0.15);
+                        box-shadow: 0 4px 20px rgba(24, 165, 246, 0.15);
                         /* Soft premium shadow */
-                        border: 1px solid rgba(56, 182, 255, 0.1);
+                        border: 1px solid rgba(24, 165, 246, 0.1);
                         position: relative;
                         overflow: hidden;
                         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -296,7 +344,7 @@
 
                     .stats-grid:hover {
                         transform: translateY(-5px);
-                        box-shadow: 0 15px 35px rgba(56, 182, 255, 0.25);
+                        box-shadow: 0 15px 35px rgba(24, 165, 246, 0.25);
                         /* Enhanced shadow on hover */
                     }
 
@@ -403,8 +451,8 @@
                             }
                         }
 
-                        // Start typing shortly after load
-                        setTimeout(typeWriter, 400);
+                        // Animasyonları başlatmak için
+                        setTimeout(typeWriter, 800);
 
                         // --- Stats Counter Effect ---
                         const counters = document.querySelectorAll('.stat-number');
@@ -446,49 +494,104 @@
                             observer.observe(statsSection);
                         }
 
-                        // --- Features Slider Logic ---
-                        const dots = document.querySelectorAll('.slider-dot');
-                        const images = document.querySelectorAll('.slider-img');
-                        const texts = document.querySelectorAll('.slider-text');
-                        let slideIndex = 0;
-                        let slideInterval;
+                        // --- Boxed Carousel Logic ---
+                        const track = document.getElementById('carouselTrack');
+                        const prevBtn = document.getElementById('carouselPrev');
+                        const nextBtn = document.getElementById('carouselNext');
+                        const dots = document.querySelectorAll('.carousel-dot');
+                        const slideCount = dots.length;
 
-                        function showSlide(index) {
-                            // remove active class from all
-                            dots.forEach(d => d.classList.remove('active'));
-                            images.forEach(i => i.classList.remove('active'));
-                            texts.forEach(t => t.classList.remove('active'));
+                        let currentIndex = 0;
+                        let autoPlayInterval;
 
-                            // Set active to clicked
-                            slideIndex = index;
-                            if (dots[slideIndex]) dots[slideIndex].classList.add('active');
-                            if (images[slideIndex]) images[slideIndex].classList.add('active');
-                            if (texts[slideIndex]) texts[slideIndex].classList.add('active');
+                        function updateCarousel() {
+                            if (!track) return;
+                            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                            dots.forEach((dot, index) => {
+                                if (index === currentIndex) {
+                                    dot.classList.add('active');
+                                } else {
+                                    dot.classList.remove('active');
+                                }
+                            });
                         }
 
                         function nextSlide() {
-                            let newIndex = slideIndex + 1;
-                            if (newIndex >= dots.length) newIndex = 0;
-                            showSlide(newIndex);
+                            currentIndex = (currentIndex + 1) % slideCount;
+                            updateCarousel();
                         }
 
-                        function startInterval() {
-                            slideInterval = setInterval(nextSlide, 4000);
+                        function prevSlide() {
+                            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                            updateCarousel();
                         }
 
-                        // Click events
-                        dots.forEach((dot, idx) => {
-                            dot.addEventListener('click', () => {
-                                clearInterval(slideInterval);
-                                showSlide(idx);
-                                startInterval();
+                        function startAutoPlay() {
+                            if (!track) return;
+                            autoPlayInterval = setInterval(nextSlide, 4000);
+                        }
+
+                        function resetAutoPlay() {
+                            clearInterval(autoPlayInterval);
+                            startAutoPlay();
+                        }
+
+                        if (nextBtn && prevBtn && track) {
+                            nextBtn.addEventListener('click', () => {
+                                nextSlide();
+                                resetAutoPlay();
                             });
-                        });
 
-                        // Start auto sliding
-                        if (dots.length > 0) {
-                            startInterval();
+                            prevBtn.addEventListener('click', () => {
+                                prevSlide();
+                                resetAutoPlay();
+                            });
+
+                            dots.forEach((dot, index) => {
+                                dot.addEventListener('click', () => {
+                                    currentIndex = index;
+                                    updateCarousel();
+                                    resetAutoPlay();
+                                });
+                            });
+
+                            // Touch swipe logic
+                            let startX = 0;
+                            let currentX = 0;
+                            let isDragging = false;
+
+                            track.addEventListener('touchstart', (e) => {
+                                startX = e.touches[0].clientX;
+                                isDragging = true;
+                                clearInterval(autoPlayInterval); // pause on touch
+                            }, { passive: true });
+
+                            track.addEventListener('touchmove', (e) => {
+                                if (!isDragging) return;
+                                currentX = e.touches[0].clientX;
+                            }, { passive: true });
+
+                            track.addEventListener('touchend', () => {
+                                if (!isDragging) return;
+                                isDragging = false;
+
+                                const difX = startX - currentX;
+                                // Need to have moved at least 50px to trigger swipe
+                                if (Math.abs(difX) > 50 && currentX !== 0) {
+                                    if (difX > 0) {
+                                        nextSlide();
+                                    } else {
+                                        prevSlide();
+                                    }
+                                }
+                                currentX = 0;
+                                startAutoPlay(); // resume
+                            });
+
+                            // Init
+                            startAutoPlay();
                         }
+
                     });
                 </script>
                 <a href="iletisim.html" class="floating-contact-btn" aria-label="İletişime Geç">
@@ -501,6 +604,18 @@
                 <nav class="mobile-nav">
                     <ul class="mobile-menu">
                         <li>
+                            <a href="ozel-ders.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <span>Özel Ders</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="blog.html">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -510,23 +625,14 @@
                                 <span>Blog</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="yorumlar.html">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg>
-                                <span>Yorumlar</span>
-                            </a>
-                        </li>
                         <li class="center-button">
-                            <a href="ozel-ders.html">
+                            <a href="index.html">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                 </svg>
-                                <span>Özel Ders</span>
+                                <span>Ana Sayfa</span>
                             </a>
                         </li>
                         <li>
@@ -554,6 +660,71 @@
                         </li>
                     </ul>
                 </nav>
+                <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
+
+                <!-- Testimonials Carousel JS -->
+                <script>
+                    (function () {
+                        const track = document.getElementById('testimonialsTrack');
+                        if (!track) return;
+                        const prevBtn = document.getElementById('tPrev');
+                        const nextBtn = document.getElementById('tNext');
+
+                        function getCardWidth() {
+                            const card = track.querySelector('.testimonial-card');
+                            if (!card) return 300;
+                            return card.offsetWidth + 16;
+                        }
+
+                        nextBtn.addEventListener('click', () => {
+                            const w = getCardWidth();
+                            const maxScroll = track.scrollWidth - track.clientWidth;
+                            let next = track.scrollLeft + w;
+                            if (next > maxScroll) next = 0;
+                            track.scrollTo({ left: next, behavior: 'smooth' });
+                        });
+
+                        prevBtn.addEventListener('click', () => {
+                            const w = getCardWidth();
+                            let prev = track.scrollLeft - w;
+                            if (prev < 0) prev = track.scrollWidth - track.clientWidth;
+                            track.scrollTo({ left: prev, behavior: 'smooth' });
+                        });
+                    })();
+                </script>
+
+
+                <!-- Scroll to Top Button -->
+                <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Yukarı Çık">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+
+                <script>
+                    // Scroll to Top Logic
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const scrollTopBtn = document.getElementById('scrollTopBtn');
+                        if (scrollTopBtn) {
+                            window.addEventListener('scroll', () => {
+                                if (window.scrollY > 300) {
+                                    scrollTopBtn.classList.add('visible');
+                                } else {
+                                    scrollTopBtn.classList.remove('visible');
+                                }
+                            });
+
+                            scrollTopBtn.addEventListener('click', () => {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: 'smooth'
+                                });
+                            });
+                        }
+                    });
+                </script>
+
 </body>
 
 </html>
