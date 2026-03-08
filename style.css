@@ -148,23 +148,22 @@ h6 {
 
 /* Header Join Button */
 .header-join-btn {
-  background-color: var(--primary);
-  /* #18a5f6 */
-  color: #ffffff;
-  font-weight: 600;
+  background-color: #ffc107 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
   padding: 8px 24px;
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease;
   white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(24, 165, 246, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
 }
 
 .header-join-btn:hover {
-  background-color: #2da1e6;
+  background-color: #facc15 !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(24, 165, 246, 0.4);
-  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6) !important;
+  color: #000000 !important;
 }
 
 @media (max-width: 768px) {
@@ -429,7 +428,7 @@ h6 {
   left: 50%;
   width: 150%;
   height: 150%;
-  background: conic-gradient(from 0deg, transparent 0%, transparent 80%, rgba(24, 165, 246, 0.8) 95%, rgba(24, 165, 246, 1) 100%);
+  background: conic-gradient(from 0deg, transparent 0%, transparent 80%, rgba(255, 193, 7, 0.8) 95%, rgba(255, 193, 7, 1) 100%) !important;
   transform: translate(-50%, -50%);
   animation: rotate-star-border 4s linear infinite;
   z-index: -2;
@@ -461,20 +460,30 @@ h6 {
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(24, 165, 246, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
   }
 
   70% {
-    box-shadow: 0 0 0 15px rgba(24, 165, 246, 0);
+    box-shadow: 0 0 0 15px rgba(255, 193, 7, 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(24, 165, 246, 0);
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
   }
 }
 
 .btn-glowing {
+  background-color: #ffc107 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
   animation: pulse 2s infinite;
+}
+
+.btn-glowing:hover {
+  background-color: #facc15 !important;
+  color: #000000 !important;
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6) !important;
 }
 
 /* Update the logo spacing and sizing */
@@ -851,138 +860,6 @@ h6 {
   }
 }
 
-/* --- Boxed Carousel Section --- */
-.boxed-carousel-section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0 1rem;
-  /* safe padding for mobile */
-  margin-top: 100px;
-}
-
-.carousel-container {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  /* soft light gray shadow */
-  background-color: #ffffff;
-}
-
-.carousel-track-wrapper {
-  overflow: hidden;
-  width: 100%;
-}
-
-.carousel-track {
-  display: flex;
-  width: 100%;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  display: block;
-  object-fit: contain;
-  pointer-events: none;
-  /* helps with touch dragging without selecting image */
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-.carousel-btn:hover {
-  background-color: #ffffff;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--primary);
-  /* #18a5f6 */
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.prev-btn {
-  left: 1rem;
-}
-
-.next-btn {
-  right: 1rem;
-}
-
-.carousel-pagination {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(24, 165, 246, 0.4);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carousel-dot.active {
-  background-color: var(--primary);
-  width: 28px;
-  border-radius: 12px;
-  /* pill shape */
-}
-
-@media (max-width: 768px) {
-  .boxed-carousel-section {
-    margin-top: 0 !important;
-    /* Lets main-content padding-top: 100px handle the spacing */
-  }
-
-  .carousel-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .prev-btn {
-    left: 0.5rem;
-  }
-
-  .next-btn {
-    right: 0.5rem;
-  }
-
-  .carousel-pagination {
-    bottom: 0.8rem;
-  }
-}
 
 /* Vertical Floating Contact Button (Right Edge) */
 .floating-contact-btn {
@@ -1151,5 +1028,60 @@ h6 {
     height: 80px;
     top: -15px;
     left: -15px;
+  }
+}
+
+/* --- Hero Horizontal Marquee --- */
+.hero-marquee-container {
+  display: flex;
+}
+
+.hero-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scrollHorizontal 30s linear infinite;
+}
+
+.hero-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.hero-marquee-track img {
+  height: 250px;
+  border-radius: 12px;
+  object-fit: contain;
+  /* Prevent distortion */
+}
+
+@keyframes scrollHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-marquee-track img {
+    height: 160px;
+  }
+}
+
+/* --- Desktop Hero Heading Fix (prevent letter-by-letter wrapping) --- */
+@media (min-width: 769px) {
+  .hero-content {
+    width: 100% !important;
+    min-width: 400px !important;
+  }
+
+  #hero-heading {
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+    hyphens: none !important;
+    font-size: clamp(2rem, 4vw, 3.5rem) !important;
   }
 }
