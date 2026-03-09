@@ -352,11 +352,14 @@ h6 {
 
   .main-footer {
     padding-bottom: 90px !important;
-    /* Move the space INSIDE the dark footer so no white bar appears below it */
   }
 
   .container {
     padding: 0 1.5rem;
+  }
+
+  .mobile-menu a {
+    font-size: 10px !important;
   }
 }
 
@@ -784,13 +787,15 @@ h6 {
 .testimonial-card {
   flex: 0 0 calc(33.333% - 12px);
   min-width: 280px;
+  max-width: 450px;
   background-color: #f8f9fa;
   border-radius: 16px;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
   transition: transform 0.3s ease;
+  height: auto;
 }
 
 .testimonial-card:hover {
@@ -801,8 +806,7 @@ h6 {
   color: #334155;
   font-size: 0.95rem;
   line-height: 1.7;
-  flex-grow: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .tcard-author {
@@ -830,27 +834,27 @@ h6 {
 }
 
 .tcard-nav-btn {
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: none;
-  background-color: var(--primary);
-  color: #ffffff;
+  background-color: #0f172a !important;
+  color: #ffffff !important;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(24, 165, 246, 0.2);
+  box-shadow: none !important;
 }
 
 .tcard-nav-btn:hover {
-  background-color: #2da1e6;
-  transform: scale(1.1);
+  background-color: #1e293b !important;
+  transform: scale(1.05);
 }
 
 .tcard-nav-btn svg {
-  stroke: #ffffff;
+  stroke: #ffffff !important;
 }
 
 @media (max-width: 768px) {
@@ -1068,6 +1072,15 @@ h6 {
   .hero-marquee-track img {
     height: 160px;
   }
+
+  /* --- Mobile Hero Heading Fix: prevent mid-word breaking --- */
+  #hero-heading {
+    font-size: 7.5vw !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+    white-space: normal !important;
+  }
 }
 
 /* --- Desktop Hero Heading Fix (prevent letter-by-letter wrapping) --- */
@@ -1083,5 +1096,300 @@ h6 {
     white-space: normal !important;
     hyphens: none !important;
     font-size: clamp(2rem, 4vw, 3.5rem) !important;
+  }
+}
+
+/* --- Services Introduction Section --- */
+.services-section {
+  padding: 4rem 0 3rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.service-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
+}
+
+.service-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-card-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: #ffffff;
+  stroke-width: 2;
+  fill: none;
+}
+
+.service-card-icon.icon-ders {
+  background: linear-gradient(135deg, #18a5f6, #0d8bd9);
+}
+
+.service-card-icon.icon-kocluk {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.service-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.service-card .service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: auto;
+  transition: gap 0.3s ease;
+}
+
+.service-card:hover .service-link {
+  gap: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* --- Testimonials Section (Homepage) --- */
+.testimonials-section {
+  background-color: #f8f9fa !important;
+  padding: 60px 0;
+  border-radius: 24px;
+  margin-bottom: 0;
+}
+
+.testimonials-section .testimonial-card {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 1.75rem !important;
+  height: auto !important;
+  min-height: 220px !important;
+}
+
+.testimonials-section .testimonial-card .tcard-quote {
+  color: #0f172a !important;
+  font-size: 4rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  margin-bottom: 1rem !important;
+}
+
+.testimonials-section .testimonial-card .tcard-text,
+.testimonials-section .testimonial-card .tcard-name {
+  color: #0f172a !important;
+}
+
+.testimonials-section .testimonial-card .tcard-badge {
+  color: #ffffff !important;
+}
+
+/* --- FAQ Section (Homepage) --- */
+.faq-section {
+  background-color: #f8f9fa !important;
+  padding: 60px 0;
+  border-radius: 24px;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-container details {
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  margin-bottom: 16px !important;
+  transition: all 0.3s ease;
+}
+
+.faq-container details:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+.faq-container details[open] {
+  background-color: #ffffff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.faq-container summary {
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  color: #1e293b !important;
+}
+
+.faq-container summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-container summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: #1e293b !important;
+  transition: var(--transition);
+}
+
+.faq-container .faq-content {
+  color: #1e293b !important;
+}
+
+.faq-container details[open] summary::after {
+  content: '−';
+  color: #1e293b !important;
+}
+
+.faq-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: #1e293b !important;
+  line-height: 1.6;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.faq-container details[open] .faq-content {
+  padding-top: 1rem;
+  animation: faqFadeIn 0.3s ease-out;
+}
+
+@keyframes faqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Vertical Marquee Section (Special Lessons) --- */
+.vertical-marquee-section {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 4rem;
+  background: #f8fafc;
+  border-radius: 24px;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.marquee-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 280px;
+}
+
+.marquee-column img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.column-up {
+  animation: scrollUp 20s linear infinite;
+}
+
+.column-down {
+  animation: scrollDown 25s linear infinite;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .vertical-marquee-section {
+    height: 400px;
+  }
+
+  .marquee-column {
+    width: 45%;
   }
 }

@@ -6,6 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğrenci Koçluğu | Ömer Hoca</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .kocluk-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 60vh;
+            padding: 2rem 0;
+        }
+
+        .kocluk-hero .package-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--border-color);
+        }
+
+        .kocluk-hero .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .kocluk-hero .package-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .kocluk-hero .package-card:hover .package-img {
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 
 <body>
@@ -16,27 +61,26 @@
             <nav class="desktop-menu">
                 <a href="index.html">Ana Sayfa</a>
                 <a href="ozel-ders.html">Özel Ders</a>
-                <a href="kocluk.html" class="active">Koçluk</a>
-                <a href="yorumlar.html">Yorumlar</a>
-                <a href="sss.html">SSS</a>
+                <a href="kocluk.html" class="active">Öğrenci Koçluğu</a>
+                <a href="blog.html">Blog</a>
                 <a href="iletisim.html">İletişim</a>
             </nav>
+            <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
+
         </div>
     </header>
 
-    <main class="main-content container animate-fade-in"
-        style="padding-top: 7rem; padding-bottom: 4rem; text-align: center;">
+    <main class="main-content container animate-fade-in" style="padding-top: 7rem; padding-bottom: 4rem;">
         <h1 class="section-title">Öğrenci <span class="text-primary">Koçluğu</span></h1>
-        <p class="section-subtitle">Stresli sınav maratonunda hedefe ulaşmanıza yardımcı olacak profesyonel rehberlik ve
-            takip sistemi.</p>
+        <p class="section-subtitle">Yapay zeka destekli analiz sistemiyle hedefe odaklı, kişiye özel koçluk programı.
+        </p>
 
-        <div class="star-border-container"
-            style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 2.5rem; background: white; padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
-            <img src="kocluk-paket.png" alt="Öğrenci Koçluğu Paketi"
-                style="max-width: 100%; height: auto; border-radius: 12px; transition: transform 0.3s ease; position: relative; z-index: 10;"
-                onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-            <a href="iletisim.html" class="btn btn-primary"
-                style="width: 100%; max-width: 300px; position: relative; z-index: 10;">Bilgi Al</a>
+        <div class="kocluk-hero">
+            <!-- Öğrenci Koçluğu Package Card -->
+            <div class="package-card star-border-container">
+                <img src="kocluk-paket.png" alt="Öğrenci Koçluğu Paketi" class="package-img">
+                <a href="iletisim.html" class="btn btn-primary" style="width: 100%; z-index: 10;">Bilgi Al</a>
+            </div>
         </div>
     </main>
 
@@ -85,8 +129,8 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Ana Sayfa</a></li>
                     <li><a href="ozel-ders.html">Özel Ders</a></li>
-                    <li><a href="kocluk.html">Öğrenci Koçluğu</a></li>
-                    <li><a href="yorumlar.html">Referanslar</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="yorumlar.html">Yorumlar</a></li>
                     <li><a href="sss.html">SSS</a></li>
                     <li><a href="iletisim.html">İletişim</a></li>
                 </ul>
@@ -105,10 +149,36 @@
         </div>
     </footer>
 
-    <!-- Mobile Bottom Navigation -->
+    <a href="iletisim.html" class="floating-contact-btn" aria-label="İletişime Geç">
+        <svg viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>İletişime Geç</span>
+    </a>
     <nav class="mobile-nav">
         <ul class="mobile-menu">
             <li>
+                <a href="ozel-ders.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span>Özel Ders</span>
+                </a>
+            </li>
+            <li>
+                <a href="kocluk.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                    </svg>
+                    <span>Koçluk</span>
+                </a>
+            </li>
+            <li class="center-button">
                 <a href="index.html">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -119,40 +189,21 @@
                 </a>
             </li>
             <li>
-                <a href="ozel-ders.html">
+                <a href="blog.html">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                     </svg>
-                    <span>Özel Ders</span>
-                </a>
-            </li>
-            <li>
-                <a href="kocluk.html" class="active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    <span>Koçluk</span>
-                </a>
-            </li>
-            <li>
-                <a href="yorumlar.html">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    <span>Yorumlar</span>
+                    <span>Blog</span>
                 </a>
             </li>
             <li>
                 <a href="iletisim.html">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                        </path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
                     <span>İletişim</span>
@@ -160,7 +211,41 @@
             </li>
         </ul>
     </nav>
+    <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
+
     <script src="split-text.js"></script>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Yukarı Çık">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script>
+        // Scroll to Top Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (scrollTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
+                });
+
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
