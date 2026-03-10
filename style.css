@@ -1044,7 +1044,7 @@ h6 {
   display: flex;
   gap: 20px;
   width: max-content;
-  animation: scrollHorizontal 30s linear infinite;
+  animation: scrollHorizontal 21s linear infinite !important;
 }
 
 .hero-marquee-track:hover {
