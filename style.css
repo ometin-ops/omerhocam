@@ -768,101 +768,100 @@ h6 {
     font-size: 0.8rem;
   }
 }
+/* --- 3D Isometric Marquee Grid (Testimonials) --- */
+.testimonial-iso-section {
+  background-color: #f8fafc;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
 
-/* --- Testimonials Carousel Section --- */
-.testimonials-track {
+.testimonial-3d-wrapper {
+  perspective: 1500px;
+  position: relative;
+  height: 600px;
+  width: 110%;
+  left: -5%;
+  overflow: hidden;
+}
+
+.testimonial-3d-grid {
   display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 1rem;
-  scrollbar-width: none;
+  gap: 2rem;
+  width: 150%;
+  transform: rotateX(45deg) rotateZ(-15deg) skewX(5deg) translateY(-10%);
+  transform-style: preserve-3d;
+  position: relative;
 }
 
-.testimonials-track::-webkit-scrollbar {
-  display: none;
-}
-
-.testimonial-card {
-  flex: 0 0 calc(33.333% - 12px);
-  min-width: 280px;
-  max-width: 450px;
-  background-color: #f8f9fa;
-  border-radius: 16px;
-  padding: 1.5rem;
+.testimonial-column {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  scroll-snap-align: start;
-  transition: transform 0.3s ease;
-  height: auto;
+  gap: 2rem;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-4px);
+.t-scroll-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: verticalMarquee linear infinite;
 }
 
-.tcard-text {
+@keyframes verticalMarquee {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.col-fast .t-scroll-content { animation-duration: 15s; }
+.col-medium .t-scroll-content { animation-duration: 18s; }
+.col-slow .t-scroll-content { animation-duration: 20s; }
+
+.t-iso-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 320px;
+  backface-visibility: hidden;
+}
+
+.t-iso-card:hover {
+  transform: translateZ(20px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.t-iso-card p {
   color: #334155;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   line-height: 1.7;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2rem;
+  font-style: italic;
 }
 
-.tcard-author {
+.t-iso-author {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
 }
 
-.tcard-name {
-  font-weight: 700;
+.t-iso-author strong {
   color: #0f172a;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
 }
 
-.tcard-badge {
-  display: inline-block;
-  background-color: #0f172a;
-  color: #ffffff;
-  padding: 4px 12px;
-  border-radius: 50px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  width: fit-content;
+.t-iso-author span {
+  color: #64748b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.2rem;
 }
 
-.tcard-nav-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background-color: #0f172a !important;
-  color: #ffffff !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: none !important;
-}
-
-.tcard-nav-btn:hover {
-  background-color: #1e293b !important;
-  transform: scale(1.05);
-}
-
-.tcard-nav-btn svg {
-  stroke: #ffffff !important;
-}
-
-@media (max-width: 768px) {
-  .testimonial-card {
-    flex: 0 0 85vw;
-    min-width: unset;
-  }
-}
 
 
 /* Vertical Floating Contact Button (Right Edge) */
@@ -1195,127 +1194,146 @@ h6 {
   }
 }
 
-/* --- Testimonials Section (Homepage) --- */
-.testimonials-section {
-  background-color: #f8f9fa !important;
-  padding: 60px 0;
-  border-radius: 24px;
-  margin-bottom: 0;
+
+/* --- Modern FAQ Section (2-Column) --- */
+.faq-modern-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+  padding: 4rem 0;
 }
 
-.testimonials-section .testimonial-card {
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-  border: none !important;
-  border-radius: 12px !important;
-  padding: 1.75rem !important;
-  height: auto !important;
-  min-height: 220px !important;
+.faq-left {
+  position: sticky;
+  top: 100px;
 }
 
-.testimonials-section .testimonial-card .tcard-quote {
-  color: #0f172a !important;
-  font-size: 4rem !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  margin-bottom: 1rem !important;
+.faq-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
 }
 
-.testimonials-section .testimonial-card .tcard-text,
-.testimonials-section .testimonial-card .tcard-name {
-  color: #0f172a !important;
+.faq-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 400px;
 }
 
-.testimonials-section .testimonial-card .tcard-badge {
-  color: #ffffff !important;
-}
-
-/* --- FAQ Section (Homepage) --- */
-.faq-section {
-  background-color: #f8f9fa !important;
-  padding: 60px 0;
-  border-radius: 24px;
-}
-
-.faq-container {
-  max-width: 800px;
-  margin: 2.5rem auto 0;
+.faq-right {
   display: flex;
   flex-direction: column;
 }
 
-.faq-container details {
-  background-color: #ffffff !important;
-  border: none !important;
-  border-radius: 12px !important;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-  margin-bottom: 16px !important;
-  transition: all 0.3s ease;
+.faq-item-modern {
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.faq-container details:hover {
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06) !important;
-}
-
-.faq-container details[open] {
-  background-color: #ffffff !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
-}
-
-.faq-container summary {
-  font-weight: 600;
-  font-size: 1.125rem;
-  cursor: pointer;
-  padding: 1.5rem;
+.faq-question-btn {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  list-style: none;
-  color: #1e293b !important;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  transition: color 0.3s ease;
 }
 
-.faq-container summary::-webkit-details-marker {
-  display: none;
+.faq-question-btn:hover {
+  color: var(--primary);
 }
 
-.faq-container summary::after {
-  content: '+';
+.faq-icon {
   font-size: 1.5rem;
-  color: #1e293b !important;
-  transition: var(--transition);
+  color: #94a3b8;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.faq-container .faq-content {
-  color: #1e293b !important;
+.faq-item-modern.active .faq-icon {
+  transform: rotate(45deg);
+  color: var(--primary);
 }
 
-.faq-container details[open] summary::after {
-  content: '−';
-  color: #1e293b !important;
+.faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
-.faq-content {
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  color: #1e293b !important;
-  line-height: 1.6;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+.faq-item-modern.active .faq-answer-wrapper {
+  grid-template-rows: 1fr;
 }
 
-.faq-container details[open] .faq-content {
-  padding-top: 1rem;
-  animation: faqFadeIn 0.3s ease-out;
+.faq-answer-inner {
+  min-height: 0;
 }
 
-@keyframes faqFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+.faq-answer-text {
+  display: block !important;
+  text-align: left !important;
+  padding-bottom: 1.5rem;
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* Blur/Fade reveal animation for typewriter segments */
+.faq-item-modern.active .faq-answer-text span {
+  display: inline-block !important;
+  white-space: pre-wrap !important;
+  margin-right: 0.25em !important;
+  animation: revealText 0.4s both;
+}
+
+@keyframes revealText {
+  0% { 
+    filter: blur(10px); 
+    opacity: 0; 
+    transform: translateY(-5px); 
   }
+  100% { 
+    filter: blur(0px); 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* Responsive FAQ */
+@media (max-width: 1024px) {
+  .faq-modern-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .faq-left {
+    position: static;
+    text-align: center;
+  }
+  .faq-subtitle {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .faq-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .faq-question-btn {
+    font-size: 1.05rem;
+  }
+  .faq-title {
+    font-size: 2rem;
   }
 }
 
