@@ -1447,20 +1447,21 @@ h6 {
   position: absolute;
   top: -25px;
   right: -25px;
-  width: 80px;
-  height: 80px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
-  border: 3px solid #111827;
+  border: 4px solid #111827;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #ffffff;
   box-shadow: 4px 4px 0px #111827;
   z-index: 10;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.1;
+  padding: 5px;
 }
 
 .neo-pricing-card h3 {
@@ -1620,12 +1621,12 @@ h6 {
 
 .tab-btn {
     background: #ffffff;
-    border: 2px solid #111827;
+    border: 3px solid #111827;
     box-shadow: 4px 4px 0px #111827;
     padding: 12px 30px;
     font-weight: 800;
-    font-size: 1.1rem;
-    border-radius: 8px;
+    font-size: 1.15rem;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
@@ -1703,11 +1704,24 @@ h6 {
         box-shadow: 8px 8px 0px #111827;
     }
     .price-badge-round {
-        width: 70px;
-        height: 70px;
-        font-size: 0.95rem;
+        width: 85px;
+        height: 85px;
+        font-size: 0.9rem;
         top: -15px;
         right: -10px;
+        box-shadow: 3px 3px 0px #111827;
+        line-height: 1.1;
+    }
+    
+    .package-tabs {
+        gap: 8px;
+        padding: 0 10px;
+    }
+    
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        border-width: 2px;
         box-shadow: 3px 3px 0px #111827;
     }
 }
