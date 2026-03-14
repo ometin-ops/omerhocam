@@ -2,6 +2,15 @@
 <html lang="tr">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MRFQRNX0W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-8MRFQRNX0W');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Özel Ders Paketleri | Ömer Hoca</title>
@@ -107,7 +116,7 @@
     </style>
 </head>
 
-<body>
+<body class="body-with-grid">
     <!-- Desktop Header -->
     <header class="desktop-header">
         <div class="nav-container">
@@ -142,38 +151,109 @@
             </div>
         </section>
 
-        <h1 class="section-title">Özel Ders <span class="text-primary">Paketleri</span></h1>
-        <p class="section-subtitle">Size en uygun çalışma paketini seçin ve hemen başarıya odaklanın.</p>
-
-        <!-- Segmented Filter Bar -->
-        <div class="filter-container-wrapper">
-            <div class="segment-filter" id="package-filter">
-                <button class="segment-btn active" data-filter="all">Tümü</button>
-                <button class="segment-btn" data-filter="lgs">LGS</button>
-                <button class="segment-btn" data-filter="yks">YKS</button>
-                <button class="segment-btn" data-filter="ara-sinif">Ara Sınıf</button>
+        <section class="neo-pricing-section">
+            <!-- Decorative Shapes -->
+            <div class="floating-shape shape-1">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="#ffc107" stroke="#111827" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
             </div>
-        </div>
-
-        <div class="cards-grid">
-            <!-- LGS Package -->
-            <div class="package-card star-border-container" data-category="lgs">
-                <img src="lgs-paket.png" alt="LGS Hazırlık Paketi" class="package-img">
-                <a href="iletisim.html" class="btn btn-primary" style="width: 100%; z-index: 10;">Bilgi Al</a>
+            <div class="floating-shape shape-2">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#38b6ff" stroke-width="4">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
             </div>
-
-            <!-- YKS Package -->
-            <div class="package-card star-border-container" data-category="yks">
-                <img src="yks-paket.png" alt="YKS Hazırlık Paketi" class="package-img">
-                <a href="iletisim.html" class="btn btn-primary" style="width: 100%; z-index: 10;">Bilgi Al</a>
+            <div class="floating-shape shape-3">
+                <svg width="55" height="55" viewBox="0 0 24 24" fill="#ff4757" stroke="#111827" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+            </div>
+            <div class="floating-shape shape-4">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="#2ed573" stroke="#111827" stroke-width="2">
+                    <path d="M12 2L2 22h20L12 2z"></path>
+                </svg>
             </div>
 
-            <!-- Ara Sınıf Package -->
-            <div class="package-card star-border-container" data-category="ara-sinif">
-                <img src="ara-paket.png" alt="Ara Sınıf Paketi" class="package-img">
-                <a href="iletisim.html" class="btn btn-primary" style="width: 100%; z-index: 10;">Bilgi Al</a>
+            <div style="text-align: center; width: 100%;">
+                <h1 class="section-title">Özel Ders <span class="text-primary">Paketleri</span></h1>
             </div>
-        </div>
+            <p class="section-subtitle">Size en uygun çalışma paketini seçin ve hemen başarıya odaklanın.</p>
+
+            <!-- Package Filter Tabs -->
+            <div class="package-tabs">
+                <button class="tab-btn active" data-target="lgs-paket">LGS</button>
+                <button class="tab-btn" data-target="yks-paket">YKS</button>
+                <button class="tab-btn" data-target="ara-sinif-paket">Ara Sınıf</button>
+            </div>
+
+            <div class="neo-pricing-container">
+                <!-- LGS Package (Red Theme) -->
+                <div class="neo-pricing-card theme-red" id="lgs-paket" style="display: flex;">
+                    <div class="price-badge-round">VIP<br>ÖZEL</div>
+                    <div style="position: relative; text-align: center; padding: 20px 0; overflow: visible; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <div style="position: absolute; top: -20px; left: 5%; width: 120px; height: 120px; background: #ffaa00; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: -20px; right: 5%; width: 120px; height: 120px; background: #38b6ff; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <h3 style="margin: 0; font-size: 2.2rem; position: relative; z-index: 2; color: #111827; font-weight: 800;">LGS</h3>
+                    </div>
+                    <ul class="neo-features-list">
+                        <li><span class="neo-check-icon">✓</span> Her konu için özel olarak hazırlanmış PDF'ler</li>
+                        <li><span class="neo-check-icon">✓</span> Düzenli deneme çözümü ve takibi</li>
+                        <li><span class="neo-check-icon">✓</span> Eksik konulara özel matematik kampları</li>
+                        <li><span class="neo-check-icon">✓</span> MEB'in çıkmış sorularının analizi</li>
+                        <li><span class="neo-check-icon">✓</span> Yapay zeka destekli çıkması muhtemel sorular</li>
+                        <li><span class="neo-check-icon">✓</span> 7/24 WhatsApp'tan soru sorabilme imkanı</li>
+                    </ul>
+                    <a href="iletisim.html" class="neo-pricing-btn">
+                        <span>Hemen Başla</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+
+                <!-- YKS Package (Blue Theme) -->
+                <div class="neo-pricing-card theme-blue" id="yks-paket">
+                    <div class="price-badge-round">PRO<br>EĞİTİM</div>
+                    <div style="position: relative; text-align: center; padding: 20px 0; overflow: visible; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <div style="position: absolute; top: -20px; left: 5%; width: 120px; height: 120px; background: #ffaa00; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: -20px; right: 5%; width: 120px; height: 120px; background: #38b6ff; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <h3 style="margin: 0; font-size: 2.2rem; position: relative; z-index: 2; color: #111827; font-weight: 800;">YKS</h3>
+                    </div>
+                    <ul class="neo-features-list">
+                        <li><span class="neo-check-icon">✓</span> Her konu için özel olarak hazırlanmış PDF'ler</li>
+                        <li><span class="neo-check-icon">✓</span> Düzenli deneme çözümü ve takibi</li>
+                        <li><span class="neo-check-icon">✓</span> Eksik konulara özel matematik kampları</li>
+                        <li><span class="neo-check-icon">✓</span> ÖSYM'nin çıkmış sorularının analizi</li>
+                        <li><span class="neo-check-icon">✓</span> Yapay zeka destekli çıkması muhtemel sorular</li>
+                        <li><span class="neo-check-icon">✓</span> 7/24 WhatsApp'tan soru sorabilme imkanı</li>
+                    </ul>
+                    <a href="iletisim.html" class="neo-pricing-btn">
+                        <span>Hemen Başla</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+
+                <!-- Ara Sınıf Package (Purple Theme) -->
+                <div class="neo-pricing-card theme-purple" id="ara-sinif-paket">
+                    <div class="price-badge-round">TAM<br>DESTEK</div>
+                    <div style="position: relative; text-align: center; padding: 20px 0; overflow: visible; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <div style="position: absolute; top: -20px; left: 5%; width: 120px; height: 120px; background: #ffaa00; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: -20px; right: 5%; width: 120px; height: 120px; background: #38b6ff; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <h3 style="margin: 0; font-size: 2.2rem; position: relative; z-index: 2; color: #111827; font-weight: 800;">Ara Sınıf</h3>
+                    </div>
+                    <ul class="neo-features-list">
+                        <li><span class="neo-check-icon">✓</span> Maarif Model ile tam uyumluluk</li>
+                        <li><span class="neo-check-icon">✓</span> Okul yazılılarına özel yazılı hazırlık provaları</li>
+                        <li><span class="neo-check-icon">✓</span> Düzenli ödevlendirme ve takibi</li>
+                        <li><span class="neo-check-icon">✓</span> Her konuya özel hazırlanmış PDF'ler</li>
+                        <li><span class="neo-check-icon">✓</span> Konu eksiği teşhis testleri</li>
+                    </ul>
+                    <a href="iletisim.html" class="neo-pricing-btn">
+                        <span>Hemen Başla</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -232,13 +312,11 @@
             <div class="footer-col">
                 <h3 class="footer-title">Yasal</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Gizlilik Politikası</a></li>
-                    <li><a href="#">Kullanım Şartları</a></li>
-                    <li><a href="#">KVKK Aydınlatma</a></li>
-                    <li><a href="#">Çerez Politikası</a></li>
+                    <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                    <li><a href="kullanim-sartlari.html">Kullanım Şartları</a></li>
+                    <li><a href="kvkk-aydinlatma.html">KVKK Aydınlatma</a></li>
+                    <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
                 </ul>
-                </nav>
-                <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
 
                 <a href="iletisim.html" class="floating-contact-btn" aria-label="İletişime Geç">
                     <svg viewBox="0 0 24 24">
@@ -303,44 +381,8 @@
                         </li>
                     </ul>
                 </nav>
-                <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
 
                 <script src="split-text.js"></script>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const filterBtns = document.querySelectorAll('.segment-btn');
-                        const cards = document.querySelectorAll('.package-card');
-
-                        filterBtns.forEach(btn => {
-                            btn.addEventListener('click', () => {
-                                // Remove active class from all
-                                filterBtns.forEach(b => b.classList.remove('active'));
-                                // Add to clicked
-                                btn.classList.add('active');
-
-                                const filterValue = btn.getAttribute('data-filter');
-
-                                cards.forEach(card => {
-                                    const category = card.getAttribute('data-category');
-                                    if (filterValue === 'all' || filterValue === category) {
-                                        card.style.display = 'flex';
-                                        // Small timeout to allow display: flex to apply before opacity for smooth fade
-                                        setTimeout(() => {
-                                            card.style.opacity = '1';
-                                            card.style.transform = '';
-                                        }, 10);
-                                    } else {
-                                        card.style.opacity = '0';
-                                        card.style.transform = 'scale(0.95)';
-                                        setTimeout(() => {
-                                            card.style.display = 'none';
-                                        }, 300); // match transition time
-                                    }
-                                });
-                            });
-                        });
-                    });
-                </script>
 
                 <!-- Scroll to Top Button -->
                 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Yukarı Çık">
@@ -370,9 +412,58 @@
                                 });
                             });
                         }
+
+                        // Package Tab Filtering Logic
+                        const tabBtns = document.querySelectorAll('.tab-btn');
+                        const cards = document.querySelectorAll('.neo-pricing-card');
+
+                        tabBtns.forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                // Remove active from all buttons
+                                tabBtns.forEach(b => b.classList.remove('active'));
+                                // Add active to clicked button
+                                btn.classList.add('active');
+
+                                // Get target ID
+                                const targetId = btn.getAttribute('data-target');
+
+                                // Hide all cards
+                                cards.forEach(card => {
+                                    card.style.display = 'none';
+                                });
+
+                                // Show the target card
+                                document.getElementById(targetId).style.display = 'flex';
+                            });
+                        });
                     });
                 </script>
 
+    <!-- Cookie Warning Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Size daha iyi hizmet sunabilmek için çerezleri kullanıyoruz.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="cookie-accept-btn" onclick="acceptCookies()">Kabul Et</button>
+            <a href="cerez-politikasi.html" class="cookie-policy-btn">Çerez Politikasını İncele</a>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 
 </html>

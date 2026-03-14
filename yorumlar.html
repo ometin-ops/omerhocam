@@ -2,6 +2,15 @@
 <html lang="tr">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MRFQRNX0W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-8MRFQRNX0W');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğrenci ve Veli Yorumları | Ömer Hoca</title>
@@ -455,10 +464,10 @@
             <div class="footer-col">
                 <h3 class="footer-title">Yasal</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Gizlilik Politikası</a></li>
-                    <li><a href="#">Kullanım Şartları</a></li>
-                    <li><a href="#">KVKK Aydınlatma</a></li>
-                    <li><a href="#">Çerez Politikası</a></li>
+                    <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                    <li><a href="kullanim-sartlari.html">Kullanım Şartları</a></li>
+                    <li><a href="kvkk-aydinlatma.html">KVKK Aydınlatma</a></li>
+                    <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
                 </ul>
                 </nav>
                 <a href="https://www.youtube.com/@omerhocatv" target="_blank" class="header-join-btn">Katıl</a>
@@ -561,6 +570,31 @@
                     });
                 </script>
 
+    <!-- Cookie Warning Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Size daha iyi hizmet sunabilmek için çerezleri kullanıyoruz.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="cookie-accept-btn" onclick="acceptCookies()">Kabul Et</button>
+            <a href="cerez-politikasi.html" class="cookie-policy-btn">Çerez Politikasını İncele</a>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 
 </html>
