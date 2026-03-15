@@ -835,12 +835,14 @@ h6 {
 .t-iso-card {
   background: #ffffff;
   padding: 2.5rem;
+  padding-bottom: 45px !important;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   border: 1px solid rgba(15, 23, 42, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   min-width: 320px;
   backface-visibility: hidden;
+  position: relative;
 }
 
 .t-iso-card:hover {
@@ -1639,10 +1641,21 @@ h6 {
 }
 
 .tab-btn.active {
-    background: #38b6ff;
     color: #ffffff;
     box-shadow: 0px 0px 0px #111827;
     transform: translate(4px, 4px);
+}
+
+.tab-btn.active.tab-lgs {
+    background-color: #ff4757;
+}
+
+.tab-btn.active.tab-yks {
+    background-color: #1e90ff;
+}
+
+.tab-btn.active.tab-ara-sinif {
+    background-color: #9b59b6;
 }
 
 /* Ensure only one card is visible when filtered */
@@ -1696,12 +1709,18 @@ h6 {
         background-size: 20px 20px;
     }
     .neo-pricing-container {
-        padding: 0 1.5rem;
+        padding: 0 10px;
         gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .neo-pricing-card {
-        padding: 2.5rem 1.5rem;
+        width: 95%;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem;
         box-shadow: 8px 8px 0px #111827;
+        box-sizing: border-box;
     }
     .price-badge-round {
         width: 85px;
@@ -1714,15 +1733,25 @@ h6 {
     }
     
     .package-tabs {
+        display: flex;
+        width: 95%;
+        margin: 0 auto 2rem auto;
         gap: 8px;
-        padding: 0 10px;
+        padding: 0;
+        box-sizing: border-box;
     }
     
     .tab-btn {
-        padding: 10px 15px;
-        font-size: 0.9rem;
+        flex: 1;
+        padding: 12px 5px;
+        font-size: 0.85rem;
         border-width: 2px;
         box-shadow: 3px 3px 0px #111827;
+        white-space: nowrap;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -1851,4 +1880,159 @@ h6 {
   .cookie-accept-btn, .cookie-policy-btn {
     width: 100%;
   }
+}
+
+/* Neo-Brutalism Modal */
+.neo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.neo-modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.neo-modal {
+    background: #ffffff;
+    border: 4px solid #111827;
+    box-shadow: 12px 12px 0px #111827;
+    width: 100%;
+    max-width: 500px;
+    padding: 2.5rem;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neo-modal-overlay.show .neo-modal {
+    transform: translateY(0);
+}
+
+.neo-modal-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.neo-modal-text b {
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.neo-modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 1rem 1.5rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    border: 3px solid #111827;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    flex: 1;
+}
+
+.modal-btn-success {
+    background: #ffc107;
+    color: #111827;
+    box-shadow: 4px 4px 0px #111827;
+}
+
+.modal-btn-success:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #111827;
+    background: #ffca2c;
+}
+
+.modal-btn-success:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #111827;
+}
+
+.modal-btn-cancel {
+    background: #e5e7eb;
+    color: #4b5563;
+    box-shadow: 4px 4px 0px #111827;
+}
+
+.modal-btn-cancel:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #111827;
+    background: #f3f4f6;
+}
+
+.modal-btn-cancel:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #111827;
+}
+
+@media (max-width: 480px) {
+    .neo-modal {
+        padding: 1.5rem;
+    }
+    .neo-modal-text {
+        font-size: 1.1rem;
+    }
+    .neo-modal-actions {
+        flex-direction: column;
+    }
+}
+
+/* Modal Social Icons */
+.neo-modal-socials {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.modal-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    background: #ffffff;
+    border: 3px solid #111827;
+    box-shadow: 4px 4px 0px #111827;
+    border-radius: 12px;
+    color: #111827;
+    transition: all 0.2s;
+}
+
+.modal-social-icon:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0px #111827;
+    color: #18a5f6;
+    border-color: #18a5f6;
+}
+
+.modal-social-icon:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #111827;
+}
+
+.modal-social-icon svg {
+    width: 32px;
+    height: 32px;
 }
