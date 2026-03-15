@@ -15,54 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Öğrenci Koçluğu | Ömer Hoca</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .kocluk-hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 60vh;
-            padding: 2rem 0;
-        }
-
-        .kocluk-hero .package-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 420px;
-            border: 1px solid var(--border-color);
-        }
-
-        .kocluk-hero .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .kocluk-hero .package-img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        .kocluk-hero .package-card:hover .package-img {
-            transform: scale(1.03);
+        /* Custom padding for this page */
+        .kocluk-section {
+            padding: 2rem 0 6rem;
         }
     </style>
 </head>
 
-<body>
+<body class="body-with-grid">
     <!-- Desktop Header -->
     <header class="desktop-header">
         <div class="nav-container">
@@ -98,17 +58,49 @@
                 </div>
             </div>
         </section>
-        <h1 class="section-title">Öğrenci <span class="text-primary">Koçluğu</span></h1>
-        <p class="section-subtitle">Yapay zeka destekli analiz sistemiyle hedefe odaklı, kişiye özel koçluk programı.
-        </p>
 
-        <div class="kocluk-hero">
-            <!-- Öğrenci Koçluğu Package Card -->
-            <div class="package-card star-border-container">
-                <img src="kocluk-paket.png" alt="Öğrenci Koçluğu Paketi" class="package-img">
-                <a href="iletisim.html" class="btn btn-primary" style="width: 100%; z-index: 10;">Bilgi Al</a>
+        <section class="neo-pricing-section kocluk-section">
+            <!-- Decorative Shapes -->
+            <div class="floating-shape shape-1">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="#ffc107" stroke="#111827" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
             </div>
-        </div>
+            <div class="floating-shape shape-2">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#38b6ff" stroke-width="4">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </div>
+
+            <div style="text-align: center; width: 100%;">
+                <h1 class="section-title">Öğrenci <span class="text-primary">Koçluğu</span></h1>
+            </div>
+            <p class="section-subtitle">Yapay zeka destekli analiz sistemiyle hedefe odaklı, kişiye özel koçluk programı.</p>
+
+            <div class="neo-pricing-container">
+                <!-- Öğrenci Koçluğu Card -->
+                <div class="neo-pricing-card theme-yellow" style="display: flex;">
+                    <div class="price-badge-round">Tüm Sınıflar</div>
+                    <div style="position: relative; text-align: center; padding: 20px 0; overflow: visible; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <div style="position: absolute; top: -20px; left: 5%; width: 120px; height: 120px; background: #ffaa00; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: -20px; right: 5%; width: 120px; height: 120px; background: #38b6ff; border-radius: 50%; filter: blur(35px); opacity: 0.85; z-index: 0; pointer-events: none;"></div>
+                        <h3 style="margin: 0; font-size: 2.2rem; position: relative; z-index: 2; color: #111827; font-weight: 800;">Öğrenci Koçluğu</h3>
+                    </div>
+                    <ul class="neo-features-list">
+                        <li><span class="neo-check-icon">✓</span> Piyasanın en seçkin denemeleri</li>
+                        <li><span class="neo-check-icon">✓</span> Yapay Zeka Analizli Çalışma Planı</li>
+                        <li><span class="neo-check-icon">✓</span> Deneme Analiz Robotu</li>
+                        <li><span class="neo-check-icon">✓</span> Haftalık Birebir Mentorluk Görüşmeleri</li>
+                        <li><span class="neo-check-icon">✓</span> 7/24 Soru Sorabilme İmkanı</li>
+                    </ul>
+                    <a href="index.html#iletisim" class="neo-pricing-btn">
+                        <span>HEMEN BAŞLA</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->

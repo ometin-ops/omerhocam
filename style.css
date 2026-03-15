@@ -1565,6 +1565,17 @@ h6 {
   background-color: #9b59b6;
 }
 
+.theme-yellow .price-badge-round,
+.theme-yellow .neo-check-icon,
+.theme-yellow .neo-pricing-btn {
+  background-color: #ffc107;
+  color: #111827 !important;
+}
+
+.theme-yellow .neo-pricing-btn:hover {
+  background-color: #ffca2c;
+}
+
 @media (max-width: 768px) {
   .neo-pricing-container {
     margin-top: 3rem;
@@ -2040,53 +2051,62 @@ h6 {
 /* --- NEW SECTIONS --- */
 
 /* Contact Section on Home Page */
+
+
 .neo-contact-section {
-    padding: 8rem 1rem;
-    background-color: #ffffff;
+    padding: 10rem 2rem;
+    background-color: #f8fafc;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
     overflow: hidden;
-    background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
-    background-size: 30px 30px;
 }
 
 .neo-contact-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 5rem;
-    background: #ffffff;
-    border: 4px solid #111827;
-    border-radius: 40px;
-    box-shadow: 20px 20px 0px #111827;
-    padding: 5rem;
-    position: relative;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    text-align: center;
 }
 
 .neo-contact-info {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 2rem;
 }
 
 .neo-contact-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 900;
     color: #111827;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     line-height: 1.1;
+}
+
+.neo-contact-links {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .neo-contact-item {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    padding: 1.75rem;
+    gap: 1rem;
+    padding: 1rem 2rem;
     background: #ffffff;
-    border: 4px solid #111827;
-    border-radius: 20px;
-    box-shadow: 8px 8px 0px #111827;
+    border: 2px solid #000;
+    border-radius: 50px;
+    box-shadow: 4px 4px 0px #000;
     text-decoration: none;
     color: #111827;
     font-weight: 800;
@@ -2094,14 +2114,14 @@ h6 {
 }
 
 .neo-contact-item:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 12px 12px 0px #111827;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000;
     background-color: #f8fafc;
 }
 
 .neo-contact-item svg {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
     stroke: #38b6ff;
     stroke-width: 3;
 }
@@ -2110,10 +2130,13 @@ h6 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    background: #f1f5f9;
-    padding: 3rem;
-    border-radius: 30px;
-    border: 4px solid #111827;
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
 }
 
 .neo-form-group {
@@ -2125,15 +2148,15 @@ h6 {
 .neo-label {
     font-weight: 900;
     color: #111827;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .neo-input, .neo-textarea {
     padding: 1.25rem;
-    border: 4px solid #111827;
-    border-radius: 15px;
+    border: 2px solid #111827;
+    border-radius: 12px;
     font-family: inherit;
     font-size: 1.1rem;
     background: #ffffff;
@@ -2144,123 +2167,54 @@ h6 {
 
 .neo-input:focus, .neo-textarea:focus {
     border-color: #38b6ff;
-    box-shadow: 5px 5px 0px #111827;
+    box-shadow: 4px 4px 0px #111827;
 }
 
 .neo-submit-btn {
     margin-top: 1rem;
-    padding: 1.5rem;
+    padding: 1.25rem;
     background: #ffc107;
-    border: 4px solid #111827;
-    box-shadow: 10px 10px 0px #111827;
-    border-radius: 20px;
+    border: 2px solid #111827;
+    box-shadow: 6px 6px 0px #111827;
+    border-radius: 50px;
     font-weight: 900;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.2s;
     text-transform: uppercase;
 }
 
 .neo-submit-btn:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0px #111827;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #111827;
     background: #ffca2c;
 }
 
-@media (max-width: 992px) {
-    .neo-contact-container {
-        grid-template-columns: 1fr;
-        padding: 3rem 1.5rem;
-        gap: 3.5rem;
-        width: 95%;
-    }
-    .neo-contact-form {
-        padding: 2rem 1.5rem;
-    }
-}
-
 @media (max-width: 768px) {
-    .floating-contact-btn {
-        display: none !important;
-    }
-
     .neo-contact-section {
-        width: 100%;
-        max-width: 100vw;
-        box-sizing: border-box;
-        overflow: hidden;
-        padding: 4rem 1rem;
-        text-align: center;
+        padding: 5rem 1.5rem;
     }
 
     .neo-contact-container {
-        width: 92%;
-        max-width: 450px;
-        padding: 2.5rem 1.5rem;
-        box-sizing: border-box;
-        box-shadow: 10px 10px 0px #111827;
-        margin: 0 auto;
-        border-radius: 30px;
-        gap: 2.5rem;
-        overflow: hidden;
+        gap: 3rem;
     }
 
-    .neo-contact-title {
-        font-size: 2rem;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-
-    .neo-contact-subtitle {
-        font-size: 1rem;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .neo-contact-info {
-        gap: 1.25rem;
+    .neo-contact-links {
+        flex-direction: column;
+        align-items: center;
     }
 
     .neo-contact-item {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-        border-width: 3px;
-        border-radius: 12px;
-        box-shadow: 4px 4px 0px #111827;
-        gap: 1rem;
-    }
-
-    .neo-contact-item svg {
-        width: 24px;
-        height: 24px;
-        stroke-width: 2.5;
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
     }
 
     .neo-contact-form {
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
         border-radius: 20px;
-        border-width: 3px;
-        gap: 1.25rem;
     }
-
-    .neo-label {
-        font-size: 0.9rem;
-    }
-
-    .neo-input, .neo-textarea {
-        padding: 0.8rem 1rem;
-        font-size: 0.95rem;
-        border-width: 3px;
-        border-radius: 12px;
-    }
-
-    .neo-submit-btn {
-        padding: 1rem;
-        font-size: 1.1rem;
-        border-width: 3px;
-        border-radius: 15px;
-        box-shadow: 6px 6px 0px #111827;
-    }
+}
 }
 
 /* Camps Grid Style */
