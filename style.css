@@ -1578,6 +1578,269 @@ h6 {
   background-color: #ffca2c;
 }
 
+/* --- Modern Minimalist Pricing (Borderless & Soft Shadows) --- */
+.modern-pricing-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0; /* Very subtle border */
+  border-radius: 16px;
+  padding: 3.5rem;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 3rem auto;
+  text-align: left;
+}
+
+.modern-pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+.card-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card-right {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.package-top-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.package-slogan {
+  font-size: 1.05rem;
+  color: #64748b;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Modern Chart Card */
+.modern-chart-card,
+.modern-image-card {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.modern-image-card {
+    padding: 10px; /* Reduced padding for image fit */
+}
+
+.modern-pricing-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.modern-pricing-img:hover {
+    transform: scale(1.02);
+}
+
+.modern-chart-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1e293b;
+}
+
+/* Modern Feature List */
+.features-header {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 2rem;
+}
+
+.modern-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modern-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  color: #334155;
+  font-size: 1rem;
+}
+
+.modern-check {
+  color: #10b981; /* Soft green */
+  font-weight: 800;
+}
+
+/* Modern Button Group */
+.modern-btn-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  justify-content: flex-end;
+}
+
+.modern-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modern-btn-main {
+  background-color: #38b6ff;
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modern-btn-main:hover {
+  background-color: #0095ff;
+  transform: translateY(-2px);
+}
+
+/* Dynamic Pricing Button Colors */
+#lgs-paket .modern-btn-main {
+  background-color: #ff6b35;
+}
+
+#lgs-paket .modern-btn-main:hover {
+  background-color: #e55a2b;
+}
+
+#yks-paket .modern-btn-main {
+  background-color: #38b6ff;
+}
+
+#yks-paket .modern-btn-main:hover {
+  background-color: #0095ff;
+}
+
+#ara-sinif-paket .modern-btn-main {
+  background-color: #8a2be2;
+}
+
+#ara-sinif-paket .modern-btn-main:hover {
+  background-color: #721acb;
+}
+
+/* Coaching Specific Button Style */
+#coaching-paket .modern-btn-main {
+  background-color: #ffcc00; /* Yellow/Orange */
+  color: #1e293b; /* Dark text for contrast */
+}
+
+#coaching-paket .modern-btn-main:hover {
+  background-color: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* Page Specific Sections */
+.kocluk-section {
+  padding: 2rem 0 6rem;
+}
+
+.modern-btn-secondary {
+  background-color: transparent;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.modern-btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Modernized Tabs */
+.modern-tabs {
+    display: flex;
+    justify-content: center;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 2rem auto 4rem;
+}
+
+.modern-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.modern-tab-btn.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.modern-tab-btn.active.tab-lgs { 
+    background: #fef2f2; 
+    color: #ef4444; 
+}
+.modern-tab-btn.active.tab-yks { 
+    background: #eff6ff; 
+    color: #3b82f6; 
+}
+.modern-tab-btn.active.tab-ara-sinif { 
+    background: #f5f3ff; 
+    color: #8b5cf6; 
+}
+
+/* Responsive Modern */
+@media (max-width: 968px) {
+  .modern-pricing-card {
+    flex-direction: column;
+    padding: 2.5rem;
+    gap: 3rem;
+  }
+  .modern-btn-group {
+    justify-content: center;
+  }
+  .modern-btn {
+    flex: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .neo-pricing-container {
     margin-top: 3rem;
