@@ -1413,6 +1413,53 @@ h6 {
   }
 }
 
+/* Horizontal Infinite Marquee */
+.horizontal-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.horizontal-marquee-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 15px;
+  width: max-content;
+  animation: scrollBanner 20s linear infinite;
+}
+
+.horizontal-marquee-track img {
+  flex-shrink: 0;
+  width: 320px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes scrollBanner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide scrollbars */
+.horizontal-marquee-container::-webkit-scrollbar {
+  display: none;
+}
+.horizontal-marquee-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 /* --- Neo-Brutalism Pricing Section (Round Badge Design) --- */
 .neo-pricing-container {
