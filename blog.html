@@ -93,25 +93,26 @@
             gap: 2rem;
             margin-bottom: 4rem;
             justify-items: center;
+            align-items: start; /* Prevent items from stretching vertically */
         }
 
         .blog-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
+            box-shadow: 8px 8px 0px #111827;
+            border: 3px solid #111827;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            height: 100%;
-            max-width: 320px;
+            width: 100%;
+            max-width: 340px;
         }
 
         .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(24, 165, 246, 0.3);
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #18a5f6;
+            border-color: #111827;
         }
 
         .blog-card-img-wrapper {
@@ -141,14 +142,15 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
+            background: #ffffff;
+            border: 2px solid #111827;
             padding: 0.4rem 1rem;
-            border-radius: 99px;
+            border-radius: 12px;
             font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
+            font-weight: 800;
+            color: #111827;
+            box-shadow: 3px 3px 0px #111827;
+            z-index: 5;
         }
 
         .blog-card-content {
@@ -196,24 +198,27 @@
 
         /* Specific style for Google Drive Download Button */
         .btn-drive {
-            background-color: #f3f4f6;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
+            background-color: #ffc107;
+            color: #111827;
+            border: 3px solid #111827;
             width: 100%;
             display: flex;
             gap: 0.75rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             margin-top: auto;
             border-radius: 12px;
+            font-weight: 800;
+            justify-content: center;
+            box-shadow: 4px 4px 0px #111827;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            padding: 0.8rem;
         }
 
         .btn-drive:hover {
-            background-color: var(--surface);
-            border-color: #34a853;
-            /* Google Drive Green accent hint */
-            color: #34a853;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 168, 83, 0.15);
+            background-color: #ffca2c;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #111827;
         }
 
         .btn-read-more {
@@ -291,26 +296,24 @@
 
             <!-- Removed "Rehberlik" Placeholder Card -->
 
-            <!-- Document/PDF Card with Google Drive Integration -->
-            <article class="blog-card">
-                <div class="blog-card-img-wrapper" style="padding-top: 110%;">
-                    <!-- Increased padding for a portrait book cover feel -->
-                    <img src="lgs-matematik-kapak.png" alt="LGS Matematik Soruları Nereden Çıkıyor"
-                        class="blog-card-img"
-                        style="border-radius: 20px 20px 0 0; object-fit: cover; object-position: top center;">
-                    <span class="blog-card-category" style="color: #18a5f6;">PDF Doküman</span>
-                </div>
-                <div class="blog-card-content">
-                    <h3 class="blog-title" style="color: #111827;">LGS Matematik Soruları Nereden
-                        Çıkıyor?</h3>
-                    <!-- Google Drive Ext. Link Button -->
-                    <a href="https://drive.google.com/file/d/13GCQKavDYzbbMPjXMmESNbtr5WViNXo1/view?usp=drive_link"
-                        target="_blank" rel="noopener noreferrer" class="btn btn-drive"
-                        style="padding: 0.75rem; background-color: #18a5f6; color: white; border-color: #18a5f6; font-weight: 600; justify-content: center; font-size: 0.95rem;">
-                        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="18" height="18">
-                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            <!-- Interactive Card: Üçgen Katlama (Square Widget Style - Simplified Frame) -->
+            <article style="align-self: flex-start; height: auto; aspect-ratio: 1 / 1; border: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important; border-radius: 20px !important; width: 100%; max-width: 340px; display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease; position: relative; background: #ffc107;">
+                <div class="blog-card-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; padding: 2.5rem; background-color: #ffc107; position: relative;">
+                    <span class="blog-card-category" style="position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%); white-space: nowrap;">İnteraktif Uygulama</span>
+                    
+                    <div style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 70px; height: 70px;">
+                            <path d="M3 20h18L12 4z" />
                         </svg>
-                        PDF Dokümanını Aç
+                    </div>
+                    
+                    <h3 class="blog-title" style="margin-bottom: 2rem; color: #111827; -webkit-line-clamp: initial; line-clamp: initial; height: auto; font-size: 1.25rem;">Üçgen Katlama ve Yardımcı Elemanlar Aracı</h3>
+                    
+                    <a href="https://ucgen.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-drive" style="width: auto; padding: 0.75rem 2rem; background-color: #111827; color: #ffffff; box-shadow: 4px 4px 0px rgba(0,0,0,0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Uygulamayı Başlat
                     </a>
                 </div>
             </article>
