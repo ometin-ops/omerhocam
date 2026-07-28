@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampüs - Öğrenci Paneli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+  <!-- YAN MENÜ (Sidebar) -->
+  <aside class="w-72 bg-white border-r border-slate-200 flex flex-col justify-between shadow-sm z-10 hidden md:flex">
+    <div>
+      <!-- Logo Alanı -->
+      <div class="h-20 flex items-center px-6 border-b border-slate-100 mb-2">
+        <img src="/b25.png" alt="Kampüs Logo" class="h-12 w-auto object-contain" />
+      </div>
+      
+      <!-- Menü Linkleri -->
+      <nav class="p-4 space-y-2 mt-4">
+        <a href="#" onclick="showSection('matematik')" id="nav-matematik" class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-[#0047ff] rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          Matematik Kütüphanesi
+        </a>
+        <a href="#" onclick="showSection('oyunlar')" id="nav-oyunlar" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Dijital Oyunlar
+        </a>
+        <a href="#" onclick="showSection('kronometre')" id="nav-kronometre" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Kronometre
+        </a>
+        <a href="#" onclick="showSection('sorular')" id="nav-sorular" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          Soru Kutusu
+        </a>
+        <a href="#" onclick="showSection('takvim')" id="nav-takvim" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Ders Programım
+        </a>
+        <a href="#" onclick="showSection('odevler')" id="nav-odevler" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          Ödevlerim
+        </a>
+      </nav>
+    </div>
+
+    <!-- Profil / Çıkış -->
+    <div class="p-4 border-t border-slate-100">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <div class="w-10 h-10 rounded-full bg-[#0047ff] text-white flex items-center justify-center font-bold">Ö</div>
+        <div>
+          <p class="text-sm font-bold text-slate-900">Öğrenci Hesabı</p>
+          <a href="#" class="logout-btn text-xs text-red-500 hover:underline font-semibold">Çıkış Yap</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobil Üst Menü (Kaldırıldı) -->
+
+  <!-- Mobil Alt Menü -->
+  <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-slate-200 h-16 flex items-center justify-between px-4 z-40 pb-safe shadow-[0_-4px_15px_rgba(0,0,0,0.05)]">
+    <!-- Sol Taraf (Çıkış Butonu) -->
+    <a href="#" class="logout-btn flex items-center justify-center w-10 h-10 text-red-500 hover:bg-red-50 rounded-full transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+    </a>
+
+    <!-- Orta Kısım (Logo) -->
+    <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="focus:outline-none flex justify-center">
+      <img src="b25.png" alt="Rakun Logo" class="h-8 w-auto object-contain">
+    </button>
+
+    <!-- Sağ Taraf (Hamburger Menü) -->
+    <button onclick="toggleBottomSheet()" class="flex items-center justify-center w-10 h-10 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+  </nav>
+
+  <!-- Mobil Açılır Menü (Bottom Sheet) -->
+  <div id="mobile-bottom-sheet" class="md:hidden fixed inset-0 z-30 pointer-events-none">
+    <!-- Karanlık Arka Plan (Backdrop) -->
+    <div id="bottom-sheet-backdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 pointer-events-none" onclick="toggleBottomSheet()"></div>
+    
+    <!-- Menü İçeriği -->
+    <div id="bottom-sheet-content" class="absolute bottom-16 left-0 right-0 bg-white rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transform translate-y-full transition-transform duration-300 ease-out pointer-events-auto flex flex-col border-t border-slate-100 pb-8">
+      <!-- Handlebar -->
+      <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto my-3 cursor-pointer" onclick="toggleBottomSheet()"></div>
+      
+      <div class="grid grid-cols-2 gap-3 p-4">
+        <button onclick="showSection('matematik'); toggleBottomSheet()" id="mob-sheet-matematik" class="flex flex-col items-center justify-center text-center gap-2 p-3 bg-blue-50 text-[#0047ff] rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          <span class="text-sm">Matematik Kütüphanesi</span>
+        </button>
+        
+        <button onclick="showSection('oyunlar'); toggleBottomSheet()" id="mob-sheet-oyunlar" class="flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="text-sm">Dijital Oyunlar</span>
+        </button>
+        
+        <button onclick="showSection('kronometre'); toggleBottomSheet()" id="mob-sheet-kronometre" class="flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="text-sm">Kronometre</span>
+        </button>
+
+        <button onclick="showSection('sorular'); toggleBottomSheet()" id="mob-sheet-sorular" class="flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          <span class="text-sm">Soru Kutusu</span>
+        </button>
+
+        <button onclick="showSection('takvim'); toggleBottomSheet()" id="mob-sheet-takvim" class="flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span class="text-sm">Ders Programım</span>
+        </button>
+
+        <button onclick="showSection('odevler'); toggleBottomSheet()" id="mob-sheet-odevler" class="flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          <span class="text-sm">Ödevlerim</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANA İÇERİK (Main Content) -->
+  <main class="flex-1 overflow-y-auto bg-slate-50/50 pt-8 pb-24 md:pb-8 px-4 md:px-12 relative">
+    
+    <!-- 1. MATEMATİK KÜTÜPHANESİ SECTION -->
+    <section id="section-matematik" class="block animate-fade-up transition-opacity duration-300">
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Matematik Kütüphanesi</h1>
+        <p class="text-slate-500 mt-2 font-medium">LGS ve YKS matematik konularına ait güncel fasiküller.</p>
+      </div>
+
+      <!-- Kategori Filtresi (Açılır Menü) -->
+      <div class="relative mb-6 z-10 w-full sm:w-auto sm:max-w-xs">
+        <button id="dropdown-filter-btn" class="w-full flex items-center justify-between px-5 py-3 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-colors shadow-sm">
+          <span id="current-filter-text">Filtrele: Tümü</span>
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <!-- Dropdown İçeriği -->
+        <div id="dropdown-filter-menu" class="hidden absolute top-full mt-2 w-full bg-white border border-slate-100 rounded-xl shadow-xl overflow-hidden py-2 max-h-60 overflow-y-auto">
+          <button data-filter="Tümü" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">Tümü</button>
+          <button data-filter="5. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">5. Sınıf</button>
+          <button data-filter="6. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">6. Sınıf</button>
+          <button data-filter="7. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">7. Sınıf</button>
+          <button data-filter="8. Sınıf (LGS)" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">8. Sınıf (LGS)</button>
+          <button data-filter="9. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">9. Sınıf</button>
+          <button data-filter="10. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">10. Sınıf</button>
+          <button data-filter="11. Sınıf" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">11. Sınıf</button>
+          <button data-filter="12. Sınıf (YKS)" class="filter-btn w-full text-left px-5 py-2.5 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#0047ff] transition-colors">12. Sınıf (YKS)</button>
+        </div>
+      </div>
+
+      <!-- Kart Grid (Dinamik) -->
+      <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Kartlar JS (renderPdfCards) ile buraya eklenecek -->
+      </div>
+    </section>
+
+    <!-- 2. DİJİTAL OYUNLAR SECTION -->
+    <section id="section-oyunlar" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Dijital Oyunlar</h1>
+        <p class="text-slate-500 mt-2 font-medium">Matematiği eğlenerek öğrenin. İnteraktif eğitim oyunları galerisi.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Oyun Kartı 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group">
+          <div class="w-full aspect-video bg-indigo-100 relative overflow-hidden">
+            <!-- Oyun Görseli (Dummy) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+              <svg class="w-16 h-16 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-extrabold text-slate-900 mb-2">Çarpanlar Kalesi</h3>
+            <p class="text-slate-500 font-medium text-sm mb-6">Asal sayıları ve çarpanları bulup kaleyi savunduğun heyecanlı bir matematik oyunu.</p>
+            <button class="w-full bg-[#0047ff] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0039cc] transition-colors shadow-lg shadow-[#0047ff]/30">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+              Oyunu Başlat
+            </button>
+          </div>
+        </div>
+
+        <!-- Oyun Kartı 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group">
+          <div class="w-full aspect-video bg-indigo-100 relative overflow-hidden">
+            <!-- Oyun Görseli (Dummy) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+              <svg class="w-16 h-16 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-extrabold text-slate-900 mb-2">Denklem Yarışı</h3>
+            <p class="text-slate-500 font-medium text-sm mb-6">Karşına çıkan 1. dereceden denklemleri hızlıca çöz ve bitiş çizgisine ilk sen ulaş.</p>
+            <button class="w-full bg-[#0047ff] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0039cc] transition-colors shadow-lg shadow-[#0047ff]/30">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+              Oyunu Başlat
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. KRONOMETRE SECTION -->
+    <section id="section-kronometre" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Kronometre</h1>
+        <p class="text-slate-500 mt-2 font-medium">Test çözerken süreni takip et, hızını ölç.</p>
+      </div>
+
+      <div class="w-full max-w-md mx-auto mt-12 bg-white p-10 rounded-[2rem] shadow-xl border border-slate-100 flex flex-col items-center">
+        <!-- Zaman Göstergesi -->
+        <div id="stopwatch-display" class="text-7xl font-black text-[#1b004e] tracking-tighter tabular-nums mb-10">
+          00:00:00
+        </div>
+        
+        <!-- Butonlar -->
+        <div class="flex gap-4 w-full">
+          <button id="btn-start" onclick="startStopwatch()" class="flex-1 bg-emerald-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/30">
+            Başlat
+          </button>
+          <button id="btn-stop" onclick="stopStopwatch()" class="hidden flex-1 bg-red-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30">
+            Durdur
+          </button>
+          <button onclick="resetStopwatch()" class="w-16 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-200 transition-colors font-bold">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SORU KUTUSU SECTION -->
+    <section id="section-sorular" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Soru Kutusu</h1>
+        <p class="text-slate-500 mt-2 font-medium">Yapamadığın soruların linkini gönder, çözümünü en kısa sürede buraya yükleyelim.</p>
+      </div>
+
+      <!-- Yeni Soru Formu -->
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-10">
+        <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+          Yeni Soru Gönder
+        </h2>
+        <form id="question-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Soru Görseli Seç <span class="text-red-500">*</span></label>
+            <input type="file" id="q-file" accept="image/*" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] transition-all bg-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#0047ff] hover:file:bg-blue-100">
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Öğretmene Not (İsteğe bağlı)</label>
+            <textarea id="q-note" rows="2" placeholder="Hocam şu kısmı hiç anlamadım..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] transition-all"></textarea>
+          </div>
+          <button type="submit" id="submit-q-btn" class="w-full bg-[#0047ff] text-white py-3.5 rounded-xl font-bold hover:bg-[#0039cc] transition-colors shadow-lg shadow-[#0047ff]/30">
+            Soruyu Gönder
+          </button>
+        </form>
+      </div>
+
+      <!-- Sorularım Listesi -->
+      <h2 class="text-xl font-black text-slate-900 mb-6">Geçmiş Sorularım</h2>
+      
+      <div id="loading-q" class="text-center py-10 hidden">
+        <p class="text-slate-500 font-bold">Sorularınız Yükleniyor...</p>
+      </div>
+      
+      <div id="empty-q" class="text-center py-10 bg-white rounded-2xl border border-slate-100 hidden">
+        <p class="text-slate-500 font-bold">Henüz hiç soru göndermediniz.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="my-questions-grid">
+        <!-- Sorular JS ile buraya gelecek -->
+      </div>
+    </section>
+
+    <!-- 5. DERS TAKVİMİ SECTION -->
+    <section id="section-takvim" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Haftalık Ders Programı</h1>
+        <p class="text-slate-500 mt-2 font-medium">Bu haftaki size ayrılmış özel ders saatlerinizi seçin. Seçtiğiniz saatler her hafta sabit kalacaktır.</p>
+      </div>
+
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div class="flex-1">
+            <label class="block text-sm font-bold text-gray-700 mb-2">Haftalık Özel Ders Limiti</label>
+            <select id="weekly-hours-limit" class="w-full max-w-xs px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium bg-gray-50/50">
+              <option value="1">Haftada 1 Saat</option>
+              <option value="2">Haftada 2 Saat</option>
+              <option value="3">Haftada 3 Saat</option>
+              <option value="4">Haftada 4 Saat</option>
+              <option value="5">Haftada 5 Saat</option>
+            </select>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-600 mb-2">Kalan Hakkınız:</p>
+            <div class="text-2xl font-black text-[#0047ff]" id="remaining-hours">1 Saat</div>
+          </div>
+        </div>
+
+        <!-- Renk Kodları -->
+        <div class="flex flex-wrap gap-4 mb-6 text-sm font-bold">
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-green-100 border border-green-300"></div> Müsait</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-red-100 border border-red-300"></div> Dolu</div>
+          <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-blue-500 border border-blue-600"></div> Sizin Seçiminiz</div>
+        </div>
+
+        <div class="overflow-x-auto pb-4">
+          <div class="min-w-[800px]">
+            <!-- Gün Başlıkları -->
+            <div class="grid grid-cols-8 gap-2 mb-4">
+              <div class="font-black text-slate-400 text-sm flex items-center justify-center">SAAT</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Pazartesi</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Salı</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Çarşamba</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Perşembe</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Cuma</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Cumartesi</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Pazar</div>
+            </div>
+
+            <!-- Saat Satırları -->
+            <div id="student-calendar-body" class="space-y-2">
+              <div class="text-center py-10 text-slate-400 font-bold">Takvim yükleniyor...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+          <button id="save-schedule-btn" class="bg-[#1b004e] text-white px-8 py-3.5 rounded-xl font-bold hover:bg-[#2c0080] transition-colors shadow-lg">
+            Onayla
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ÖDEVLERİM SECTION -->
+    <section id="section-odevler" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Ödevlerim</h1>
+          <p class="text-slate-500 mt-2 font-medium">Ömer Hoca'nın size atadığı tüm ödevleri buradan takip edebilir ve tamamlandı olarak işaretleyebilirsiniz.</p>
+        </div>
+      </div>
+
+      <div id="loading-odev" class="text-center py-10 hidden">
+        <p class="text-slate-500 font-bold">Ödevleriniz Yükleniyor...</p>
+      </div>
+      
+      <div id="empty-odev" class="text-center py-16 bg-white rounded-3xl border border-slate-100 shadow-sm hidden">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+        </div>
+        <p class="text-slate-500 font-bold text-lg">Şu an için atanmış bir ödeviniz bulunmuyor.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="odevler-grid">
+        <!-- Ödevler buraya render edilecek -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Modal (Lightbox) -->
+  <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden p-4 transition-opacity cursor-zoom-out" onclick="closeImageModal()">
+    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50" onclick="closeImageModal()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <img id="modal-image" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl relative z-40 cursor-auto" />
+  </div>
+
+  <script>
+    // Image Modal Logic
+    window.openImageModal = (imgSrc, event) => {
+      if(event) event.preventDefault();
+      document.getElementById('modal-image').src = imgSrc;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+    
+    window.closeImageModal = () => {
+      document.getElementById('image-modal').classList.add('hidden');
+      document.getElementById('modal-image').src = '';
+    }
+    
+    document.getElementById('modal-image').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Tab Navigation Logic
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = ['matematik', 'oyunlar', 'kronometre', 'sorular', 'takvim', 'odevler'];
+      sections.forEach(id => {
+        const sec = document.getElementById('section-' + id);
+        if(sec) {
+          sec.classList.add('hidden');
+          sec.classList.remove('block');
+        }
+      });
+      
+      // Reset Desktop Nav Styles
+      const desktopNavs = ['nav-matematik', 'nav-oyunlar', 'nav-kronometre', 'nav-sorular', 'nav-takvim', 'nav-odevler'];
+      desktopNavs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.className = 'flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all';
+        }
+      });
+
+      // Reset Mobile Sheet Styles
+      const mobileSheets = ['mob-sheet-matematik', 'mob-sheet-oyunlar', 'mob-sheet-kronometre', 'mob-sheet-sorular', 'mob-sheet-takvim', 'mob-sheet-odevler'];
+      mobileSheets.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.className = 'flex flex-col items-center justify-center text-center gap-2 p-3 text-slate-600 hover:bg-slate-50 border border-slate-100 rounded-2xl font-bold transition-all';
+        }
+      });
+
+      // Show targeted section
+      const targetSec = document.getElementById('section-' + sectionId);
+      if(targetSec) {
+        targetSec.classList.remove('hidden');
+        targetSec.classList.add('block');
+      }
+
+      // Set Active Desktop Nav
+      const activeDesktop = document.getElementById('nav-' + sectionId);
+      if(activeDesktop) {
+        activeDesktop.className = 'flex items-center gap-3 px-4 py-3 bg-blue-50 text-[#0047ff] rounded-xl font-bold transition-all';
+      }
+
+      // Set Active Mobile Sheet
+      const activeMobile = document.getElementById('mob-sheet-' + sectionId);
+      if (activeMobile) {
+        activeMobile.className = 'flex flex-col items-center justify-center text-center gap-2 p-3 bg-blue-50 text-[#0047ff] rounded-2xl font-bold transition-all';
+      }
+    }
+
+    // Bottom Sheet Logic (Simulating React State)
+    let isMenuOpen = false;
+    function toggleBottomSheet() {
+      isMenuOpen = !isMenuOpen;
+      const backdrop = document.getElementById('bottom-sheet-backdrop');
+      const content = document.getElementById('bottom-sheet-content');
+      
+      if (isMenuOpen) {
+        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+        backdrop.classList.add('pointer-events-auto', 'opacity-100');
+        
+        content.classList.remove('translate-y-full');
+        content.classList.add('translate-y-0');
+      } else {
+        backdrop.classList.remove('pointer-events-auto', 'opacity-100');
+        backdrop.classList.add('pointer-events-none', 'opacity-0');
+        
+        content.classList.remove('translate-y-0');
+        content.classList.add('translate-y-full');
+      }
+    }
+
+    // Stopwatch Logic
+    let timerInterval;
+    let seconds = 0;
+    
+    function formatTime(sec) {
+      const h = Math.floor(sec / 3600).toString().padStart(2, '0');
+      const m = Math.floor((sec % 3600) / 60).toString().padStart(2, '0');
+      const s = (sec % 60).toString().padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    function startStopwatch() {
+      document.getElementById('btn-start').classList.add('hidden');
+      document.getElementById('btn-stop').classList.remove('hidden');
+      
+      timerInterval = setInterval(() => {
+        seconds++;
+        document.getElementById('stopwatch-display').textContent = formatTime(seconds);
+      }, 1000);
+    }
+
+    function stopStopwatch() {
+      clearInterval(timerInterval);
+      document.getElementById('btn-stop').classList.add('hidden');
+      document.getElementById('btn-start').classList.remove('hidden');
+      document.getElementById('btn-start').textContent = 'Devam Et';
+    }
+
+    function resetStopwatch() {
+      clearInterval(timerInterval);
+      seconds = 0;
+      document.getElementById('stopwatch-display').textContent = '00:00:00';
+      document.getElementById('btn-stop').classList.add('hidden');
+      document.getElementById('btn-start').classList.remove('hidden');
+      document.getElementById('btn-start').textContent = 'Başlat';
+    }
+  </script>
+
+  <!-- Firebase Auth & Protected Route & Firestore -->
+  <script type="module">
+    import { auth, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, onSnapshot, query, orderBy, getDocs, where, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    let currentUser = null;
+
+    // Rota Koruması (VIP Kontrolü)
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+      } else if (user.email !== 'omerfarukmetin037@gmail.com') {
+        try {
+          currentUser = user;
+          const q = query(collection(db, "approved_students"), where("email", "==", user.email.toLowerCase()));
+          const querySnapshot = await getDocs(q);
+          if (querySnapshot.empty) {
+            // Kullanıcı yetkisiz, oturumu kapat ve geri at
+            await signOut(auth);
+            window.location.href = 'index.html';
+          } else {
+            // PDF'leri getir (Sadece bu öğrenciye zimmetli olanları)
+            const pdfQuery = query(collection(db, "pdfs"), where("assigned_to", "==", user.email));
+            onSnapshot(pdfQuery, (snapshot) => {
+              allPdfs = [];
+              snapshot.forEach((doc) => {
+                allPdfs.push(doc.data());
+              });
+              
+              // Frontend'de zamana göre sırala (Index hatası yememek için)
+              allPdfs.sort((a, b) => {
+                const timeA = a.createdAt ? a.createdAt.toMillis() : 0;
+                const timeB = b.createdAt ? b.createdAt.toMillis() : 0;
+                return timeB - timeA;
+              });
+
+              renderFilteredCards();
+            }, (error) => {
+              console.error("Firestore PDF okuma hatası:", error);
+              grid.innerHTML = '<div class="col-span-full text-center py-10 text-red-500 font-bold">Veriler yüklenirken bir hata oluştu. Lütfen Firebase kurallarını kontrol edin.</div>';
+            });
+          }
+        } catch(err) {
+          console.error("Yetki kontrol hatası", err);
+          window.location.href = 'index.html';
+        }
+      }
+    });
+
+    // Çıkış Yapma Mantığı
+    const logoutBtns = document.querySelectorAll('.logout-btn');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          console.error('Çıkış hatası:', error);
+        });
+      });
+    });
+
+    // Kütüphane Verilerini Firestore'dan Gerçek Zamanlı Okuma ve Filtreleme
+    const grid = document.getElementById('pdf-grid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    let allPdfs = [];
+    let currentFilter = 'Tümü';
+
+    // Dropdown Logic
+    const dropdownBtn = document.getElementById('dropdown-filter-btn');
+    const dropdownMenu = document.getElementById('dropdown-filter-menu');
+    const currentFilterText = document.getElementById('current-filter-text');
+
+    dropdownBtn.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Filtre Butonları Tıklama Olayı
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Dropdown'ı kapat
+        dropdownMenu.classList.add('hidden');
+
+        // Metni güncelle
+        currentFilter = btn.getAttribute('data-filter');
+        currentFilterText.textContent = currentFilter === 'Tümü' ? 'Filtrele: Tümü' : `Sınıf Seç: ${currentFilter}`;
+
+        renderFilteredCards();
+      });
+    });
+
+    // Dışarı tıklanınca dropdown'ı kapat
+    document.addEventListener('click', (e) => {
+      if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.add('hidden');
+      }
+    });
+
+    function renderFilteredCards() {
+      grid.innerHTML = '';
+      
+      const filteredPdfs = currentFilter === 'Tümü' 
+        ? allPdfs 
+        : allPdfs.filter(pdf => pdf.category === currentFilter);
+
+      if (filteredPdfs.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-10 text-slate-500 font-medium">Bu kategoriye ait fasikül bulunamadı.</div>';
+        return;
+      }
+
+      filteredPdfs.forEach(pdf => {
+        const link = pdf.url || pdf.fileUrl || '#';
+        const actionButtonHTML = `
+          <a href="${link}" target="_blank" rel="noopener noreferrer" class="w-full bg-[#eff6ff] text-[#0047ff] hover:bg-[#0047ff] hover:text-white py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors mt-auto">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            PDF İndir / Görüntüle
+          </a>
+        `;
+
+        const desc = pdf.description || pdf.desc || '';
+
+        const cardHTML = `
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group flex flex-col h-full animate-fade-up">
+            <div class="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            </div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">${pdf.category}</span>
+            <h3 class="text-lg font-extrabold text-slate-900 mb-2 leading-tight">${pdf.title}</h3>
+            <p class="text-sm text-slate-500 font-medium mb-6">${desc}</p>
+            ${actionButtonHTML}
+          </div>
+        `;
+        grid.innerHTML += cardHTML;
+      });
+    }
+
+
+    // --- SORU KUTUSU MANTIĞI ---
+    const qForm = document.getElementById('question-form');
+    const submitQBtn = document.getElementById('submit-q-btn');
+    const myQuestionsGrid = document.getElementById('my-questions-grid');
+    const loadingQ = document.getElementById('loading-q');
+    const emptyQ = document.getElementById('empty-q');
+    let qSnapshotUnsubscribe = null;
+
+    qForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentUser) return;
+
+      const fileInput = document.getElementById('q-file');
+      const note = document.getElementById('q-note').value.trim();
+      
+      if (fileInput.files.length === 0) {
+        toast.error("Lütfen bir soru görseli seçin.");
+        return;
+      }
+      const file = fileInput.files[0];
+
+      const originalBtnText = submitQBtn.innerHTML;
+      submitQBtn.innerHTML = 'Görsel Yükleniyor...';
+      submitQBtn.disabled = true;
+      submitQBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        // ImgBB Upload
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        const imgBbRes = await fetch('https://api.imgbb.com/1/upload?key=bcb2cb00b4f772d037f699e40d2a82fc', {
+          method: 'POST',
+          body: formData
+        });
+        const imgBbData = await imgBbRes.json();
+        
+        if(!imgBbData.success) {
+          throw new Error("Resim yüklenemedi: " + imgBbData.error.message);
+        }
+        
+        const imgUrl = imgBbData.data.url;
+
+        // Save to Firestore
+        await addDoc(collection(db, "qa_box"), {
+          student_email: currentUser.email,
+          student_name: currentUser.displayName || currentUser.email.split('@')[0],
+          question_link: imgUrl,
+          question_note: note,
+          status: 'Bekliyor',
+          solution_link: '',
+          createdAt: new Date()
+        });
+
+        qForm.reset();
+        toast.success('Sorunuz başarıyla gönderildi! Çözüm yüklendiğinde burada görebilirsiniz.');
+      } catch (error) {
+        console.error("Soru gönderme hatası:", error);
+        toast.error("Soru gönderilirken hata oluştu: " + error.message);
+      } finally {
+        submitQBtn.innerHTML = originalBtnText;
+        submitQBtn.disabled = false;
+        submitQBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+
+    // Kullanıcının Sorularını Dinle
+    onAuthStateChanged(auth, (user) => {
+      if (user && user.email !== 'omerfarukmetin037@gmail.com') {
+        loadingQ.classList.remove('hidden');
+        emptyQ.classList.add('hidden');
+
+        try {
+          // Firebase Index hatasını aşmak için orderBy kaldırıldı. 
+          // Sıralama (sorting) işlemi aşağıda JavaScript ile frontend tarafında yapılacak.
+          const myQuestionsQuery = query(
+            collection(db, "qa_box"), 
+            where("student_email", "==", user.email)
+          );
+          
+          if (qSnapshotUnsubscribe) qSnapshotUnsubscribe();
+
+          qSnapshotUnsubscribe = onSnapshot(myQuestionsQuery, (snapshot) => {
+            loadingQ.classList.add('hidden');
+            myQuestionsGrid.innerHTML = '';
+            
+            if (snapshot.empty) {
+              emptyQ.classList.remove('hidden');
+              return;
+            } else {
+              emptyQ.classList.add('hidden');
+            }
+
+            // Belgeleri bir diziye al ve createdAt'e göre JavaScript ile sırala (descending)
+            const docsArray = [];
+            snapshot.forEach((docSnapshot) => {
+              docsArray.push({ id: docSnapshot.id, data: docSnapshot.data() });
+            });
+
+            docsArray.sort((a, b) => {
+              const timeA = a.data.createdAt ? a.data.createdAt.toMillis() : 0;
+              const timeB = b.data.createdAt ? b.data.createdAt.toMillis() : 0;
+              return timeB - timeA; // En yeni en üstte
+            });
+
+            docsArray.forEach((docObj) => {
+              const data = docObj.data;
+              const docId = docObj.id;
+              const isPending = data.status === 'Bekliyor';
+
+              const card = document.createElement('div');
+              card.className = `border rounded-2xl p-5 transition-all ${isPending ? 'border-amber-200 bg-amber-50/50' : 'border-emerald-200 bg-emerald-50/50'}`;
+              
+              let statusHtml = isPending 
+                ? `<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-black uppercase tracking-wider">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Çözüm Bekleniyor
+                   </span>`
+                : `<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase tracking-wider">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    Çözüldü
+                   </span>`;
+
+              let actionHtml = isPending 
+                ? `<div class="mt-4 pt-4 border-t border-amber-200/50">
+                     <p class="text-sm font-semibold text-amber-700 mb-3">Ömer Hoca sorunuzu inceliyor...</p>
+                     <img src="${data.question_link}" onclick="openImageModal('${data.question_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity shadow-sm" alt="Soru Görseli" loading="lazy">
+                   </div>`
+                : `<div class="mt-4 pt-4 border-t border-emerald-200/50">
+                     <p class="text-sm font-bold text-emerald-700 mb-3">Çözümün hazır!</p>
+                     <div class="flex flex-col gap-4">
+                       <div>
+                         <p class="text-xs font-bold text-slate-500 mb-1 uppercase tracking-wide">Sorun:</p>
+                         <img src="${data.question_link}" onclick="openImageModal('${data.question_link}', event)" class="h-32 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity border border-emerald-200/50 shadow-sm" alt="Soru Görseli" loading="lazy">
+                       </div>
+                       <div>
+                         <p class="text-xs font-bold text-emerald-600 mb-1 uppercase tracking-wide">Çözüm:</p>
+                         <img src="${data.solution_link}" onclick="openImageModal('${data.solution_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity border-2 border-emerald-400 shadow-md" alt="Çözüm Görseli" loading="lazy">
+                       </div>
+                     </div>
+                   </div>`;
+
+              let dateText = data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString('tr-TR') : 'Tarih Yok';
+
+              card.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                  <div class="flex items-center gap-2">
+                    ${statusHtml}
+                    <button onclick="deleteQuestion('${docId}')" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-1.5 rounded-lg transition-colors" title="Soruyu Sil">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+                  <span class="text-xs font-semibold text-slate-400">${dateText}</span>
+                </div>
+                ${data.question_note ? `<p class="text-sm text-slate-700 font-medium mt-3 italic">"${data.question_note}"</p>` : ''}
+                ${actionHtml}
+              `;
+              myQuestionsGrid.appendChild(card);
+            });
+          }, (error) => {
+            console.error("Soru okuma hatası:", error);
+            myQuestionsGrid.innerHTML = `<div class="text-center py-10"><p class="text-red-500 font-bold mb-2">Veriler yüklenirken hata oluştu.</p><p class="text-sm text-slate-500 max-w-md mx-auto">${error.message}</p></div>`;
+          });
+        } catch (err) {
+          console.error("Firebase hata:", err);
+        }
+      }
+    });
+
+    window.deleteQuestion = async (docId) => {
+      if (confirm('Bu soruyu silmek istediğinize emin misiniz?')) {
+        try {
+          await deleteDoc(doc(db, "qa_box", docId));
+        } catch (error) {
+          console.error("Soru silme hatası:", error);
+          toast.error("Silinirken hata oluştu: " + error.message);
+        }
+      }
+    };
+
+    // TAKVİM (SCHEDULE) LOGIC
+    const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+    const hours = [
+      "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00",
+      "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00",
+      "20:00 - 21:00"
+    ];
+    let scheduleDataMap = {}; // From Firestore (all users)
+    let mySelectedSlots = new Set(); // Local state for UI changes
+    let initialMySlots = new Set(); // To know what to delete/add on save
+
+    const limitSelect = document.getElementById('weekly-hours-limit');
+    const remainingHoursEl = document.getElementById('remaining-hours');
+    const studentCalendarBody = document.getElementById('student-calendar-body');
+
+    function updateRemaining() {
+      const limit = parseInt(limitSelect.value);
+      const remaining = limit - mySelectedSlots.size;
+      remainingHoursEl.textContent = remaining + " Saat";
+      if(remaining < 0) remainingHoursEl.classList.add('text-red-500');
+      else remainingHoursEl.classList.remove('text-red-500');
+    }
+
+    limitSelect.addEventListener('change', updateRemaining);
+
+    function toggleSlot(day, hour) {
+      if(!currentUser) return;
+      const key = day + "_" + hour;
+      const slotData = scheduleDataMap[key];
+      
+      // If taken by someone else
+      if(slotData && slotData.student_email !== currentUser.email) return;
+
+      const limit = parseInt(limitSelect.value);
+
+      if(mySelectedSlots.has(key)) {
+        // Immutably remove selection using filter over a spread array copy
+        const filteredSlots = [...mySelectedSlots].filter(x => x !== key);
+        mySelectedSlots = new Set(filteredSlots);
+      } else {
+        if(mySelectedSlots.size >= limit) {
+          toast.error("Haftalık ders limitinize ulaştınız. Yeni bir saat seçmek için önce mevcut seçimlerinizden birini kaldırmalısınız.");
+          return;
+        }
+        // Immutably add selection by creating a new Set with the spread operator
+        mySelectedSlots = new Set([...mySelectedSlots, key]);
+      }
+      renderStudentCalendar();
+      updateRemaining();
+    }
+
+    function renderStudentCalendar() {
+      studentCalendarBody.innerHTML = '';
+      hours.forEach(hour => {
+        const row = document.createElement('div');
+        row.className = 'grid grid-cols-8 gap-2';
+
+        const timeCol = document.createElement('div');
+        timeCol.className = 'flex items-center justify-center font-bold text-slate-500 text-sm bg-slate-50 rounded-xl h-14';
+        timeCol.textContent = hour;
+        row.appendChild(timeCol);
+
+        days.forEach(day => {
+          const key = day + "_" + hour;
+          const slotData = scheduleDataMap[key];
+          const isSelectedByMe = mySelectedSlots.has(key);
+          
+          const cell = document.createElement('div');
+          
+          if(slotData && slotData.student_email !== currentUser?.email && !isSelectedByMe) {
+            // Başkası almış
+            cell.className = 'bg-red-100 border border-red-200 rounded-xl h-14 flex items-center justify-center cursor-not-allowed opacity-70';
+          } else if(isSelectedByMe) {
+            // Benim seçimim (veya zaten benimdi)
+            cell.className = 'bg-blue-500 border border-blue-600 rounded-xl h-14 flex items-center justify-center cursor-pointer text-white transition-transform active:scale-95 shadow-md';
+            cell.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>';
+            cell.onclick = () => toggleSlot(day, hour);
+          } else {
+            // Boş
+            cell.className = 'bg-green-100 border border-green-300 rounded-xl h-14 flex items-center justify-center cursor-pointer hover:bg-green-200 transition-colors active:scale-95';
+            cell.onclick = () => toggleSlot(day, hour);
+          }
+          row.appendChild(cell);
+        });
+        studentCalendarBody.appendChild(row);
+      });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user && user.email !== 'omerfarukmetin037@gmail.com') {
+        // Read Schedule
+        onSnapshot(collection(db, "weekly_schedule"), (snapshot) => {
+          scheduleDataMap = {};
+          initialMySlots = new Set();
+          const newSelectedSlots = new Set();
+          let myCount = 0;
+
+          snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const key = data.day + "_" + data.time_slot;
+            data.id = docSnap.id;
+            scheduleDataMap[key] = data;
+
+            if(data.student_email === user.email) {
+              initialMySlots.add(key);
+              newSelectedSlots.add(key);
+              myCount++;
+            }
+          });
+          mySelectedSlots = newSelectedSlots;
+          
+          // Auto adjust limit if they have more slots than default limit
+          if(parseInt(limitSelect.value) < myCount) {
+             limitSelect.value = myCount;
+          }
+          
+          renderStudentCalendar();
+          updateRemaining();
+        });
+      }
+    });
+
+    document.getElementById('save-schedule-btn').addEventListener('click', async () => {
+      if(!currentUser) return;
+      const btn = document.getElementById('save-schedule-btn');
+      const origText = btn.innerHTML;
+      btn.innerHTML = 'Sabitleniyor...';
+      btn.disabled = true;
+
+      try {
+        // Find deletions (in initial but not in selected)
+        const toDelete = [...initialMySlots].filter(x => !mySelectedSlots.has(x));
+        // Find additions (in selected but not in initial)
+        const toAdd = [...mySelectedSlots].filter(x => !initialMySlots.has(x));
+
+        // Delete old
+        for(const key of toDelete) {
+           const docId = scheduleDataMap[key].id;
+           await deleteDoc(doc(db, "weekly_schedule", docId));
+        }
+
+        // Add new
+        for(const key of toAdd) {
+           const [day, hour] = key.split('_');
+           await addDoc(collection(db, "weekly_schedule"), {
+             day: day,
+             time_slot: hour,
+             student_email: currentUser.email,
+             student_name: currentUser.displayName || "İsimsiz Öğrenci",
+             createdAt: new Date(),
+             expiresAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
+           });
+        }
+
+        // Notify admin via Serverless API if there were changes
+        if (toAdd.length > 0 || toDelete.length > 0) {
+          try {
+            await fetch('/api/send-notification', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                studentName: currentUser.displayName || "İsimsiz Öğrenci",
+                studentEmail: currentUser.email
+              })
+            });
+          } catch(apiErr) {
+            console.error("Bildirim API hatası:", apiErr);
+          }
+        }
+
+        toast.success('Ders programınız başarıyla sabitlendi!');
+      } catch(err) {
+        console.error("Takvim kayıt hatası:", err);
+        toast.error("Hata: " + err.message);
+      } finally {
+        btn.innerHTML = origText;
+        btn.disabled = false;
+      }
+    });
+
+    // ÖDEVLERİM (HOMEWORKS) LOGIC
+    const odevlerGrid = document.getElementById('odevler-grid');
+    const loadingOdev = document.getElementById('loading-odev');
+    const emptyOdev = document.getElementById('empty-odev');
+
+    window.markHomeworkCompleted = async (docId) => {
+      try {
+        const { updateDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js");
+        await updateDoc(doc(db, "homeworks", docId), {
+          status: 'Tamamlandı'
+        });
+      } catch (error) {
+        console.error("Ödev güncellenirken hata:", error);
+        toast.error("Güncellenirken hata oluştu: " + error.message);
+      }
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email !== 'omerfarukmetin037@gmail.com') {
+        const { query, where } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js");
+        
+        loadingOdev.classList.remove('hidden');
+        emptyOdev.classList.add('hidden');
+
+        try {
+          const hwQuery = query(
+            collection(db, "homeworks"),
+            where("student_email", "==", user.email)
+          );
+
+          onSnapshot(hwQuery, (snapshot) => {
+            loadingOdev.classList.add('hidden');
+            odevlerGrid.innerHTML = '';
+            
+            if (snapshot.empty) {
+              emptyOdev.classList.remove('hidden');
+              return;
+            } else {
+              emptyOdev.classList.add('hidden');
+            }
+
+            const homeworks = [];
+            snapshot.forEach((docSnap) => {
+              homeworks.push({ id: docSnap.id, ...docSnap.data() });
+            });
+
+            // Sort by status ('Bekliyor' first) then by due_date
+            homeworks.sort((a, b) => {
+              if (a.status !== b.status) {
+                return a.status === 'Bekliyor' ? -1 : 1;
+              }
+              const dateA = new Date(a.due_date || 0);
+              const dateB = new Date(b.due_date || 0);
+              return dateA - dateB;
+            });
+
+            homeworks.forEach(data => {
+              const isCompleted = data.status === 'Tamamlandı';
+              
+              const card = document.createElement('div');
+              card.className = `p-6 rounded-3xl border shadow-sm flex flex-col h-full transition-all ${
+                isCompleted 
+                  ? 'bg-green-50 border-green-100 opacity-80' 
+                  : 'bg-white border-slate-100 hover:shadow-md'
+              }`;
+
+              const statusBadge = isCompleted 
+                ? `<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-black rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> Tamamlandı</span>`
+                : `<span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-black rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Bekliyor</span>`;
+
+              const dateText = data.due_date ? new Date(data.due_date).toLocaleDateString('tr-TR') : 'Belirtilmedi';
+              
+              const actionButton = !isCompleted 
+                ? `<button onclick="markHomeworkCompleted('${data.id}')" class="w-full mt-auto bg-[#0047ff] text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-md active:scale-95 flex items-center justify-center gap-2">
+                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                     Görevi Tamamladım
+                   </button>`
+                : `<div class="w-full mt-auto bg-green-100 text-green-700 py-3 rounded-xl font-bold text-center border border-green-200">
+                     Ödev Tamamlandı
+                   </div>`;
+
+              card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                  ${statusBadge}
+                  <div class="text-right">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Son Teslim</p>
+                    <p class="text-sm font-black ${isCompleted ? 'text-green-700' : 'text-red-500'}">${dateText}</p>
+                  </div>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 mb-2 leading-tight">${data.title}</h3>
+                <p class="text-slate-600 font-medium text-sm mb-6 flex-1 whitespace-pre-wrap">${data.description}</p>
+                ${actionButton}
+              `;
+              
+              odevlerGrid.appendChild(card);
+            });
+          }, (error) => {
+            console.error("Ödev okuma hatası:", error);
+            emptyOdev.classList.remove('hidden');
+            emptyOdev.innerHTML = `<p class="text-red-500 font-bold mb-2">Veriler yüklenirken hata oluştu.</p><p class="text-sm text-slate-500 max-w-md mx-auto">${error.message}</p>`;
+          });
+        } catch (err) {
+          console.error("Firebase hata:", err);
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>

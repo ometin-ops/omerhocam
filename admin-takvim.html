@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Ders Takvimi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+  <!-- YAN MENÜ (Sidebar) -->
+  <aside class="w-72 bg-[#1b004e] text-white flex flex-col justify-between shadow-sm z-10 hidden md:flex">
+    <div>
+      <div class="h-20 flex items-center px-8 border-b border-white/10">
+        <div class="text-2xl font-black tracking-tight">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+      </div>
+      
+      <nav class="p-4 space-y-2 mt-4">
+        <a href="admin-ogrenciler.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          Öğrenciler
+        </a>
+        <a href="admin-takvim.html" class="flex items-center gap-3 px-4 py-3 bg-[#0047ff] text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Ders Takvimi
+        </a>
+        <a href="admin-paneli.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+          Kütüphane Yönetimi
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <div class="w-10 h-10 rounded-full bg-white text-[#1b004e] flex items-center justify-center font-black">A</div>
+        <div>
+          <p class="text-sm font-bold text-white">Sistem Yöneticisi</p>
+          <a href="#" class="logout-btn text-xs text-red-400 hover:underline font-semibold">Güvenli Çıkış</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobil Üst Menü -->
+  <header class="md:hidden fixed top-0 w-full bg-[#1b004e] text-white border-b border-white/10 h-16 flex items-center justify-between px-4 z-20">
+    <div class="text-xl font-black">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+    <a href="#" class="logout-btn text-sm text-red-400 font-bold">Çıkış</a>
+  </header>
+
+  <!-- ANA İÇERİK -->
+  <main class="flex-1 overflow-y-auto bg-slate-50/50 pt-20 md:pt-8 pb-12 px-4 md:px-12 relative">
+    <div class="max-w-6xl mx-auto">
+      <div class="md:hidden flex gap-2 mb-6 overflow-x-auto pb-2">
+        <a href="admin-ogrenciler.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Öğrenciler</a>
+        <a href="admin-takvim.html" class="px-5 py-2 bg-[#0047ff] text-white rounded-full text-sm font-bold whitespace-nowrap">Ders Takvimi</a>
+        <a href="admin-paneli.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Kütüphane Yönetimi</a>
+      </div>
+
+      <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Haftalık Ders Programı</h1>
+          <p class="text-slate-500 mt-2 font-medium">Tüm öğrencilerin rezerve ettiği sabit ders saatlerini görüntüleyin ve yönetin.</p>
+        </div>
+      </div>
+
+      <!-- TAKVİM GRID -->
+      <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <div class="min-w-[800px]">
+            <!-- Gün Başlıkları -->
+            <div class="grid grid-cols-8 gap-2 mb-4">
+              <div class="font-black text-slate-400 text-sm flex items-center justify-center">SAAT</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Pazartesi</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Salı</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Çarşamba</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Perşembe</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Cuma</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Cumartesi</div>
+              <div class="font-black text-slate-800 text-center bg-slate-50 rounded-xl py-3">Pazar</div>
+            </div>
+
+            <!-- Saat Satırları -->
+            <div id="calendar-body" class="space-y-2">
+              <div class="text-center py-10 text-slate-400 font-bold">Takvim yükleniyor...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SON GÜNCELLEMELER -->
+      <div class="mt-8 bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <h2 class="text-xl font-black text-slate-800 tracking-tight mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Son Güncellemeler
+        </h2>
+        <div id="updates-log" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+          <div class="text-slate-400 text-sm font-medium">Güncelleme bilgisi yükleniyor...</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module">
+    import { auth, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, onSnapshot, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+      } else if (user.email !== 'omerfarukmetin037@gmail.com') {
+        window.location.href = 'ogrenci-paneli.html';
+      }
+    });
+
+    const logoutBtns = document.querySelectorAll('.logout-btn');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = 'index.html';
+        });
+      });
+    });
+
+    const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+    const hours = [
+      "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00",
+      "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00",
+      "20:00 - 21:00"
+    ];
+
+    const calendarBody = document.getElementById('calendar-body');
+
+    const colors = [
+      'bg-red-100 text-red-800 border-red-200 hover:bg-red-200', 
+      'bg-green-100 text-green-800 border-green-200 hover:bg-green-200', 
+      'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200', 
+      'bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200', 
+      'bg-pink-100 text-pink-800 border-pink-200 hover:bg-pink-200', 
+      'bg-indigo-100 text-indigo-800 border-indigo-200 hover:bg-indigo-200', 
+      'bg-teal-100 text-teal-800 border-teal-200 hover:bg-teal-200', 
+      'bg-orange-100 text-orange-800 border-orange-200 hover:bg-orange-200'
+    ];
+
+    function getStudentColor(name) {
+      if (!name) return colors[0];
+      let sum = 0;
+      for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i);
+      }
+      return colors[sum % colors.length];
+    }
+
+    // Admin override silme
+    window.deleteSlot = async (docId, studentName) => {
+      if(confirm(studentName + " isimli öğrencinin bu ders saatini iptal etmek istediğinize emin misiniz?")) {
+        try {
+          await deleteDoc(doc(db, "weekly_schedule", docId));
+        } catch(err) {
+          console.error("Silme hatası:", err);
+          toast.error("Hata: " + err.message);
+        }
+      }
+    };
+
+    let validEmails = new Set();
+    let isStudentsLoaded = false;
+    let currentSchedules = [];
+
+    // 1. Öğrencileri Dinle (Yetim kayıt kontrolü ve Defensive Rendering için)
+    onSnapshot(collection(db, "approved_students"), (snap) => {
+       validEmails.clear();
+       snap.forEach(s => {
+          if (s.data().email) validEmails.add(s.data().email);
+       });
+       isStudentsLoaded = true;
+       purgeAndRender();
+    });
+
+    // 2. Takvimi Dinle
+    const activeSchedulesQuery = query(collection(db, "weekly_schedule"), where("expiresAt", ">=", new Date()));
+    onSnapshot(activeSchedulesQuery, (snapshot) => {
+      currentSchedules = [];
+      snapshot.forEach(docSnap => currentSchedules.push(docSnap));
+      purgeAndRender();
+    });
+
+    function purgeAndRender() {
+      if (!isStudentsLoaded) return; // Geçerli öğrenci listesi yüklenene kadar bekle
+
+      const scheduleMap = {}; 
+      const userUpdatesMap = {};
+      
+      currentSchedules.forEach(docSnap => {
+        const data = docSnap.data();
+        
+        // ORPHAN PURGE & DEFENSIVE RENDER
+        // Eğer dersin sahibi aktif öğrenciler listesinde yoksa, veriyi KALICI sil ve takvime ekleme!
+        if (data.student_email && !validEmails.has(data.student_email)) {
+           deleteDoc(docSnap.ref).catch(e => console.error("Yetim kayıt silinirken hata:", e));
+           return; // Bu döngü adımını atla (defensive render)
+        }
+
+        const key = data.day + "_" + data.time_slot;
+        scheduleMap[key] = { id: docSnap.id, ...data };
+
+        if(data.createdAt && data.student_name) {
+          const dt = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+          if(!userUpdatesMap[data.student_name] || userUpdatesMap[data.student_name] < dt) {
+             userUpdatesMap[data.student_name] = dt;
+          }
+        }
+      });
+
+      const logContainer = document.getElementById('updates-log');
+      const updates = Object.keys(userUpdatesMap).map(name => ({
+         name, 
+         date: userUpdatesMap[name]
+      })).sort((a, b) => b.date - a.date);
+
+      if(updates.length === 0) {
+         logContainer.innerHTML = '<div class="text-slate-400 text-sm font-medium italic">Henüz bir güncelleme kaydı yok.</div>';
+      } else {
+         logContainer.innerHTML = updates.map(up => {
+            const dateOptions = { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' };
+            const dateStr = up.date.toLocaleDateString('tr-TR', dateOptions);
+            return `<div class="flex items-center gap-3 text-sm text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div class="w-2 h-2 rounded-full bg-[#0047ff]"></div>
+              <div><strong class="text-slate-700">${up.name.split(' ')[0]}</strong> - ${dateStr} tarihinde programını güncelledi.</div>
+            </div>`;
+         }).join('');
+      }
+
+      calendarBody.innerHTML = '';
+
+      hours.forEach(hour => {
+        const row = document.createElement('div');
+        row.className = 'grid grid-cols-8 gap-2';
+
+        // Saat kolonu
+        const timeCol = document.createElement('div');
+        timeCol.className = 'flex items-center justify-center font-bold text-slate-500 text-sm bg-slate-50 rounded-xl h-14';
+        timeCol.textContent = hour;
+        row.appendChild(timeCol);
+
+        days.forEach(day => {
+          const key = day + "_" + hour;
+          const slotData = scheduleMap[key];
+          const cell = document.createElement('div');
+
+          if(slotData) {
+            // Dolu blok
+            const colorClass = getStudentColor(slotData.student_name);
+            cell.className = `relative flex flex-col items-center justify-center rounded-xl font-bold text-xs p-1 text-center border cursor-pointer transition-colors shadow-sm group ${colorClass}`;
+            cell.innerHTML = `
+              <span class="truncate w-full block px-1">${slotData.student_name.split(' ')[0]}</span>
+              <span class="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center bg-red-500 text-white rounded-xl text-xs font-black transition-opacity">İptal Et</span>
+            `;
+            cell.onclick = () => window.deleteSlot(slotData.id, slotData.student_name);
+          } else {
+            // Boş blok
+            cell.className = 'bg-slate-50 border border-dashed border-slate-200 rounded-xl h-14 flex items-center justify-center text-slate-300 text-xs font-medium';
+            cell.textContent = '-';
+          }
+          
+          row.appendChild(cell);
+        });
+
+        calendarBody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>

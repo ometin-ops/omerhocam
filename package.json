@@ -1,0 +1,12 @@
+{
+  "name": "omerhocam-platform",
+  "version": "1.0.0",
+  "description": "Vercel API definitions for omerhocam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampüs - Gelen Sorular</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+  <!-- YAN MENÜ (Sidebar) -->
+  <aside class="w-72 bg-[#1b004e] text-white flex flex-col justify-between shadow-sm z-10 hidden md:flex">
+    <div>
+      <!-- Logo Alanı -->
+      <div class="h-20 flex items-center px-8 border-b border-white/10">
+        <div class="text-2xl font-black tracking-tight">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+      </div>
+      
+      <!-- Menü Linkleri -->
+      <nav class="p-4 space-y-2 mt-4">
+        <a href="admin-paneli.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+          İçerik Ekle
+        </a>
+        <a href="admin-ogrenciler.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          Öğrenciler
+        </a>
+        <a href="admin-sorular.html" class="flex items-center gap-3 px-4 py-3 bg-[#0047ff] text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          Gelen Sorular
+        </a>
+      </nav>
+    </div>
+
+    <!-- Profil / Çıkış -->
+    <div class="p-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <div class="w-10 h-10 rounded-full bg-white text-[#1b004e] flex items-center justify-center font-black">A</div>
+        <div>
+          <p class="text-sm font-bold text-white">Sistem Yöneticisi</p>
+          <a href="#" class="logout-btn text-xs text-red-400 hover:underline font-semibold">Güvenli Çıkış</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobil Üst Menü -->
+  <header class="md:hidden fixed top-0 w-full bg-[#1b004e] text-white border-b border-white/10 h-16 flex items-center justify-between px-4 z-20">
+    <div class="text-xl font-black">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+    <a href="#" class="logout-btn text-sm text-red-400 font-bold">Çıkış</a>
+  </header>
+
+  <!-- ANA İÇERİK (Main Content) -->
+  <main class="flex-1 overflow-y-auto bg-slate-50/50 pt-20 md:pt-8 pb-12 px-4 md:px-12 relative">
+    
+    <div class="max-w-5xl mx-auto">
+      <!-- Mobil Navigasyon (Sadece Mobilde Görünür) -->
+      <div class="md:hidden flex gap-2 mb-6 overflow-x-auto pb-2">
+        <a href="admin-paneli.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">İçerik Ekle</a>
+        <a href="admin-ogrenciler.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Öğrenciler</a>
+        <a href="admin-sorular.html" class="px-5 py-2 bg-[#0047ff] text-white rounded-full text-sm font-bold whitespace-nowrap">Gelen Sorular</a>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">Gelen Sorular</h1>
+        <p class="text-slate-500 mt-2 font-medium">Öğrencilerin gönderdiği soruları inceleyin ve çözüm linklerini ekleyin.</p>
+      </div>
+
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100">
+        
+        <div id="loading-state" class="text-center py-12 hidden">
+          <p class="text-slate-500 font-bold">Sorular Yükleniyor...</p>
+        </div>
+
+        <div id="empty-state" class="text-center py-12 hidden">
+          <svg class="w-16 h-16 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <p class="text-slate-500 font-bold">Henüz gönderilmiş bir soru bulunmuyor.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6" id="questions-grid">
+          <!-- Sorular JS ile buraya yüklenecek -->
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { auth, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, onSnapshot, query, orderBy, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // Rota Koruması
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+      } else if (user.email !== 'omerfarukmetin037@gmail.com') {
+        window.location.href = 'ogrenci-paneli.html';
+      }
+    });
+
+    const logoutBtns = document.querySelectorAll('.logout-btn');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = 'index.html';
+        });
+      });
+    });
+
+    // Soruları Çek
+    const grid = document.getElementById('questions-grid');
+    const loadingState = document.getElementById('loading-state');
+    const emptyState = document.getElementById('empty-state');
+
+    try {
+      loadingState.classList.remove('hidden');
+      const q = query(collection(db, "qa_box"), orderBy("createdAt", "desc"));
+      
+      onSnapshot(q, (snapshot) => {
+        loadingState.classList.add('hidden');
+        grid.innerHTML = '';
+        
+        if (snapshot.empty) {
+          emptyState.classList.remove('hidden');
+          return;
+        } else {
+          emptyState.classList.add('hidden');
+        }
+
+        snapshot.forEach((docSnapshot) => {
+          const data = docSnapshot.data();
+          const docId = docSnapshot.id;
+          const isPending = data.status === 'Bekliyor';
+
+          const card = document.createElement('div');
+          card.className = `border rounded-2xl p-5 md:p-6 transition-all ${isPending ? 'border-amber-200 bg-amber-50/30' : 'border-slate-100 bg-white'}`;
+          
+          let solutionHtml = '';
+          if (isPending) {
+            solutionHtml = `
+              <div class="mt-4 pt-4 border-t border-slate-200/60 flex flex-col gap-3">
+                <label class="text-sm font-bold text-slate-700">Çözüm Görseli Yükle</label>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <input type="file" id="sol-file-${docId}" accept="image/*" class="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] text-sm bg-white file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#0047ff] hover:file:bg-blue-100">
+                  <button id="sol-btn-${docId}" onclick="submitSolution('${docId}')" class="bg-[#0047ff] text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-[#0039cc] transition-colors whitespace-nowrap shadow-sm">
+                    Çözüm Yükle
+                  </button>
+                </div>
+              </div>
+            `;
+          } else {
+            solutionHtml = `
+              <div class="mt-4 pt-4 border-t border-slate-200/60 flex items-center justify-between">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-black uppercase tracking-wider">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                  Çözüldü
+                </span>
+                <a href="${data.solution_link}" target="_blank" class="text-[#0047ff] font-bold text-sm hover:underline flex items-center gap-1">
+                  Çözümü Gör <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+              </div>
+            `;
+          }
+
+          let noteHtml = data.question_note ? `<p class="text-sm text-slate-600 mt-2 bg-white/50 p-3 rounded-lg italic">"${data.question_note}"</p>` : '';
+
+          card.innerHTML = `
+            <div class="flex flex-col sm:flex-row justify-between items-start mb-3 gap-4">
+              <div>
+                <h3 class="font-extrabold text-slate-900 text-lg">${data.student_name}</h3>
+                <p class="text-xs text-slate-400 font-semibold mb-2">${data.student_email}</p>
+                <a href="${data.question_link}" target="_blank" class="block w-full max-w-xs md:max-w-sm overflow-hidden rounded-lg border border-slate-200 shadow-sm mt-3 bg-white">
+                  <img src="${data.question_link}" class="w-full h-auto object-contain hover:opacity-90 transition-opacity" loading="lazy" alt="Soru Görseli">
+                </a>
+              </div>
+              <button onclick="deleteQuestion('${docId}')" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors shrink-0" title="Soruyu Sil">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </div>
+            ${noteHtml}
+            ${solutionHtml}
+          `;
+          grid.appendChild(card);
+        });
+      }, (error) => {
+        console.error("Sorular okunamadı:", error);
+        grid.innerHTML = '<div class="text-center py-10 text-red-500 font-bold">Veriler yüklenirken hata oluştu.</div>';
+      });
+    } catch (err) {
+      console.error("Firebase hata:", err);
+    }
+
+    // Global Fonksiyon
+    window.submitSolution = async (docId) => {
+      const fileInput = document.getElementById('sol-file-' + docId);
+      const btn = document.getElementById('sol-btn-' + docId);
+      
+      if (fileInput.files.length === 0) {
+        toast.error("Lütfen bir çözüm görseli seçin.");
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      const originalBtnText = btn.innerHTML;
+      btn.innerHTML = 'Yükleniyor...';
+      btn.disabled = true;
+      btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        // ImgBB API Upload
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        const imgBbRes = await fetch('https://api.imgbb.com/1/upload?key=bcb2cb00b4f772d037f699e40d2a82fc', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const imgBbData = await imgBbRes.json();
+        
+        if(!imgBbData.success) {
+          throw new Error("Çözüm resmi yüklenemedi: " + imgBbData.error.message);
+        }
+        
+        const solutionUrl = imgBbData.data.url;
+
+        // Firebase Update
+        const questionRef = doc(db, "qa_box", docId);
+        await updateDoc(questionRef, {
+          solution_link: solutionUrl,
+          status: 'Çözüldü'
+        });
+        toast.success("Çözüm başarıyla gönderildi!");
+      } catch (err) {
+        console.error("Güncelleme hatası", err);
+        toast.error("Hata oluştu: " + err.message);
+      } finally {
+        if(btn) {
+          btn.innerHTML = originalBtnText;
+          btn.disabled = false;
+          btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        }
+      }
+    };
+
+    window.deleteQuestion = async (docId) => {
+      if (confirm('Bu soruyu tamamen silmek istediğinize emin misiniz? (Bu işlem geri alınamaz)')) {
+        try {
+          await deleteDoc(doc(db, "qa_box", docId));
+        } catch (error) {
+          console.error("Soru silme hatası:", error);
+          toast.error("Silinirken hata oluştu: " + error.message);
+        }
+      }
+    };
+  </script>
+</body>
+</html>

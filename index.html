@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ömer Hoca — Matematik Özel Ders</title>
+  <meta name="description" content="Ömer Hoca ile özel ders ve kampüs programlarıyla başarıya ulaş. Deneyimli matematik eğitimi." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+
+  <!-- Google Fonts — Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            coral: {
+              DEFAULT: '#CC4400',
+              light: '#E05020',
+              dark:  '#A33800',
+            },
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(28px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            slideIn: {
+              '0%':   { opacity: '0', transform: 'translateX(28px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            marqueeUp: {
+              '0%':   { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-50%)' },
+            },
+            marqueeDown: {
+              '0%':   { transform: 'translateY(-50%)' },
+              '100%': { transform: 'translateY(0)' },
+            },
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%':      { transform: 'translateY(-14px) rotate(4deg)' },
+            },
+          },
+          animation: {
+            'fade-up':      'fadeUp 0.7s ease forwards',
+            'slide-in':     'slideIn 0.7s ease 0.15s forwards',
+            'marquee-up':   'marqueeUp 22s linear infinite',
+            'marquee-down': 'marqueeDown 26s linear infinite',
+            'float-slow':   'floatSlow 4s ease-in-out infinite',
+            'float-slow2':  'floatSlow 5s ease-in-out 0.8s infinite',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Hide scrollbar for carousel */
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw;
+      position: relative;
+      overscroll-behavior-x: none;
+    }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f5; }
+
+    /* ── Navbar ── */
+    #navbar { transition: box-shadow 0.3s ease, background 0.3s ease; }
+    #navbar.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.97);
+    }
+
+    /* Nav link hover underline */
+    .nav-link { position: relative; padding-bottom: 4px; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 2px;
+      background: #150338;
+      border-radius: 9999px;
+      transition: width 0.28s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+    #mobile-menu.open { max-height: 320px; opacity: 1; }
+
+    /* ── Hero ── */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    /* ── Vertical Marquee Gallery ── */
+    .marquee-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      will-change: transform;
+    }
+    .marquee-col img {
+      width: 100%;          /* sütun genişliğine tam otur */
+      height: 210px;        /* SABİT yükseklik — taşmayı önler */
+      object-fit: cover;    /* kırparak doldur, oran bozulmaz */
+      border-radius: 0.875rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+      display: block;
+      flex-shrink: 0;
+    }
+    /* Pause on hover */
+    .marquee-wrapper:hover .marquee-col { animation-play-state: paused; }
+
+    /* Top/bottom fade mask — kenarlar yumuşak solar */
+    .gallery-fade-mask {
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+    }
+  </style>
+</head>
+
+<body class="antialiased w-full max-w-[100vw] overflow-x-hidden bg-slate-50">
+
+
+
+
+  <!-- ══════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════ -->
+  <main>
+    <section id="hero" class="relative w-full bg-white md:bg-gradient-to-r md:from-blue-900 md:to-blue-600 overflow-hidden pt-0 md:pt-28 pb-0 md:pb-12">
+      
+      <!-- Dekoratif Arka Plan Işıkları -->
+      <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none hidden md:block">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-cyan-400 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+      </div>
+
+      <!-- Yüzen Masaüstü Menü (Navbar) -->
+      <div class="hidden md:flex items-center justify-between bg-white/90 backdrop-blur-md rounded-full px-8 py-3 w-full max-w-6xl mx-auto shadow-lg fixed top-4 left-0 right-0 z-[100]">
+        <!-- Sol Taraf (Logo) -->
+        <a href="#" class="flex-shrink-0">
+          <img src="/b25.png" alt="Logo" class="h-10 w-auto object-contain" />
+        </a>
+
+        <!-- Orta Taraf (Navigasyon Linkleri) -->
+        <nav class="flex items-center gap-8">
+          <a href="#ozel-ders" class="text-slate-700 font-medium text-[15px] hover:text-blue-600 transition-colors cursor-pointer">Özel Ders</a>
+          <a href="#kampus" class="text-slate-700 font-medium text-[15px] hover:text-blue-600 transition-colors cursor-pointer">Kampüs</a>
+          <a href="#yorumlar" class="text-slate-700 font-medium text-[15px] hover:text-blue-600 transition-colors cursor-pointer">Yorumlar</a>
+          <a href="#sss" class="text-slate-700 font-medium text-[15px] hover:text-blue-600 transition-colors cursor-pointer">SSS</a>
+        </nav>
+
+        <!-- Sağ Taraf (Eylem Butonu / Kullanıcı Profili) -->
+        <div id="desktop-user-area">
+          <button id="desktop-login-btn" class="bg-blue-600 text-white px-7 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 hover:shadow-md transition-all">
+            Giriş Yap
+          </button>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto lg:px-8 relative z-10 p-0 m-0">
+        <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 items-center min-h-[400px]">
+          
+          <!-- Sol Sütun (İçerik ve Butonlar) -->
+          <div class="hidden md:flex flex-col justify-center text-center lg:text-left order-2 lg:order-1 px-4 sm:px-6 lg:px-0">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-4 mx-auto lg:mx-0 w-max backdrop-blur-sm shadow-inner mt-6 md:mt-0">
+              <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              Ömer Hoca | Matematik Öğretmeni
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+              2027 LGS Matematik Maratonuna Yazdan Başlayın!
+            </h1>
+            
+            <p class="text-base md:text-lg text-blue-100 mb-6 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+              7. sınıf eksiklerinizi tamamen kapatın ve 8. sınıf konularına rakiplerinizden bir adım önde başlayın. Yaz tatilini LGS başarısına dönüştürün.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a href="#ozel-ders" class="w-full sm:w-auto bg-[#0047ff] text-white px-8 py-3 rounded-xl font-bold text-lg shadow-[0_8px_20px_rgba(0,71,255,0.4)] hover:bg-blue-700 hover:-translate-y-1 transition-all border border-blue-400/50 flex items-center justify-center">
+                Hemen Başla
+              </a>
+              <button onclick="document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="w-full sm:w-auto bg-white text-zinc-900 px-8 py-3 rounded-xl font-bold text-lg shadow-xl hover:bg-gray-50 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                Sizi Arayalım
+              </button>
+            </div>
+          </div>
+
+          <!-- Sağ Sütun (Kahraman Görseli / Video) -->
+          <div class="flex items-center justify-center order-1 lg:order-2 w-full relative p-0 m-0">
+            <!-- Mobil İçin Video -->
+            <video src="giris6.mp4" autoPlay loop muted playsInline class="block md:hidden w-full h-auto object-contain"></video>
+            
+            <!-- Masaüstü İçin Görsel -->
+            <img src="/header.png" alt="Rakun App" class="hidden md:block w-full h-auto object-contain max-h-[500px] mx-auto drop-shadow-2xl animate-fade-up" />
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /hero -->
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       ÖNE ÇIKAN ÖZELLİKLER / SHOWCASE SLIDER
+  ══════════════════════════════════════════ -->
+  <section id="showcase" class="py-16 md:py-24 bg-white overflow-hidden opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Üst Başlık -->
+      <div class="text-center mb-12 md:mb-16">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-[#0047ff] text-sm font-semibold mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Öne Çıkan Özellikler
+        </span>
+        <h2 class="text-3xl md:text-4xl font-black text-zinc-900 tracking-tight">Sistemimizde <span class="text-[#0047ff]">Neler Var?</span></h2>
+      </div>
+
+      <!-- 2 Sütunlu Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+
+        <!-- ═══ SOL SÜTUN: Stacked Cards Mockup ═══ -->
+        <div class="order-1 md:order-1 relative">
+          <div id="stacked-cards-container" class="relative w-full aspect-video" style="perspective: 1200px;">
+            <!-- Kartlar JS tarafından dinamik olarak eklenecek -->
+          </div>
+
+          <!-- Mobil Kaydırma (Swipe) İpucu -->
+          <div class="absolute bottom-4 right-4 z-30 md:hidden flex items-center gap-2 bg-black/60 backdrop-blur-sm text-white rounded-full px-3 py-1.5 shadow-lg animate-pulse pointer-events-none">
+            <span class="text-[11px] font-semibold tracking-wide uppercase">Yana Kaydırın</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 3l4 4-4 4M8 21l-4-4 4-4M20 7H4M4 17h16"></path></svg>
+          </div>
+        </div>
+
+        <!-- ═══ SAĞ SÜTUN: İçerik ve Kontroller ═══ -->
+        <div class="order-2 md:order-2 flex flex-col justify-center">
+          <!-- Slide Sayacı -->
+          <span id="showcase-counter" class="text-sm font-bold text-[#0047ff] tracking-widest mb-3"></span>
+
+          <!-- Başlık -->
+          <h3 id="showcase-title" class="text-3xl md:text-4xl font-bold text-zinc-900 leading-tight mb-2 transition-all duration-300"></h3>
+
+          <!-- Alt Başlık -->
+          <p id="showcase-subtitle" class="text-lg text-gray-400 font-medium mb-4 transition-all duration-300"></p>
+
+          <!-- Açıklama -->
+          <p id="showcase-desc" class="text-gray-600 leading-relaxed mb-8 transition-all duration-300"></p>
+
+          <!-- Pagination Dots -->
+          <div id="showcase-dots" class="flex items-center gap-2 mb-8">
+            <!-- Noktalar JS tarafından dinamik olarak eklenecek -->
+          </div>
+
+          <!-- Buton Grubu -->
+          <div class="flex flex-wrap gap-4">
+            <button onclick="prevSlide()" class="px-6 py-3 rounded-xl border-2 border-gray-200 text-zinc-700 font-semibold text-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              Önceki
+            </button>
+            <button onclick="nextSlide()" class="px-6 py-3 rounded-xl bg-[#0047ff] text-white font-semibold text-sm hover:bg-[#0039cc] transition-all duration-200 shadow-lg shadow-[#0047ff]/30 hover:shadow-xl hover:shadow-[#0047ff]/40 flex items-center gap-2">
+              Sonraki
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- Showcase Stacked Cards Slider Logic -->
+  <script>
+    (function() {
+      const showcaseData = [
+        {
+          image: "post1.png", 
+          title: "Özel Olarak Hazırlanmış PDF'ler",
+          subtitle: "Yeni Nesil Sorular ve Çözümler",
+          description: "Kendi hazırladığım, MEB müfredatına tam uyumlu ve analitik düşünme becerisini geliştiren özel matematik fasikülleriyle rakiplerinin bir adım önüne geç."
+        },
+        {
+          image: "post2.png", 
+          title: "Deneme Analizi ve Takibi",
+          subtitle: "Yapay Zeka Destekli Gelişim",
+          description: "Girdiğin deneme sınavlarını detaylıca analiz ediyor, eksik kazanımlarını nokta atışı tespit ederek sana en uygun çalışma yol haritasını çıkarıyoruz."
+        },
+        {
+          image: "post3.png", 
+          title: "Düzenli Öğrenci Takibi",
+          subtitle: "Haftalık Program ve Birebir Takip",
+          description: "Öğrencilerimiz için haftalık ve günlük çalışma programları hazırlıyor, hedeflerine sapmadan ilerlemeleri için süreçlerini yakından takip ediyoruz."
+        },
+        {
+          image: "post4.png", 
+          title: "Kitap ve Doküman Desteği",
+          subtitle: "Planlama Defterim ile Başarı",
+          description: "Süreci en iyi şekilde yönetmek için özel olarak hazırladığımız 'Planlama Defterim' ve özenle seçilmiş seviyene uygun kaynaklarla daima yanındayız."
+        },
+        {
+          image: "post5.png", 
+          title: "Konu ve Genel Denemeleri",
+          subtitle: "Gerçek Sınav Provası",
+          description: "Belirli periyotlarla uyguladığımız branş ve genel denemeler sayesinde gerçek sınav stresini yenmeyi ve zaman yönetimini kusursuzlaştırmayı öğreniyoruz."
+        },
+        {
+          image: "post6.png", 
+          title: "Online Kütüphanede Beraber Çalışma",
+          subtitle: "Maksimum Odaklanma ve Motivasyon",
+          description: "Belirlenen saatlerde online kütüphane ortamında toplanarak hep birlikte ders çalışıyor, çalışma disiplinimizi ve motivasyonumuzu en üst seviyeye çıkarıyoruz."
+        },
+        {
+          image: "post7.png", 
+          title: "7/24 Soru Sorabilme İmkanı",
+          subtitle: "Anında Çözüm Desteği",
+          description: "Ders çalışırken takıldığın veya çözemediğin soruları günün her saati bana iletebilir, detaylı çözüm yollarına hızlıca ulaşarak zaman kaybetmekten kurtulabilirsin."
+        }
+      ];
+
+      const cardsContainer = document.getElementById('stacked-cards-container');
+      const dotsContainer = document.getElementById('showcase-dots');
+
+      // Dinamik olarak kartları ve noktaları oluştur
+      showcaseData.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'showcase-card absolute inset-0 transition-all duration-500 ease-in-out';
+        card.setAttribute('data-index', i);
+        card.innerHTML = `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain rounded-2xl shadow-2xl" />`;
+        cardsContainer.appendChild(card);
+        
+        const dot = document.createElement('button');
+        dot.className = 'showcase-dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300';
+        dot.onclick = () => window.goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
+
+      let currentSlide = 0;
+      const totalSlides = showcaseData.length;
+      const cards = document.querySelectorAll('.showcase-card');
+      const dots = document.querySelectorAll('.showcase-dot');
+
+      function getCardPosition(cardIndex, activeIndex) {
+        const diff = cardIndex - activeIndex;
+        // Normalize for wrap-around
+        let normalizedDiff = diff;
+        if (diff > totalSlides / 2) normalizedDiff = diff - totalSlides;
+        if (diff < -totalSlides / 2) normalizedDiff = diff + totalSlides;
+
+        if (normalizedDiff === 0) {
+          // Active (front)
+          return { transform: 'translateX(0) rotate(0deg) scale(1)', zIndex: 30, opacity: 1, shadow: '0 25px 50px -12px rgba(0,0,0,0.5)' };
+        } else if (normalizedDiff === -1) {
+          // Previous (back-left)
+          return { transform: 'translateX(-30px) rotate(-6deg) scale(0.92)', zIndex: 10, opacity: 0.6, shadow: '0 20px 40px -12px rgba(0,0,0,0.35)' };
+        } else if (normalizedDiff === 1) {
+          // Next (back-right)
+          return { transform: 'translateX(30px) rotate(6deg) scale(0.92)', zIndex: 10, opacity: 0.6, shadow: '0 20px 40px -12px rgba(0,0,0,0.35)' };
+        } else {
+          // Hidden
+          return { transform: 'translateX(0) rotate(0deg) scale(0.8)', zIndex: 0, opacity: 0, shadow: 'none' };
+        }
+      }
+
+      function updateShowcase() {
+        const data = showcaseData[currentSlide];
+
+        // Update stacked cards positions
+        cards.forEach((card, i) => {
+          const pos = getCardPosition(i, currentSlide);
+          card.style.transform = pos.transform;
+          card.style.zIndex = pos.zIndex;
+          card.style.opacity = pos.opacity;
+          card.style.boxShadow = pos.shadow;
+        });
+
+        // Update text
+        document.getElementById('showcase-title').textContent = data.title;
+        document.getElementById('showcase-subtitle').textContent = data.subtitle;
+        document.getElementById('showcase-desc').textContent = data.description;
+        document.getElementById('showcase-counter').textContent = `0${currentSlide + 1} / 0${totalSlides}`;
+
+        // Update dots
+        dots.forEach((dot, i) => {
+          if (i === currentSlide) {
+            dot.classList.add('w-8', 'bg-[#0047ff]');
+            dot.classList.remove('w-2', 'bg-gray-300');
+          } else {
+            dot.classList.remove('w-8', 'bg-[#0047ff]');
+            dot.classList.add('w-2', 'bg-gray-300');
+          }
+        });
+      }
+
+      window.goToSlide = function(index) {
+        currentSlide = index;
+        updateShowcase();
+      };
+      window.nextSlide = function() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateShowcase();
+      };
+      window.prevSlide = function() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateShowcase();
+      };
+
+      // Swipe (Touch) Logic for Mobile
+      const container = document.getElementById('stacked-cards-container');
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      container.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      container.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const deltaX = touchStartX - touchEndX;
+        const deltaY = touchStartY - touchEndY;
+        const threshold = 50; // Minimum swipe distance in px
+
+        // Dikey kaydırma (scroll) yatay kaydırmadan büyükse, işlemi iptal et (kullanıcı sayfayı kaydırıyor demektir)
+        if (Math.abs(deltaY) > Math.abs(deltaX)) {
+          return;
+        }
+
+        if (deltaX > threshold) {
+          // Sola kaydırıldı (Next)
+          window.nextSlide();
+        } else if (deltaX < -threshold) {
+          // Sağa kaydırıldı (Prev)
+          window.prevSlide();
+        }
+      }
+
+      // Initialize card positions
+      updateShowcase();
+    })();
+  </script>
+
+
+  <!-- ══════════════════════════════════════════
+       PLACEHOLDER SECTION ANCHORS (for nav links)
+  ══════════════════════════════════════════ -->
+    <section id="ozel-ders" class="py-12 md:py-16 bg-[#eff6ff] relative rounded-t-3xl mx-2 md:mx-4 mb-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
+    <div class="max-w-6xl mx-auto px-2 sm:px-4">
+      
+      <!-- Başlık -->
+      <div class="text-center mb-10 animate-fade-up">
+        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Hangi sınava <span class="relative inline-block z-10">hazırlanıyorsun?
+          <svg class="absolute left-0 w-full h-3 -bottom-1 -z-10 pointer-events-none" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path class="draw-line" d="M2,5 Q50,8 98,3" stroke="#FBBF24" stroke-width="3" fill="transparent" stroke-linecap="round" />
+          </svg>
+        </span></h2>
+        <p class="text-gray-600 text-base md:text-lg">Seçimini yaparak sana uygun programın detaylarını inceleyebilirsin.</p>
+      </div>
+
+      <!-- Sekmeler (Tabs - Sadece Mobilde) -->
+      <div class="flex justify-center mb-8 lg:hidden">
+        <div class="bg-white rounded-full shadow-sm p-1.5 flex items-center gap-1 border border-gray-100">
+          <button onclick="showTab('lgs')" id="tab-btn-lgs" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 bg-gradient-to-r from-[#0029b8] to-[#0047ff] text-white shadow-md shadow-[#0047ff]/40">LGS</button>
+          <button onclick="showTab('yks')" id="tab-btn-yks" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-gray-700 hover:bg-gray-50">YKS</button>
+          <button onclick="showTab('arasinif')" id="tab-btn-arasinif" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-gray-700 hover:bg-gray-50">Ara Sınıf</button>
+        </div>
+      </div>
+
+      <!-- KARTLAR GRID KAPSAYICI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto mt-10 px-4 justify-center justify-items-center">
+        
+        <!-- LGS KARTI -->
+        <div id="card-lgs" class="w-full block lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-[#0047ff]">
+          <!-- Rozet -->
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">👍 En Popüler</span>
+          </div>
+
+          <!-- Kart Başlık -->
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">LGS Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <!-- Paket Seçimi Modülü -->
+            <div class="bg-white border border-gray-200 rounded-full p-1 flex items-center mx-auto shadow-sm w-full">
+              <button onclick="setPackage('ozel-ders', 'lgs')" id="btn-ozel-ders-lgs" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60 text-center justify-center whitespace-nowrap">Özel Ders</button>
+              <button onclick="setPackage('kocluk', 'lgs')" id="btn-kocluk-lgs" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300 text-center justify-center whitespace-nowrap">Özel Ders + Koçluk</button>
+            </div>
+          </div>
+
+          <!-- Görsel / Video Alanı -->
+          <div id="ozel-ders-video-container-lgs" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="lgs1.png" alt="LGS Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fiyat Alanı -->
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-lgs" class="hidden items-center gap-2">
+              <span id="old-price-lgs" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-lgs" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-lgs" class="flex items-end gap-2">
+              <span class="text-4xl font-black text-[#1b004e]">₺1.200</span><span class="text-[#1b004e] font-medium pb-1">/ Saat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+
+          <!-- Buton -->
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+
+          <!-- ÖZELLİKLER BAŞLIĞI -->
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul id="features-list-lgs" class="space-y-3 block"></ul>
+        </div>
+
+        <!-- YKS KARTI -->
+        <div id="card-yks" class="w-full hidden lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-transparent lg:border-[#0047ff]">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">🔥 En Çok Seçilen</span>
+          </div>
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">YKS Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <!-- Paket Seçimi Modülü -->
+            <div class="bg-white border border-gray-200 rounded-full p-1 flex items-center mx-auto shadow-sm w-full">
+              <button onclick="setPackage('ozel-ders', 'yks')" id="btn-ozel-ders-yks" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60 text-center justify-center whitespace-nowrap">Özel Ders</button>
+              <button onclick="setPackage('kocluk', 'yks')" id="btn-kocluk-yks" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300 text-center justify-center whitespace-nowrap">Özel Ders + Koçluk</button>
+            </div>
+          </div>
+          <div id="ozel-ders-video-container-yks" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="yks1.png" alt="YKS Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-yks" class="hidden items-center gap-2">
+              <span id="old-price-yks" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-yks" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-yks" class="flex items-end gap-2">
+              <span class="text-4xl font-black text-[#1b004e]">₺1.200</span><span class="text-[#1b004e] font-medium pb-1">/ Saat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+          <!-- ÖZELLİKLER BAŞLIĞI -->
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul id="features-list-yks" class="space-y-3 block"></ul>
+        </div>
+
+        <!-- ARA SINIF KARTI -->
+        <div id="card-arasinif" class="w-full hidden lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-transparent lg:border-[#0047ff]">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">⏳ Sınırlı Kontenjan</span>
+          </div>
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">Ara Sınıf Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <!-- Paket Seçimi Modülü -->
+            <div class="bg-white border border-gray-200 rounded-full p-1 flex items-center mx-auto shadow-sm w-full">
+              <button onclick="setPackage('ozel-ders', 'arasinif')" id="btn-ozel-ders-arasinif" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60 text-center justify-center whitespace-nowrap">Özel Ders</button>
+              <button onclick="setPackage('kocluk', 'arasinif')" id="btn-kocluk-arasinif" class="flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300 text-center justify-center whitespace-nowrap">Özel Ders + Koçluk</button>
+            </div>
+          </div>
+          <div id="ozel-ders-video-container-arasinif" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="arasınıf1.png" alt="Ara Sınıf Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-arasinif" class="hidden items-center gap-2">
+              <span id="old-price-arasinif" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-arasinif" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-arasinif" class="flex items-end gap-2">
+              <span class="text-4xl font-black text-[#1b004e]">₺1.200</span><span class="text-[#1b004e] font-medium pb-1">/ Saat</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul id="features-list-arasinif" class="space-y-3 block"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       KAMPÜS SECTION
+  ══════════════════════════════════════════ -->
+  <section id="kampus" class="max-w-7xl mx-auto px-4 my-20 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
+    <a href="https://whatsapp.com/channel/0029VbCjF055a246ZyeeUh1I" target="_blank" rel="noopener noreferrer" class="block w-full transition-transform hover:scale-[1.02]">
+      <!-- Masaüstü Görseli (Geniş Ekranlar İçin) -->
+      <img src="wpkanal.png" alt="Ömer Hoca Kampüs Masaüstü" class="hidden md:block w-full h-auto object-cover rounded-2xl shadow-2xl">
+      <!-- Mobil Görsel (Telefon Ekranları İçin) -->
+      <img src="a5.png" alt="Ömer Hoca Kampüs Mobil" class="block md:hidden w-full h-auto object-cover rounded-2xl shadow-xl">
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       YORUMLAR (TESTIMONIALS) SECTION
+  ══════════════════════════════════════════ -->
+  <section id="yorumlar" class="max-w-7xl mx-auto px-4 py-20 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
+    
+    <!-- Başlık & Açıklama -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-black text-[#150338] mb-4">Öğrencilerimiz ve Velilerimiz Ne Diyor?</h2>
+      <p class="text-gray-500 font-medium max-w-2xl mx-auto">Birlikte başarıya ulaştığımız öğrencilerimizin ve velilerimizin deneyimleri...</p>
+    </div>
+
+    <div id="testimonial-carousel" class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8">
+      
+      <!-- 1. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#1E3A8A] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "Kızımız için matematikden özel ders ararken tesadüfen denk geldik. Sadece ders anlatıp geçmiyor çoçuğun durumunu ve motivasyonunu da çok iyi yönetiyor. Siteden çözdüğü sayfaları, ödevleri takip etmesi bizim içinde büyük rahatlık oldu doğrusu. Cok teşekürler ömer hocam 🙏"
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1E3A8A] mb-2">Mustafa K.</h4>
+          <span class="inline-block bg-[#b2eb02] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">VELİ</span>
+        </div>
+      </div>
+
+      <!-- 2. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#1E3A8A] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "matematik dersini hiç sevmezdim ama ömer hoca nın dersleri hiç sıkıcı geçmiyor 😅 Hocamın pdf notları da direkt konuyu anlamada çok yardımcı oluyor, okulda anlamadığım konuları daha rahat bir şekilde anladım."
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1E3A8A] mb-2">Emre</h4>
+          <span class="inline-block bg-[#b2eb02] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">8. SINIF ÖĞRENCİSİ</span>
+        </div>
+      </div>
+
+      <!-- 3. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#1E3A8A] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "Ömer hocayla Bolu'da bir tanıdık vasıtasıyla tanıştık. Oğlumun matematiği gerçekten çok kötüydü LGS ye hazırlanırken evde sürekli bir stres vardı. Ömer hocamın ilgisi, sabrı ve desteği sayesinde netlerimiz beklemediğimiz kadar arttı. İyiki yollarımız kesişmiş hocam emeklerinize sağlık."
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1E3A8A] mb-2">Ayşe T.</h4>
+          <span class="inline-block bg-[#b2eb02] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">LGS VELİSİ</span>
+        </div>
+      </div>
+
+      <!-- 4. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#1E3A8A] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "Lgs ye son aylar kala netlerim artmıyor diye çok endişeleniyordum.. Ömer hocamla derslere başladıktan sonra verdiği o kısa yollar sınavda hayat kurtardı resmen. Şuan denemelerde matematikten en fazla 1-2 yanlışım cıkıyor 🥳 iyiki varsınız hocam"
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1E3A8A] mb-2">Ceren</h4>
+          <span class="inline-block bg-[#b2eb02] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">LGS ÖĞRENCİSİ</span>
+        </div>
+      </div>
+
+      <!-- 5. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#1E3A8A] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "matematik temeli zayıf diye çok korkuyorduk ama Ömer hoca sağolsun çocuk artık kendi isteğiyle masa başına oturuyor 😊 verdiği taktikler ve dökümanlar okul sınavlarında da çok işimize yaradı. herkese gönül rahatlıgıyla tavsiye ederim 🌸🌟"
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1E3A8A] mb-2">Zeynep Y.</h4>
+          <span class="inline-block bg-[#b2eb02] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">VELİ</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Yön Butonları (Navigasyon) -->
+    <div class="flex items-center justify-center gap-4 mt-2 md:mt-4">
+      <button onclick="document.getElementById('testimonial-carousel').scrollBy({left: -320, behavior: 'smooth'})" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#1E3A8A] text-white hover:bg-opacity-90 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#1E3A8A] focus:ring-offset-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <button onclick="document.getElementById('testimonial-carousel').scrollBy({left: 320, behavior: 'smooth'})" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#1E3A8A] text-white hover:bg-opacity-90 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#1E3A8A] focus:ring-offset-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SSS (FAQ) SECTION
+  ══════════════════════════════════════════ -->
+  <section id="sss" class="max-w-3xl mx-auto px-4 py-20 w-full">
+    
+    <!-- Başlık & Açıklama -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-black text-[#150338] mb-4">Sıkça Sorulan Sorular</h2>
+      <p class="text-gray-500 font-medium max-w-2xl mx-auto">Matematik yolculuğun hakkında merak edilenleri senin için derledik.</p>
+    </div>
+
+    <!-- Akordeon Kapsayıcısı -->
+    <div class="space-y-4">
+      
+      <!-- Soru 1 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq1')">
+          <span class="font-bold text-gray-900 pr-4">Yüz yüze dersleri nerede veriyorsunuz? Online eğitiminiz var mı?</span>
+          <svg id="icon-faq1" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Yüz yüze özel derslerimi Bolu merkez ve çevresinde gerçekleştiriyorum. Ayrıca Türkiye'nin her yerinden öğrencilerim için online matematik özel dersi hizmeti sunuyorum.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 2 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq2')">
+          <span class="font-bold text-gray-900 pr-4">Bir ders saati kaç dakika sürüyor?</span>
+          <svg id="icon-faq2" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq2" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Derslerimizin verimliliğini maksimumda tutmak için bir ders saatimiz öğrencinin odak süresine göre değişmekle birlikte genelde 60+30 veya 60 dakika gibi planlanmaktadır.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 3 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq3')">
+          <span class="font-bold text-gray-900 pr-4">Sadece LGS ve YKS öğrencilerine mi ders veriyorsunuz?</span>
+          <svg id="icon-faq3" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Hayır, 5. sınıftan 11. sınıfa kadar tüm ara sınıf öğrencilerine ve tabii ki LGS ile YKS hazırlık gruplarına matematik dersi veriyorum.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 4 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq4')">
+          <span class="font-bold text-gray-900 pr-4">Derslerde hangi kaynakları kullanıyorsunuz?</span>
+          <svg id="icon-faq4" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq4" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Öğrencinin seviye tespitini yaptıktan sonra piyasadaki en nitelikli yayınlardan oluşan kişiye özel bir kaynak listesi oluşturuyorum. Ayrıca kendi hazırladığım yeni nesil soru bankası havuzundan ve interaktif içeriklerden de faydalanıyoruz.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 5 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq5')">
+          <span class="font-bold text-gray-900 pr-4">Sürece başlamadan önce bir tanışma veya deneme dersi yapıyor musunuz?</span>
+          <svg id="icon-faq5" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq5" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Evet, öğrenciyle aramızdaki uyumu görmek ve mevcut seviyesini analiz etmek için "ücretsiz" bir tanışma ve seviye tespit görüşmesi gerçekleştiriyoruz. Bu görüşme sonrasında kişiye özel yol haritamızı çiziyoruz.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 6 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq6')">
+          <span class="font-bold text-gray-900 pr-4">İptal hakkı var mı?</span>
+          <svg id="icon-faq6" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq6" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Evet, eğer ilk hafta içinde memnun kalmazsanız ücretiniz iade yapılmaktadır.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="bg-[#1E3A8A] rounded-t-3xl px-6 py-12 md:px-16 md:py-16 mt-0 relative overflow-visible">
+
+    <!-- Sol Üst Dekoratif Görsel -->
+    <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-8 -left-8 w-32 h-32 md:w-40 md:h-40 object-contain z-0 pointer-events-none" />
+
+    <!-- Sağ Üst Dekoratif Görsel -->
+    <img src="a9.png" alt="" aria-hidden="true" class="absolute -top-8 -right-8 w-32 h-32 md:w-40 md:h-40 object-contain z-0 pointer-events-none" />
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+
+      <!-- 4 Sütun Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+        <!-- 1. Sütun: Marka -->
+        <div class="flex flex-col gap-4">
+          <img src="a6.png" alt="Ömer Hoca Logo" class="h-14 w-auto object-contain self-start brightness-0 invert">
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Ömer Hoca'yla hazır ol,<br>fark yarat.
+          </p>
+        </div>
+
+        <!-- 2. Sütun: Hizmetler -->
+        <div class="flex flex-col gap-5">
+          <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-3">Programlar</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">LGS Özel Ders</a></li>
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">YKS Özel Ders</a></li>
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">Ara Sınıf</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-3">Hızlı Linkler</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li><a href="#kampus" class="hover:text-white transition-colors">Hakkımda</a></li>
+              <li><a href="#iletisim" class="hover:text-white transition-colors">İletişim</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Sütun: Sözleşme ve Koşullar -->
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-4">Yasal</h4>
+          <ul class="space-y-2.5 text-gray-300 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">Mesafeli Satış Sözleşmesi</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">İptal İade Koşulları</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">KVKK Aydınlatma Metni</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Çerez Politikası</a></li>
+          </ul>
+        </div>
+
+        <!-- 4. Sütun: İletişim & Sosyal Medya -->
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-4">Bize Ulaşın</h4>
+          <div class="flex items-center gap-4">
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/omerhoca.tv/" target="_blank" rel="noopener noreferrer"
+               aria-label="Instagram"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/905000000000" target="_blank" rel="noopener noreferrer"
+               aria-label="WhatsApp"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
+
+            <!-- E-posta -->
+            <a href="mailto:omerhocatv@gmail.com"
+               aria-label="E-posta"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright Çizgisi -->
+      <div class="border-t border-white/10 mt-10 pt-8 text-center">
+        <p class="text-gray-400 text-xs">Copyright &copy; 2026 Ömer Hoca Mentörlük. Tüm hakları saklıdır.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════
+       JS — Scroll & Hamburger
+  ══════════════════════════════════════════ -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bars = hamburger.querySelectorAll('.ham-bar');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      // Animate bars to X
+      if (isOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity   = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        bars[2].style.width     = '1.5rem';
+      } else {
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '1';
+        bars[2].style.transform = '';
+        bars[2].style.width     = '1rem';
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '1';
+        bars[2].style.transform = '';
+        bars[2].style.width     = '1rem';
+      });
+    });
+
+        };
+
+    function changeTab(tabId) {
+      // Update buttons styling
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-[#150338]', 'text-white', 'active', 'shadow-md');
+        btn.classList.add('text-gray-700', 'hover:bg-gray-50');
+      });
+      const activeBtn = document.getElementById('tab-' + tabId);
+      activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+      activeBtn.classList.add('bg-[#150338]', 'text-white', 'active', 'shadow-md');
+
+      // Update content
+      const data = tabData[tabId];
+      document.getElementById('paket-baslik').textContent = data.title;
+      document.getElementById('paket-rozet').textContent = data.badge;
+      document.getElementById('paket-degerlendirme').textContent = data.social;
+      
+      const listEl = document.getElementById('paket-liste');
+      listEl.innerHTML = '';
+      data.items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-3';
+        li.innerHTML = `
+          <svg class="w-5 h-5 text-[#150338] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="text-gray-700 font-medium">${item}</span>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+
+    // Initialize with LGS tab — try both ways to be safe
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => changeTab('lgs'));
+    } else {
+      changeTab('lgs');
+    }
+  </script>
+
+  <!-- ══════════════════════════════════════════
+       SABİT İLETİŞİM BUTONU (FAB) - EN DIŞ KATMAN
+  ══════════════════════════════════════════ -->
+  <div class="fixed right-0 top-1/2 transform -translate-y-1/2 z-[9999] flex">
+    <!-- Dalgalanma (Ping) Animasyonu Katmanı -->
+    <div class="absolute inset-0 bg-[#b2eb02] rounded-l-xl animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-75"></div>
+    
+    <!-- Asıl Buton -->
+    <button onclick="document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="relative flex flex-col items-center justify-center gap-1.5 md:gap-2 min-w-[40px] bg-[#b2eb02] text-[#150338] py-3 px-2 md:py-5 md:px-3 rounded-l-xl shadow-2xl hover:bg-[#0ae382] transition-colors focus:outline-none">
+      <!-- Telefon İkonu -->
+      <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+      </svg>
+      <!-- Dikey Yazı -->
+      <span class="font-bold text-xs md:text-sm tracking-widest [writing-mode:vertical-rl] rotate-180">İletişime Geç</span>
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MOBİL ALT NAVİGASYON (BOTTOM NAV)
+  ══════════════════════════════════════════ -->
+  <nav id="bottom-nav" class="md:hidden fixed bottom-0 w-full bg-white flex justify-between items-center px-4 py-3 pb-safe z-[50] rounded-t-3xl shadow-[0_-4px_15px_rgba(0,0,0,0.05)] overflow-visible">
+
+    <!-- Sol Taraf (Aksiyon Butonu) -->
+    <button onclick="document.getElementById('auth-modal').classList.remove('hidden')" class="bg-[#0047ff] text-white rounded-full px-5 py-2 font-medium text-sm focus:outline-none shadow-md shadow-[#0047ff]/30">
+      Giriş Yap
+    </button>
+
+    <!-- Orta Kısım (Logo ve Yukarı Scroll) -->
+    <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="focus:outline-none flex justify-center">
+      <img src="b25.png" alt="Rakun Logo" class="h-8 w-auto object-contain">
+    </button>
+
+    <!-- Sağ Taraf (Hamburger Menü) -->
+    <div class="relative flex items-center justify-center">
+      <div class="absolute inset-0 rounded-full bg-blue-100 opacity-75 animate-ping"></div>
+      <button onclick="toggleMobileMenu()" class="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-[#0047ff] focus:outline-none hover:bg-blue-100 transition-colors z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- Açılır Mobil Menü (Bottom Sheet) -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu()"></div>
+  <div id="mobile-bottom-sheet" class="fixed bottom-0 left-0 w-full bg-white z-[70] rounded-t-3xl shadow-2xl transition-transform duration-300 translate-y-full flex flex-col pb-safe">
+    <div class="w-full flex justify-center py-3">
+      <div class="w-12 h-1.5 bg-gray-200 rounded-full"></div>
+    </div>
+    <div class="px-6 pb-8 pt-2 flex flex-col gap-2">
+      <!-- Menü Linkleri -->
+      <a href="#ozel-ders" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        Özel Ders
+      </a>
+
+      <a href="#kampus" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        Kampüs
+      </a>
+      <button onclick="toggleMobileMenu(); document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px] text-left focus:outline-none">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+        İletişim
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let isMenuOpen = false;
+    function toggleMobileMenu() {
+      isMenuOpen = !isMenuOpen;
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const sheet = document.getElementById('mobile-bottom-sheet');
+      
+      if (isMenuOpen) {
+        overlay.classList.remove('hidden');
+        // setTimeout for smooth transition
+        setTimeout(() => {
+          overlay.classList.remove('opacity-0');
+          overlay.classList.add('opacity-100');
+          sheet.classList.remove('translate-y-full');
+          sheet.classList.add('translate-y-0');
+        }, 10);
+      } else {
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        sheet.classList.remove('translate-y-0');
+        sheet.classList.add('translate-y-full');
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 300);
+      }
+    }
+  </script>
+
+  <!-- FAQ Accordion Logic -->
+  <script>
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      
+      // Close all other accordions (Optional behavior)
+      const allContents = document.querySelectorAll('[id^="faq"]');
+      const allIcons = document.querySelectorAll('[id^="icon-faq"]');
+      
+      let isOpening = !content.style.maxHeight || content.style.maxHeight === "0px";
+
+      // Reset all
+      allContents.forEach(c => {
+        if (c.id !== id) {
+          c.style.maxHeight = null;
+        }
+      });
+      allIcons.forEach(i => {
+        if (i.id !== 'icon-' + id) {
+          i.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current
+      if (isOpening) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.classList.add('rotate-180');
+      } else {
+        content.style.maxHeight = null;
+        icon.classList.remove('rotate-180');
+      }
+    }
+  </script>
+
+
+  
+
+
+  <!-- Custom Tab Logic -->
+  <script>
+    function showTab(tabName) {
+      // 1. Sekme (Tab) Buton renklerini sıfırla (Sadece Mobilde Görünür)
+      const btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(btn => {
+        btn.classList.remove('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', 'shadow-md', 'shadow-[#0047ff]/40');
+        btn.classList.add('text-gray-700', 'hover:bg-gray-50');
+      });
+
+      // Butonu aktif yap
+      const activeBtn = document.getElementById('tab-btn-' + tabName);
+      if(activeBtn) {
+        activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+        activeBtn.classList.add('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', 'shadow-md', 'shadow-[#0047ff]/40');
+      }
+
+      // 2. Mobilde Sekme Mantığı, Masaüstünde 3'lü Grid:
+      ['lgs', 'yks', 'arasinif'].forEach(id => {
+        const card = document.getElementById('card-' + id);
+        if (card) {
+          if (id === tabName) {
+            // Mobilde göster, masaüstünde mavi border ekle
+            card.classList.remove('hidden', 'border-transparent');
+            card.classList.add('block', 'border-[#0047ff]');
+          } else {
+            // Mobilde gizle (masaüstünde lg:block sayesinde hep açık kalır), mavi border'ı sil
+            card.classList.remove('block', 'border-[#0047ff]');
+            card.classList.add('hidden', 'border-transparent');
+          }
+        }
+      });
+      
+      // Video kapağını dinamik güncelle ve oynatılan videoyu sıfırla (Mobilde geçiş yaparken)
+      const videoContainer = document.getElementById('ozel-ders-video-container-' + tabName);
+      if (videoContainer) {
+        let imgSrc = 'lgs1.png';
+        if (tabName === 'yks') imgSrc = 'yks1.png';
+        if (tabName === 'arasinif') imgSrc = 'arasınıf1.png';
+
+        videoContainer.classList.add('cursor-pointer', 'group');
+        videoContainer.onclick = function() {
+          this.innerHTML='<iframe class="w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1" title="Özel Ders Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          this.onclick=null;
+          this.classList.remove('cursor-pointer', 'group');
+        };
+        videoContainer.innerHTML = `
+          <img src="${imgSrc}" alt="${tabName} Özel Ders" class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+            <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // İletişim Formu Mail Gönderme İşlemi (Türkçe Karakter Destekli)
+    function sendEmail(event) {
+      event.preventDefault(); // Formun sayfayı yenilemesini engelle
+
+      // Verileri al
+      const ad = document.getElementById('ad').value;
+      const soyad = document.getElementById('soyad').value;
+      const rol = document.getElementById('rol').value;
+      const telefon = document.getElementById('telefon').value;
+      const mesaj = document.getElementById('mesaj').value;
+
+      // Konu ve Gövdeyi oluştur
+      const konu = "omerhocam.com İletişim Formu: " + ad + " " + soyad;
+      const govde = "Ad: " + ad + "\n" +
+                    "Soyad: " + soyad + "\n" +
+                    "Kayıt Türü: " + rol + "\n" +
+                    "Telefon: " + telefon + "\n\n" +
+                    "Mesaj:\n" + mesaj;
+
+      // Mailto linkini güvenli bir şekilde oluştur (Türkçe karakterleri düzeltir)
+      const mailtoLink = "mailto:omerhocatv@gmail.com?subject=" + encodeURIComponent(konu) + "&body=" + encodeURIComponent(govde);
+
+      // Mail uygulamasını aç
+      window.location.href = mailtoLink;
+    }
+  </script>
+
+
+
+  <!-- ══════════════════════════════════════════
+       İLETİŞİM DRAWER (Sağdan Açılan Panel)
+  ══════════════════════════════════════════ -->
+
+  <!-- Overlay (Arka Plan Örtüsü) -->
+  <div id="drawer-overlay" class="fixed inset-0 z-[9998] bg-black/50 hidden transition-opacity" onclick="closeDrawer()"></div>
+
+  <!-- Drawer Panel -->
+  <div id="contact-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 z-[9999] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    
+    <!-- Drawer Başlık -->
+    <div class="flex items-center justify-between px-6 py-5 bg-[#1E3A8A] text-white flex-shrink-0">
+      <div>
+        <h2 class="text-xl font-black tracking-tight">İletişim Formu</h2>
+        <p class="text-blue-200 text-sm mt-0.5">Size en kısa sürede dönüş yapacağız.</p>
+      </div>
+      <button onclick="closeDrawer()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors focus:outline-none">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <!-- Başarı Mesajı (Gizli) -->
+    <div id="drawer-success" class="flex-1 px-6 py-12 hidden flex-col items-center justify-center text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+      </div>
+      <h3 class="text-2xl font-black text-gray-900 mb-3">Talebiniz Alındı!</h3>
+      <p class="text-green-600 font-bold text-lg">24 saat içinde size geri dönüş yapacağız.</p>
+    </div>
+
+    <!-- Form Alanı (Kaydırılabilir) -->
+    <div id="drawer-form-container" class="flex-1 overflow-y-auto px-6 py-6">
+      <form id="drawer-form" class="space-y-5" onsubmit="sendDrawerEmail(event)">
+
+        <!-- Ad Soyad -->
+        <div>
+          <label for="d-adsoyad" class="block text-sm font-bold text-gray-700 mb-1.5">Ad ve Soyad</label>
+          <input type="text" id="d-adsoyad" name="AdSoyad" placeholder="Örn: Ahmet Yılmaz" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A]/20 transition-all font-medium text-gray-900">
+        </div>
+
+        <!-- Öğrenci / Veli -->
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">Öğrenci misiniz, Veli misiniz?</label>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="d-rol" value="Öğrenci" class="w-4 h-4 accent-[#1E3A8A]" checked>
+              <span class="text-sm font-medium text-gray-700">Öğrenci</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="d-rol" value="Veli" class="w-4 h-4 accent-[#1E3A8A]">
+              <span class="text-sm font-medium text-gray-700">Veli</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Telefon -->
+        <div>
+          <label for="d-telefon" class="block text-sm font-bold text-gray-700 mb-1.5">Telefon Numarası</label>
+          <input type="tel" id="d-telefon" name="Telefon" placeholder="0 (5__) ___ __ __" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A]/20 transition-all font-medium text-gray-900">
+        </div>
+
+        <!-- Açıklama -->
+        <div>
+          <label for="d-aciklama" class="block text-sm font-bold text-gray-700 mb-1.5">Açıklama</label>
+          <textarea id="d-aciklama" name="Aciklama" rows="5" placeholder="Mesajınızı buraya yazabilirsiniz..." required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A]/20 transition-all font-medium text-gray-900 resize-none"></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Gönder Butonu (Sabit Alt) -->
+    <div id="drawer-btn-container" class="px-6 py-5 border-t border-gray-100 flex-shrink-0">
+      <button type="button" id="submit-btn" onclick="sendDrawerEmail(event)" class="w-full bg-[#b2eb02] text-[#1E3A8A] py-4 rounded-xl font-black text-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-lg shadow-[#b2eb02]/30">
+        Gönder
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function setPackage(packageType, tabName = 'lgs') {
+      const btnOzel = document.getElementById(`btn-ozel-ders-${tabName}`);
+      const btnKocluk = document.getElementById(`btn-kocluk-${tabName}`);
+      const priceDiv = document.getElementById(`price-ozel-ders-${tabName}`);
+      const discountRow = document.getElementById(`discount-row-${tabName}`);
+
+      if (!btnOzel || !btnKocluk) return;
+
+      const activeClass = "flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60 text-center justify-center whitespace-nowrap";
+      const inactiveClass = "flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300 text-center justify-center whitespace-nowrap";
+
+      if (discountRow) {
+        discountRow.classList.remove('flex');
+        discountRow.classList.add('hidden');
+      }
+
+      if (packageType === 'ozel-ders') {
+        btnOzel.className = activeClass;
+        btnKocluk.className = inactiveClass;
+        priceDiv.className = "flex items-end gap-2";
+        priceDiv.innerHTML = '<span class="text-4xl font-black text-[#1b004e]">₺1.200</span><span class="text-[#1b004e] font-medium pb-1">/ Saat</span>';
+      } else if (packageType === 'kocluk') {
+        btnKocluk.className = activeClass;
+        btnOzel.className = inactiveClass;
+        priceDiv.className = "flex flex-col items-start";
+        priceDiv.innerHTML = `
+          <div>
+            <span class="text-4xl font-bold text-[#1b004e]">₺1.200</span>
+            <span class="text-lg text-gray-500 font-medium">/ Saat</span>
+          </div>
+          <div class="text-xl font-semibold text-slate-700 mt-2">
+            + ₺2.400 <span class="text-base text-gray-500 font-normal">/ Ay (Koçluk Ücreti)</span>
+          </div>
+        `;
+      }
+
+      featuresState[tabName].type = packageType;
+      renderFeatures(tabName);
+    }
+
+    const baseFeatures = {
+      lgs: [
+        "Öğrenciye özel PDF'ler",
+        "Kitap ve doküman desteği",
+        "Düzenli deneme ve takibi",
+        "Online kütüphane ile beraber ders çalışma",
+        "Öğrenciye Özel Eksik Konu Analizi",
+        "7/24 soru sorabilme",
+        "Ücretsiz tanışma dersi"
+      ],
+      yks: [
+        "Öğrenciye özel PDF'ler",
+        "Kitap ve doküman desteği",
+        "Düzenli deneme ve takibi",
+        "Online kütüphane ile beraber ders çalışma",
+        "Öğrenciye Özel Eksik Konu Analizi",
+        "7/24 soru sorabilme",
+        "Ücretsiz tanışma dersi"
+      ],
+      arasinif: [
+        "Maarif modele uygun PDF'ler",
+        "Yazılılara özel kamplar",
+        "Kitap ve doküman desteği",
+        "Düzenli deneme ve takibi",
+        "Online kütüphane ile beraber ders çalışma",
+        "Öğrenciye Özel Eksik Konu Analizi"
+      ]
+    };
+
+    const featuresState = {
+      lgs: { showAll: false, type: 'ozel-ders' },
+      yks: { showAll: false, type: 'ozel-ders' },
+      arasinif: { showAll: false, type: 'ozel-ders' }
+    };
+
+    function renderFeatures(tabName) {
+      const state = featuresState[tabName];
+      const listEl = document.getElementById(`features-list-${tabName}`);
+      if (!listEl) return;
+
+      let features = [];
+      const base = baseFeatures[tabName] || [];
+      if (state.type === 'ozel-ders') {
+        features = ["Rakun App'e sınırsız erişim", ...base];
+      } else {
+        features = ["Alanında uzman PDR Hocamızla her hafta görüşme", "Rakun App'e sınırsız erişim", ...base];
+      }
+
+      const displayFeatures = state.showAll ? features : features.slice(0, 6);
+
+      listEl.innerHTML = '';
+      displayFeatures.forEach(feat => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-3';
+        li.innerHTML = `
+          <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="text-zinc-700 font-medium text-sm">${feat}</span>
+        `;
+        listEl.appendChild(li);
+      });
+
+      if (features.length > 6) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mt-3 text-xs font-bold text-gray-500 hover:text-blue-600 transition-colors flex items-center gap-1.5 focus:outline-none';
+        if (state.showAll) {
+          toggleBtn.innerHTML = `
+            Daha az göster
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path></svg>
+          `;
+        } else {
+          const remaining = features.length - 6;
+          toggleBtn.innerHTML = `
+            + ${remaining} özellik daha göster
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+          `;
+        }
+        toggleBtn.onclick = () => {
+          state.showAll = !state.showAll;
+          renderFeatures(tabName);
+        };
+        listEl.appendChild(toggleBtn);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderFeatures('lgs');
+      renderFeatures('yks');
+      renderFeatures('arasinif');
+    });
+
+    function setFormat(card, format) {
+      const btnOnline = document.getElementById(`btn-online-${card}`);
+      const btnYuzyuze = document.getElementById(`btn-yuzyuze-${card}`);
+      const priceDiv = document.getElementById(`price-${card}`);
+      const yuzyuzeDiv = document.getElementById(`yuzyuze-${card}`);
+
+      if (!btnOnline) return;
+
+      const activeClass = "px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60";
+      const inactiveClass = "px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300";
+
+      if (format === 'online') {
+        btnOnline.className = activeClass;
+        btnYuzyuze.className = inactiveClass;
+        priceDiv.classList.remove('hidden');
+        priceDiv.classList.add('flex');
+        yuzyuzeDiv.classList.add('hidden');
+        yuzyuzeDiv.classList.remove('block');
+      } else {
+        btnYuzyuze.className = activeClass;
+        btnOnline.className = inactiveClass;
+        priceDiv.classList.add('hidden');
+        priceDiv.classList.remove('flex');
+        yuzyuzeDiv.classList.remove('hidden');
+        yuzyuzeDiv.classList.add('block');
+      }
+    }
+
+    function closeDrawer() {
+      document.getElementById('contact-drawer').classList.add('translate-x-full');
+      document.getElementById('drawer-overlay').classList.add('hidden');
+      
+      // Animasyon bittikten sonra formu sıfırla
+      setTimeout(() => {
+        document.getElementById('drawer-form-container').classList.remove('hidden');
+        document.getElementById('drawer-btn-container').classList.remove('hidden');
+        document.getElementById('drawer-success').classList.add('hidden');
+        document.getElementById('drawer-success').classList.remove('flex');
+        
+        const submitBtn = document.getElementById('submit-btn');
+        if(submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Gönder';
+          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }, 300);
+    }
+
+    function sendDrawerEmail(e) {
+      if (e) e.preventDefault();
+      
+      const form = document.getElementById('drawer-form');
+      const adSoyad  = document.getElementById('d-adsoyad').value.trim();
+      const rol      = document.querySelector('input[name="d-rol"]:checked')?.value || '';
+      const telefon  = document.getElementById('d-telefon').value.trim();
+      const aciklama = document.getElementById('d-aciklama').value.trim();
+
+      if (!adSoyad || !telefon || !aciklama) {
+        toast.error('Lütfen tüm alanları doldurunuz.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Gönderiliyor...';
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      emailjs.send("service_tk0hzdk", "template_ljoux8s", {
+        from_name: adSoyad,
+        reply_to: telefon,
+        message: aciklama,
+        adSoyad: adSoyad,
+        rol: rol,
+        telefon: telefon,
+        aciklama: aciklama
+      }).then(function() {
+        form.reset();
+        document.getElementById('drawer-form-container').classList.add('hidden');
+        document.getElementById('drawer-btn-container').classList.add('hidden');
+        document.getElementById('drawer-success').classList.remove('hidden');
+        document.getElementById('drawer-success').classList.add('flex');
+      }, function(error) {
+        toast.error('Gönderim sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Gönder';
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+    }
+
+    // Hero Text Slider Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const words = ['Başarıyı', 'Kazanmayı', 'Zirveyi', 'Yüksek neti'];
+      let currentWordIndex = 0;
+      
+      setInterval(() => {
+        const nextWordIndex = (currentWordIndex + 1) % words.length;
+        
+        const currentEl = document.getElementById('hero-word-current');
+        const nextEl = document.getElementById('hero-word-next');
+        if(!currentEl || !nextEl) return;
+        
+        // Yeni kelimeyi alttan hazirla
+        nextEl.textContent = words[nextWordIndex];
+        nextEl.className = "col-start-1 row-start-1 transition-none translate-y-[50%] opacity-0";
+        
+        // Tarayiciyi guncellemeye zorla
+        void nextEl.offsetWidth;
+        
+        // Mevcut kelimeyi yukari kaydirip yok et, yenisini ortaya getir
+        currentEl.className = "col-start-1 row-start-1 transition-all duration-300 ease-in-out -translate-y-[50%] opacity-0";
+        nextEl.className = "col-start-1 row-start-1 transition-all duration-300 ease-in-out translate-y-0 opacity-100";
+        
+        // Animasyon bitiminde (300ms) rolleri degis
+        setTimeout(() => {
+          currentEl.textContent = words[nextWordIndex];
+          currentEl.className = "col-start-1 row-start-1 transition-none translate-y-0 opacity-100";
+          nextEl.className = "col-start-1 row-start-1 transition-none translate-y-[50%] opacity-0";
+          currentWordIndex = nextWordIndex;
+        }, 300);
+
+      }, 1500);
+    });
+  </script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("fbG_xqqONUwYd-nm7");
+    })();
+  </script>
+  <!-- Scroll Reveal Animation Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // %20'si görünür olduğunda tetikle
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            observer.unobserve(entry.target); // Animasyonun sadece 1 kez çalışması için takibi bırak
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+    <div class="bg-white rounded-[2rem] w-full max-w-md p-8 shadow-2xl relative animate-fade-up border border-gray-100">
+      <!-- Kapat Butonu -->
+      <button onclick="document.getElementById('auth-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors bg-gray-50 rounded-full p-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      
+      <!-- Başlık -->
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-blue-50 text-[#0047ff] rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+        </div>
+        <h2 class="text-3xl font-black text-[#1b004e] mb-2 tracking-tight">Giriş Yap</h2>
+        <p class="text-gray-500 text-sm font-medium">Sisteme erişmek için bilgilerinizi girin.</p>
+      </div>
+
+      <!-- Firebase Google Login -->
+      <div class="flex flex-col gap-4 mt-6">
+        <button id="google-login-btn" class="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 py-3.5 rounded-xl font-bold text-lg transition-all shadow-sm active:scale-[0.98] flex justify-center items-center gap-3">
+          <svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg>
+          Google ile Giriş Yap
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script type="module">
+    import { auth, googleProvider, signInWithPopup, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const handleGoogleLogin = async () => {
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        
+        if (user.email === 'omerfarukmetin037@gmail.com') {
+          window.location.href = 'admin-ogrenciler.html';
+          return;
+        }
+
+        // VIP Kontrolü
+        const q = query(collection(db, "approved_students"), where("email", "==", user.email.toLowerCase()));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          window.location.href = 'ogrenci-paneli.html';
+        } else {
+          await auth.signOut();
+          toast.error("Bu platform sadece Ömer Hoca'nın özel ders öğrencilerine açıktır. Sisteme erişim izniniz bulunmamaktadır.");
+        }
+      } catch (error) {
+        console.error("Giriş hatası:", error);
+        toast.error("Giriş yapılırken bir hata oluştu: " + error.message);
+      }
+    };
+
+    const loginBtn = document.getElementById('google-login-btn');
+    if (loginBtn) {
+      loginBtn.addEventListener('click', handleGoogleLogin);
+    }
+
+    const desktopLoginBtn = document.getElementById('desktop-login-btn');
+    if (desktopLoginBtn) {
+      desktopLoginBtn.addEventListener('click', handleGoogleLogin);
+    }
+
+    // Kullanıcı zaten giriş yapmışsa direkt panele yönlendir
+    onAuthStateChanged(auth, async (user) => {
+      const userArea = document.getElementById('desktop-user-area');
+      if (user) {
+        // Oturum açık, butonu kaldırıp avatarı göster
+        if (userArea) {
+          const redirectUrl = user.email === 'omerfarukmetin037@gmail.com' ? 'admin-ogrenciler.html' : 'ogrenci-paneli.html';
+          userArea.innerHTML = `
+            <a href="${redirectUrl}" class="flex items-center hover:scale-105 transition-transform" title="Panele Git">
+              <img src="${user.photoURL || 'https://lh3.googleusercontent.com/a/default-user'}" class="w-10 h-10 rounded-full border-2 border-blue-600 object-cover shadow-md" />
+            </a>
+          `;
+        }
+
+        if (user.email === 'omerfarukmetin037@gmail.com') {
+          window.location.href = 'admin-ogrenciler.html';
+        } else {
+          // Öğrenci paneline yönlendirmeden önce veritabanında var mı emin ol
+          try {
+            const q = query(collection(db, "approved_students"), where("email", "==", user.email.toLowerCase()));
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+              window.location.href = 'ogrenci-paneli.html';
+            } else {
+              await auth.signOut();
+              if (userArea) {
+                userArea.innerHTML = `
+                  <button id="desktop-login-btn" class="bg-blue-600 text-white px-7 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 hover:shadow-md transition-all">
+                    Giriş Yap
+                  </button>
+                `;
+                const newDesktopBtn = document.getElementById('desktop-login-btn');
+                if (newDesktopBtn) newDesktopBtn.addEventListener('click', handleGoogleLogin);
+              }
+            }
+          } catch(err) {
+            console.error("Yetki kontrol hatası", err);
+          }
+        }
+      } else {
+        if (userArea) {
+          userArea.innerHTML = `
+            <button id="desktop-login-btn" class="bg-blue-600 text-white px-7 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 hover:shadow-md transition-all">
+              Giriş Yap
+            </button>
+          `;
+          const newDesktopBtn = document.getElementById('desktop-login-btn');
+          if (newDesktopBtn) newDesktopBtn.addEventListener('click', handleGoogleLogin);
+        }
+      }
+    });
+
+    // Testimonials Carousel/Slider Dynamic Restructuring & Logic
+    const originalCarousel = document.getElementById('testimonial-carousel');
+    if (originalCarousel) {
+      // 1. Viewport ve şerit kapsayıcısını dinamik oluşturup yerleştir
+      const viewport = document.createElement('div');
+      viewport.className = 'overflow-hidden rounded-2xl shadow-sm bg-[#f8f7fc] p-6 md:p-12 border border-gray-100/50';
+      
+      originalCarousel.parentNode.insertBefore(viewport, originalCarousel);
+      viewport.appendChild(originalCarousel);
+      
+      const outerContainer = document.createElement('div');
+      outerContainer.className = 'relative max-w-4xl mx-auto px-4 md:px-16';
+      viewport.parentNode.insertBefore(outerContainer, viewport);
+      outerContainer.appendChild(viewport);
+      
+      // 2. Track sınıf ve stil tanımlaması
+      originalCarousel.id = 'testimonial-track';
+      originalCarousel.className = 'flex transition-transform duration-500 ease-in-out';
+      originalCarousel.style.transform = 'translateX(0%)';
+      originalCarousel.style.width = '100%';
+      
+      // 3. İçerideki kartları tam genişlikli yap
+      const cards = Array.from(originalCarousel.children);
+      cards.forEach((card) => {
+        card.className = 'min-w-full px-2 flex flex-col justify-between';
+      });
+      
+      // 4. İleri/Geri Butonlarının Oluşturulması
+      const prevBtn = document.createElement('button');
+      prevBtn.id = 'prev-testimonial';
+      prevBtn.className = 'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-[#1E3A8A] text-white hover:bg-opacity-90 transition-all shadow-lg focus:outline-none';
+      prevBtn.innerHTML = '<svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>';
+      
+      const nextBtn = document.createElement('button');
+      nextBtn.id = 'next-testimonial';
+      nextBtn.className = 'absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-[#1E3A8A] text-white hover:bg-opacity-90 transition-all shadow-lg focus:outline-none';
+      nextBtn.innerHTML = '<svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>';
+      
+      outerContainer.appendChild(prevBtn);
+      outerContainer.appendChild(nextBtn);
+      
+      // 5. Gösterge Noktaları (Dots) Oluşturulması
+      const dotsContainer = document.createElement('div');
+      dotsContainer.id = 'testimonial-dots';
+      dotsContainer.className = 'flex items-center justify-center gap-2 mt-6';
+      
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = i === 0 ? 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-[#1E3A8A]' : 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-300';
+        dot.setAttribute('data-index', i);
+        dotsContainer.appendChild(dot);
+      });
+      outerContainer.parentNode.insertBefore(dotsContainer, outerContainer.nextSibling);
+      
+      // 6. Eski Butonların Kaldırılması
+      const oldNav = document.querySelector('#yorumlar > div.flex.items-center.justify-center.gap-4.mt-2.md\\:mt-4');
+      if (oldNav) {
+        oldNav.remove();
+      }
+      
+      // 7. Slider Kaydırma Mantığı
+      let currentTestimonialIndex = 0;
+      const totalTestimonials = cards.length;
+      const dots = dotsContainer.querySelectorAll('button');
+      
+      const updateTestimonialSlider = (index) => {
+        if (index < 0) index = totalTestimonials - 1;
+        if (index >= totalTestimonials) index = 0;
+        currentTestimonialIndex = index;
+        
+        originalCarousel.style.transform = `translateX(-${currentTestimonialIndex * 100}%)`;
+        
+        dots.forEach((dot, idx) => {
+          if (idx === currentTestimonialIndex) {
+            dot.className = 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-[#1E3A8A]';
+          } else {
+            dot.className = 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-300';
+          }
+        });
+      };
+      
+      prevBtn.addEventListener('click', () => updateTestimonialSlider(currentTestimonialIndex - 1));
+      nextBtn.addEventListener('click', () => updateTestimonialSlider(currentTestimonialIndex + 1));
+      
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const index = parseInt(dot.getAttribute('data-index'));
+          updateTestimonialSlider(index);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

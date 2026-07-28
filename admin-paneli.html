@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampüs - Yönetici Paneli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+  <!-- YAN MENÜ (Sidebar) -->
+  <aside class="w-72 bg-[#1b004e] text-white flex flex-col justify-between shadow-sm z-10 hidden md:flex">
+    <div>
+      <!-- Logo Alanı -->
+      <div class="h-20 flex items-center px-8 border-b border-white/10">
+        <div class="text-2xl font-black tracking-tight">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+      </div>
+      
+      <!-- Menü Linkleri -->
+      <nav class="p-4 space-y-2 mt-4">
+        <a href="admin-ogrenciler.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          Öğrenciler
+        </a>
+        <a href="admin-takvim.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Ders Takvimi
+        </a>
+        <a href="admin-paneli.html" class="flex items-center gap-3 px-4 py-3 bg-[#0047ff] text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+          Kütüphane Yönetimi
+        </a>
+      </nav>
+    </div>
+
+    <!-- Profil / Çıkış -->
+    <div class="p-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <div class="w-10 h-10 rounded-full bg-white text-[#1b004e] flex items-center justify-center font-black">A</div>
+        <div>
+          <p class="text-sm font-bold text-white">Sistem Yöneticisi</p>
+          <a href="#" class="logout-btn text-xs text-red-400 hover:underline font-semibold">Güvenli Çıkış</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobil Üst Menü -->
+  <header class="md:hidden fixed top-0 w-full bg-[#1b004e] text-white border-b border-white/10 h-16 flex items-center justify-between px-4 z-20">
+    <div class="text-xl font-black">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+    <a href="#" class="logout-btn text-sm text-red-400 font-bold">Çıkış</a>
+  </header>
+
+  <!-- ANA İÇERİK (Main Content) -->
+  <main class="flex-1 overflow-y-auto bg-slate-50/50 pt-20 md:pt-8 pb-12 px-4 md:px-12 relative">
+    
+    <div class="max-w-4xl mx-auto">
+      <!-- Mobil Navigasyon (Sadece Mobilde Görünür) -->
+      <div class="md:hidden flex gap-2 mb-6 overflow-x-auto pb-2">
+        <a href="admin-ogrenciler.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Öğrenciler</a>
+        <a href="admin-takvim.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Ders Takvimi</a>
+        <a href="admin-paneli.html" class="px-5 py-2 bg-[#0047ff] text-white rounded-full text-sm font-bold whitespace-nowrap">Kütüphane Yönetimi</a>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">İçerik Yönetimi</h1>
+        <p class="text-slate-500 mt-2 font-medium">Öğrenci paneline yeni Matematik fasikülleri ve oyunlar ekleyin.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- MATEMATİK PDF EKLEME FORMU -->
+        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-blue-50 text-[#0047ff] rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-slate-900">Matematik PDF Ekle</h2>
+          </div>
+
+          <form id="pdf-form" class="space-y-5">
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Sınav Kategorisi</label>
+              <select id="pdf-category" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50">
+                <option value="5. Sınıf">5. Sınıf</option>
+                <option value="6. Sınıf">6. Sınıf</option>
+                <option value="7. Sınıf">7. Sınıf</option>
+                <option value="8. Sınıf (LGS)">8. Sınıf (LGS)</option>
+                <option value="9. Sınıf">9. Sınıf</option>
+                <option value="10. Sınıf">10. Sınıf</option>
+                <option value="11. Sınıf">11. Sınıf</option>
+                <option value="12. Sınıf (YKS)">12. Sınıf (YKS)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Fasikül Başlığı</label>
+              <input type="text" id="pdf-title" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="Örn: Çarpanlar ve Katlar">
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Açıklama</label>
+              <textarea id="pdf-desc" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="İçerik hakkında kısa bilgi..."></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Google Drive veya İndirme Linki</label>
+              <input type="url" id="pdf-link" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="https://drive.google.com/...">
+            </div>
+            <button id="submit-btn" type="submit" class="w-full bg-[#1b004e] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#2c0080] transition-all shadow-lg active:scale-[0.98] mt-2">
+              Sisteme Yükle
+            </button>
+          </form>
+        </div>
+
+        <!-- DİJİTAL OYUN EKLEME FORMU -->
+        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-slate-900">Dijital Oyun Ekle</h2>
+          </div>
+
+          <form onsubmit="event.preventDefault(); toast.success('Oyun başarıyla eklendi (Mockup)');" class="space-y-5">
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Oyun Adı</label>
+              <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="Örn: Denklem Yarışı">
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Oyun Açıklaması</label>
+              <textarea rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="Nasıl oynanır, hangi konuları içerir..."></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Oyun Linki (URL)</label>
+              <input type="url" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="https://...">
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Kapak Görseli</label>
+              <input type="file" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#0047ff] hover:file:bg-blue-100">
+            </div>
+            <button type="submit" class="w-full bg-[#1b004e] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#2c0080] transition-all shadow-lg active:scale-[0.98] mt-2">
+              Sisteme Yükle
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase Auth, Firestore & Storage -->
+  <script type="module">
+    import { auth, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // Rota Koruması (Kullanıcı giriş yapmamışsa veya admin değilse)
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+      } else if (user.email !== 'omerfarukmetin037@gmail.com') {
+        // Eğer giriş yapan var ama admin değilse, öğrenci paneline yolla
+        window.location.href = 'ogrenci-paneli.html';
+      }
+    });
+
+    // Çıkış Yapma Mantığı
+    const logoutBtns = document.querySelectorAll('.logout-btn');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = 'index.html';
+        }).catch((error) => {
+          console.error('Çıkış hatası:', error);
+        });
+      });
+    });
+
+    // PDF Yükleme Mantığı (Firestore)
+    const pdfForm = document.getElementById('pdf-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    pdfForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const category = document.getElementById('pdf-category').value;
+      const title = document.getElementById('pdf-title').value;
+      const desc = document.getElementById('pdf-desc').value;
+      const fileUrl = document.getElementById('pdf-link').value;
+
+      if (!fileUrl) {
+        toast.error("Lütfen bir indirme linki girin.");
+        return;
+      }
+      
+      // Yükleniyor durumu
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Kaydediliyor... Lütfen Bekleyin';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        // Verileri Firestore'a kaydet
+        await addDoc(collection(db, "pdfs"), {
+          category: category,
+          title: title,
+          desc: desc,
+          fileUrl: fileUrl,
+          createdAt: new Date()
+        });
+
+        toast.success('Dosya başarıyla yüklendi! (Öğrenci panelinden kontrol edebilirsiniz)');
+        pdfForm.reset();
+      } catch (error) {
+        console.error("Yükleme hatası:", error);
+        toast.error("Dosya yüklenirken bir hata oluştu: " + error.message);
+      } finally {
+        // Butonu eski haline getir
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kampüs - Öğrenci Yönetimi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="toast.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+
+  <!-- YAN MENÜ (Sidebar) -->
+  <aside class="w-72 bg-[#1b004e] text-white flex flex-col justify-between shadow-sm z-10 hidden md:flex">
+    <div>
+      <!-- Logo Alanı -->
+      <div class="h-20 flex items-center px-8 border-b border-white/10">
+        <div class="text-2xl font-black tracking-tight">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+      </div>
+      
+      <!-- Menü Linkleri -->
+      <nav class="p-4 space-y-2 mt-4">
+        <a href="admin-ogrenciler.html" class="flex items-center gap-3 px-4 py-3 bg-[#0047ff] text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          Öğrenciler
+        </a>
+        <a href="admin-takvim.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Ders Takvimi
+        </a>
+        <a href="admin-paneli.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+          Kütüphane Yönetimi
+        </a>
+      </nav>
+    </div>
+
+    <!-- Profil / Çıkış -->
+    <div class="p-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <div class="w-10 h-10 rounded-full bg-white text-[#1b004e] flex items-center justify-center font-black">A</div>
+        <div>
+          <p class="text-sm font-bold text-white">Sistem Yöneticisi</p>
+          <a href="#" class="logout-btn text-xs text-red-400 hover:underline font-semibold">Güvenli Çıkış</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobil Üst Menü -->
+  <header class="md:hidden fixed top-0 w-full bg-[#1b004e] text-white border-b border-white/10 h-16 flex items-center justify-between px-4 z-20">
+    <div class="text-xl font-black">ÖmerHocam <span class="text-[#0047ff]">Admin</span></div>
+    <a href="#" class="logout-btn text-sm text-red-400 font-bold">Çıkış</a>
+  </header>
+
+  <!-- ANA İÇERİK (Main Content) -->
+  <main class="flex-1 overflow-y-auto bg-slate-50/50 pt-20 md:pt-8 pb-12 px-4 md:px-12 relative">
+    
+    <div class="max-w-4xl mx-auto">
+      <!-- Mobil Navigasyon (Sadece Mobilde Görünür) -->
+      <div class="md:hidden flex gap-2 mb-6 overflow-x-auto pb-2">
+        <a href="admin-ogrenciler.html" class="px-5 py-2 bg-[#0047ff] text-white rounded-full text-sm font-bold whitespace-nowrap">Öğrenciler</a>
+        <a href="admin-takvim.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Ders Takvimi</a>
+        <a href="admin-paneli.html" class="px-5 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold whitespace-nowrap">Kütüphane Yönetimi</a>
+      </div>
+
+      <!-- MASTER VIEW: Öğrenci Listesi -->
+      <div id="master-view">
+        <div class="mb-8">
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Öğrencilerim</h1>
+          <p class="text-slate-500 mt-2 font-medium">Öğrencilerinize tıklayarak gönderdikleri soruları görebilir ve çözüm yükleyebilirsiniz.</p>
+        </div>
+
+      <div class="grid grid-cols-1 gap-8">
+        
+        <!-- YENİ ÖĞRENCİ EKLEME FORMU -->
+        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-green-50 text-green-500 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+            </div>
+            <h2 class="text-xl font-extrabold text-slate-900">Yeni Öğrenci Ekle</h2>
+          </div>
+
+          <form id="student-form" class="space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1.5">Öğrenci Adı Soyadı</label>
+                <input type="text" id="student-name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="Örn: Ahmet Yılmaz">
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1.5">Sınıf Seviyesi</label>
+                <select id="student-grade" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50">
+                  <option value="5. Sınıf">5. Sınıf</option>
+                  <option value="6. Sınıf">6. Sınıf</option>
+                  <option value="7. Sınıf">7. Sınıf</option>
+                  <option value="8. Sınıf (LGS)">8. Sınıf (LGS)</option>
+                  <option value="9. Sınıf">9. Sınıf</option>
+                  <option value="10. Sınıf">10. Sınıf</option>
+                  <option value="11. Sınıf">11. Sınıf</option>
+                  <option value="12. Sınıf (YKS)">12. Sınıf (YKS)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1.5">Google Hesabı (Gmail Adresi)</label>
+              <input type="email" id="student-email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] focus:border-transparent font-medium bg-gray-50/50" placeholder="Örn: ornekogrenci@gmail.com">
+              <p class="text-xs text-slate-500 mt-1">Öğrencinin sisteme 'Google ile Giriş Yap' derken kullanacağı mail adresi olmalıdır.</p>
+            </div>
+            <button id="submit-student-btn" type="submit" class="w-full bg-[#1b004e] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#2c0080] transition-all shadow-lg active:scale-[0.98] mt-2">
+              Sisteme Ekle ve Yetki Ver
+            </button>
+          </form>
+        </div>
+
+        <!-- KAYITLI ÖĞRENCİLER LİSTESİ (KARTLAR) -->
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 mb-6">Kayıtlı Öğrenciler</h2>
+          
+          <div id="students-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- JS ile kartlar buraya gelecek -->
+            <div class="col-span-full text-center py-12 text-slate-500 font-medium">Öğrenciler Yükleniyor...</div>
+          </div>
+        </div>
+      </div> <!-- /END grid -->
+      </div> <!-- /MASTER VIEW -->
+
+      <!-- DETAIL VIEW: Öğrenci Dosyası -->
+      <div id="detail-view" class="hidden">
+        <button onclick="closeDetailView()" class="mb-6 flex items-center gap-2 text-slate-500 hover:text-slate-900 font-bold transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          Öğrencilere Dön
+        </button>
+
+        <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 id="detail-student-name" class="text-3xl font-black text-slate-900 tracking-tight">Öğrenci Adı</h1>
+            <p id="detail-student-email" class="text-[#0047ff] font-bold mt-1">email@example.com</p>
+          </div>
+          <span id="detail-student-grade" class="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm">Sınıf</span>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-8">
+          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Öğrenciye Özel Matematik Fasikülü/Denemesi Gönder</h2>
+          <form id="assign-pdf-form" class="flex flex-col md:flex-row gap-4">
+            <input type="url" id="assign-pdf-url" placeholder="Google Drive İndirme Linki" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium" required>
+            <input type="text" id="assign-pdf-title" placeholder="Fasikül Başlığı (Örn: LGS Üslü Sayılar Soru Bankası)" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium" required>
+            <button type="submit" id="submit-assign-btn" class="bg-[#1b004e] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#2c0080] transition-colors whitespace-nowrap">
+              Gönder
+            </button>
+          </form>
+
+          <h3 class="font-bold text-slate-900 mt-8 mb-4 border-b pb-2">Gönderilen Fasiküller / Dökümanlar</h3>
+          <div id="pdf-empty" class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200 hidden">
+            <p class="text-slate-500 font-bold text-sm">Bu öğrenciye atanmış özel döküman bulunmuyor.</p>
+          </div>
+          <div id="pdf-grid" class="grid grid-cols-1 gap-4">
+            <!-- PDFler JS ile buraya yüklenecek -->
+          </div>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-8">
+          <h2 class="text-xl font-extrabold text-slate-900 mb-4">Yeni Ödev Ata</h2>
+          <form id="assign-hw-form" class="flex flex-col gap-4">
+            <div class="flex flex-col md:flex-row gap-4">
+              <input type="text" id="hw-title" placeholder="Ödev Başlığı (Örn: Üslü Sayılar Soru Bankası Test 4-5)" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium" required>
+              <input type="date" id="hw-date" class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium text-slate-600" required>
+            </div>
+            <textarea id="hw-desc" placeholder="Ödev ile ilgili detaylı açıklama veya notlarınız..." rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] font-medium" required></textarea>
+            <button type="submit" id="submit-hw-btn" class="bg-[#0047ff] text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors self-end shadow-md">
+              Ödev Ver
+            </button>
+          </form>
+
+          <h3 class="font-bold text-slate-900 mt-8 mb-4 border-b pb-2">Verilen Ödevler</h3>
+          <div id="hw-empty" class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200 hidden">
+            <p class="text-slate-500 font-bold text-sm">Bu öğrenciye atanmış ödev bulunmuyor.</p>
+          </div>
+          <div id="hw-grid" class="grid grid-cols-1 gap-4">
+            <!-- Ödevler JS ile buraya yüklenecek -->
+          </div>
+        </div>
+
+        <h2 class="text-xl font-extrabold text-slate-900 mb-6">Öğrencinin Gönderdiği Sorular</h2>
+        
+        <div id="questions-empty" class="text-center py-12 bg-white rounded-3xl border border-slate-100 hidden">
+          <svg class="w-16 h-16 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <p class="text-slate-500 font-bold">Bu öğrenci henüz soru göndermemiş.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="questions-grid">
+          <!-- Sorular JS ile buraya yüklenecek -->
+        </div>
+      </div> <!-- /DETAIL VIEW -->
+
+    </div>
+  </main>
+
+  <!-- Image Modal (Lightbox) -->
+  <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden p-4 transition-opacity cursor-zoom-out" onclick="closeImageModal()">
+    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50" onclick="closeImageModal()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <img id="modal-image" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl relative z-40 cursor-auto" />
+  </div>
+
+  <!-- Firebase Auth, Firestore -->
+  <script type="module">
+    import { auth, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, where, updateDoc, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    // Rota Koruması (Admin Değilse At)
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+      } else if (user.email !== 'omerfarukmetin037@gmail.com') {
+        window.location.href = 'ogrenci-paneli.html';
+      }
+    });
+
+    // Image Modal Logic
+    window.openImageModal = (imgSrc, event) => {
+      if(event) event.preventDefault();
+      document.getElementById('modal-image').src = imgSrc;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+    
+    window.closeImageModal = () => {
+      document.getElementById('image-modal').classList.add('hidden');
+      document.getElementById('modal-image').src = '';
+    }
+    
+    document.getElementById('modal-image').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Çıkış Yapma Mantığı
+    const logoutBtns = document.querySelectorAll('.logout-btn');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+          window.location.href = 'index.html';
+        });
+      });
+    });
+
+    // Öğrenci Ekleme Mantığı
+    const studentForm = document.getElementById('student-form');
+    const submitBtn = document.getElementById('submit-student-btn');
+    let isSubmitting = false;
+
+    studentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isSubmitting) return;
+      
+      const name = document.getElementById('student-name').value;
+      const grade = document.getElementById('student-grade').value;
+      const email = document.getElementById('student-email').value.trim().toLowerCase();
+
+      if (!email) {
+        toast.error("Geçerli bir e-posta adresi girin.");
+        return;
+      }
+      
+      isSubmitting = true;
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Ekleniyor...';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        await addDoc(collection(db, "approved_students"), {
+          name: name,
+          grade: grade,
+          email: email,
+          createdAt: new Date()
+        });
+
+        studentForm.reset();
+        toast.success('Öğrenci sisteme başarıyla eklendi! Artık giriş yapabilir.');
+      } catch (error) {
+        console.error("Öğrenci ekleme hatası:", error);
+        toast.error("Hata oluştu: " + error.message);
+      } finally {
+        isSubmitting = false;
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+
+    // MASTER VIEW: Öğrencileri Listeleme
+    const studentsGrid = document.getElementById('students-grid');
+    
+    try {
+      const q = query(collection(db, "approved_students"), orderBy("createdAt", "desc"));
+      
+      onSnapshot(q, (snapshot) => {
+        studentsGrid.innerHTML = ''; 
+        
+        if (snapshot.empty) {
+          studentsGrid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 font-medium bg-white rounded-[2rem] border border-slate-100">Sisteme kayıtlı öğrenci bulunmuyor.</div>';
+          return;
+        }
+
+        snapshot.forEach((docSnapshot) => {
+          const student = docSnapshot.data();
+          const docId = docSnapshot.id;
+          
+          const card = document.createElement('div');
+          card.className = 'bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between';
+          
+          card.innerHTML = `
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <div class="w-12 h-12 bg-blue-50 text-[#0047ff] rounded-2xl flex items-center justify-center font-black text-xl group-hover:scale-110 transition-transform">
+                  ${(student?.name || 'İ').charAt(0).toUpperCase()}
+                </div>
+                <button class="delete-student-btn text-slate-400 hover:text-red-500 p-2 rounded-lg transition-colors z-10" data-id="${docId}" title="Öğrenciyi Sil">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+              </div>
+              <h3 class="font-black text-lg text-slate-900 group-hover:text-[#0047ff] transition-colors">${student?.name || 'İsim Yok'}</h3>
+              <p class="text-sm font-semibold text-slate-500 mt-1">${student?.email || 'Mail Yok'}</p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+              <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">${student?.grade || 'Sınıf Yok'}</span>
+              <span class="text-[#0047ff] text-sm font-bold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                İncele
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+              </span>
+            </div>
+          `;
+          
+          // Delete click engelleme ve silme işlemi
+          const deleteBtn = card.querySelector('.delete-student-btn');
+          deleteBtn.addEventListener('click', async (e) => {
+            e.stopPropagation(); // Kart tıklanmasını engelle
+            if(confirm(`"${student?.name || 'Öğrenci'}" isimli öğrencinin erişimini kaldırmak istediğinize emin misiniz?`)) {
+              try {
+                const batch = writeBatch(db);
+                
+                // 1. Öğrenciyi sistemden (approved_students) sil
+                batch.delete(doc(db, "approved_students", docId));
+                
+                // 2. Öğrenciye ait takvim rezervasyonlarını bul ve batch'e ekle
+                if (student?.email) {
+                  const scheduleQuery = query(collection(db, "weekly_schedule"), where("student_email", "==", student.email));
+                  const scheduleDocs = await getDocs(scheduleQuery);
+                  scheduleDocs.forEach((scheduleDoc) => {
+                    batch.delete(scheduleDoc.ref);
+                  });
+                }
+                
+                // 3. Tüm silme işlemlerini tek seferde (atomic) uygula
+                await batch.commit();
+              } catch (err) {
+                console.error("Öğrenci silinirken hata:", err);
+                toast.error("Silinemedi: " + err.message);
+              }
+            }
+          });
+
+          // Karta tıklandığında detay aç
+          card.addEventListener('click', () => {
+            if(typeof window.openDetailView === 'function') {
+              window.openDetailView(student?.name, student?.email, student?.grade);
+            }
+          });
+
+          studentsGrid.appendChild(card);
+        });
+      }, (error) => {
+        console.error("Öğrenci okuma hatası (Firebase Snapshot):", error);
+        studentsGrid.innerHTML = '<div class="col-span-full text-center py-8 text-red-500 font-bold">Veriler yüklenirken hata oluştu.</div>';
+      });
+    } catch (error) {
+      console.error("Öğrencileri Listeleme Başlatılamadı:", error);
+      studentsGrid.innerHTML = '<div class="col-span-full text-center py-8 text-red-500 font-bold">Liste yüklenirken bir hata oluştu.</div>';
+    }
+
+    // --- DETAIL VIEW LOGIC ---
+    const masterView = document.getElementById('master-view');
+    const detailView = document.getElementById('detail-view');
+    const questionsGrid = document.getElementById('questions-grid');
+    const questionsEmpty = document.getElementById('questions-empty');
+    let currentQuestionsUnsubscribe = null;
+    let currentSelectedStudentEmail = null;
+
+    let currentHwUnsubscribe = null;
+    let currentPdfUnsubscribe = null;
+
+    window.closeDetailView = () => {
+      detailView.classList.add('hidden');
+      masterView.classList.remove('hidden');
+      if (currentQuestionsUnsubscribe) {
+        currentQuestionsUnsubscribe();
+        currentQuestionsUnsubscribe = null;
+      }
+      if (currentHwUnsubscribe) {
+        currentHwUnsubscribe();
+        currentHwUnsubscribe = null;
+      }
+      if (currentPdfUnsubscribe) {
+        currentPdfUnsubscribe();
+        currentPdfUnsubscribe = null;
+      }
+      currentSelectedStudentEmail = null;
+    };
+
+    window.openDetailView = (name, email, grade) => {
+      document.getElementById('detail-student-name').textContent = name || 'İsim Yok';
+      document.getElementById('detail-student-email').textContent = email || 'Mail Yok';
+      document.getElementById('detail-student-grade').textContent = grade || 'Sınıf Yok';
+      currentSelectedStudentEmail = email;
+      
+      masterView.classList.add('hidden');
+      detailView.classList.remove('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if(email) {
+        loadStudentQuestions(email);
+        loadStudentHomeworks(email);
+        loadStudentPdfs(email);
+      }
+    };
+
+    function loadStudentQuestions(studentEmail) {
+      if (currentQuestionsUnsubscribe) {
+        currentQuestionsUnsubscribe();
+      }
+
+      questionsGrid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 font-medium">Sorular yükleniyor...</div>';
+      questionsEmpty.classList.add('hidden');
+
+      try {
+        const qBoxQuery = query(collection(db, "qa_box"), where("student_email", "==", studentEmail));
+
+        currentQuestionsUnsubscribe = onSnapshot(qBoxQuery, (snapshot) => {
+          questionsGrid.innerHTML = '';
+
+          if (snapshot.empty) {
+            questionsEmpty.classList.remove('hidden');
+            return;
+          } else {
+            questionsEmpty.classList.add('hidden');
+          }
+
+          const docsArray = [];
+          snapshot.forEach((docSnapshot) => {
+            docsArray.push({ id: docSnapshot.id, data: docSnapshot.data() });
+          });
+
+          docsArray.sort((a, b) => {
+            const timeA = a.data.createdAt ? a.data.createdAt.toMillis() : 0;
+            const timeB = b.data.createdAt ? b.data.createdAt.toMillis() : 0;
+            return timeB - timeA;
+          });
+
+          docsArray.forEach((docObj) => {
+            const data = docObj.data;
+            const docId = docObj.id;
+            const isPending = data.status === 'Bekliyor';
+
+            const card = document.createElement('div');
+            card.className = `relative flex flex-col border rounded-2xl p-5 transition-all overflow-hidden ${isPending ? 'border-amber-200 bg-amber-50/50' : 'border-emerald-200 bg-emerald-50/50'}`;
+            
+            // Absolute delete button
+            const deleteBtn = `
+              <button onclick="deleteQuestion('${docId}')" class="absolute top-4 right-4 z-10 bg-white border border-slate-200 text-red-500 hover:text-red-700 hover:bg-red-50 p-1.5 rounded-lg transition-colors shadow-sm" title="Soruyu Sil">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            `;
+
+            let solutionHtml = '';
+            if (isPending) {
+              solutionHtml = `
+                <div class="mt-4 pt-4 border-t border-amber-200/50 flex flex-col gap-3">
+                  <label class="text-[10px] font-bold text-slate-600 uppercase tracking-wide">Çözüm Görseli Yükle</label>
+                  <div class="flex flex-col gap-2">
+                    <input type="file" id="sol-file-${docId}" accept="image/*" class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0047ff] text-xs bg-white file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-[#0047ff] hover:file:bg-blue-100">
+                    <button id="sol-btn-${docId}" onclick="submitSolution('${docId}')" class="w-full bg-[#0047ff] text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-[#0039cc] transition-colors shadow-sm">
+                      Çözüm Yükle
+                    </button>
+                  </div>
+                </div>
+              `;
+            } else {
+              solutionHtml = `
+                <div class="mt-4 pt-4 border-t border-emerald-200/50">
+                  <p class="text-[10px] font-bold text-emerald-600 mb-2 uppercase tracking-wide">Yüklenen Çözüm:</p>
+                  <img src="${data.solution_link}" onclick="openImageModal('${data.solution_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity border-2 border-emerald-400 shadow-sm" alt="Çözüm Görseli" loading="lazy">
+                </div>
+              `;
+            }
+
+            let statusHtml = isPending 
+              ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase tracking-wider mb-3 w-max">
+                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Bekliyor
+                 </span>`
+              : `<span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-wider mb-3 w-max">
+                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> Çözüldü
+                 </span>`;
+
+            card.innerHTML = `
+              ${deleteBtn}
+              <div class="flex flex-col flex-1">
+                ${statusHtml}
+                <p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wide pr-10">Öğrencinin Sorusu:</p>
+                <img src="${data.question_link}" onclick="openImageModal('${data.question_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity shadow-sm border border-slate-200/60" loading="lazy">
+                ${solutionHtml}
+              </div>
+            `;
+            questionsGrid.appendChild(card);
+          });
+        }, (error) => {
+          console.error("Soruları okuma hatası:", error);
+          questionsGrid.innerHTML = `<div class="text-center py-10 text-red-500 font-bold">Sorular yüklenirken hata oluştu.</div>`;
+        });
+      } catch (err) {
+        console.error("Firebase hata:", err);
+      }
+    }
+
+    // Özel PDF atama
+    const assignForm = document.getElementById('assign-pdf-form');
+    if (assignForm) {
+      assignForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url = document.getElementById('assign-pdf-url').value;
+        const title = document.getElementById('assign-pdf-title').value;
+        const btn = document.getElementById('submit-assign-btn');
+        
+        if(!currentSelectedStudentEmail) {
+          toast.error('Hata: Öğrenci seçilmedi.');
+          return;
+        }
+
+        const originalTxt = btn.innerHTML;
+        btn.innerHTML = 'Gönderiliyor...';
+        btn.disabled = true;
+
+        try {
+          await addDoc(collection(db, "pdfs"), {
+            title: title,
+            url: url,
+            category: 'Ozel',
+            assigned_to: currentSelectedStudentEmail,
+            description: "Bu materyal Ömer Hoca tarafından size özel olarak atanmıştır.",
+            createdAt: new Date()
+          });
+          assignForm.reset();
+          toast.success('Özel materyal öğrenciye başarıyla gönderildi!');
+        } catch(err) {
+          console.error("PDF atama hatası", err);
+          toast.error("Hata: " + err.message);
+        } finally {
+          btn.innerHTML = originalTxt;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // --- HOMEWORK (ÖDEV) LOGIC ---
+    const hwForm = document.getElementById('assign-hw-form');
+    const hwGrid = document.getElementById('hw-grid');
+    const hwEmpty = document.getElementById('hw-empty');
+
+    if (hwForm) {
+      hwForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if(!currentSelectedStudentEmail) {
+          toast.error("Öğrenci seçilmedi!");
+          return;
+        }
+
+        const title = document.getElementById('hw-title').value;
+        const date = document.getElementById('hw-date').value;
+        const desc = document.getElementById('hw-desc').value;
+        const btn = document.getElementById('submit-hw-btn');
+        
+        const origBtnText = btn.innerHTML;
+        btn.innerHTML = 'Atanıyor...';
+        btn.disabled = true;
+
+        try {
+          await addDoc(collection(db, "homeworks"), {
+            student_email: currentSelectedStudentEmail,
+            title: title,
+            due_date: date,
+            description: desc,
+            status: 'Bekliyor',
+            created_at: new Date()
+          });
+          hwForm.reset();
+          toast.success("Ödev başarıyla atandı.");
+        } catch(err) {
+          console.error("Ödev atama hatası:", err);
+          toast.error("Hata: " + err.message);
+        } finally {
+          btn.innerHTML = origBtnText;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    window.markHomeworkAsDoneAdmin = async (docId) => {
+      try {
+        await updateDoc(doc(db, "homeworks", docId), { status: 'Tamamlandı' });
+      } catch (err) {
+        console.error("Ödev güncellenirken hata:", err);
+        toast.error("Güncelleme hatası: " + err.message);
+      }
+    };
+
+    window.deleteHomeworkAdmin = async (docId) => {
+      if(confirm('Bu ödevi silmek istediğinize emin misiniz?')) {
+        try {
+          await deleteDoc(doc(db, "homeworks", docId));
+        } catch(err) {
+          console.error("Silme hatası:", err);
+          toast.error("Silinirken hata oluştu: " + err.message);
+        }
+      }
+    };
+
+    function loadStudentHomeworks(studentEmail) {
+      if (currentHwUnsubscribe) {
+        currentHwUnsubscribe();
+      }
+
+      hwGrid.innerHTML = '<div class="text-center py-6 text-slate-500">Ödevler yükleniyor...</div>';
+      hwEmpty.classList.add('hidden');
+
+      try {
+        const q = query(collection(db, "homeworks"), where("student_email", "==", studentEmail));
+        
+        currentHwUnsubscribe = onSnapshot(q, (snapshot) => {
+          hwGrid.innerHTML = '';
+          
+          if (snapshot.empty) {
+            hwEmpty.classList.remove('hidden');
+            return;
+          } else {
+            hwEmpty.classList.add('hidden');
+          }
+
+          const docsArray = [];
+          snapshot.forEach(docSnap => {
+            docsArray.push({ id: docSnap.id, data: docSnap.data() });
+          });
+
+          // Sort by date manually to avoid Firebase index requirement
+          docsArray.sort((a, b) => {
+             const dA = new Date(a.data.due_date || 0);
+             const dB = new Date(b.data.due_date || 0);
+             return dA - dB;
+          });
+
+          docsArray.forEach(docObj => {
+            const data = docObj.data;
+            const docId = docObj.id;
+            const isCompleted = data.status === 'Tamamlandı';
+            
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border flex flex-col md:flex-row md:items-center gap-4 ${isCompleted ? 'bg-green-50 border-green-200' : 'bg-white border-slate-100 shadow-sm'}`;
+            
+            const statusBadge = isCompleted 
+              ? `<span class="px-2.5 py-1 bg-green-100 text-green-700 text-[10px] font-black rounded-full uppercase tracking-wider">Tamamlandı</span>`
+              : `<span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-[10px] font-black rounded-full uppercase tracking-wider">Bekliyor</span>`;
+            
+            const dateStr = data.due_date ? new Date(data.due_date).toLocaleDateString('tr-TR') : '-';
+
+            card.innerHTML = `
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <h4 class="font-black text-slate-900">${data.title}</h4>
+                  ${statusBadge}
+                </div>
+                <p class="text-sm text-slate-600 mb-3">${data.description}</p>
+                <div class="text-xs font-bold text-slate-400">Son Teslim: <span class="text-slate-600">${dateStr}</span></div>
+              </div>
+              <div class="flex flex-row md:flex-col gap-2 shrink-0">
+                ${!isCompleted ? `<button onclick="markHomeworkAsDoneAdmin('${docId}')" class="px-4 py-2 bg-green-500 text-white font-bold text-xs rounded-xl hover:bg-green-600 transition-colors">Tamamlandı İşaretle</button>` : ''}
+                <button onclick="deleteHomeworkAdmin('${docId}')" class="px-4 py-2 bg-red-50 text-red-500 hover:bg-red-100 font-bold text-xs rounded-xl transition-colors">Sil</button>
+              </div>
+            `;
+            hwGrid.appendChild(card);
+          });
+        });
+      } catch (err) {
+        console.error("Ödev dinleme hatası:", err);
+      }
+    }
+
+    // --- PDF LOGIC ---
+    const pdfGrid = document.getElementById('pdf-grid');
+    const pdfEmpty = document.getElementById('pdf-empty');
+
+    window.deletePdfAdmin = async (docId) => {
+      if(confirm('Bu özel fasikülü silmek istediğinize emin misiniz?')) {
+        try {
+          await deleteDoc(doc(db, "pdfs", docId));
+        } catch(err) {
+          console.error("PDF silme hatası:", err);
+          toast.error("Silinirken hata oluştu: " + err.message);
+        }
+      }
+    };
+
+    function loadStudentPdfs(studentEmail) {
+      if (currentPdfUnsubscribe) {
+        currentPdfUnsubscribe();
+      }
+
+      pdfGrid.innerHTML = '<div class="text-center py-6 text-slate-500">PDFler yükleniyor...</div>';
+      pdfEmpty.classList.add('hidden');
+
+      try {
+        const q = query(collection(db, "pdfs"), where("assigned_to", "==", studentEmail));
+        
+        currentPdfUnsubscribe = onSnapshot(q, (snapshot) => {
+          pdfGrid.innerHTML = '';
+          
+          if (snapshot.empty) {
+            pdfEmpty.classList.remove('hidden');
+            return;
+          } else {
+            pdfEmpty.classList.add('hidden');
+          }
+
+          const docsArray = [];
+          snapshot.forEach(docSnap => {
+            docsArray.push({ id: docSnap.id, data: docSnap.data() });
+          });
+
+          // Zamana göre ters sırala
+          docsArray.sort((a, b) => {
+             const getMillis = (timestamp) => {
+               if (!timestamp) return 0;
+               if (typeof timestamp.toMillis === 'function') return timestamp.toMillis();
+               if (typeof timestamp.toDate === 'function') return timestamp.toDate().getTime();
+               if (timestamp instanceof Date) return timestamp.getTime();
+               return new Date(timestamp).getTime() || 0;
+             };
+             return getMillis(b.data.createdAt) - getMillis(a.data.createdAt);
+          });
+
+          docsArray.forEach(docObj => {
+            const data = docObj.data;
+            const docId = docObj.id;
+            
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border border-slate-100 bg-white shadow-sm flex flex-col md:flex-row md:items-center gap-4`;
+            
+            let dateStr = '-';
+            if (data.createdAt) {
+              if (typeof data.createdAt.toDate === 'function') {
+                dateStr = data.createdAt.toDate().toLocaleDateString('tr-TR');
+              } else {
+                dateStr = new Date(data.createdAt).toLocaleDateString('tr-TR');
+              }
+            }
+            const link = data.url || data.fileUrl || '#';
+
+            card.innerHTML = `
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <h4 class="font-black text-slate-900">${data.title}</h4>
+                  <span class="px-2.5 py-1 bg-red-50 text-red-600 text-[10px] font-black rounded-full uppercase tracking-wider">Özel Döküman</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-3">${data.description || 'Bu materyal size özel olarak atanmıştır.'}</p>
+                <div class="text-xs font-bold text-slate-400">Gönderim Tarihi: <span class="text-slate-600">${dateStr}</span></div>
+              </div>
+              <div class="flex flex-row md:flex-col gap-2 shrink-0 w-full md:w-auto">
+                <a href="${link}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-blue-50 text-[#0047ff] hover:bg-[#0047ff] hover:text-white font-bold text-xs rounded-xl text-center transition-colors flex-1 md:flex-none">
+                  Görüntüle
+                </a>
+                <button onclick="deletePdfAdmin('${docId}')" class="px-4 py-2 bg-red-50 text-red-500 hover:bg-red-100 font-bold text-xs rounded-xl transition-colors flex-1 md:flex-none">
+                  Sil
+                </button>
+              </div>
+            `;
+            pdfGrid.appendChild(card);
+          });
+        });
+      } catch (err) {
+        console.error("PDF dinleme hatası:", err);
+      }
+    }
+
+    // Çözüm Yükleme (ImgBB)
+    window.submitSolution = async (docId) => {
+      const fileInput = document.getElementById('sol-file-' + docId);
+      const btn = document.getElementById('sol-btn-' + docId);
+      
+      if (!fileInput || fileInput.files.length === 0) {
+        toast.error("Lütfen bir çözüm görseli seçin.");
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      const originalBtnText = btn.innerHTML;
+      btn.innerHTML = 'Yükleniyor...';
+      btn.disabled = true;
+      btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        const imgBbRes = await fetch('https://api.imgbb.com/1/upload?key=bcb2cb00b4f772d037f699e40d2a82fc', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const imgBbData = await imgBbRes.json();
+        
+        if(!imgBbData.success) {
+          throw new Error("Çözüm resmi yüklenemedi: " + imgBbData.error.message);
+        }
+        
+        const solutionUrl = imgBbData.data.url;
+
+        const questionRef = doc(db, "qa_box", docId);
+        await updateDoc(questionRef, {
+          solution_link: solutionUrl,
+          status: 'Çözüldü'
+        });
+        toast.success("Çözüm başarıyla gönderildi!");
+      } catch (err) {
+        console.error("Güncelleme hatası", err);
+        toast.error("Hata oluştu: " + err.message);
+      } finally {
+        if(btn) {
+          btn.innerHTML = originalBtnText;
+          btn.disabled = false;
+          btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        }
+      }
+    };
+
+    // Soruyu Silme
+    window.deleteQuestion = async (docId) => {
+      if (confirm('Bu soruyu tamamen silmek istediğinize emin misiniz? (Bu işlem geri alınamaz)')) {
+        try {
+          await deleteDoc(doc(db, "qa_box", docId));
+        } catch (error) {
+          console.error("Soru silme hatası:", error);
+          toast.error("Silinirken hata oluştu: " + error.message);
+        }
+      }
+    };
+
+  </script>
+</body>
+</html>
