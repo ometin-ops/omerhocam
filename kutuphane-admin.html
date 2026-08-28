@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kütüphane Yönetim Paneli - Ömer Hoca</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Toast Bildirimleri -->
+  <script src="toast.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen antialiased flex flex-col">
+
+  <!-- ========================================================================= -->
+  <!-- 1. YÜKLENİYOR DURUMU (Auth Loading State) -->
+  <!-- ========================================================================= -->
+  <div id="auth-loading" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex flex-col items-center justify-center text-white">
+    <div class="w-12 h-12 border-4 border-white/30 border-t-blue-500 rounded-full animate-spin mb-4"></div>
+    <p class="font-bold text-sm tracking-wide">Güvenlik ve Yetki Kontrol Ediliyor...</p>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. GİRİŞ YAPILMAMIŞ DURUM (Google Sign-In State) -->
+  <!-- ========================================================================= -->
+  <div id="login-view" class="hidden flex-1 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-md w-full shadow-2xl border border-slate-200/80 text-center">
+      <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+
+      <h1 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Kütüphane Yönetimi</h1>
+      <p class="text-xs font-medium text-slate-500 mb-8 leading-relaxed">
+        Bu alana sadece yetkili yönetici erişebilir. Lütfen Google hesabınız ile giriş yapın.
+      </p>
+
+      <button id="btn-google-login" class="w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-3.5 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-blue-500/20 active:scale-95">
+        <svg class="w-5 h-5" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        Google ile Giriş Yap
+      </button>
+
+      <div class="mt-6 pt-6 border-t border-slate-100">
+        <a href="index.html" class="text-xs font-bold text-slate-400 hover:text-slate-700 transition-colors">← Ana Sayfaya Dön</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. YETKİSİZ ERİŞİM DURUMU (Unauthorized State) -->
+  <!-- ========================================================================= -->
+  <div id="unauthorized-view" class="hidden flex-1 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-md w-full shadow-2xl border border-red-100 text-center">
+      <div class="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+      </div>
+
+      <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-black rounded-full uppercase tracking-wider mb-2 inline-block">Erişim Reddedildi</span>
+      <h1 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Yetkisiz Erişim</h1>
+      <p class="text-xs font-medium text-slate-600 mb-6 leading-relaxed">
+        Bu sayfayı görüntüleme yetkiniz yok. Yönetici paneli yalnızca <strong class="text-slate-900 font-bold">omerfarukmetin037@gmail.com</strong> hesabına açıktır.
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left mb-6">
+        <p class="text-[11px] font-bold text-slate-400">Giriş Yapılan Hesap:</p>
+        <p id="unauthorized-user-email" class="text-xs font-bold text-slate-800 truncate"></p>
+      </div>
+
+      <div class="space-y-3">
+        <button id="btn-unauth-logout" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-6 rounded-2xl text-xs transition-all shadow-md active:scale-95">
+          Farklı Hesapla Giriş Yap (Çıkış)
+        </button>
+        <a href="index.html" class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-2xl text-xs transition-colors">
+          Ana Sayfaya Dön
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. YETKİLİ ADMİN PANELİ (Authorized Admin Dashboard) -->
+  <!-- ========================================================================= -->
+  <div id="admin-view" class="hidden flex-1 flex flex-col">
+    
+    <!-- Üst Menü (Navbar) -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-30 shadow-sm">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        
+        <!-- Sol: Logo & Başlık -->
+        <div class="flex items-center gap-4">
+          <a href="index.html" class="flex-shrink-0">
+            <img src="/b25.png" alt="Logo" class="h-9 w-auto object-contain" />
+          </a>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider rounded-md">Admin Paneli</span>
+              <span class="text-xs font-semibold text-slate-400">v2.1</span>
+            </div>
+            <h1 class="text-lg font-black text-slate-900 tracking-tight">Kütüphane Doküman Yönetimi</h1>
+          </div>
+        </div>
+
+        <!-- Sağ: Aksiyonlar & Profil -->
+        <div class="flex items-center gap-3">
+          <a href="kutuphane.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+            Kütüphaneyi Canlı Gör
+          </a>
+
+          <div class="flex items-center gap-3 pl-3 border-l border-slate-200">
+            <div class="text-right hidden md:block">
+              <p class="text-xs font-bold text-slate-900">Ömer Faruk Metin</p>
+              <p class="text-[11px] font-medium text-slate-400">Yönetici</p>
+            </div>
+            <button id="btn-admin-logout" class="p-2.5 bg-slate-100 hover:bg-red-50 hover:text-red-600 text-slate-600 rounded-xl transition-colors" title="Güvenli Çıkış">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Ana İçerik Alanı (Form ve Liste) -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- SOL SÜTUN: PDF YÜKLEME / DÜZENLEME FORMU (lg:col-span-5) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80 sticky top-28">
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div id="form-icon-container" class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black">
+                  <svg id="form-icon-svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h2 id="form-heading" class="text-xl font-black text-slate-900 tracking-tight">Yeni PDF Dokümanı Ekle</h2>
+                  <p id="form-subheading" class="text-xs text-slate-500 font-medium">Kütüphanede anında yayına alınır</p>
+                </div>
+              </div>
+              <!-- Düzenleme Modu Rozeti -->
+              <span id="editing-badge" class="hidden px-3 py-1 bg-amber-100 text-amber-800 text-xs font-black rounded-full uppercase tracking-wider">
+                Düzenleniyor
+              </span>
+            </div>
+
+            <!-- Form -->
+            <form id="pdf-upload-form" class="space-y-4">
+              
+              <!-- 1. PDF Başlığı -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  PDF Başlığı <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="form-title" 
+                  required 
+                  placeholder="Örn: 8. Sınıf Üslü Sayılar Çalışma Kağıdı" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all placeholder-slate-400"
+                />
+              </div>
+
+              <!-- 2. Kategori (5-12. Sınıflar) & Sayfa Sayısı -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Kategori (Sınıf) <span class="text-red-500">*</span>
+                  </label>
+                  <select 
+                    id="form-category" 
+                    required 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                  >
+                    <option value="5. Sınıf">5. Sınıf</option>
+                    <option value="6. Sınıf">6. Sınıf</option>
+                    <option value="7. Sınıf">7. Sınıf</option>
+                    <option value="8. Sınıf" selected>8. Sınıf</option>
+                    <option value="9. Sınıf">9. Sınıf</option>
+                    <option value="10. Sınıf">10. Sınıf</option>
+                    <option value="11. Sınıf">11. Sınıf</option>
+                    <option value="12. Sınıf">12. Sınıf</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Sayfa Sayısı <span class="text-red-500">*</span>
+                  </label>
+                  <input 
+                    type="number" 
+                    id="form-pages" 
+                    required 
+                    min="1" 
+                    max="500" 
+                    value="8" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                  />
+                </div>
+              </div>
+
+              <!-- 3. Etiket / Kart Tema Rengi -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Kapak / Rozet Rengi
+                </label>
+                <select 
+                  id="form-theme" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                >
+                  <option value="blue">🔵 Mavi & İndigo (LGS & Klasik)</option>
+                  <option value="emerald">🟢 Zümrüt Yeşili (Denemeler)</option>
+                  <option value="violet">🟣 Mor & Violet (TYT & Fonksiyonlar)</option>
+                  <option value="rose">🔴 Gül Kurusu & Rose (AYT & Trigonometri)</option>
+                  <option value="amber">🟠 Amber & Turuncu (Ara Sınıflar)</option>
+                  <option value="cyan">🌊 Camgöbeği & Cyan (Formül Kartları)</option>
+                </select>
+              </div>
+
+              <!-- 4. PDF Dosya / İndirme Linki -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  PDF Dosya Linki (URL) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  type="url" 
+                  id="form-file-url" 
+                  required 
+                  placeholder="https://drive.google.com/... veya dosya linki" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all placeholder-slate-400"
+                />
+                <p class="text-[11px] text-slate-400 mt-1">Google Drive, Dropbox, Vercel Blob veya doğrudan PDF bağlantısı girebilirsiniz.</p>
+              </div>
+
+              <!-- 5. Kısa Açıklama -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Kısa Açıklama / Not
+                </label>
+                <textarea 
+                  id="form-desc" 
+                  rows="2" 
+                  placeholder="Örn: Beceri temelli yeni nesil sorular ve çözümlü pratik test." 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all placeholder-slate-400 resize-none"
+                ></textarea>
+              </div>
+
+              <!-- 6. Günün Tavsiyesi Seçeneği -->
+              <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-2xl flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-extrabold text-yellow-950 flex items-center gap-1.5">
+                    <span>⭐</span> Günün Tavsiyesi Olarak Öne Çıkar
+                  </p>
+                  <p class="text-[11px] text-yellow-800/80">Kütüphane sağ panelindeki sarı kutuda gösterilir</p>
+                </div>
+                <input 
+                  type="checkbox" 
+                  id="form-is-featured" 
+                  class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500 border-gray-300 cursor-pointer"
+                />
+              </div>
+
+              <!-- Butonlar Grubu -->
+              <div class="flex items-center gap-3 pt-2">
+                <button 
+                  type="submit" 
+                  id="btn-submit-pdf" 
+                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 px-6 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/30 active:scale-95"
+                >
+                  <svg id="btn-submit-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                  <span id="btn-submit-text">PDF'i Kütüphaneye Ekle</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  id="btn-cancel-edit" 
+                  onclick="window.cancelEdit()" 
+                  class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-4 px-5 rounded-2xl text-sm transition-all"
+                >
+                  Vazgeç
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+        <!-- SAĞ SÜTUN: MEVCUT PDF'LER LİSTESİ (lg:col-span-7) -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80">
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+              <div>
+                <h2 class="text-xl font-black text-slate-900 tracking-tight">Kayıtlı PDF Dokümanları</h2>
+                <p class="text-xs text-slate-500 font-medium">Firestore veritabanındaki aktif içerikler</p>
+              </div>
+              <span id="admin-doc-count" class="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-xs font-black">
+                0 Doküman
+              </span>
+            </div>
+
+            <!-- PDF Listesi -->
+            <div id="admin-pdf-list" class="space-y-3">
+              <div class="text-center py-12 text-slate-400">
+                <div class="w-8 h-8 border-2 border-slate-300 border-t-blue-600 rounded-full animate-spin mx-auto mb-3"></div>
+                <p class="text-xs font-semibold">Dokümanlar Yükleniyor...</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FIREBASE AUTH & FIRESTORE ENTEGRASYONU -->
+  <!-- ========================================================================= -->
+  <script type="module">
+    import { auth, googleProvider, signInWithPopup, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { 
+      collection, 
+      addDoc, 
+      updateDoc,
+      deleteDoc, 
+      doc, 
+      onSnapshot, 
+      query, 
+      orderBy, 
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const ADMIN_EMAIL = 'omerfarukmetin037@gmail.com';
+
+    let editingPdfId = null;
+    let loadedPdfsMap = new Map();
+
+    const authLoading = document.getElementById('auth-loading');
+    const loginView = document.getElementById('login-view');
+    const unauthorizedView = document.getElementById('unauthorized-view');
+    const adminView = document.getElementById('admin-view');
+    const unauthEmailEl = document.getElementById('unauthorized-user-email');
+
+    // 1. Yetki ve Giriş Durumu Takibi (Auth Guard)
+    onAuthStateChanged(auth, (user) => {
+      authLoading.classList.add('hidden');
+
+      if (!user) {
+        // Giriş yapılmamış
+        loginView.classList.remove('hidden');
+        unauthorizedView.classList.add('hidden');
+        adminView.classList.add('hidden');
+      } else if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+        // Yetkili Admin
+        loginView.classList.add('hidden');
+        unauthorizedView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        
+        // Firestore'dan dokümanları dinlemeye başla
+        listenToPdfCollection();
+      } else {
+        // Yetkisiz Kullanıcı
+        loginView.classList.add('hidden');
+        unauthorizedView.classList.remove('hidden');
+        adminView.classList.add('hidden');
+        if (unauthEmailEl) unauthEmailEl.textContent = user.email;
+      }
+    });
+
+    // 2. Google ile Giriş Yap Butonu
+    const googleLoginBtn = document.getElementById('btn-google-login');
+    if (googleLoginBtn) {
+      googleLoginBtn.addEventListener('click', async () => {
+        try {
+          await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+          console.error("Giriş hatası:", error);
+          toast.error("Giriş yapılamadı: " + error.message);
+        }
+      });
+    }
+
+    // 3. Çıkış Butonları
+    const logoutAction = () => {
+      signOut(auth).then(() => {
+        toast.info("Oturum kapatıldı.");
+      }).catch(err => {
+        console.error("Çıkış hatası:", err);
+      });
+    };
+
+    const adminLogoutBtn = document.getElementById('btn-admin-logout');
+    const unauthLogoutBtn = document.getElementById('btn-unauth-logout');
+    if (adminLogoutBtn) adminLogoutBtn.addEventListener('click', logoutAction);
+    if (unauthLogoutBtn) unauthLogoutBtn.addEventListener('click', logoutAction);
+
+    // 4. Form Gönderme (addDoc veya updateDoc)
+    const pdfForm = document.getElementById('pdf-upload-form');
+    const submitBtn = document.getElementById('btn-submit-pdf');
+    const submitBtnText = document.getElementById('btn-submit-text');
+
+    if (pdfForm) {
+      pdfForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById('form-title').value.trim();
+        const category = document.getElementById('form-category').value;
+        const pages = parseInt(document.getElementById('form-pages').value, 10) || 8;
+        const theme = document.getElementById('form-theme').value;
+        const fileUrl = document.getElementById('form-file-url').value.trim();
+        const desc = document.getElementById('form-desc').value.trim();
+        const isFeatured = document.getElementById('form-is-featured').checked;
+
+        if (!title || !fileUrl) {
+          toast.error("Lütfen başlık ve dosya linkini eksiksiz doldurun.");
+          return;
+        }
+
+        const originalBtnHtml = submitBtnText.innerHTML;
+        submitBtnText.innerHTML = editingPdfId ? 'Güncelleniyor...' : 'Kaydediliyor...';
+        submitBtn.disabled = true;
+
+        try {
+          if (editingPdfId) {
+            // Düzenleme Modu (updateDoc)
+            await updateDoc(doc(db, "library_pdfs", editingPdfId), {
+              title: title,
+              category: category,
+              pages: pages,
+              theme: theme,
+              fileUrl: fileUrl,
+              desc: desc || "Ömer Hoca Özel Ders & Dijital Kütüphane İçeriği.",
+              isFeatured: isFeatured,
+              updatedAt: serverTimestamp()
+            });
+
+            toast.success("PDF dokümanı başarıyla güncellendi!");
+            window.cancelEdit();
+          } else {
+            // Yeni Ekleme Modu (addDoc)
+            await addDoc(collection(db, "library_pdfs"), {
+              title: title,
+              category: category,
+              pages: pages,
+              theme: theme,
+              fileUrl: fileUrl,
+              desc: desc || "Ömer Hoca Özel Ders & Dijital Kütüphane İçeriği.",
+              isFeatured: isFeatured,
+              createdAt: serverTimestamp()
+            });
+
+            toast.success("PDF başarıyla kütüphaneye eklendi!");
+            pdfForm.reset();
+            document.getElementById('form-pages').value = "8";
+            document.getElementById('form-category').value = "8. Sınıf";
+          }
+        } catch (error) {
+          console.error("İşlem hatası:", error);
+          toast.error("Hata: " + error.message);
+        } finally {
+          submitBtnText.innerHTML = editingPdfId ? "PDF'i Güncelle" : "PDF'i Kütüphaneye Ekle";
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    // 5. Firestore Dokümanlarını Gerçek Zamanlı Listeleme (onSnapshot)
+    function listenToPdfCollection() {
+      const pdfListContainer = document.getElementById('admin-pdf-list');
+      const docCountBadge = document.getElementById('admin-doc-count');
+
+      const q = query(collection(db, "library_pdfs"), orderBy("createdAt", "desc"));
+
+      onSnapshot(q, (snapshot) => {
+        if (!pdfListContainer) return;
+
+        loadedPdfsMap.clear();
+
+        if (snapshot.empty) {
+          pdfListContainer.innerHTML = `
+            <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+              <p class="text-xs font-bold text-slate-500">Henüz eklenmiş bir PDF bulunmuyor.</p>
+              <p class="text-[11px] text-slate-400 mt-1">Sol taraftaki formdan ilk dokümanınızı ekleyebilirsiniz.</p>
+            </div>
+          `;
+          if (docCountBadge) docCountBadge.textContent = "0 Doküman";
+          return;
+        }
+
+        if (docCountBadge) docCountBadge.textContent = `${snapshot.size} Doküman`;
+
+        let html = '';
+        snapshot.forEach((docSnap) => {
+          const item = docSnap.data();
+          const id = docSnap.id;
+          loadedPdfsMap.set(id, item);
+
+          const themeColors = {
+            'blue': 'bg-blue-100 text-blue-800 border-blue-200',
+            'emerald': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+            'violet': 'bg-violet-100 text-violet-800 border-violet-200',
+            'rose': 'bg-rose-100 text-rose-800 border-rose-200',
+            'amber': 'bg-amber-100 text-amber-800 border-amber-200',
+            'cyan': 'bg-cyan-100 text-cyan-800 border-cyan-200'
+          };
+
+          const themeBadgeClass = themeColors[item.theme] || 'bg-blue-100 text-blue-800 border-blue-200';
+          const isCurrentlyEditing = editingPdfId === id;
+
+          html += `
+            <div class="p-4 ${isCurrentlyEditing ? 'bg-amber-50/80 border-amber-300 ring-2 ring-amber-400/50' : 'bg-slate-50 hover:bg-slate-100/80 border-slate-200/70'} rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 flex-wrap mb-1">
+                  <span class="px-2 py-0.5 text-[10px] font-black uppercase rounded-md border ${themeBadgeClass}">
+                    ${item.category || '8. Sınıf'}
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">${item.pages || 8} Sayfa</span>
+                  ${item.isFeatured ? '<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1">⭐ Tavsiye</span>' : ''}
+                  ${isCurrentlyEditing ? '<span class="px-2 py-0.5 bg-amber-200 text-amber-900 text-[10px] font-black rounded-md animate-pulse">Düzenleniyor</span>' : ''}
+                </div>
+                <h4 class="text-sm font-extrabold text-slate-900">${item.title}</h4>
+                <p class="text-xs text-slate-500 truncate max-w-md mt-0.5">${item.desc || ''}</p>
+              </div>
+
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <a href="${item.fileUrl}" target="_blank" class="px-3 py-2 bg-white hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 transition-colors" title="PDF Bağlantısını Aç">
+                  Görüntüle
+                </a>
+                <button onclick="window.startEdit('${id}')" class="px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-xl border border-blue-200/60 transition-colors flex items-center gap-1" title="Dokümanı Düzenle">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                  Düzenle
+                </button>
+                <button onclick="window.deletePdf('${id}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-xl border border-red-200/60 transition-colors" title="Dokümanı Sil">
+                  Sil
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        pdfListContainer.innerHTML = html;
+      });
+    }
+
+    // 6. PDF Düzenleme Başlatma
+    window.startEdit = (docId) => {
+      const item = loadedPdfsMap.get(docId);
+      if (!item) {
+        toast.error("Doküman verisi bulunamadı.");
+        return;
+      }
+
+      editingPdfId = docId;
+
+      // Form inputlarını doldur
+      document.getElementById('form-title').value = item.title || '';
+      document.getElementById('form-category').value = item.category || '8. Sınıf';
+      document.getElementById('form-pages').value = item.pages || 8;
+      document.getElementById('form-theme').value = item.theme || 'blue';
+      document.getElementById('form-file-url').value = item.fileUrl || '';
+      document.getElementById('form-desc').value = item.desc || '';
+      document.getElementById('form-is-featured').checked = !!item.isFeatured;
+
+      // Arayüzü Düzenleme Moduna Çevir
+      document.getElementById('form-heading').textContent = "PDF Dokümanını Düzenle";
+      document.getElementById('form-subheading').textContent = "Mevcut kaydı güncelliyorsunuz";
+      document.getElementById('btn-submit-text').textContent = "PDF'i Güncelle";
+      document.getElementById('btn-cancel-edit').classList.remove('hidden');
+      document.getElementById('editing-badge').classList.remove('hidden');
+
+      const iconContainer = document.getElementById('form-icon-container');
+      if (iconContainer) {
+        iconContainer.classList.remove('bg-blue-50', 'text-blue-600');
+        iconContainer.classList.add('bg-amber-50', 'text-amber-600');
+      }
+
+      // Sayfayı forma odakla
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('form-title').focus();
+
+      toast.info("Düzenleme modu aktif. Bilgileri değiştirip 'PDF'i Güncelle'ye basın.");
+    };
+
+    // 7. Düzenlemeyi İptal Etme
+    window.cancelEdit = () => {
+      editingPdfId = null;
+      pdfForm.reset();
+      document.getElementById('form-pages').value = "8";
+      document.getElementById('form-category').value = "8. Sınıf";
+
+      document.getElementById('form-heading').textContent = "Yeni PDF Dokümanı Ekle";
+      document.getElementById('form-subheading').textContent = "Kütüphanede anında yayına alınır";
+      document.getElementById('btn-submit-text').textContent = "PDF'i Kütüphaneye Ekle";
+      document.getElementById('btn-cancel-edit').classList.add('hidden');
+      document.getElementById('editing-badge').classList.add('hidden');
+
+      const iconContainer = document.getElementById('form-icon-container');
+      if (iconContainer) {
+        iconContainer.classList.remove('bg-amber-50', 'text-amber-600');
+        iconContainer.classList.add('bg-blue-50', 'text-blue-600');
+      }
+    };
+
+    // 8. PDF Silme Fonksiyonu
+    window.deletePdf = async (docId, title) => {
+      if (!confirm(`"${title}" adlı dokümanı kütüphaneden silmek istediğinize emin misiniz?`)) {
+        return;
+      }
+
+      try {
+        await deleteDoc(doc(db, "library_pdfs", docId));
+        toast.info("Doküman kütüphaneden kaldırıldı.");
+        if (editingPdfId === docId) {
+          window.cancelEdit();
+        }
+      } catch (err) {
+        console.error("Silme hatası:", err);
+        toast.error("Doküman silinemedi: " + err.message);
+      }
+    };
+  </script>
+
+</body>
+</html>
