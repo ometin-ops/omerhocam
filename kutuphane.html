@@ -79,7 +79,7 @@
 
 
   <!-- ========================================================================= -->
-  <!-- 2. ORTA ANA ALAN (Main Content - Geniş & Modern Kartlar) -->
+  <!-- 2. ORTA ANA ALAN (Main Content - Minimalist Yatay Liste) -->
   <!-- ========================================================================= -->
   <main class="flex-1 bg-slate-50 flex flex-col h-full overflow-hidden">
     
@@ -123,12 +123,12 @@
       </div>
     </header>
 
-    <!-- Kaydırılabilir PDF Kartları Izgarası (Grid) -->
+    <!-- Kaydırılabilir PDF Liste Alanı (Yatay Satırlar) -->
     <div class="flex-1 overflow-y-auto p-5 md:p-8 pt-4">
       <div class="max-w-6xl mx-auto">
         
         <!-- Bilgilendirme Çubuğu -->
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <h2 id="active-category-title" class="text-lg font-extrabold text-slate-800">Tüm Dokümanlar</h2>
             <span id="doc-count-badge" class="px-2.5 py-0.5 bg-slate-200 text-slate-700 text-xs font-bold rounded-full">... PDF</span>
@@ -136,8 +136,8 @@
           <p class="text-xs font-medium text-slate-400 hidden sm:block">Ücretsiz Çalışma Kağıtları & Denemeler</p>
         </div>
 
-        <!-- PDF KARTLARI GRID YAPISI (Dinamik Doldurulur) -->
-        <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
+        <!-- PDF KARTLARI YATAY LİSTE YAPISI -->
+        <div id="pdf-grid" class="flex flex-col gap-3 pb-12">
           <!-- Yükleniyor Göstergesi -->
           <div class="col-span-full text-center py-20">
             <div class="w-10 h-10 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3"></div>
@@ -266,7 +266,7 @@
         </button>
       </div>
 
-      <!-- Günün Tavsiyesi Kartı (Dinamik & Doğrudan Tıklanabilir) -->
+      <!-- Günün Tavsiyesi Kartı (Dinamik & Tıklanabilir) -->
       <div id="featured-card-container" class="bg-white rounded-3xl p-5 shadow-xl border border-yellow-200 relative overflow-hidden">
         <!-- Rozet -->
         <div class="flex items-center justify-between mb-3">
@@ -276,21 +276,17 @@
           <span class="text-xs font-bold text-slate-400">#ÖmerHoca</span>
         </div>
 
-        <h3 id="featured-title" class="text-base font-black text-slate-900 tracking-tight mb-1.5">
+        <h3 id="featured-title" class="text-base font-black text-slate-900 tracking-tight mb-4">
           8. Sınıf Üslü Sayılar Çalışma Kağıdı
         </h3>
-        
-        <p id="featured-desc" class="text-xs text-slate-600 font-medium leading-relaxed mb-4">
-          "LGS öğrencileri için en çok hata yapılan üslü ifade sorularını derledim. Mutlaka çözün!"
-        </p>
 
-        <!-- Öne Çıkan PDF Butonu (Doğrudan Link Açar) -->
-        <a id="featured-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-slate-950 hover:bg-blue-600 text-white font-black py-3 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md active:scale-95">
+        <!-- Öne Çıkan PDF Butonu -->
+        <button id="featured-btn" class="w-full bg-slate-950 hover:bg-blue-600 text-white font-black py-3 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.98]">
           <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
           </svg>
           Tavsiye PDF'i İncele
-        </a>
+        </button>
       </div>
 
     </div>
@@ -334,9 +330,8 @@
     <!-- Günün Tavsiyesi (Mobil) -->
     <div class="bg-white rounded-3xl p-5 shadow-lg">
       <span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[11px] font-black rounded-full mb-2 inline-block">⭐ Günün Tavsiyesi</span>
-      <h3 id="mobile-featured-title" class="font-extrabold text-sm text-slate-900 mb-1">8. Sınıf Üslü Sayılar Çalışma Kağıdı</h3>
-      <p id="mobile-featured-desc" class="text-xs text-slate-500 mb-4">Yeni nesil çözümlü sorular ve sınav ipuçları.</p>
-      <a id="mobile-featured-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-slate-950 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center">PDF'i İncele</a>
+      <h3 id="mobile-featured-title" class="font-extrabold text-sm text-slate-900 mb-3">8. Sınıf Üslü Sayılar Çalışma Kağıdı</h3>
+      <button id="mobile-featured-btn" class="w-full bg-slate-950 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center">PDF'i İncele</button>
     </div>
   </div>
 
@@ -361,16 +356,12 @@
 
         <div class="flex items-center gap-2 mb-2">
           <span id="modal-category" class="px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-md">8. Sınıf</span>
-          <span id="modal-pages" class="text-xs font-semibold text-slate-400">8 Sayfa • PDF</span>
+          <span class="text-xs font-semibold text-slate-400">Dijital PDF Dokümanı</span>
         </div>
 
-        <h3 id="modal-title" class="text-xl font-extrabold text-slate-900 mb-2 leading-snug">
+        <h3 id="modal-title" class="text-xl font-extrabold text-slate-900 mb-6 leading-snug">
           Doküman Başlığı
         </h3>
-
-        <p id="modal-desc" class="text-xs text-slate-500 leading-relaxed mb-6">
-          Bu doküman Ömer Hoca tarafından özel olarak hazırlanmıştır.
-        </p>
 
         <!-- Özellikler Listesi -->
         <div class="space-y-2 mb-6 bg-slate-50 p-4 rounded-2xl border border-slate-100">
@@ -407,11 +398,19 @@
 
 
   <!-- ========================================================================= -->
-  <!-- FIRESTORE REAL-TIME DOKÜMAN ENTEGRASYONU & ARAMA/FİLTRE -->
+  <!-- FIRESTORE REAL-TIME DOKÜMAN ENTEGRASYONU & CANLI VIEW SAYACI -->
   <!-- ========================================================================= -->
   <script type="module">
     import { db } from './firebase-config.js';
-    import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { 
+      collection, 
+      onSnapshot, 
+      query, 
+      orderBy, 
+      doc, 
+      updateDoc, 
+      increment 
+    } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
     let allPdfItems = [];
     let currentCategory = 'all';
@@ -422,103 +421,85 @@
         id: 'mock-1',
         title: '8. Sınıf Üslü Sayılar Çalışma Kağıdı',
         category: '8. Sınıf',
-        pages: 8,
-        theme: 'blue',
-        desc: 'Yeni nesil LGS tipi beceri temelli sorular ve pratik özet konu anlatımı.',
         fileUrl: 'https://drive.google.com/',
+        views: 248,
         isFeatured: true
       },
       {
         id: 'mock-2',
         title: '8. Sınıf LGS Matematik Deneme Sınavı - 1',
         category: '8. Sınıf',
-        pages: 16,
-        theme: 'emerald',
-        desc: 'MEB formatında hazırlanmış, zorluk derecesi yüksek 20 özgün soru.',
         fileUrl: 'https://drive.google.com/',
+        views: 184,
         isFeatured: false
       },
       {
         id: 'mock-3',
         title: '12. Sınıf TYT Fonksiyonlar Özet Fasikülü',
         category: '12. Sınıf',
-        pages: 14,
-        theme: 'violet',
-        desc: 'Fonksiyon grafikleri, ters fonksiyon ve bileşke konularında hap notlar.',
         fileUrl: 'https://drive.google.com/',
+        views: 312,
         isFeatured: false
       },
       {
         id: 'mock-4',
         title: '11. Sınıf AYT Trigonometri VIP Notları',
         category: '11. Sınıf',
-        pages: 10,
-        theme: 'rose',
-        desc: 'Birim çember, toplam-fark formülleri ve trigonometrik denklemler rehberi.',
         fileUrl: 'https://drive.google.com/',
+        views: 156,
         isFeatured: false
       },
       {
         id: 'mock-5',
         title: '7. Sınıf Rasyonel Sayılar Beceri Temelli Test',
         category: '7. Sınıf',
-        pages: 12,
-        theme: 'amber',
-        desc: 'LGS temeli için rasyonel sayılarda çok adımlı işlemler ve problem çözümleri.',
         fileUrl: 'https://drive.google.com/',
+        views: 95,
         isFeatured: false
       },
       {
         id: 'mock-6',
         title: '6. Sınıf Kesirler ve Ondalık Gösterim Rehberi',
         category: '6. Sınıf',
-        pages: 6,
-        theme: 'cyan',
-        desc: 'Modelleyerek öğrenme ve yeni nesil kesir problemleri çalışma yaprağı.',
         fileUrl: 'https://drive.google.com/',
+        views: 74,
         isFeatured: false
       },
       {
         id: 'mock-7',
         title: '5. Sınıf Doğal Sayılar ve İşlemler Fasikülü',
         category: '5. Sınıf',
-        pages: 8,
-        theme: 'blue',
-        desc: 'Temel kavramlar, zihinden işlemler ve eğlenceli matematik bulmacaları.',
         fileUrl: 'https://drive.google.com/',
+        views: 68,
         isFeatured: false
       },
       {
         id: 'mock-8',
         title: '10. Sınıf Polinomlar ve İkinci Dereceden Denklemler',
         category: '10. Sınıf',
-        pages: 12,
-        theme: 'emerald',
-        desc: 'YKS temeli için polinom bölmesi, kökler ve katsayılar bağıntısı özeti.',
         fileUrl: 'https://drive.google.com/',
+        views: 142,
         isFeatured: false
       },
       {
         id: 'mock-9',
         title: '9. Sınıf Kümeler ve Mantık Konu Fasikülü',
         category: '9. Sınıf',
-        pages: 10,
-        theme: 'violet',
-        desc: 'Liseye başlangıçta mantık önermeleri ve küme problemleri rehberi.',
         fileUrl: 'https://drive.google.com/',
+        views: 110,
         isFeatured: false
       }
     ];
 
-    // Tema Renkleri Eşleştirmesi
-    const themeGradients = {
-      'blue': 'from-blue-500 to-indigo-700 text-blue-100',
-      'emerald': 'from-emerald-500 to-teal-700 text-emerald-100',
-      'violet': 'from-violet-600 to-purple-800 text-violet-100',
-      'rose': 'from-rose-500 to-pink-700 text-rose-100',
-      'amber': 'from-amber-500 to-orange-600 text-amber-100',
-      'cyan': 'from-cyan-500 to-blue-700 text-cyan-100'
-    };
+    // Mock veriler için localStorage views önbelleği kontrolü
+    initialMockItems.forEach(item => {
+      try {
+        const savedViews = localStorage.getItem('views_' + item.id);
+        if (savedViews !== null) {
+          item.views = parseInt(savedViews, 10);
+        }
+      } catch(e) {}
+    });
 
     // 1. Firestore Koleksiyonunu Gerçek Zamanlı Dinle
     try {
@@ -556,7 +537,7 @@
       renderCards();
     }
 
-    // 2. Kartları Ekrana Bas (Doğrudan Tıklanabilir Link Butonları)
+    // 2. Yatay Liste Kartlarını Ekrana Bas (Minimalist Satır Tasarımı & İkon Buton)
     function renderCards() {
       const grid = document.getElementById('pdf-grid');
       const searchInput = document.getElementById('search-input');
@@ -571,7 +552,7 @@
         if (itemCat === 'arasinif') itemCat = '7. Sınıf';
 
         const matchesCat = (currentCategory === 'all') || (itemCat === currentCategory) || (item.category === currentCategory);
-        const matchesQuery = !queryText || (item.title && item.title.toLowerCase().includes(queryText)) || (item.desc && item.desc.toLowerCase().includes(queryText));
+        const matchesQuery = !queryText || (item.title && item.title.toLowerCase().includes(queryText));
         return matchesCat && matchesQuery;
       });
 
@@ -593,62 +574,55 @@
 
       let html = '';
       filtered.forEach(item => {
-        const gradient = themeGradients[item.theme] || themeGradients['blue'];
         const catBadge = item.category || 'PDF';
         const escapedTitle = (item.title || '').replace(/'/g, "\\'");
-        const escapedDesc = (item.desc || '').replace(/'/g, "\\'");
         const escapedCat = (catBadge).replace(/'/g, "\\'");
         const fileUrl = item.fileUrl || '#';
-        const isDirectLink = fileUrl && fileUrl !== '#' && (fileUrl.startsWith('http://') || fileUrl.startsWith('https://'));
+        const viewsCount = item.views !== undefined && item.views !== null ? item.views : 0;
 
         html += `
-          <div class="pdf-card group bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <!-- PDF Kapak Görseli -->
-              <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br ${gradient} p-4 flex flex-col justify-between text-white shadow-inner mb-4">
-                <div class="flex items-center justify-between z-10">
-                  <span class="px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-lg text-xs font-black uppercase tracking-wider">${catBadge}</span>
-                  <span class="px-2 py-0.5 bg-yellow-400 text-slate-900 rounded-md text-[11px] font-extrabold">PDF</span>
-                </div>
-                
-                <div class="my-auto text-center z-10">
-                  <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                  </div>
-                  <p class="text-xs font-medium tracking-wide opacity-90">Ömer Hoca Özel Arşiv</p>
-                </div>
-
-                <div class="flex items-center justify-between text-xs z-10 font-semibold opacity-90">
-                  <span>${item.pages || 8} Sayfa</span>
-                  <span>${item.isFeatured ? '⭐ Tavsiye' : 'Çözümlü'}</span>
-                </div>
-                <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+          <div class="pdf-card group bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-blue-300 transition-all flex flex-row items-center justify-between gap-3 sm:gap-4 w-full">
+            
+            <!-- Sol Kısım: Sadece Sınıf Rozeti + PDF Adı -->
+            <div class="flex flex-col gap-1.5 min-w-0 flex-1 pr-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 text-xs font-extrabold rounded-lg border border-blue-100/80 inline-flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                  ${catBadge}
+                </span>
+                ${item.isFeatured ? '<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md">⭐ Tavsiye</span>' : ''}
               </div>
 
-              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+              <h3 class="text-sm sm:text-base md:text-lg font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug truncate sm:whitespace-normal">
                 ${item.title}
               </h3>
-              <p class="text-xs text-slate-500 font-medium line-clamp-2 mb-4">
-                ${item.desc || 'Beceri temelli yeni nesil sorular ve pratik çözümler.'}
-              </p>
             </div>
 
-            <!-- PDF'i İncele / İndir Butonu (Doğrudan Link Açar) -->
-            <div class="pt-3 border-t border-slate-100">
-              <a 
-                href="${isDirectLink ? fileUrl : '#'}" 
-                ${isDirectLink ? 'target="_blank" rel="noopener noreferrer"' : `onclick="window.openPdfModal('${escapedTitle}', '${escapedCat}', '${item.pages || 8}', '${fileUrl}', '${escapedDesc}'); return false;"`}
-                class="w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-colors shadow-sm active:scale-95"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <!-- Sağ Kısım: Canlı Tıklanma Sayacı + Şık Kare İkon Buton -->
+            <div class="flex items-center gap-2.5 sm:gap-4 flex-shrink-0">
+              
+              <!-- Canlı Görüntülenme (View) Sayacı -->
+              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200/60 px-2.5 sm:px-3 py-2 rounded-xl whitespace-nowrap" title="${viewsCount} kez incelendi">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                 </svg>
-                PDF'i İncele
-              </a>
+                <span class="font-black text-slate-800">${viewsCount}</span>
+              </div>
+
+              <!-- İndirme / Görüntüleme Kare İkon Butonu -->
+              <button 
+                onclick="window.handlePdfClick('${item.id}', '${fileUrl}', '${escapedTitle}', '${escapedCat}')" 
+                class="bg-slate-900 hover:bg-blue-600 text-white p-3 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center group-hover:bg-blue-600"
+                title="PDF Dosyasını Aç / İndir"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
+
             </div>
+
           </div>
         `;
       });
@@ -656,7 +630,39 @@
       grid.innerHTML = html;
     }
 
-    // 3. Kategori Sayaçlarını Güncelle (5-12. Sınıflar)
+    // 3. Tıklanma / Görüntüleme Eylemini Yönet (Firestore Canlı increment)
+    window.handlePdfClick = async (docId, fileUrl, title, category) => {
+      // 1. Firestore'da view sayısını increment(1) ile artır
+      if (docId && !docId.startsWith('mock-')) {
+        try {
+          const docRef = doc(db, "library_pdfs", docId);
+          await updateDoc(docRef, {
+            views: increment(1)
+          });
+        } catch (err) {
+          console.error("Firestore views updateDoc hatası:", err);
+        }
+      } else if (docId && docId.startsWith('mock-')) {
+        const item = allPdfItems.find(i => i.id === docId);
+        if (item) {
+          item.views = (item.views || 0) + 1;
+          try {
+            localStorage.setItem('views_' + docId, item.views);
+          } catch(e) {}
+          renderCards();
+        }
+      }
+
+      // 2. Doğrudan Yeni Sekmede Aç veya Modalı Göster
+      const isDirectLink = fileUrl && fileUrl !== '#' && (fileUrl.startsWith('http://') || fileUrl.startsWith('https://'));
+      if (isDirectLink) {
+        window.open(fileUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        window.openPdfModal(title, category, fileUrl);
+      }
+    };
+
+    // 4. Kategori Sayaçlarını Güncelle (5-12. Sınıflar)
     function updateCategoryCounters() {
       const cAll = document.getElementById('counter-all');
       if (cAll) cAll.textContent = allPdfItems.length;
@@ -677,54 +683,47 @@
       }
     }
 
-    // 4. Günün Tavsiyesi Kartını Güncelle (Doğrudan Link Açar)
+    // 5. Günün Tavsiyesi Kartını Güncelle
     function updateFeaturedCard() {
       const featured = allPdfItems.find(i => i.isFeatured) || allPdfItems[0];
       if (!featured) return;
 
       const featTitle = document.getElementById('featured-title');
-      const featDesc = document.getElementById('featured-desc');
       const featBtn = document.getElementById('featured-btn');
 
       const mobFeatTitle = document.getElementById('mobile-featured-title');
-      const mobFeatDesc = document.getElementById('mobile-featured-desc');
       const mobFeatBtn = document.getElementById('mobile-featured-btn');
 
       if (featTitle) featTitle.textContent = featured.title;
-      if (featDesc) featDesc.textContent = `"${featured.desc || 'Ömer Hoca tarafından haftanın en çok önerilen çalışma fasikülü.'}"`;
       
-      const isDirect = featured.fileUrl && featured.fileUrl !== '#' && (featured.fileUrl.startsWith('http://') || featured.fileUrl.startsWith('https://'));
-
       if (featBtn) {
-        if (isDirect) {
-          featBtn.href = featured.fileUrl;
-          featBtn.target = "_blank";
-          featBtn.rel = "noopener noreferrer";
-          featBtn.removeAttribute('onclick');
-        } else {
-          featBtn.href = "#";
-          featBtn.target = "";
-          featBtn.setAttribute('onclick', `window.openPdfModal('${(featured.title || '').replace(/'/g, "\\'")}', '${featured.category || 'Tavsiye'}', '${featured.pages || 8}', '${featured.fileUrl || '#'}', '${(featured.desc || '').replace(/'/g, "\\'")}'); return false;`);
-        }
+        featBtn.onclick = (e) => {
+          e.preventDefault();
+          window.handlePdfClick(
+            featured.id, 
+            featured.fileUrl, 
+            featured.title, 
+            featured.category
+          );
+        };
       }
 
       if (mobFeatTitle) mobFeatTitle.textContent = featured.title;
-      if (mobFeatDesc) mobFeatDesc.textContent = featured.desc || '';
       if (mobFeatBtn) {
-        if (isDirect) {
-          mobFeatBtn.href = featured.fileUrl;
-          mobFeatBtn.target = "_blank";
-          mobFeatBtn.rel = "noopener noreferrer";
-          mobFeatBtn.removeAttribute('onclick');
-        } else {
-          mobFeatBtn.href = "#";
-          mobFeatBtn.target = "";
-          mobFeatBtn.setAttribute('onclick', `window.openPdfModal('${(featured.title || '').replace(/'/g, "\\'")}', '${featured.category || 'Tavsiye'}', '${featured.pages || 8}', '${featured.fileUrl || '#'}', '${(featured.desc || '').replace(/'/g, "\\'")}'); window.toggleFilterDrawer(); return false;`);
-        }
+        mobFeatBtn.onclick = (e) => {
+          e.preventDefault();
+          window.handlePdfClick(
+            featured.id, 
+            featured.fileUrl, 
+            featured.title, 
+            featured.category
+          );
+          window.toggleFilterDrawer();
+        };
       }
     }
 
-    // 5. Global Window Fonksiyonları (Filtreleme & Arama)
+    // 6. Global Window Fonksiyonları (Filtreleme & Arama)
     window.filterCategory = (cat) => {
       currentCategory = cat;
 
@@ -781,14 +780,12 @@
       }
     };
 
-    window.openPdfModal = (title, category, pages, fileUrl, desc) => {
+    window.openPdfModal = (title, category, fileUrl) => {
       const modal = document.getElementById('pdf-modal');
       const content = document.getElementById('pdf-modal-content');
       
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-category').textContent = category;
-      document.getElementById('modal-pages').textContent = pages + ' Sayfa • PDF';
-      document.getElementById('modal-desc').textContent = desc || "Bu doküman Ömer Hoca tarafından özel olarak hazırlanmıştır.";
 
       const downloadLink = document.getElementById('modal-download-link');
       if (downloadLink) {

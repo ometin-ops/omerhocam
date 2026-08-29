@@ -554,25 +554,23 @@
             </div>
           </div>
 
-          <!-- Fiyat Alanı -->
-          <div class="flex flex-col gap-1 mb-6">
-            <div id="discount-row-lgs" class="hidden items-center gap-2">
-              <span id="old-price-lgs" class="line-through text-gray-400 font-bold text-lg"></span>
-              <span id="discount-badge-lgs" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
-            </div>
-            <div id="price-ozel-ders-lgs" class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-400 line-through text-xl font-medium">₺1.200</span>
-              <span class="text-4xl font-extrabold text-blue-700">₺1.000</span>
-              <span class="text-blue-700 font-medium pb-1">/ Saat</span>
-              <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold ml-2">%17 İndirim</span>
+          <!-- Konum & Hizmet Alanı (2 Ayrı Kutu) -->
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="flex flex-row justify-between gap-2 w-full">
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>📍</span> Bolu Yüz Yüze
+              </div>
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>💻</span> Diğer Şehirler Online
+              </div>
             </div>
             <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
           </div>
 
           <!-- Buton -->
-          <a href="https://www.shopier.com/omerhocatv/49549434" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
-            Ücretsiz Derse Başla
-          </a>
+          <button onclick="openContactDrawer()" class="w-full block text-center bg-[#0047ff] text-white py-3 rounded-full font-bold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Tanışma Dersine Başla
+          </button>
 
           <!-- ÖZELLİKLER BAŞLIĞI -->
           <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
@@ -607,22 +605,23 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col gap-1 mb-6">
-            <div id="discount-row-yks" class="hidden items-center gap-2">
-              <span id="old-price-yks" class="line-through text-gray-400 font-bold text-lg"></span>
-              <span id="discount-badge-yks" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
-            </div>
-            <div id="price-ozel-ders-yks" class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-400 line-through text-xl font-medium">₺1.200</span>
-              <span class="text-4xl font-extrabold text-blue-700">₺1.000</span>
-              <span class="text-blue-700 font-medium pb-1">/ Saat</span>
-              <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold ml-2">%17 İndirim</span>
+          <!-- Konum & Hizmet Alanı (2 Ayrı Kutu) -->
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="flex flex-row justify-between gap-2 w-full">
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>📍</span> Bolu Yüz Yüze
+              </div>
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>💻</span> Diğer Şehirler Online
+              </div>
             </div>
             <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
           </div>
-          <a href="https://www.shopier.com/omerhocatv/49549488" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
-            Ücretsiz Derse Başla
-          </a>
+
+          <!-- Buton -->
+          <button onclick="openContactDrawer()" class="w-full block text-center bg-[#0047ff] text-white py-3 rounded-full font-bold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Tanışma Dersine Başla
+          </button>
           <!-- ÖZELLİKLER BAŞLIĞI -->
           <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
           <ul id="features-list-yks" class="space-y-3 block"></ul>
@@ -656,22 +655,23 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col gap-1 mb-6">
-            <div id="discount-row-arasinif" class="hidden items-center gap-2">
-              <span id="old-price-arasinif" class="line-through text-gray-400 font-bold text-lg"></span>
-              <span id="discount-badge-arasinif" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
-            </div>
-            <div id="price-ozel-ders-arasinif" class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-400 line-through text-xl font-medium">₺1.200</span>
-              <span class="text-4xl font-extrabold text-blue-700">₺1.000</span>
-              <span class="text-blue-700 font-medium pb-1">/ Saat</span>
-              <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold ml-2">%17 İndirim</span>
+          <!-- Konum & Hizmet Alanı (2 Ayrı Kutu) -->
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="flex flex-row justify-between gap-2 w-full">
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>📍</span> Bolu Yüz Yüze
+              </div>
+              <div class="bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs sm:text-[13px] font-bold py-2.5 px-2 rounded-xl w-1/2 text-center flex items-center justify-center gap-1 shadow-sm">
+                <span>💻</span> Diğer Şehirler Online
+              </div>
             </div>
             <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
           </div>
-          <a href="https://www.shopier.com/omerhocatv/49549512" target="_blank" rel="noopener noreferrer" class="w-full block text-center bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
-            Ücretsiz Derse Başla
-          </a>>
+
+          <!-- Buton -->
+          <button onclick="openContactDrawer()" class="w-full block text-center bg-[#0047ff] text-white py-3 rounded-full font-bold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Tanışma Dersine Başla
+          </button>
           <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
           <ul id="features-list-arasinif" class="space-y-3 block"></ul>
         </div>
@@ -1388,49 +1388,37 @@
   </div>
 
   <script>
+    function openContactDrawer() {
+      const drawer = document.getElementById('contact-drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      if (drawer && overlay) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      }
+    }
+    window.openContactDrawer = openContactDrawer;
+
     function setPackage(packageType, tabName = 'lgs') {
       const btnOzel = document.getElementById(`btn-ozel-ders-${tabName}`);
       const btnKocluk = document.getElementById(`btn-kocluk-${tabName}`);
-      const priceDiv = document.getElementById(`price-ozel-ders-${tabName}`);
-      const discountRow = document.getElementById(`discount-row-${tabName}`);
 
       if (!btnOzel || !btnKocluk) return;
 
       const activeClass = "flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60 text-center justify-center whitespace-nowrap";
       const inactiveClass = "flex-1 px-1 py-2 rounded-full text-xs md:text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300 text-center justify-center whitespace-nowrap";
 
-      if (discountRow) {
-        discountRow.classList.remove('flex');
-        discountRow.classList.add('hidden');
-      }
-
       if (packageType === 'ozel-ders') {
         btnOzel.className = activeClass;
         btnKocluk.className = inactiveClass;
-        priceDiv.className = "flex items-center gap-2 flex-wrap";
-        priceDiv.innerHTML = `
-          <span class="text-gray-400 line-through text-xl font-medium">₺1.200</span>
-          <span class="text-4xl font-extrabold text-blue-700">₺1.000</span>
-          <span class="text-blue-700 font-medium pb-1">/ Saat</span>
-          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold ml-2">%17 İndirim</span>
-        `;
       } else if (packageType === 'kocluk') {
         btnKocluk.className = activeClass;
         btnOzel.className = inactiveClass;
-        priceDiv.className = "flex flex-col items-start";
-        priceDiv.innerHTML = `
-          <div>
-            <span class="text-4xl font-bold text-[#1b004e]">₺1.000</span>
-            <span class="text-lg text-gray-500 font-medium">/ Saat</span>
-          </div>
-          <div class="text-xl font-semibold text-slate-700 mt-2">
-            + ₺3.000 <span class="text-base text-gray-500 font-normal">/ Ay (Koçluk Ücreti)</span>
-          </div>
-        `;
       }
 
-      featuresState[tabName].type = packageType;
-      renderFeatures(tabName);
+      if (featuresState && featuresState[tabName]) {
+        featuresState[tabName].type = packageType;
+        renderFeatures(tabName);
+      }
     }
 
     const baseFeatures = {
