@@ -238,19 +238,23 @@
                 <p class="text-[11px] text-slate-400 mt-1">Google Drive, Dropbox, Vercel Blob veya doğrudan PDF bağlantısı girebilirsiniz.</p>
               </div>
 
-              <!-- 5. Günün Tavsiyesi Seçeneği -->
-              <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-2xl flex items-center justify-between">
-                <div>
-                  <p class="text-xs font-extrabold text-yellow-950 flex items-center gap-1.5">
-                    <span>⭐</span> Günün Tavsiyesi Olarak Öne Çıkar
-                  </p>
-                  <p class="text-[11px] text-yellow-800/80">Kütüphane sağ panelindeki sarı kutuda gösterilir</p>
+              <!-- 5. Özel Etiket (Opsiyonel) -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Özel Etiket (Opsiyonel)
+                </label>
+                <div class="relative">
+                  <input 
+                    type="text" 
+                    id="form-custom-badge" 
+                    placeholder="Örn: Yeni, Tavsiye, Çıkmış Soru, VIP, MEB" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                  />
+                  <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-yellow-500">
+                    <span class="text-sm">⭐</span>
+                  </div>
                 </div>
-                <input 
-                  type="checkbox" 
-                  id="form-is-featured" 
-                  class="w-5 h-5 text-blue-600 rounded-lg focus:ring-blue-500 border-gray-300 cursor-pointer"
-                />
+                <p class="text-[11px] text-slate-400 mt-1">Doldurursanız kartın üzerinde sarı renkli özel rozet olarak görünür. Boş bırakırsanız rozet görünmez.</p>
               </div>
 
               <!-- Butonlar Grubu -->
@@ -404,7 +408,7 @@
         const category = document.getElementById('form-category').value;
         const theme = document.getElementById('form-theme').value;
         const fileUrl = document.getElementById('form-file-url').value.trim();
-        const isFeatured = document.getElementById('form-is-featured').checked;
+        const customBadge = document.getElementById('form-custom-badge').value.trim();
 
         if (!title || !fileUrl) {
           toast.error("Lütfen başlık ve dosya linkini eksiksiz doldurun.");
@@ -423,7 +427,8 @@
               category: category,
               theme: theme,
               fileUrl: fileUrl,
-              isFeatured: isFeatured,
+              customBadge: customBadge,
+              isFeatured: Boolean(customBadge),
               updatedAt: serverTimestamp()
             });
 
@@ -436,13 +441,15 @@
               category: category,
               theme: theme,
               fileUrl: fileUrl,
-              isFeatured: isFeatured,
+              customBadge: customBadge,
+              isFeatured: Boolean(customBadge),
               views: 0,
               createdAt: serverTimestamp()
             });
 
             toast.success("PDF başarıyla kütüphaneye eklendi!");
             pdfForm.reset();
+            document.getElementById('form-custom-badge').value = "";
             document.getElementById('form-category').value = "8. Sınıf";
           }
         } catch (error) {
@@ -498,6 +505,7 @@
           const themeBadgeClass = themeColors[item.theme] || 'bg-blue-100 text-blue-800 border-blue-200';
           const isCurrentlyEditing = editingPdfId === id;
           const viewsCount = item.views !== undefined && item.views !== null ? item.views : 0;
+          const badgeText = item.customBadge || (item.isFeatured ? 'Tavsiye' : '');
 
           html += `
             <div class="p-4 ${isCurrentlyEditing ? 'bg-amber-50/80 border-amber-300 ring-2 ring-amber-400/50' : 'bg-slate-50 hover:bg-slate-100/80 border-slate-200/70'} rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
@@ -510,7 +518,7 @@
                     <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                     ${viewsCount}
                   </span>
-                  ${item.isFeatured ? '<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1">⭐ Tavsiye</span>' : ''}
+                  ${badgeText ? `<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1">⭐ ${badgeText}</span>` : ''}
                   ${isCurrentlyEditing ? '<span class="px-2 py-0.5 bg-amber-200 text-amber-900 text-[10px] font-black rounded-md animate-pulse">Düzenleniyor</span>' : ''}
                 </div>
                 <h4 class="text-sm font-extrabold text-slate-900">${item.title}</h4>
@@ -551,7 +559,7 @@
       document.getElementById('form-category').value = item.category || '8. Sınıf';
       document.getElementById('form-theme').value = item.theme || 'blue';
       document.getElementById('form-file-url').value = item.fileUrl || '';
-      document.getElementById('form-is-featured').checked = !!item.isFeatured;
+      document.getElementById('form-custom-badge').value = item.customBadge || (item.isFeatured ? 'Tavsiye' : '');
 
       // Arayüzü Düzenleme Moduna Çevir
       document.getElementById('form-heading').textContent = "PDF Dokümanını Düzenle";
@@ -577,6 +585,7 @@
     window.cancelEdit = () => {
       editingPdfId = null;
       pdfForm.reset();
+      document.getElementById('form-custom-badge').value = "";
       document.getElementById('form-category').value = "8. Sınıf";
 
       document.getElementById('form-heading').textContent = "Yeni PDF Dokümanı Ekle";

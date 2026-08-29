@@ -136,8 +136,8 @@
           <p class="text-xs font-medium text-slate-400 hidden sm:block">Ücretsiz Çalışma Kağıtları & Denemeler</p>
         </div>
 
-        <!-- PDF KARTLARI YATAY LİSTE YAPISI -->
-        <div id="pdf-grid" class="flex flex-col gap-3 pb-12">
+        <!-- PDF KARTLARI DİKEY GRID YAPISI -->
+        <div id="pdf-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 pb-12">
           <!-- Yükleniyor Göstergesi -->
           <div class="col-span-full text-center py-20">
             <div class="w-10 h-10 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-3"></div>
@@ -423,6 +423,7 @@
         category: '8. Sınıf',
         fileUrl: 'https://drive.google.com/',
         views: 248,
+        customBadge: 'Tavsiye',
         isFeatured: true
       },
       {
@@ -431,6 +432,7 @@
         category: '8. Sınıf',
         fileUrl: 'https://drive.google.com/',
         views: 184,
+        customBadge: 'Yeni',
         isFeatured: false
       },
       {
@@ -439,6 +441,7 @@
         category: '12. Sınıf',
         fileUrl: 'https://drive.google.com/',
         views: 312,
+        customBadge: 'Çıkmış Soru',
         isFeatured: false
       },
       {
@@ -447,6 +450,7 @@
         category: '11. Sınıf',
         fileUrl: 'https://drive.google.com/',
         views: 156,
+        customBadge: 'VIP',
         isFeatured: false
       },
       {
@@ -455,6 +459,7 @@
         category: '7. Sınıf',
         fileUrl: 'https://drive.google.com/',
         views: 95,
+        customBadge: '',
         isFeatured: false
       },
       {
@@ -580,40 +585,67 @@
         const fileUrl = item.fileUrl || '#';
         const viewsCount = item.views !== undefined && item.views !== null ? item.views : 0;
 
+        // Gradient paletleri (Tema veya Sınıf Seviyesine Göre Canlı & Uyumlu)
+        const themeGradients = {
+          'blue': 'bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-800 shadow-indigo-500/20',
+          'emerald': 'bg-gradient-to-br from-emerald-500 via-teal-600 to-teal-800 shadow-teal-500/20',
+          'violet': 'bg-gradient-to-br from-violet-600 via-purple-600 to-purple-900 shadow-purple-500/20',
+          'rose': 'bg-gradient-to-br from-rose-500 via-pink-600 to-rose-700 shadow-rose-500/20',
+          'amber': 'bg-gradient-to-br from-amber-500 via-orange-500 to-orange-700 shadow-orange-500/20',
+          'cyan': 'bg-gradient-to-br from-cyan-500 via-blue-600 to-blue-800 shadow-cyan-500/20'
+        };
+
+        const categoryGradients = {
+          '5. Sınıf': 'bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 shadow-orange-500/20',
+          '6. Sınıf': 'bg-gradient-to-br from-teal-400 via-emerald-500 to-teal-700 shadow-emerald-500/20',
+          '7. Sınıf': 'bg-gradient-to-br from-cyan-500 via-sky-600 to-blue-700 shadow-sky-500/20',
+          '8. Sınıf': 'bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-800 shadow-blue-500/20',
+          '9. Sınıf': 'bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-800 shadow-purple-500/20',
+          '10. Sınıf': 'bg-gradient-to-br from-fuchsia-500 via-pink-600 to-rose-700 shadow-pink-500/20',
+          '11. Sınıf': 'bg-gradient-to-br from-rose-500 via-red-600 to-orange-600 shadow-rose-500/20',
+          '12. Sınıf': 'bg-gradient-to-br from-indigo-600 via-blue-700 to-slate-900 shadow-indigo-500/20'
+        };
+
+        const cardGradient = themeGradients[item.theme] || categoryGradients[catBadge] || 'bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-800 shadow-indigo-500/20';
+        const customBadgeText = (item.customBadge !== undefined && item.customBadge !== null) 
+          ? item.customBadge.trim() 
+          : (item.isFeatured ? 'Tavsiye' : '');
+
         html += `
-          <div class="pdf-card group bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-blue-300 transition-all flex flex-row items-center justify-between gap-3 sm:gap-4 w-full">
+          <div class="pdf-card group ${cardGradient} rounded-2xl p-5 shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-200 flex flex-col justify-between gap-3 w-full text-white">
             
-            <!-- Sol Kısım: Sadece Sınıf Rozeti + PDF Adı -->
-            <div class="flex flex-col gap-1.5 min-w-0 flex-1 pr-2">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 text-xs font-extrabold rounded-lg border border-blue-100/80 inline-flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+            <div>
+              <!-- 1. Satır (Üst): Sınıf/Kategori Rozeti + Dinamik Özel Rozet -->
+              <div class="flex flex-row items-center gap-2 mb-2.5">
+                <span class="px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-extrabold rounded-lg border border-white/30 inline-flex items-center gap-1.5 shadow-sm">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                   ${catBadge}
                 </span>
-                ${item.isFeatured ? '<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md">⭐ Tavsiye</span>' : ''}
+                ${customBadgeText ? `<span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-lg shadow-sm flex items-center gap-1">⭐ ${customBadgeText}</span>` : ''}
               </div>
 
-              <h3 class="text-sm sm:text-base md:text-lg font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug truncate sm:whitespace-normal">
+              <!-- 2. Satır (Orta): Sadece PDF Başlığı (Beyaz, okunaklı, alt satıra kayabilir) -->
+              <h3 class="text-base sm:text-lg font-bold text-white leading-snug break-words whitespace-normal drop-shadow-sm">
                 ${item.title}
               </h3>
             </div>
 
-            <!-- Sağ Kısım: Canlı Tıklanma Sayacı + Şık Kare İkon Buton -->
-            <div class="flex items-center gap-2.5 sm:gap-4 flex-shrink-0">
+            <!-- 3. Satır (Alt): Canlı Tıklanma Sayacı (Sol) + Kare İndirme Butonu (Sağ) -->
+            <div class="flex flex-row justify-between items-center w-full mt-2 pt-3 border-t border-white/20">
               
-              <!-- Canlı Görüntülenme (View) Sayacı -->
-              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200/60 px-2.5 sm:px-3 py-2 rounded-xl whitespace-nowrap" title="${viewsCount} kez incelendi">
-                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <!-- Sol: Canlı Tıklanma Sayacı (Glassmorphism) -->
+              <div class="flex items-center gap-1.5 text-xs font-bold text-white bg-white/15 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl whitespace-nowrap shadow-sm" title="${viewsCount} kez incelendi">
+                <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                 </svg>
-                <span class="font-black text-slate-800">${viewsCount}</span>
+                <span class="font-black text-white">${viewsCount}</span>
               </div>
 
-              <!-- İndirme / Görüntüleme Kare İkon Butonu -->
+              <!-- Sağ: İndirme / Görüntüleme Kare İkon Butonu (Glassmorphism / Koyu Saydam) -->
               <button 
                 onclick="window.handlePdfClick('${item.id}', '${fileUrl}', '${escapedTitle}', '${escapedCat}')" 
-                class="bg-slate-900 hover:bg-blue-600 text-white p-3 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center group-hover:bg-blue-600"
+                class="bg-black/30 hover:bg-black/50 backdrop-blur-md text-white border border-white/20 p-2.5 sm:p-3 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center hover:scale-105"
                 title="PDF Dosyasını Aç / İndir"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -685,7 +717,7 @@
 
     // 5. Günün Tavsiyesi Kartını Güncelle
     function updateFeaturedCard() {
-      const featured = allPdfItems.find(i => i.isFeatured) || allPdfItems[0];
+      const featured = allPdfItems.find(i => i.customBadge || i.isFeatured) || allPdfItems[0];
       if (!featured) return;
 
       const featTitle = document.getElementById('featured-title');
