@@ -56,7 +56,7 @@
         Bu alana sadece yetkili yönetici erişebilir. Lütfen Google hesabınız ile giriş yapın.
       </p>
 
-      <button id="btn-google-login" class="w-full bg-slate-900 hover:bg-yellow-500 hover:text-slate-950 text-white font-bold py-3.5 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95">
+      <button id="btn-google-login" class="w-full bg-slate-950 hover:bg-yellow-400 hover:text-slate-950 text-white font-bold py-3.5 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95">
         <svg class="w-5 h-5" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
           <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -100,7 +100,7 @@
         <button id="btn-unauth-logout" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-6 rounded-2xl text-xs transition-all shadow-md active:scale-95">
           Farklı Hesapla Giriş Yap (Çıkış)
         </button>
-        <a href="index.html" class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-2xl text-xs transition-colors">
+        <a href="/" class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-2xl text-xs transition-colors">
           Ana Sayfaya Dön
         </a>
       </div>
@@ -124,7 +124,7 @@
           <div>
             <div class="flex items-center gap-2">
               <span class="px-2 py-0.5 bg-yellow-100 text-slate-950 font-black text-[10px] uppercase tracking-wider rounded-md border border-yellow-300">Oyun Admin</span>
-              <span class="text-xs font-semibold text-slate-400">v2.1</span>
+              <span class="text-xs font-semibold text-slate-400">v2.2</span>
             </div>
             <h1 class="text-lg font-black text-slate-900 tracking-tight">Oyun Dükkanı İçerik Yönetimi</h1>
           </div>
@@ -172,7 +172,7 @@
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- SOL SÜTUN: OYUN EKLEME / DÜZENLEME FORMU (lg:col-span-5) -->
+        <!-- SOL SÜTUN: SADELEŞTİRİLMİŞ OYUN EKLEME / DÜZENLEME FORMU (lg:col-span-5) -->
         <div class="lg:col-span-5">
           <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80 sticky top-28">
             
@@ -192,10 +192,10 @@
               </span>
             </div>
 
-            <!-- Form -->
+            <!-- Form: Yalnızca Zorunlu ve İstenen Alanlar -->
             <form id="game-upload-form" class="space-y-4">
               
-              <!-- 1. Oyun Adı -->
+              <!-- 1. Oyun Adı (Zorunlu Text Input) -->
               <div>
                 <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Oyun Adı <span class="text-red-500">*</span>
@@ -209,63 +209,7 @@
                 />
               </div>
 
-              <!-- 2. Oyun Açıklaması -->
-              <div>
-                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                  Oyun Açıklaması
-                </label>
-                <textarea 
-                  id="form-description" 
-                  rows="2"
-                  placeholder="Kareköklü ifadeleri çarparak labirentteki çıkış kapısını bul..." 
-                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400 resize-none"
-                ></textarea>
-              </div>
-
-              <!-- 3. Kategori (Sınıf Seviyesi) -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                    Sınıf / Kategori <span class="text-red-500">*</span>
-                  </label>
-                  <select 
-                    id="form-category" 
-                    required 
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all"
-                  >
-                    <option value="5. Sınıf">5. Sınıf</option>
-                    <option value="6. Sınıf">6. Sınıf</option>
-                    <option value="7. Sınıf">7. Sınıf</option>
-                    <option value="8. Sınıf (LGS)" selected>8. Sınıf (LGS)</option>
-                    <option value="9. Sınıf">9. Sınıf</option>
-                    <option value="10. Sınıf">10. Sınıf</option>
-                    <option value="11. Sınıf">11. Sınıf</option>
-                    <option value="12. Sınıf">12. Sınıf</option>
-                    <option value="YKS & Mantık">YKS & Mantık</option>
-                    <option value="Genel Matematik">Genel Matematik</option>
-                  </select>
-                </div>
-
-                <!-- 4. Kart Renk Teması -->
-                <div>
-                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                    Kart Tema Rengi
-                  </label>
-                  <select 
-                    id="form-theme" 
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all"
-                  >
-                    <option value="amber" selected>🟠 Amber & Turuncu</option>
-                    <option value="blue">🔵 Mavi & İndigo</option>
-                    <option value="emerald">🟢 Zümrüt Yeşili</option>
-                    <option value="violet">🟣 Mor & Violet</option>
-                    <option value="rose">🔴 Gül Kurusu & Kırmızı</option>
-                    <option value="cyan">🌊 Camgöbeği & Cyan</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- 5. Oyun Bağlantısı (URL) -->
+              <!-- 2. Oyun Bağlantısı (URL / Link) (Zorunlu Text Input) -->
               <div>
                 <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Oyun Bağlantısı (URL / Link) <span class="text-red-500">*</span>
@@ -274,16 +218,16 @@
                   type="text" 
                   id="form-game-url" 
                   required 
-                  placeholder="https://... veya oyun linki" 
+                  placeholder="https://... veya oyun bağlantısı" 
                   class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
                 />
-                <p class="text-[11px] text-slate-400 mt-1">Öğrencinin oyunu oynayacağı web/canvas/iframe veya harici oyun bağlantısı.</p>
+                <p class="text-[11px] text-slate-400 mt-1">Öğrencinin oyunu oynayacağı web/canvas/iframe veya harici oyun linki.</p>
               </div>
 
-              <!-- 6. Kapak Görseli (URL veya Dosya Yükleme) -->
+              <!-- 3. Kapak Görseli (1:1 Kare Format Destekli Dosya veya URL) -->
               <div>
                 <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                  Kapak Görseli
+                  Kapak Görseli (Kare 1:1)
                 </label>
                 
                 <div class="space-y-2">
@@ -294,64 +238,60 @@
                     class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
                   />
 
-                  <!-- Dosya Seçici & Önizleme -->
+                  <!-- Dosya Seçici & 1:1 Kare Önizleme -->
                   <div class="flex items-center gap-3">
-                    <label class="cursor-pointer px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center gap-2">
-                      <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <label class="cursor-pointer px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center gap-2 active:scale-95">
+                      <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                       </svg>
-                      <span>Veya Dosya Yükle</span>
+                      <span>Veya Dosya Seç (1:1 Kare)</span>
                       <input type="file" id="form-cover-file" accept="image/*" class="hidden" />
                     </label>
+                  </div>
 
-                    <div id="cover-preview-box" class="hidden items-center gap-2">
-                      <img id="cover-preview-img" src="" alt="Önizleme" class="w-10 h-10 object-cover rounded-xl border border-slate-200 shadow-sm" />
-                      <button type="button" id="btn-clear-cover" class="text-xs text-red-500 hover:underline font-bold">Kaldır</button>
+                  <!-- 1:1 Kare Görsel Önizleme Kutusu -->
+                  <div id="cover-preview-box" class="hidden items-center gap-3.5 p-3 bg-slate-50 border border-slate-200 rounded-2xl mt-2">
+                    <div class="w-16 h-16 aspect-square rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 shadow-inner">
+                      <img id="cover-preview-img" src="" alt="Kare Önizleme" class="aspect-square w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold text-slate-900">1:1 Kare Kapak Önizlemesi</p>
+                      <p class="text-[11px] text-slate-400">Görsel tam kare formatta kırpılmadan oturur.</p>
+                      <button type="button" id="btn-clear-cover" class="text-xs text-red-500 hover:underline font-bold mt-0.5">Görseli Kaldır</button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- 7. Özel Rozet & Başlangıç Oynanma -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                    Özel Rozet (Opsiyonel)
-                  </label>
-                  <input 
-                    type="text" 
-                    id="form-custom-badge" 
-                    placeholder="Örn: Yeni, Popüler, MEB" 
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
-                    Oynanma Sayısı
-                  </label>
-                  <input 
-                    type="number" 
-                    id="form-views" 
-                    min="0"
-                    placeholder="0" 
-                    value="0"
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
-                  />
-                </div>
+              <!-- 4. Kart Tema Rengi (Seçim Alanı) -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Kart Tema Rengi
+                </label>
+                <select 
+                  id="form-theme" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all"
+                >
+                  <option value="amber" selected>🟠 Amber & Turuncu (Klasik)</option>
+                  <option value="blue">🔵 Mavi & İndigo</option>
+                  <option value="emerald">🟢 Zümrüt Yeşili</option>
+                  <option value="violet">🟣 Mor & Violet</option>
+                  <option value="rose">🔴 Gül Kurusu & Kırmızı</option>
+                  <option value="cyan">🌊 Camgöbeği & Cyan</option>
+                </select>
               </div>
 
-              <!-- 8. Günün / Önerilen Oyunu Checkbox -->
+              <!-- 5. Önerilen Oyun Olarak Belirle (Checkbox / Switch) -->
               <div class="bg-yellow-50/70 border border-yellow-200/80 rounded-2xl p-4 flex items-start gap-3">
                 <input 
                   type="checkbox" 
                   id="form-is-featured" 
                   class="w-5 h-5 mt-0.5 rounded-lg text-yellow-500 focus:ring-yellow-400 border-yellow-300 transition-all cursor-pointer"
                 />
-                <label for="form-is-featured" class="cursor-pointer">
-                  <span class="block text-xs font-extrabold text-slate-900">⭐ Günün / Önerilen Oyunu Olarak Belirle</span>
+                <label for="form-is-featured" class="cursor-pointer select-none">
+                  <span class="block text-xs font-extrabold text-slate-900">⭐ Önerilen Oyun Olarak Belirle</span>
                   <span class="block text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                    İşaretlendiğinde Oyun Dükkanı sayfasındaki sağ sarı panelde tavsiye edilen oyun olarak öne çıkarılır.
+                    İşaretlendiğinde Oyun Dükkanı sayfasındaki sağ sarı 'Günün Oyunu' panelinde öne çıkarılır.
                   </span>
                 </label>
               </div>
@@ -381,18 +321,28 @@
           </div>
         </div>
 
-        <!-- SAĞ SÜTUN: MEVCUT OYUNLAR LİSTESİ (lg:col-span-7) -->
+        <!-- SAĞ SÜTUN: KAYITLI OYUNLAR LİSTESİ & SİLME (lg:col-span-7) -->
         <div class="lg:col-span-7">
           <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80">
             
-            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 flex-wrap gap-2">
               <div>
                 <h2 class="text-xl font-black text-slate-900 tracking-tight">Kayıtlı Oyunlar</h2>
                 <p class="text-xs text-slate-500 font-medium">Firestore veritabanındaki aktif oyun listesi</p>
               </div>
-              <span id="admin-game-count" class="px-3 py-1 bg-yellow-400 text-slate-950 rounded-full text-xs font-black">
-                0 Oyun
-              </span>
+              <div class="flex items-center gap-2">
+                <button 
+                  id="btn-seed-header" 
+                  onclick="window.seedMockGames()" 
+                  class="px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-900 rounded-xl text-xs font-bold transition-colors flex items-center gap-1 shadow-sm"
+                  title="Başlangıç Oyunlarını Firestore'a Aktar"
+                >
+                  ⚡ Başlangıç Oyunlarını Yükle
+                </button>
+                <span id="admin-game-count" class="px-3 py-1 bg-yellow-400 text-slate-950 rounded-full text-xs font-black">
+                  0 Oyun
+                </span>
+              </div>
             </div>
 
             <!-- Oyun Arama / Hızlı Filtre -->
@@ -429,18 +379,63 @@
     import { 
       collection, 
       addDoc, 
-      updateDoc,
+      updateDoc, 
       deleteDoc, 
       doc, 
       onSnapshot, 
       query, 
       orderBy, 
       serverTimestamp,
-      getDocs,
-      where
+      getDocs
     } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
     const ADMIN_EMAIL = 'omerfarukmetin037@gmail.com';
+
+    // Başlangıç Mock Oyunları (İlk Seed için)
+    const INITIAL_SEED_GAMES = [
+      {
+        title: 'Kareköklü Sayılar Labirenti',
+        theme: 'amber',
+        isFeatured: true,
+        coverImage: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      },
+      {
+        title: 'Cebirsel İfadeler Arenası',
+        theme: 'emerald',
+        isFeatured: false,
+        coverImage: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      },
+      {
+        title: 'Hızlı Çarpanlar & EBOB-EKOK',
+        theme: 'blue',
+        isFeatured: false,
+        coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      },
+      {
+        title: 'Geometri & Açı Avcısı',
+        theme: 'cyan',
+        isFeatured: false,
+        coverImage: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      },
+      {
+        title: 'Kesirler Dünyası & Pizza Ustası',
+        theme: 'rose',
+        isFeatured: false,
+        coverImage: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      },
+      {
+        title: 'Fonksiyonlar & Grafikler Bulmacası',
+        theme: 'violet',
+        isFeatured: false,
+        coverImage: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=700&auto=format&fit=crop&q=80',
+        gameUrl: 'https://phet.colorado.edu/tr/'
+      }
+    ];
 
     let editingGameId = null;
     let loadedGamesMap = new Map();
@@ -504,7 +499,7 @@
     if (adminLogoutBtn) adminLogoutBtn.addEventListener('click', logoutAction);
     if (unauthLogoutBtn) unauthLogoutBtn.addEventListener('click', logoutAction);
 
-    // 4. Görsel Yükleme (File & URL Önizleme)
+    // 4. Görsel Yükleme (1:1 Kare Format Dosya & URL Önizleme)
     const coverFileInput = document.getElementById('form-cover-file');
     const coverUrlInput = document.getElementById('form-cover-url');
     const previewBox = document.getElementById('cover-preview-box');
@@ -563,7 +558,7 @@
       }
     }
 
-    // 5. Form Gönderme (addDoc veya updateDoc)
+    // 5. Form Gönderme (addDoc veya updateDoc - Sadeleştirilmiş)
     const gameForm = document.getElementById('game-upload-form');
     const submitBtn = document.getElementById('btn-submit-game');
     const submitBtnText = document.getElementById('btn-submit-text');
@@ -573,13 +568,9 @@
         e.preventDefault();
 
         const title = document.getElementById('form-title').value.trim();
-        const description = document.getElementById('form-description').value.trim();
-        const category = document.getElementById('form-category').value;
         const theme = document.getElementById('form-theme').value;
         const gameUrl = document.getElementById('form-game-url').value.trim();
         const coverImage = document.getElementById('form-cover-url').value.trim() || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80';
-        const customBadge = document.getElementById('form-custom-badge').value.trim();
-        const views = parseInt(document.getElementById('form-views').value, 10) || 0;
         const isFeatured = document.getElementById('form-is-featured').checked;
 
         if (!title || !gameUrl) {
@@ -591,7 +582,7 @@
         submitBtn.disabled = true;
 
         try {
-          // Eğer bu oyun isFeatured olarak seçildiyse, diğer oyunların isFeatured alanını false yap
+          // Eğer bu oyun isFeatured olarak seçildiyse, diğer oyunların isFeatured alanını kaldır
           if (isFeatured) {
             loadedGamesMap.forEach(async (item, id) => {
               if (id !== editingGameId && item.isFeatured) {
@@ -608,30 +599,22 @@
             // Düzenleme Modu (updateDoc)
             await updateDoc(doc(db, "games", editingGameId), {
               title,
-              description,
-              category,
               theme,
               gameUrl,
               coverImage,
-              customBadge,
-              views,
               isFeatured,
               updatedAt: serverTimestamp()
             });
 
-            toast.success("Oyun bilgileri başarıyla güncellendi!");
+            toast.success("Oyun başarıyla güncellendi!");
             window.cancelEdit();
           } else {
             // Yeni Ekleme Modu (addDoc)
             await addDoc(collection(db, "games"), {
               title,
-              description,
-              category,
               theme,
               gameUrl,
               coverImage,
-              customBadge,
-              views,
               isFeatured,
               createdAt: serverTimestamp(),
               updatedAt: serverTimestamp()
@@ -640,9 +623,7 @@
             toast.success("Oyun başarıyla dükkana eklendi!");
             gameForm.reset();
             hideCoverPreview();
-            document.getElementById('form-category').value = "8. Sınıf (LGS)";
             document.getElementById('form-theme').value = "amber";
-            document.getElementById('form-views').value = "0";
             document.getElementById('form-is-featured').checked = false;
           }
         } catch (error) {
@@ -669,9 +650,13 @@
 
         if (snapshot.empty) {
           gameListContainer.innerHTML = `
-            <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-              <p class="text-xs font-bold text-slate-500">Henüz eklenmiş bir oyun bulunmuyor.</p>
-              <p class="text-[11px] text-slate-400 mt-1">Sol taraftaki formdan ilk eğitici oyununuzu ekleyebilirsiniz.</p>
+            <div class="text-center py-12 px-4 bg-yellow-50/60 rounded-3xl border border-dashed border-yellow-300">
+              <div class="text-4xl mb-3">🎮</div>
+              <p class="text-sm font-black text-slate-900">Henüz Veritabanında Oyun Kaydı Yok</p>
+              <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Sol taraftaki sadeleştirilmiş formdan oyun ekleyebilir veya aşağıdaki butona basarak 6 başlangıç oyununu Firestore'a aktarabilirsiniz.</p>
+              <button onclick="window.seedMockGames()" class="mt-4 px-5 py-2.5 bg-slate-950 hover:bg-yellow-400 hover:text-slate-950 text-white rounded-xl text-xs font-black transition-all shadow-md active:scale-95 inline-flex items-center gap-2">
+                <span>⚡ 6 Başlangıç Oyununu Firestore'a Yükle (Seed)</span>
+              </button>
             </div>
           `;
           if (gameCountBadge) gameCountBadge.textContent = "0 Oyun";
@@ -691,7 +676,31 @@
       });
     }
 
-    // Admin Listesini Render Et
+    // 7. Başlangıç Oyunlarını Firestore'a Aktarma (Seed)
+    window.seedMockGames = async () => {
+      const btn = document.getElementById('btn-seed-header');
+      if (btn) btn.disabled = true;
+
+      toast.info("Başlangıç oyunları veritabanına aktarılıyor...");
+
+      try {
+        for (const item of INITIAL_SEED_GAMES) {
+          await addDoc(collection(db, "games"), {
+            ...item,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+        }
+        toast.success("6 adet başlangıç oyunu Firestore'a başarıyla yüklendi! Artık dilediğinizi silebilir veya düzenleyebilirsiniz.");
+      } catch (err) {
+        console.error("Seed hatası:", err);
+        toast.error("Oyunlar aktarılırken hata oluştu: " + err.message);
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    };
+
+    // 8. Admin Listesini Render Et (1:1 Kare Görsel & Çöp Kutusu İkonlu Sil Butonu)
     function renderAdminGames() {
       const gameListContainer = document.getElementById('admin-game-list');
       const searchInput = document.getElementById('admin-search');
@@ -703,16 +712,12 @@
       let matchCount = 0;
 
       loadedGamesMap.forEach((item, id) => {
-        if (queryText && 
-            !item.title?.toLowerCase().includes(queryText) && 
-            !item.description?.toLowerCase().includes(queryText) && 
-            !item.category?.toLowerCase().includes(queryText)) {
+        if (queryText && !item.title?.toLowerCase().includes(queryText)) {
           return;
         }
 
         matchCount++;
         const isCurrentlyEditing = editingGameId === id;
-        const viewsCount = item.views !== undefined && item.views !== null ? item.views : 0;
         const coverSrc = item.coverImage || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80';
 
         const themeBadges = {
@@ -729,40 +734,46 @@
           <div class="p-4 ${isCurrentlyEditing ? 'bg-amber-50/80 border-amber-300 ring-2 ring-amber-400/50' : 'bg-slate-50 hover:bg-slate-100/80 border-slate-200/70'} rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
             
             <div class="flex items-center gap-3.5 flex-1 min-w-0">
-              <img 
-                src="${coverSrc}" 
-                alt="${item.title}" 
-                class="w-14 h-14 rounded-xl object-cover border border-slate-200 shadow-sm flex-shrink-0"
-                onerror="this.src='https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80'"
-              />
+              <!-- 1:1 Kare Görsel Küçük Önizleme -->
+              <div class="w-14 h-14 aspect-square rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 shadow-sm">
+                <img 
+                  src="${coverSrc}" 
+                  alt="${item.title}" 
+                  class="aspect-square w-full h-full object-cover"
+                  onerror="this.src='https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80'"
+                />
+              </div>
+
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 flex-wrap mb-1">
                   <span class="px-2 py-0.5 text-[10px] font-black uppercase rounded-md border ${themeBadgeClass}">
-                    ${item.category || '8. Sınıf'}
+                    ${item.theme || 'Tema'}
                   </span>
-                  <span class="px-2 py-0.5 bg-slate-200/70 text-slate-700 text-[10px] font-bold rounded-md flex items-center gap-1" title="Oynanma Sayısı">
-                    👁️ ${viewsCount}
-                  </span>
-                  ${item.isFeatured ? `<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1 shadow-sm">⭐ Günün Oyunu</span>` : ''}
-                  ${item.customBadge ? `<span class="px-2 py-0.5 bg-slate-900 text-white text-[10px] font-black rounded-md flex items-center gap-1">🏷️ ${item.customBadge}</span>` : ''}
+                  ${item.isFeatured ? `<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1 shadow-sm">⭐ Önerilen</span>` : ''}
                   ${isCurrentlyEditing ? '<span class="px-2 py-0.5 bg-amber-200 text-amber-900 text-[10px] font-black rounded-md animate-pulse">Düzenleniyor</span>' : ''}
                 </div>
                 <h4 class="text-sm font-extrabold text-slate-900 truncate">${item.title}</h4>
-                ${item.description ? `<p class="text-xs text-slate-500 line-clamp-1 mt-0.5">${item.description}</p>` : ''}
               </div>
             </div>
 
+            <!-- Aksiyon Butonları -->
             <div class="flex items-center gap-2 flex-shrink-0 self-end sm:self-center">
-              ${item.gameUrl ? `
+              ${item.gameUrl && item.gameUrl !== '#' ? `
                 <a href="${item.gameUrl}" target="_blank" class="px-3 py-2 bg-white hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 transition-colors" title="Oyunu Başlat">
                   Test Et
                 </a>
               ` : ''}
-              <button onclick="window.startEdit('${id}')" class="px-3 py-2 bg-yellow-50 hover:bg-yellow-100 text-yellow-900 text-xs font-bold rounded-xl border border-yellow-200 transition-colors flex items-center gap-1" title="Oyunu Düzenle">
+              
+              <button onclick="window.startEdit('${id}')" class="px-3 py-2 bg-yellow-50 hover:bg-yellow-100 text-yellow-900 text-xs font-bold rounded-xl border border-yellow-200 transition-colors flex items-center gap-1.5 active:scale-95" title="Oyunu Düzenle">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                 Düzenle
               </button>
-              <button onclick="window.deleteGame('${id}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-xl border border-red-200/60 transition-colors" title="Oyunu Sil">
+
+              <!-- Sil (Çöp Kutusu İkonlu) Butonu -->
+              <button onclick="window.deleteGame('${id}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-xl border border-red-200/60 transition-colors flex items-center gap-1.5 active:scale-95" title="Oyunu Kalıcı Olarak Sil">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
                 Sil
               </button>
             </div>
@@ -785,7 +796,7 @@
       renderAdminGames();
     };
 
-    // 7. Oyun Düzenleme Başlatma
+    // 9. Oyun Düzenleme Başlatma (Sadeleştirilmiş Alanlar)
     window.startEdit = (gameId) => {
       const item = loadedGamesMap.get(gameId);
       if (!item) {
@@ -797,13 +808,9 @@
 
       // Form inputlarını doldur
       document.getElementById('form-title').value = item.title || '';
-      document.getElementById('form-description').value = item.description || '';
-      document.getElementById('form-category').value = item.category || '8. Sınıf (LGS)';
       document.getElementById('form-theme').value = item.theme || 'amber';
       document.getElementById('form-game-url').value = item.gameUrl || '';
       document.getElementById('form-cover-url').value = item.coverImage || '';
-      document.getElementById('form-custom-badge').value = item.customBadge || '';
-      document.getElementById('form-views').value = item.views !== undefined ? item.views : 0;
       document.getElementById('form-is-featured').checked = Boolean(item.isFeatured);
 
       if (item.coverImage) {
@@ -827,14 +834,12 @@
       toast.info("Düzenleme modu aktif. Bilgileri değiştirip 'Oyunu Güncelle'ye basın.");
     };
 
-    // 8. Düzenlemeyi İptal Etme
+    // 10. Düzenlemeyi İptal Etme
     window.cancelEdit = () => {
       editingGameId = null;
       gameForm.reset();
       hideCoverPreview();
-      document.getElementById('form-category').value = "8. Sınıf (LGS)";
       document.getElementById('form-theme').value = "amber";
-      document.getElementById('form-views').value = "0";
       document.getElementById('form-is-featured').checked = false;
 
       document.getElementById('form-heading').textContent = "Yeni Oyun Ekle";
@@ -846,15 +851,15 @@
       renderAdminGames();
     };
 
-    // 9. Oyun Silme Fonksiyonu
+    // 11. Oyun Silme Fonksiyonu (Firestore'dan Kalıcı Olarak Sil)
     window.deleteGame = async (gameId, title) => {
-      if (!confirm(`"${title}" adlı oyunu silmek istediğinize emin misiniz?`)) {
+      if (!confirm(`"${title}" adlı oyunu veritabanından kalıcı olarak silmek istediğinize emin misiniz?`)) {
         return;
       }
 
       try {
         await deleteDoc(doc(db, "games", gameId));
-        toast.info("Oyun dükkandan kaldırıldı.");
+        toast.success(`"${title}" başarıyla silindi.`);
         if (editingGameId === gameId) {
           window.cancelEdit();
         }

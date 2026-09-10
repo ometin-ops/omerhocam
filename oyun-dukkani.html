@@ -94,15 +94,15 @@
 
 
   <!-- ========================================================================= -->
-  <!-- 2. ORTA ANA ALAN (Main Content - Oyun Kartları Izgarası) -->
+  <!-- 2. ORTA ANA ALAN (Main Content - Sadeleştirilmiş 1:1 Kare Kartlar) -->
   <!-- ========================================================================= -->
   <main class="flex-1 bg-slate-50 flex flex-col h-full overflow-hidden">
     
-    <!-- Üst Arama Çubuğu (Mobilde Canlı Sarı & rounded-b-[2.5rem] Kavisli) -->
+    <!-- Üst Arama Çubuğu -->
     <header class="px-5 md:px-8 pt-2 md:pt-6 pb-6 md:pb-6 bg-yellow-400 md:bg-slate-50/80 backdrop-blur-md border-b-0 md:border-b border-slate-200/60 rounded-b-[2.5rem] md:rounded-none shadow-lg md:shadow-none flex-shrink-0 z-10">
       <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
         
-        <!-- Arama Çubuğu (Geniş & Modern) -->
+        <!-- Arama Çubuğu -->
         <div class="relative w-full max-w-2xl">
           <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -113,12 +113,12 @@
             type="text" 
             id="search-input"
             oninput="window.handleSearch()"
-            placeholder="🎮 Oyun veya konu ara..." 
+            placeholder="🎮 Oyun ara..." 
             class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200/80 rounded-2xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all shadow-sm"
           />
         </div>
 
-        <!-- Masaüstü Hızlı İpucu / Durum -->
+        <!-- Masaüstü Canlı Oyun Durumu -->
         <div class="hidden md:flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span>Canlı Oyun Arama</span>
@@ -141,7 +141,7 @@
       <div class="max-w-6xl mx-auto">
         
         <!-- Bilgilendirme Çubuğu -->
-        <div class="flex items-center justify-between mb-5">
+        <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-2.5">
             <h2 id="active-category-title" class="text-lg md:text-xl font-extrabold text-slate-900">Tüm Oyunlar</h2>
             <span id="game-count-badge" class="px-2.5 py-0.5 bg-yellow-400 text-slate-950 text-xs font-black rounded-full shadow-sm">0 OYUN</span>
@@ -149,22 +149,22 @@
           <p class="text-xs font-semibold text-slate-500 hidden sm:block">Eğitici Matematik ve Mantık Oyunları</p>
         </div>
 
-        <!-- OYUN KARTLARI DİKEY GRID YAPISI -->
-        <div id="game-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 pb-16">
+        <!-- OYUN KARTLARI IZGARASI (1:1 Kare Format) -->
+        <div id="game-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-6 pb-16">
           <!-- Yükleniyor Göstergesi -->
           <div class="col-span-full text-center py-20">
             <div class="w-10 h-10 border-4 border-slate-200 border-t-yellow-500 rounded-full animate-spin mx-auto mb-3"></div>
-            <p class="text-xs font-bold text-slate-400">Oyun Dükkanı Yükleniyor...</p>
+            <p class="text-xs font-bold text-slate-400">Oyunlar Yükleniyor...</p>
           </div>
         </div>
 
-        <!-- Arama Sonucu Bulunamadı Durumu -->
+        <!-- Arama Sonucu Bulunamadı / Oyun Yok Durumu -->
         <div id="no-results" class="hidden text-center py-16">
           <div class="w-16 h-16 bg-slate-200 text-slate-400 rounded-3xl flex items-center justify-center mx-auto mb-4 text-3xl">
             🎮
           </div>
-          <h3 class="text-lg font-bold text-slate-800">Eşleşen Oyun Bulunamadı</h3>
-          <p class="text-sm text-slate-500 mt-1 max-w-sm mx-auto">Aradığınız kriterlere uygun bir oyun bulunamadı. Lütfen farklı bir arama terimi deneyin.</p>
+          <h3 class="text-lg font-bold text-slate-800">Henüz Oyun Bulunmuyor</h3>
+          <p class="text-sm text-slate-500 mt-1 max-w-sm mx-auto">Aradığınız kriterlere uygun bir oyun bulunamadı veya henüz eklenmedi.</p>
           <button onclick="window.resetFilters()" class="mt-4 px-5 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-slate-950 rounded-xl text-xs font-bold transition-colors shadow-sm">Tüm Oyunları Göster</button>
         </div>
 
@@ -175,12 +175,12 @@
 
 
   <!-- ========================================================================= -->
-  <!-- 3. SAĞ PANEL (Sadeleştirilmiş - Doğrudan Günün/Önerilen Oyunu Odaklı) -->
+  <!-- 3. SAĞ PANEL: ÖNERİLEN OYUN / GÜNÜN OYUNU (1:1 Kare Kapak) -->
   <!-- ========================================================================= -->
   <aside id="filter-sidebar" class="w-full lg:w-80 xl:w-96 bg-yellow-400 text-slate-950 flex flex-col justify-between p-6 md:p-8 flex-shrink-0 z-20 overflow-y-auto hidden lg:flex border-l border-yellow-500/30">
     
     <div>
-      <!-- Sağ Panel Sade Başlık -->
+      <!-- Sağ Panel Başlık -->
       <div class="flex items-center justify-between mb-6">
         <div>
           <span class="text-xs font-black uppercase tracking-wider text-yellow-950/70">ÖNERİLEN OYUN</span>
@@ -191,38 +191,29 @@
         </div>
       </div>
 
-      <!-- Günün / Önerilen Oyunu Kartı (Admin Panelinden Dinamik Olarak Seçilir) -->
+      <!-- Günün / Önerilen Oyunu Kartı (1:1 Kare Görsel) -->
       <div id="featured-card-container" class="bg-white rounded-3xl p-5 shadow-xl border border-yellow-200 relative overflow-hidden transition-all duration-300">
         
-        <!-- Üst Kapak Görseli -->
-        <div class="relative w-full h-40 rounded-2xl overflow-hidden bg-slate-950 mb-4 shadow-inner">
+        <!-- Üst 1:1 Kare Kapak Görseli -->
+        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-950 mb-4 shadow-inner">
           <img 
             id="featured-cover" 
             src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80" 
             alt="Günün Oyunu"
-            class="w-full h-full object-cover"
+            class="aspect-square w-full h-full object-cover rounded-2xl"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           
           <div class="absolute top-3 left-3">
             <span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-lg shadow-sm flex items-center gap-1">
               ⭐ Günün Tavsiyesi
             </span>
           </div>
-
-          <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
-            <span id="featured-category" class="text-xs font-extrabold px-2 py-0.5 bg-black/60 backdrop-blur-md rounded-md border border-white/20">8. Sınıf (LGS)</span>
-            <span id="featured-views" class="text-[11px] font-bold bg-white/20 backdrop-blur-md px-2 py-0.5 rounded-md">👁️ 1.2k</span>
-          </div>
         </div>
 
-        <!-- Oyun Bilgileri -->
-        <h3 id="featured-title" class="text-lg font-black text-slate-900 tracking-tight mb-1.5 leading-snug">
+        <!-- Oyun Adı -->
+        <h3 id="featured-title" class="text-base sm:text-lg font-black text-slate-900 tracking-tight mb-4 leading-snug">
           Kareköklü Sayılar Labirenti
         </h3>
-        <p id="featured-desc" class="text-xs text-slate-600 leading-relaxed font-medium mb-5 line-clamp-3">
-          Kareköklü ifadeleri çarparak ve sadeleştirerek labirentteki çıkış kapısını bul, yüksek skorları topla!
-        </p>
 
         <!-- Öne Çıkan Oyun Butonu -->
         <button id="featured-btn" onclick="window.playFeaturedGame()" class="w-full bg-slate-950 hover:bg-slate-800 text-white font-black py-3.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.98]">
@@ -256,36 +247,28 @@
   <!-- OYUN OYNAMA MODALI -->
   <!-- ========================================================================= -->
   <div id="game-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-    <div id="game-modal-content" class="bg-white rounded-[2.5rem] w-full max-w-lg p-6 md:p-8 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300 relative flex flex-col justify-between">
+    <div id="game-modal-content" class="bg-white rounded-[2.5rem] w-full max-w-sm p-6 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300 relative flex flex-col justify-between text-center">
       
       <!-- Kapat Butonu -->
-      <button onclick="window.closeGameModal()" class="absolute top-5 right-5 p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full transition-colors">
+      <button onclick="window.closeGameModal()" class="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full transition-colors z-10">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
       <div>
-        <div class="flex items-center gap-2 mb-3">
-          <span id="modal-category" class="px-3 py-1 bg-yellow-100 text-yellow-900 text-xs font-bold rounded-full border border-yellow-200">8. Sınıf (LGS)</span>
-          <span id="modal-views" class="text-xs font-semibold text-slate-400">👁️ 1.2k Oynanma</span>
+        <div class="w-full aspect-square rounded-2xl overflow-hidden bg-slate-900 mb-4 shadow-inner">
+          <img id="modal-cover" src="" alt="Oyun Afişi" class="aspect-square w-full h-full object-cover" />
         </div>
         
-        <h2 id="modal-title" class="text-2xl font-black text-slate-900 tracking-tight mb-2">Oyun Adı</h2>
-        <p id="modal-desc" class="text-slate-600 text-sm leading-relaxed mb-6">Oyun açıklaması yükleniyor...</p>
-
-        <!-- Oyun Alanı / Önizleme Kapsayıcısı -->
-        <div class="relative w-full aspect-video rounded-2xl bg-slate-900 overflow-hidden shadow-inner flex flex-col items-center justify-center text-center p-6 text-white mb-6">
-          <div class="text-5xl mb-2 animate-bounce">🎮</div>
-          <span class="font-extrabold text-sm text-yellow-400">Oyun Motoru Hazırlanıyor</span>
-          <p class="text-xs text-slate-400 mt-1 max-w-xs">Bu oyun tarayıcınızda doğrudan tam ekran ve interaktif olarak açılmak üzere hazırlanmıştır.</p>
-        </div>
+        <h2 id="modal-title" class="text-xl font-black text-slate-900 tracking-tight mb-2">Oyun Adı</h2>
+        <p class="text-xs text-slate-500 mb-6">Oyunu yeni sekmede başlatmak için aşağıdaki butona tıklayın.</p>
       </div>
 
       <div class="flex items-center gap-3">
-        <button onclick="window.launchGameFullscreen()" class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black py-3.5 px-6 rounded-2xl text-sm transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          Tam Ekran Başlat
+        <button onclick="window.launchGameFullscreen()" class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black py-3.5 px-5 rounded-2xl text-xs transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Oyunu Başlat
         </button>
-        <button onclick="window.closeGameModal()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-sm transition-all">
+        <button onclick="window.closeGameModal()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs transition-all">
           Kapat
         </button>
       </div>
@@ -295,159 +278,67 @@
 
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: FIREBASE ENTEGRASYONU & OYUN DÜKKANI MOTORU -->
+  <!-- JAVASCRIPT: DİNAMİK FIRESTORE ENTEGRASYONU -->
   <!-- ========================================================================= -->
   <script type="module">
     import { db } from './firebase-config.js';
     import { 
       collection, 
-      doc, 
       onSnapshot, 
       query, 
-      orderBy,
-      updateDoc,
-      increment
+      orderBy 
     } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    // Yedek Mock Oyunlar (Firestore koleksiyonu boşsa veya çevrimdışıysa anında gösterilir)
-    const fallbackGames = [
-      {
-        id: 'game-1',
-        title: 'Kareköklü Sayılar Labirenti',
-        category: '8. Sınıf (LGS)',
-        customBadge: 'Tavsiye',
-        isFeatured: true,
-        views: 1240,
-        description: 'Kareköklü ifadeleri çarparak ve sadeleştirerek labirentteki çıkış kapısını bul, yüksek skorları topla!',
-        theme: 'amber',
-        coverImage: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      },
-      {
-        id: 'game-2',
-        title: 'Cebirsel İfadeler Arenası',
-        category: '7. Sınıf',
-        customBadge: 'Yeni',
-        isFeatured: false,
-        views: 890,
-        description: 'Bilinmeyenleri hızla bul, denklem canavarlarını alt et ve matematiğin hız şampiyonu ol!',
-        theme: 'emerald',
-        coverImage: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      },
-      {
-        id: 'game-3',
-        title: 'Hızlı Çarpanlar & EBOB-EKOK',
-        category: '8. Sınıf (LGS)',
-        customBadge: 'Popüler',
-        isFeatured: false,
-        views: 2410,
-        description: 'Süre dolmadan en büyük ortak böleni ve katları yakala, komboları patlat!',
-        theme: 'blue',
-        coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      },
-      {
-        id: 'game-4',
-        title: 'Geometri & Açı Avcısı',
-        category: '6. Sınıf',
-        customBadge: 'Eğlenceli',
-        isFeatured: false,
-        views: 730,
-        description: 'Açıları tahmin et, üçgen ve dörtgenlerin bilinmeyen açılarını hedefe kilitlenerek bul!',
-        theme: 'cyan',
-        coverImage: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      },
-      {
-        id: 'game-5',
-        title: 'Kesirler Dünyası & Pizza Ustası',
-        category: '5. Sınıf',
-        customBadge: 'Yeni',
-        isFeatured: false,
-        views: 1120,
-        description: 'Sipariş edilen kesirli pizzaları doğru dilimle, denk kesirleri bularak müşterileri mutlu et!',
-        theme: 'rose',
-        coverImage: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      },
-      {
-        id: 'game-6',
-        title: 'Fonksiyonlar & Grafikler Bulmacası',
-        category: 'YKS & Mantık',
-        customBadge: 'Zorlu',
-        isFeatured: false,
-        views: 1850,
-        description: 'Fonksiyon grafiklerini doğru eksenlerle eşleştir, parabollerin tepe noktalarını yakala!',
-        theme: 'violet',
-        coverImage: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=700&auto=format&fit=crop&q=80',
-        gameUrl: '#'
-      }
-    ];
-
-    let allGames = [...fallbackGames];
+    let allGames = [];
     let featuredGame = null;
     let currentGameInModal = null;
 
-    // Sayı Formatlayıcı (1240 -> 1.2k)
-    function formatViews(count) {
-      if (count === undefined || count === null) count = 0;
-      if (count >= 1000) {
-        return (count / 1000).toFixed(1).replace('.0', '') + 'k';
-      }
-      return count.toString();
-    }
-
-    // 1. FIRESTORE 'games' KOLEKSİYONUNU GERÇEK ZAMANLI DİNLE
+    // 1. FIRESTORE 'games' KOLEKSİYONUNU GERÇEK ZAMANLI DİNLE (Statik Dizi Yok)
     try {
       const q = query(collection(db, "games"), orderBy("createdAt", "desc"));
       onSnapshot(q, (snapshot) => {
-        if (!snapshot.empty) {
-          allGames = [];
-          snapshot.forEach((docSnap) => {
-            allGames.push({
-              id: docSnap.id,
-              ...docSnap.data()
-            });
+        allGames = [];
+        snapshot.forEach((docSnap) => {
+          allGames.push({
+            id: docSnap.id,
+            ...docSnap.data()
           });
-        } else {
-          allGames = [...fallbackGames];
-        }
+        });
+
         updateFeaturedCard();
         renderCards();
       }, (err) => {
-        console.warn("Firestore dinleme uyarısı (yedek veriler aktif):", err);
-        allGames = [...fallbackGames];
+        console.warn("Firestore oyun dinleme hatası:", err);
+        allGames = [];
         updateFeaturedCard();
         renderCards();
       });
     } catch(error) {
       console.warn("Firebase bağlantı hatası:", error);
-      allGames = [...fallbackGames];
+      allGames = [];
       updateFeaturedCard();
       renderCards();
     }
 
     // 2. SAĞ PANEL: ÖNERİLEN / GÜNÜN OYUNU KARTINI GÜNCELLE
     function updateFeaturedCard() {
-      // isFeatured: true olanı bul, yoksa ilk oyunu seç
       featuredGame = allGames.find(g => g.isFeatured === true) || allGames[0];
-      if (!featuredGame) return;
+      const container = document.getElementById('featured-card-container');
+
+      if (!featuredGame) {
+        if (container) container.classList.add('opacity-50', 'pointer-events-none');
+        return;
+      }
+      if (container) container.classList.remove('opacity-50', 'pointer-events-none');
 
       const fTitle = document.getElementById('featured-title');
-      const fDesc = document.getElementById('featured-desc');
-      const fCat = document.getElementById('featured-category');
-      const fViews = document.getElementById('featured-views');
       const fCover = document.getElementById('featured-cover');
 
       if (fTitle) fTitle.textContent = featuredGame.title || 'Günün Oyunu';
-      if (fDesc) fDesc.textContent = featuredGame.description || 'Eğitici matematik oyunu seni bekliyor.';
-      if (fCat) fCat.textContent = featuredGame.category || 'Genel';
-      if (fViews) fViews.textContent = `👁️ ${formatViews(featuredGame.views)}`;
       if (fCover && featuredGame.coverImage) fCover.src = featuredGame.coverImage;
     }
 
-    // 3. OYUN KARTLARINI RENDER ET
+    // 3. SADELEŞTİRİLMİŞ 1:1 KARE OYUN KARTLARINI RENDER ET
     function renderCards() {
       const grid = document.getElementById('game-grid');
       const searchInput = document.getElementById('search-input');
@@ -456,10 +347,7 @@
       if (!grid) return;
 
       const filtered = allGames.filter(game => {
-        return !queryText || 
-          (game.title && game.title.toLowerCase().includes(queryText)) ||
-          (game.description && game.description.toLowerCase().includes(queryText)) ||
-          (game.category && game.category.toLowerCase().includes(queryText));
+        return !queryText || (game.title && game.title.toLowerCase().includes(queryText));
       });
 
       // Sayaçlar
@@ -478,89 +366,45 @@
 
       if (noResults) noResults.classList.add('hidden');
 
-      const themeGradients = {
-        'blue': 'from-blue-600 via-indigo-600 to-indigo-900',
-        'emerald': 'from-emerald-600 via-teal-600 to-slate-900',
-        'violet': 'from-violet-600 via-purple-700 to-slate-900',
-        'rose': 'from-rose-500 via-pink-600 to-slate-900',
-        'amber': 'from-amber-500 via-orange-600 to-slate-900',
-        'cyan': 'from-cyan-500 via-blue-600 to-indigo-900'
-      };
-
       let html = '';
       filtered.forEach(game => {
-        const cardGrad = themeGradients[game.theme] || 'from-slate-800 via-slate-900 to-black';
-        const viewsStr = formatViews(game.views);
         const coverSrc = game.coverImage || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80';
 
         html += `
-          <div class="game-card group bg-gradient-to-br ${cardGrad} rounded-3xl shadow-md hover:shadow-2xl hover:scale-[1.015] transition-all duration-300 flex flex-col justify-between overflow-hidden text-white border border-white/10">
+          <div class="game-card group bg-white rounded-3xl p-3.5 sm:p-4 shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between border border-slate-200/80">
             
-            <!-- 1. Üst Kısım: 16:9 Oranında Kapak Görseli ve Rozetler -->
-            <div class="relative w-full h-36 sm:h-40 overflow-hidden bg-slate-950 flex items-center justify-center">
+            <!-- 1. Üst Kısım: 1:1 Kare Kapak Görseli (aspect-square w-full object-cover rounded-2xl) -->
+            <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-900 shadow-inner mb-3.5">
               <img 
                 src="${coverSrc}" 
                 alt="${game.title}"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                class="aspect-square w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-2xl"
+                onerror="this.src='https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80'"
               />
-              <div class="hidden absolute inset-0 bg-gradient-to-br from-amber-400 to-yellow-600 items-center justify-center text-4xl shadow-inner">
-                🎮
-              </div>
-
-              <!-- Karartma Katmanı -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-              <!-- Sol Üst: Sınıf Rozeti -->
-              <div class="absolute top-3 left-3">
-                <span class="px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-black rounded-lg border border-white/20 inline-flex items-center gap-1.5 shadow-sm">
-                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                  ${game.category || 'Genel'}
-                </span>
-              </div>
-
-              <!-- Sağ Üst: Özel Rozet veya Önerilen -->
-              ${(game.isFeatured || game.customBadge) ? `
-                <div class="absolute top-3 right-3">
+              ${game.isFeatured ? `
+                <div class="absolute top-2.5 right-2.5">
                   <span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-lg shadow-md flex items-center gap-1">
-                    ⭐ ${game.customBadge ? game.customBadge : 'Günün Oyunu'}
+                    ⭐ Önerilen
                   </span>
                 </div>
               ` : ''}
             </div>
 
-            <!-- 2. Orta Kısım: Başlık & Açıklama -->
-            <div class="p-5 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 class="text-base sm:text-lg font-black text-white leading-snug break-words whitespace-normal drop-shadow-sm group-hover:text-yellow-300 transition-colors">
-                  ${game.title}
-                </h3>
-                <p class="text-xs text-white/80 mt-2 line-clamp-2 leading-relaxed font-medium">
-                  ${game.description || ''}
-                </p>
-              </div>
+            <!-- 2. Alt Kısım: Oyun Adı ve Hemen Oyna Butonu -->
+            <div class="flex flex-col gap-3">
+              <h3 class="text-sm sm:text-base font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-yellow-600 transition-colors">
+                ${game.title}
+              </h3>
 
-              <!-- 3. Alt Bar: Oynanma Sayısı (Sol) & Oyna Butonu (Sağ) -->
-              <div class="flex flex-row justify-between items-center w-full mt-4 pt-3 border-t border-white/20">
-                
-                <!-- Sol: Canlı Oynanma Sayacı -->
-                <div class="flex items-center gap-1.5 text-xs font-bold text-white bg-white/15 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-xl whitespace-nowrap shadow-sm" title="${game.views || 0} kez oynandı">
-                  <span class="text-xs">👁️</span>
-                  <span class="font-black text-white tracking-wide">${viewsStr}</span>
-                </div>
-
-                <!-- Sağ: Şık Kare Oyna Butonu -->
-                <button 
-                  onclick="window.playGame('${game.id}')" 
-                  class="w-9 h-9 bg-white/20 hover:bg-yellow-400 hover:text-slate-950 backdrop-blur-md rounded-xl flex items-center justify-center text-white transition-all active:scale-95 shadow-sm hover:scale-110"
-                  title="Oyunu Başlat"
-                >
-                  <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </button>
-
-              </div>
+              <button 
+                onclick="window.playGame('${game.id}')" 
+                class="w-full bg-slate-950 hover:bg-yellow-400 hover:text-slate-950 text-white font-black py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 group/btn"
+              >
+                <svg class="w-3.5 h-3.5 fill-current text-yellow-400 group-hover/btn:text-slate-950 transition-colors" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <span>Hemen Oyna</span>
+              </button>
             </div>
 
           </div>
@@ -570,42 +414,26 @@
       grid.innerHTML = html;
     }
 
-    // 4. OYUN OYNAMA & TIKLANMA SAYACI ARTIRMA (FIRESTORE)
-    window.playGame = async function(gameId) {
+    // 4. OYUN OYNAMA İŞLEMİ
+    window.playGame = function(gameId) {
       const game = allGames.find(g => g.id === gameId);
       if (!game) return;
 
-      // Yerel sayacı artır ve anında ekrana yansıt
-      game.views = (game.views || 0) + 1;
-      renderCards();
-      updateFeaturedCard();
-
-      // Firestore üzerinde views sayacını atomik olarak artır
-      try {
-        if (!gameId.startsWith('game-')) {
-          const gameRef = doc(db, "games", gameId);
-          await updateDoc(gameRef, {
-            views: increment(1)
-          });
-        }
-      } catch(err) {
-        console.warn("Firestore sayaç güncelleme:", err);
-      }
-
       currentGameInModal = game;
+
+      if (game.gameUrl && game.gameUrl !== '#') {
+        window.open(game.gameUrl, '_blank');
+        return;
+      }
 
       // Modal İçeriğini Doldur
       const modal = document.getElementById('game-modal');
       const modalContent = document.getElementById('game-modal-content');
       const mTitle = document.getElementById('modal-title');
-      const mCat = document.getElementById('modal-category');
-      const mDesc = document.getElementById('modal-desc');
-      const mViews = document.getElementById('modal-views');
+      const mCover = document.getElementById('modal-cover');
 
       if (mTitle) mTitle.textContent = game.title;
-      if (mCat) mCat.textContent = game.category || 'Genel';
-      if (mDesc) mDesc.textContent = game.description || 'Eğitici matematik oyunu.';
-      if (mViews) mViews.textContent = `👁️ ${formatViews(game.views)} Oynanma`;
+      if (mCover && game.coverImage) mCover.src = game.coverImage;
 
       if (modal && modalContent) {
         modal.classList.remove('hidden');
@@ -643,7 +471,7 @@
       if (currentGameInModal && currentGameInModal.gameUrl && currentGameInModal.gameUrl !== '#') {
         window.open(currentGameInModal.gameUrl, '_blank');
       } else if (currentGameInModal) {
-        alert(`🎮 "${currentGameInModal.title}" başlatılıyor!\nOyun sayfası yükleniyor.`);
+        alert(`🎮 "${currentGameInModal.title}" başlatılıyor!`);
       }
       window.closeGameModal();
     };
