@@ -1,0 +1,20 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/oyun-dukkani", "destination": "/oyun-dukkani.html" },
+    { "source": "/oyun-admin", "destination": "/oyun-admin.html" },
+    { "source": "/kutuphane", "destination": "/kutuphane.html" },
+    { "source": "/kutuphane-admin", "destination": "/kutuphane-admin.html" },
+    { "source": "/ogrenci-paneli", "destination": "/ogrenci-paneli.html" },
+    { "source": "/admin-paneli", "destination": "/admin-paneli.html" },
+    { "source": "/admin-ogrenciler", "destination": "/admin-ogrenciler.html" },
+    { "source": "/admin-sorular", "destination": "/admin-sorular.html" },
+    { "source": "/admin-takvim", "destination": "/admin-takvim.html" },
+    { "source": "/cerez-politikasi", "destination": "/cerez-politikasi.html" },
+    { "source": "/kullanim-kosullari", "destination": "/kullanim-kosullari.html" },
+    { "source": "/kvkk", "destination": "/kvkk.html" },
+    { "source": "/iptal-iade-kosullari", "destination": "/iptal-iade-kosullari.html" }
+  ]
+}
