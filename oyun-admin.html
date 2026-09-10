@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oyun Yönetim Paneli - Ömer Hoca</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Toast Bildirimleri -->
+  <script src="toast.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen antialiased flex flex-col">
+
+  <!-- ========================================================================= -->
+  <!-- 1. YÜKLENİYOR DURUMU (Auth Loading State) -->
+  <!-- ========================================================================= -->
+  <div id="auth-loading" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex flex-col items-center justify-center text-white">
+    <div class="w-12 h-12 border-4 border-white/30 border-t-yellow-400 rounded-full animate-spin mb-4"></div>
+    <p class="font-bold text-sm tracking-wide">Güvenlik ve Yetki Kontrol Ediliyor...</p>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. GİRİŞ YAPILMAMIŞ DURUM (Google Sign-In State) -->
+  <!-- ========================================================================= -->
+  <div id="login-view" class="hidden flex-1 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-md w-full shadow-2xl border border-slate-200/80 text-center">
+      <div class="w-16 h-16 bg-yellow-100 text-slate-950 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner text-3xl">
+        🎮
+      </div>
+
+      <h1 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Oyun Dükkanı Yönetimi</h1>
+      <p class="text-xs font-medium text-slate-500 mb-8 leading-relaxed">
+        Bu alana sadece yetkili yönetici erişebilir. Lütfen Google hesabınız ile giriş yapın.
+      </p>
+
+      <button id="btn-google-login" class="w-full bg-slate-900 hover:bg-yellow-500 hover:text-slate-950 text-white font-bold py-3.5 px-6 rounded-2xl text-sm flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95">
+        <svg class="w-5 h-5" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        Google ile Giriş Yap
+      </button>
+
+      <div class="mt-6 pt-6 border-t border-slate-100 flex items-center justify-center gap-4">
+        <a href="index.html" class="text-xs font-bold text-slate-400 hover:text-slate-700 transition-colors">← Ana Sayfa</a>
+        <span class="text-slate-200">•</span>
+        <a href="oyun-dukkani.html" class="text-xs font-bold text-slate-400 hover:text-slate-700 transition-colors">Oyun Dükkanı</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. YETKİSİZ ERİŞİM DURUMU (Unauthorized State) -->
+  <!-- ========================================================================= -->
+  <div id="unauthorized-view" class="hidden flex-1 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[2.5rem] p-8 md:p-12 max-w-md w-full shadow-2xl border border-red-100 text-center">
+      <div class="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+      </div>
+
+      <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-black rounded-full uppercase tracking-wider mb-2 inline-block">Erişim Reddedildi</span>
+      <h1 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Yetkisiz Erişim</h1>
+      <p class="text-xs font-medium text-slate-600 mb-6 leading-relaxed">
+        Bu sayfayı görüntüleme yetkiniz yok. Yönetici paneli yalnızca <strong class="text-slate-900 font-bold">omerfarukmetin037@gmail.com</strong> hesabına açıktır.
+      </p>
+
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left mb-6">
+        <p class="text-[11px] font-bold text-slate-400">Giriş Yapılan Hesap:</p>
+        <p id="unauthorized-user-email" class="text-xs font-bold text-slate-800 truncate"></p>
+      </div>
+
+      <div class="space-y-3">
+        <button id="btn-unauth-logout" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-6 rounded-2xl text-xs transition-all shadow-md active:scale-95">
+          Farklı Hesapla Giriş Yap (Çıkış)
+        </button>
+        <a href="index.html" class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-2xl text-xs transition-colors">
+          Ana Sayfaya Dön
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. YETKİLİ ADMİN PANELİ (Authorized Admin Dashboard) -->
+  <!-- ========================================================================= -->
+  <div id="admin-view" class="hidden flex-1 flex flex-col">
+    
+    <!-- Üst Menü (Navbar) -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-30 shadow-sm">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        
+        <!-- Sol: Logo & Başlık -->
+        <div class="flex items-center gap-4">
+          <a href="index.html" class="flex-shrink-0">
+            <img src="/b25.png" alt="Logo" class="h-9 w-auto object-contain" />
+          </a>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 bg-yellow-100 text-slate-950 font-black text-[10px] uppercase tracking-wider rounded-md border border-yellow-300">Oyun Admin</span>
+              <span class="text-xs font-semibold text-slate-400">v2.1</span>
+            </div>
+            <h1 class="text-lg font-black text-slate-900 tracking-tight">Oyun Dükkanı İçerik Yönetimi</h1>
+          </div>
+        </div>
+
+        <!-- Sağ: Aksiyonlar & Profil -->
+        <div class="flex items-center gap-3">
+          <!-- Kütüphane Yönetimi Sekmesi -->
+          <a href="kutuphane-admin.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition-all shadow-sm">
+            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            Kütüphane Yönetimi
+          </a>
+
+          <!-- Oyun Dükkanını Canlı Gör -->
+          <a href="oyun-dukkani.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="6" y1="12" x2="10" y2="12"></line>
+              <line x1="8" y1="10" x2="8" y2="14"></line>
+              <line x1="15" y1="13" x2="15.01" y2="13"></line>
+              <line x1="18" y1="11" x2="18.01" y2="11"></line>
+              <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+            </svg>
+            Oyun Dükkanını Canlı Gör
+          </a>
+
+          <div class="flex items-center gap-3 pl-3 border-l border-slate-200">
+            <div class="text-right hidden md:block">
+              <p class="text-xs font-bold text-slate-900">Ömer Faruk Metin</p>
+              <p class="text-[11px] font-medium text-slate-400">Yönetici</p>
+            </div>
+            <button id="btn-admin-logout" class="p-2.5 bg-slate-100 hover:bg-red-50 hover:text-red-600 text-slate-600 rounded-xl transition-colors" title="Güvenli Çıkış">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Ana İçerik Alanı (Form ve Liste) -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- SOL SÜTUN: OYUN EKLEME / DÜZENLEME FORMU (lg:col-span-5) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80 sticky top-28">
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div id="form-icon-container" class="w-10 h-10 rounded-2xl bg-yellow-100 text-slate-950 flex items-center justify-center font-black text-xl">
+                  🎮
+                </div>
+                <div>
+                  <h2 id="form-heading" class="text-xl font-black text-slate-900 tracking-tight">Yeni Oyun Ekle</h2>
+                  <p id="form-subheading" class="text-xs text-slate-500 font-medium">Oyun Dükkanı'nda anında yayına alınır</p>
+                </div>
+              </div>
+              <!-- Düzenleme Modu Rozeti -->
+              <span id="editing-badge" class="hidden px-3 py-1 bg-amber-100 text-amber-800 text-xs font-black rounded-full uppercase tracking-wider">
+                Düzenleniyor
+              </span>
+            </div>
+
+            <!-- Form -->
+            <form id="game-upload-form" class="space-y-4">
+              
+              <!-- 1. Oyun Adı -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Oyun Adı <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="form-title" 
+                  required 
+                  placeholder="Örn: Kareköklü Sayılar Labirenti" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                />
+              </div>
+
+              <!-- 2. Oyun Açıklaması -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Oyun Açıklaması
+                </label>
+                <textarea 
+                  id="form-description" 
+                  rows="2"
+                  placeholder="Kareköklü ifadeleri çarparak labirentteki çıkış kapısını bul..." 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400 resize-none"
+                ></textarea>
+              </div>
+
+              <!-- 3. Kategori (Sınıf Seviyesi) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Sınıf / Kategori <span class="text-red-500">*</span>
+                  </label>
+                  <select 
+                    id="form-category" 
+                    required 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all"
+                  >
+                    <option value="5. Sınıf">5. Sınıf</option>
+                    <option value="6. Sınıf">6. Sınıf</option>
+                    <option value="7. Sınıf">7. Sınıf</option>
+                    <option value="8. Sınıf (LGS)" selected>8. Sınıf (LGS)</option>
+                    <option value="9. Sınıf">9. Sınıf</option>
+                    <option value="10. Sınıf">10. Sınıf</option>
+                    <option value="11. Sınıf">11. Sınıf</option>
+                    <option value="12. Sınıf">12. Sınıf</option>
+                    <option value="YKS & Mantık">YKS & Mantık</option>
+                    <option value="Genel Matematik">Genel Matematik</option>
+                  </select>
+                </div>
+
+                <!-- 4. Kart Renk Teması -->
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Kart Tema Rengi
+                  </label>
+                  <select 
+                    id="form-theme" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all"
+                  >
+                    <option value="amber" selected>🟠 Amber & Turuncu</option>
+                    <option value="blue">🔵 Mavi & İndigo</option>
+                    <option value="emerald">🟢 Zümrüt Yeşili</option>
+                    <option value="violet">🟣 Mor & Violet</option>
+                    <option value="rose">🔴 Gül Kurusu & Kırmızı</option>
+                    <option value="cyan">🌊 Camgöbeği & Cyan</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 5. Oyun Bağlantısı (URL) -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Oyun Bağlantısı (URL / Link) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="form-game-url" 
+                  required 
+                  placeholder="https://... veya oyun linki" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                />
+                <p class="text-[11px] text-slate-400 mt-1">Öğrencinin oyunu oynayacağı web/canvas/iframe veya harici oyun bağlantısı.</p>
+              </div>
+
+              <!-- 6. Kapak Görseli (URL veya Dosya Yükleme) -->
+              <div>
+                <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Kapak Görseli
+                </label>
+                
+                <div class="space-y-2">
+                  <input 
+                    type="url" 
+                    id="form-cover-url" 
+                    placeholder="Görsel URL'si (Örn: https://images.unsplash.com/...)" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                  />
+
+                  <!-- Dosya Seçici & Önizleme -->
+                  <div class="flex items-center gap-3">
+                    <label class="cursor-pointer px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all border border-slate-200 flex items-center gap-2">
+                      <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      <span>Veya Dosya Yükle</span>
+                      <input type="file" id="form-cover-file" accept="image/*" class="hidden" />
+                    </label>
+
+                    <div id="cover-preview-box" class="hidden items-center gap-2">
+                      <img id="cover-preview-img" src="" alt="Önizleme" class="w-10 h-10 object-cover rounded-xl border border-slate-200 shadow-sm" />
+                      <button type="button" id="btn-clear-cover" class="text-xs text-red-500 hover:underline font-bold">Kaldır</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Özel Rozet & Başlangıç Oynanma -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Özel Rozet (Opsiyonel)
+                  </label>
+                  <input 
+                    type="text" 
+                    id="form-custom-badge" 
+                    placeholder="Örn: Yeni, Popüler, MEB" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    Oynanma Sayısı
+                  </label>
+                  <input 
+                    type="number" 
+                    id="form-views" 
+                    min="0"
+                    placeholder="0" 
+                    value="0"
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-white transition-all placeholder-slate-400"
+                  />
+                </div>
+              </div>
+
+              <!-- 8. Günün / Önerilen Oyunu Checkbox -->
+              <div class="bg-yellow-50/70 border border-yellow-200/80 rounded-2xl p-4 flex items-start gap-3">
+                <input 
+                  type="checkbox" 
+                  id="form-is-featured" 
+                  class="w-5 h-5 mt-0.5 rounded-lg text-yellow-500 focus:ring-yellow-400 border-yellow-300 transition-all cursor-pointer"
+                />
+                <label for="form-is-featured" class="cursor-pointer">
+                  <span class="block text-xs font-extrabold text-slate-900">⭐ Günün / Önerilen Oyunu Olarak Belirle</span>
+                  <span class="block text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                    İşaretlendiğinde Oyun Dükkanı sayfasındaki sağ sarı panelde tavsiye edilen oyun olarak öne çıkarılır.
+                  </span>
+                </label>
+              </div>
+
+              <!-- Butonlar Grubu -->
+              <div class="flex items-center gap-3 pt-2">
+                <button 
+                  type="submit" 
+                  id="btn-submit-game" 
+                  class="flex-1 bg-slate-950 hover:bg-yellow-400 hover:text-slate-950 text-white font-extrabold py-4 px-6 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95"
+                >
+                  <span id="btn-submit-text">Oyunu Dükkana Ekle</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  id="btn-cancel-edit" 
+                  onclick="window.cancelEdit()" 
+                  class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-4 px-5 rounded-2xl text-sm transition-all"
+                >
+                  Vazgeç
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+        <!-- SAĞ SÜTUN: MEVCUT OYUNLAR LİSTESİ (lg:col-span-7) -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-sm border border-slate-200/80">
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+              <div>
+                <h2 class="text-xl font-black text-slate-900 tracking-tight">Kayıtlı Oyunlar</h2>
+                <p class="text-xs text-slate-500 font-medium">Firestore veritabanındaki aktif oyun listesi</p>
+              </div>
+              <span id="admin-game-count" class="px-3 py-1 bg-yellow-400 text-slate-950 rounded-full text-xs font-black">
+                0 Oyun
+              </span>
+            </div>
+
+            <!-- Oyun Arama / Hızlı Filtre -->
+            <div class="mb-4">
+              <input 
+                type="text" 
+                id="admin-search" 
+                oninput="window.filterAdminGames()" 
+                placeholder="Listede oyun ara..." 
+                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+              />
+            </div>
+
+            <!-- Oyun Listesi Container -->
+            <div id="admin-game-list" class="space-y-3">
+              <div class="text-center py-12 text-slate-400">
+                <div class="w-8 h-8 border-2 border-slate-300 border-t-yellow-500 rounded-full animate-spin mx-auto mb-3"></div>
+                <p class="text-xs font-semibold">Oyunlar Yükleniyor...</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FIREBASE AUTH & FIRESTORE ENTEGRASYONU -->
+  <!-- ========================================================================= -->
+  <script type="module">
+    import { auth, googleProvider, signInWithPopup, signOut, onAuthStateChanged, db } from './firebase-config.js';
+    import { 
+      collection, 
+      addDoc, 
+      updateDoc,
+      deleteDoc, 
+      doc, 
+      onSnapshot, 
+      query, 
+      orderBy, 
+      serverTimestamp,
+      getDocs,
+      where
+    } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const ADMIN_EMAIL = 'omerfarukmetin037@gmail.com';
+
+    let editingGameId = null;
+    let loadedGamesMap = new Map();
+
+    const authLoading = document.getElementById('auth-loading');
+    const loginView = document.getElementById('login-view');
+    const unauthorizedView = document.getElementById('unauthorized-view');
+    const adminView = document.getElementById('admin-view');
+    const unauthEmailEl = document.getElementById('unauthorized-user-email');
+
+    // 1. Yetki ve Giriş Durumu Takibi (Auth Guard)
+    onAuthStateChanged(auth, (user) => {
+      authLoading.classList.add('hidden');
+
+      if (!user) {
+        // Giriş yapılmamış
+        loginView.classList.remove('hidden');
+        unauthorizedView.classList.add('hidden');
+        adminView.classList.add('hidden');
+      } else if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+        // Yetkili Admin
+        loginView.classList.add('hidden');
+        unauthorizedView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        
+        // Firestore'dan oyunları dinlemeye başla
+        listenToGameCollection();
+      } else {
+        // Yetkisiz Kullanıcı
+        loginView.classList.add('hidden');
+        unauthorizedView.classList.remove('hidden');
+        adminView.classList.add('hidden');
+        if (unauthEmailEl) unauthEmailEl.textContent = user.email;
+      }
+    });
+
+    // 2. Google ile Giriş Yap Butonu
+    const googleLoginBtn = document.getElementById('btn-google-login');
+    if (googleLoginBtn) {
+      googleLoginBtn.addEventListener('click', async () => {
+        try {
+          await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+          console.error("Giriş hatası:", error);
+          toast.error("Giriş yapılamadı: " + error.message);
+        }
+      });
+    }
+
+    // 3. Çıkış Butonları
+    const logoutAction = () => {
+      signOut(auth).then(() => {
+        toast.info("Oturum kapatıldı.");
+      }).catch(err => {
+        console.error("Çıkış hatası:", err);
+      });
+    };
+
+    const adminLogoutBtn = document.getElementById('btn-admin-logout');
+    const unauthLogoutBtn = document.getElementById('btn-unauth-logout');
+    if (adminLogoutBtn) adminLogoutBtn.addEventListener('click', logoutAction);
+    if (unauthLogoutBtn) unauthLogoutBtn.addEventListener('click', logoutAction);
+
+    // 4. Görsel Yükleme (File & URL Önizleme)
+    const coverFileInput = document.getElementById('form-cover-file');
+    const coverUrlInput = document.getElementById('form-cover-url');
+    const previewBox = document.getElementById('cover-preview-box');
+    const previewImg = document.getElementById('cover-preview-img');
+    const clearCoverBtn = document.getElementById('btn-clear-cover');
+
+    if (coverFileInput) {
+      coverFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          if (file.size > 2 * 1024 * 1024) {
+            toast.error("Görsel boyutu 2MB'den küçük olmalıdır.");
+            coverFileInput.value = "";
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            coverUrlInput.value = evt.target.result;
+            showCoverPreview(evt.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    if (coverUrlInput) {
+      coverUrlInput.addEventListener('input', function() {
+        if (coverUrlInput.value.trim()) {
+          showCoverPreview(coverUrlInput.value.trim());
+        } else {
+          hideCoverPreview();
+        }
+      });
+    }
+
+    if (clearCoverBtn) {
+      clearCoverBtn.addEventListener('click', function() {
+        hideCoverPreview();
+      });
+    }
+
+    function showCoverPreview(src) {
+      if (previewImg && previewBox) {
+        previewImg.src = src;
+        previewBox.classList.remove('hidden');
+        previewBox.classList.add('flex');
+      }
+    }
+
+    function hideCoverPreview() {
+      if (coverUrlInput) coverUrlInput.value = '';
+      if (coverFileInput) coverFileInput.value = '';
+      if (previewBox) {
+        previewBox.classList.add('hidden');
+        previewBox.classList.remove('flex');
+      }
+    }
+
+    // 5. Form Gönderme (addDoc veya updateDoc)
+    const gameForm = document.getElementById('game-upload-form');
+    const submitBtn = document.getElementById('btn-submit-game');
+    const submitBtnText = document.getElementById('btn-submit-text');
+
+    if (gameForm) {
+      gameForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById('form-title').value.trim();
+        const description = document.getElementById('form-description').value.trim();
+        const category = document.getElementById('form-category').value;
+        const theme = document.getElementById('form-theme').value;
+        const gameUrl = document.getElementById('form-game-url').value.trim();
+        const coverImage = document.getElementById('form-cover-url').value.trim() || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80';
+        const customBadge = document.getElementById('form-custom-badge').value.trim();
+        const views = parseInt(document.getElementById('form-views').value, 10) || 0;
+        const isFeatured = document.getElementById('form-is-featured').checked;
+
+        if (!title || !gameUrl) {
+          toast.error("Lütfen oyun adını ve oyun bağlantısını eksiksiz doldurun.");
+          return;
+        }
+
+        submitBtnText.innerHTML = editingGameId ? 'Güncelleniyor...' : 'Kaydediliyor...';
+        submitBtn.disabled = true;
+
+        try {
+          // Eğer bu oyun isFeatured olarak seçildiyse, diğer oyunların isFeatured alanını false yap
+          if (isFeatured) {
+            loadedGamesMap.forEach(async (item, id) => {
+              if (id !== editingGameId && item.isFeatured) {
+                try {
+                  await updateDoc(doc(db, "games", id), { isFeatured: false });
+                } catch(e) {
+                  console.warn("Önceki featured oyun güncellenirken uyarı:", e);
+                }
+              }
+            });
+          }
+
+          if (editingGameId) {
+            // Düzenleme Modu (updateDoc)
+            await updateDoc(doc(db, "games", editingGameId), {
+              title,
+              description,
+              category,
+              theme,
+              gameUrl,
+              coverImage,
+              customBadge,
+              views,
+              isFeatured,
+              updatedAt: serverTimestamp()
+            });
+
+            toast.success("Oyun bilgileri başarıyla güncellendi!");
+            window.cancelEdit();
+          } else {
+            // Yeni Ekleme Modu (addDoc)
+            await addDoc(collection(db, "games"), {
+              title,
+              description,
+              category,
+              theme,
+              gameUrl,
+              coverImage,
+              customBadge,
+              views,
+              isFeatured,
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp()
+            });
+
+            toast.success("Oyun başarıyla dükkana eklendi!");
+            gameForm.reset();
+            hideCoverPreview();
+            document.getElementById('form-category').value = "8. Sınıf (LGS)";
+            document.getElementById('form-theme').value = "amber";
+            document.getElementById('form-views').value = "0";
+            document.getElementById('form-is-featured').checked = false;
+          }
+        } catch (error) {
+          console.error("İşlem hatası:", error);
+          toast.error("Hata: " + error.message);
+        } finally {
+          submitBtnText.innerHTML = editingGameId ? "Oyunu Güncelle" : "Oyunu Dükkana Ekle";
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    // 6. Firestore Oyunlarını Gerçek Zamanlı Listeleme (onSnapshot)
+    function listenToGameCollection() {
+      const gameListContainer = document.getElementById('admin-game-list');
+      const gameCountBadge = document.getElementById('admin-game-count');
+
+      const q = query(collection(db, "games"), orderBy("createdAt", "desc"));
+
+      onSnapshot(q, (snapshot) => {
+        if (!gameListContainer) return;
+
+        loadedGamesMap.clear();
+
+        if (snapshot.empty) {
+          gameListContainer.innerHTML = `
+            <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+              <p class="text-xs font-bold text-slate-500">Henüz eklenmiş bir oyun bulunmuyor.</p>
+              <p class="text-[11px] text-slate-400 mt-1">Sol taraftaki formdan ilk eğitici oyununuzu ekleyebilirsiniz.</p>
+            </div>
+          `;
+          if (gameCountBadge) gameCountBadge.textContent = "0 Oyun";
+          return;
+        }
+
+        if (gameCountBadge) gameCountBadge.textContent = `${snapshot.size} Oyun`;
+
+        snapshot.forEach((docSnap) => {
+          loadedGamesMap.set(docSnap.id, docSnap.data());
+        });
+
+        renderAdminGames();
+      }, (err) => {
+        console.error("Oyun listesi dinleme hatası:", err);
+        toast.error("Oyunlar yüklenemedi: " + err.message);
+      });
+    }
+
+    // Admin Listesini Render Et
+    function renderAdminGames() {
+      const gameListContainer = document.getElementById('admin-game-list');
+      const searchInput = document.getElementById('admin-search');
+      const queryText = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+      if (!gameListContainer) return;
+
+      let html = '';
+      let matchCount = 0;
+
+      loadedGamesMap.forEach((item, id) => {
+        if (queryText && 
+            !item.title?.toLowerCase().includes(queryText) && 
+            !item.description?.toLowerCase().includes(queryText) && 
+            !item.category?.toLowerCase().includes(queryText)) {
+          return;
+        }
+
+        matchCount++;
+        const isCurrentlyEditing = editingGameId === id;
+        const viewsCount = item.views !== undefined && item.views !== null ? item.views : 0;
+        const coverSrc = item.coverImage || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80';
+
+        const themeBadges = {
+          'amber': 'bg-amber-100 text-amber-900 border-amber-200',
+          'blue': 'bg-blue-100 text-blue-900 border-blue-200',
+          'emerald': 'bg-emerald-100 text-emerald-900 border-emerald-200',
+          'violet': 'bg-violet-100 text-violet-900 border-violet-200',
+          'rose': 'bg-rose-100 text-rose-900 border-rose-200',
+          'cyan': 'bg-cyan-100 text-cyan-900 border-cyan-200'
+        };
+        const themeBadgeClass = themeBadges[item.theme] || 'bg-amber-100 text-amber-900 border-amber-200';
+
+        html += `
+          <div class="p-4 ${isCurrentlyEditing ? 'bg-amber-50/80 border-amber-300 ring-2 ring-amber-400/50' : 'bg-slate-50 hover:bg-slate-100/80 border-slate-200/70'} rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+            
+            <div class="flex items-center gap-3.5 flex-1 min-w-0">
+              <img 
+                src="${coverSrc}" 
+                alt="${item.title}" 
+                class="w-14 h-14 rounded-xl object-cover border border-slate-200 shadow-sm flex-shrink-0"
+                onerror="this.src='https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=700&auto=format&fit=crop&q=80'"
+              />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap mb-1">
+                  <span class="px-2 py-0.5 text-[10px] font-black uppercase rounded-md border ${themeBadgeClass}">
+                    ${item.category || '8. Sınıf'}
+                  </span>
+                  <span class="px-2 py-0.5 bg-slate-200/70 text-slate-700 text-[10px] font-bold rounded-md flex items-center gap-1" title="Oynanma Sayısı">
+                    👁️ ${viewsCount}
+                  </span>
+                  ${item.isFeatured ? `<span class="px-2 py-0.5 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-md flex items-center gap-1 shadow-sm">⭐ Günün Oyunu</span>` : ''}
+                  ${item.customBadge ? `<span class="px-2 py-0.5 bg-slate-900 text-white text-[10px] font-black rounded-md flex items-center gap-1">🏷️ ${item.customBadge}</span>` : ''}
+                  ${isCurrentlyEditing ? '<span class="px-2 py-0.5 bg-amber-200 text-amber-900 text-[10px] font-black rounded-md animate-pulse">Düzenleniyor</span>' : ''}
+                </div>
+                <h4 class="text-sm font-extrabold text-slate-900 truncate">${item.title}</h4>
+                ${item.description ? `<p class="text-xs text-slate-500 line-clamp-1 mt-0.5">${item.description}</p>` : ''}
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 flex-shrink-0 self-end sm:self-center">
+              ${item.gameUrl ? `
+                <a href="${item.gameUrl}" target="_blank" class="px-3 py-2 bg-white hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 transition-colors" title="Oyunu Başlat">
+                  Test Et
+                </a>
+              ` : ''}
+              <button onclick="window.startEdit('${id}')" class="px-3 py-2 bg-yellow-50 hover:bg-yellow-100 text-yellow-900 text-xs font-bold rounded-xl border border-yellow-200 transition-colors flex items-center gap-1" title="Oyunu Düzenle">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                Düzenle
+              </button>
+              <button onclick="window.deleteGame('${id}', '${item.title.replace(/'/g, "\\'")}')" class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-xl border border-red-200/60 transition-colors" title="Oyunu Sil">
+                Sil
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      if (matchCount === 0 && queryText) {
+        html = `
+          <div class="text-center py-8 text-slate-400">
+            <p class="text-xs font-bold">Aramanızla eşleşen oyun bulunamadı.</p>
+          </div>
+        `;
+      }
+
+      gameListContainer.innerHTML = html;
+    }
+
+    window.filterAdminGames = function() {
+      renderAdminGames();
+    };
+
+    // 7. Oyun Düzenleme Başlatma
+    window.startEdit = (gameId) => {
+      const item = loadedGamesMap.get(gameId);
+      if (!item) {
+        toast.error("Oyun verisi bulunamadı.");
+        return;
+      }
+
+      editingGameId = gameId;
+
+      // Form inputlarını doldur
+      document.getElementById('form-title').value = item.title || '';
+      document.getElementById('form-description').value = item.description || '';
+      document.getElementById('form-category').value = item.category || '8. Sınıf (LGS)';
+      document.getElementById('form-theme').value = item.theme || 'amber';
+      document.getElementById('form-game-url').value = item.gameUrl || '';
+      document.getElementById('form-cover-url').value = item.coverImage || '';
+      document.getElementById('form-custom-badge').value = item.customBadge || '';
+      document.getElementById('form-views').value = item.views !== undefined ? item.views : 0;
+      document.getElementById('form-is-featured').checked = Boolean(item.isFeatured);
+
+      if (item.coverImage) {
+        showCoverPreview(item.coverImage);
+      } else {
+        hideCoverPreview();
+      }
+
+      // Arayüzü Düzenleme Moduna Çevir
+      document.getElementById('form-heading').textContent = "Oyunu Düzenle";
+      document.getElementById('form-subheading').textContent = "Mevcut kaydı güncelliyorsunuz";
+      document.getElementById('btn-submit-text').textContent = "Oyunu Güncelle";
+      document.getElementById('btn-cancel-edit').classList.remove('hidden');
+      document.getElementById('editing-badge').classList.remove('hidden');
+
+      // Sayfayı forma odakla
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('form-title').focus();
+
+      renderAdminGames();
+      toast.info("Düzenleme modu aktif. Bilgileri değiştirip 'Oyunu Güncelle'ye basın.");
+    };
+
+    // 8. Düzenlemeyi İptal Etme
+    window.cancelEdit = () => {
+      editingGameId = null;
+      gameForm.reset();
+      hideCoverPreview();
+      document.getElementById('form-category').value = "8. Sınıf (LGS)";
+      document.getElementById('form-theme').value = "amber";
+      document.getElementById('form-views').value = "0";
+      document.getElementById('form-is-featured').checked = false;
+
+      document.getElementById('form-heading').textContent = "Yeni Oyun Ekle";
+      document.getElementById('form-subheading').textContent = "Oyun Dükkanı'nda anında yayına alınır";
+      document.getElementById('btn-submit-text').textContent = "Oyunu Dükkana Ekle";
+      document.getElementById('btn-cancel-edit').classList.add('hidden');
+      document.getElementById('editing-badge').classList.add('hidden');
+
+      renderAdminGames();
+    };
+
+    // 9. Oyun Silme Fonksiyonu
+    window.deleteGame = async (gameId, title) => {
+      if (!confirm(`"${title}" adlı oyunu silmek istediğinize emin misiniz?`)) {
+        return;
+      }
+
+      try {
+        await deleteDoc(doc(db, "games", gameId));
+        toast.info("Oyun dükkandan kaldırıldı.");
+        if (editingGameId === gameId) {
+          window.cancelEdit();
+        }
+      } catch (err) {
+        console.error("Silme hatası:", err);
+        toast.error("Oyun silinemedi: " + err.message);
+      }
+    };
+  </script>
+
+</body>
+</html>
