@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ömer Hoca — Yeni Nesil Matematik</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/fav1.png">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Caveat (El Yazısı), Plus Jakarta Sans & Inter -->
@@ -43,7 +45,7 @@
                  hide-caret 0.1s 2.9s forwards;
     }
 
-    /* Soldan Sağa Çizilen Dalgalı Çizgi (Squiggly Underline) */
+    /* Soldan Sağa Çizilen Zarif Akıcı Alt Çizgi */
     @keyframes draw-line {
       to {
         stroke-dashoffset: 0;
@@ -59,11 +61,11 @@
     @keyframes popInUp {
       0% {
         opacity: 0;
-        transform: translateY(48px) scale(0.9);
+        transform: translateY(32px) scale(0.92);
       }
       65% {
         opacity: 1;
-        transform: translateY(-8px) scale(1.03);
+        transform: translateY(-6px) scale(1.02);
       }
       100% {
         opacity: 1;
@@ -72,143 +74,252 @@
     }
 
     .animate-pop-in {
-      animation: popInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: popInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
   </style>
 </head>
-<body class="bg-[#d4ff00] relative min-h-screen w-full flex flex-col items-center justify-start p-0 m-0 select-none selection:bg-[#6b46ff] selection:text-[#d4ff00] overflow-x-hidden">
+<body class="bg-[#d4ff00] relative min-h-screen w-full flex flex-col justify-between p-0 m-0 select-none selection:bg-[#6b46ff] selection:text-[#d4ff00] overflow-x-hidden">
 
   <!-- ========================================================================= -->
-  <!-- 2. TAM GENİŞLİKTE RESPONSİVE KARŞILAMA AFİŞİ (Masaüstü: w2.png, Mobil: w3.png) -->
+  <!-- 1. ÜST MENÜ (HEADER) -->
   <!-- ========================================================================= -->
-  <div class="w-full p-0 m-0 relative z-0 flex items-center justify-center overflow-hidden">
-    <!-- Mobil Görsel (w3.png - Dikey Tasarım) -->
-    <img 
-      src="/w3.png" 
-      alt="Ömer Hoca & Raku - Hoş Geldin" 
-      class="block md:hidden w-full h-auto object-cover" 
-    />
-    <!-- Masaüstü Görsel (w2.png - Yatay Banner) -->
-    <img 
-      src="/w2.png" 
-      alt="Ömer Hoca & Raku - Hoş Geldin" 
-      class="hidden md:block w-full h-auto object-cover" 
-    />
+  <header class="w-full bg-[#d4ff00] px-5 sm:px-8 md:px-12 py-4 sm:py-5 flex items-center justify-between z-30 flex-shrink-0">
+    <!-- Sol Köşe: Üç Çizgili Hamburger Menü İkonu -->
+    <button id="open-menu-btn" 
+            class="flex flex-col justify-center items-start gap-1.5 w-10 h-10 p-1 rounded-xl hover:opacity-80 active:scale-95 transition-all focus:outline-none cursor-pointer"
+            aria-label="Menüyü Aç">
+      <span class="block w-7 sm:w-8 h-1 bg-[#6b46ff] rounded-full"></span>
+      <span class="block w-7 sm:w-8 h-1 bg-[#6b46ff] rounded-full"></span>
+      <span class="block w-7 sm:w-8 h-1 bg-[#6b46ff] rounded-full"></span>
+    </button>
+
+    <!-- Tam Orta: Rakun Logosu -->
+    <a href="/" class="flex items-center justify-center -translate-x-1 sm:translate-x-0">
+      <img src="/b25.png" alt="Rakun Logo" class="h-8 sm:h-9 md:h-11 w-auto object-contain hover:scale-105 transition-transform" />
+    </a>
+
+    <!-- Sağ Köşe: Mor Yuvarlak Hatlı 'Giriş Yap' Butonu -->
+    <a href="/ogrenci-paneli.html" 
+       class="bg-[#6b46ff] hover:bg-[#5835ea] text-white font-extrabold text-xs sm:text-sm md:text-base px-4 sm:px-6 md:px-7 py-2 sm:py-2.5 rounded-full md:rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-95 no-underline flex items-center justify-center">
+      Giriş Yap
+    </a>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- AÇILIR MOBİL / YAN ÇEKMECE MENÜ (DRAWER) -->
+  <!-- ========================================================================= -->
+  <div id="drawer-menu" class="fixed inset-0 z-50 flex hidden">
+    <!-- Karartma Overlay -->
+    <div id="drawer-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"></div>
+
+    <!-- Menü İçerik Paneli -->
+    <div class="relative w-72 sm:w-80 max-w-full bg-[#d4ff00] h-full shadow-2xl p-6 flex flex-col justify-between z-10 border-r border-black/10">
+      <div>
+        <!-- Üst Bar: Kapat Butonu & Logo -->
+        <div class="flex items-center justify-between pb-6 border-b border-black/10">
+          <img src="/b25.png" alt="Rakun Logo" class="h-8 w-auto object-contain" />
+          <button id="close-menu-btn" class="w-9 h-9 rounded-full bg-[#6b46ff] text-white flex items-center justify-center font-bold text-lg hover:bg-[#5835ea] transition-colors" aria-label="Kapat">
+            ✕
+          </button>
+        </div>
+
+        <!-- Sayfa Bağlantıları -->
+        <nav class="mt-6 flex flex-col gap-3">
+          <a href="/ozel-ders.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm">
+            <img src="/roket.png" alt="Özel Ders" class="w-6 h-6 object-contain" />
+            <span>Özel Ders</span>
+          </a>
+          <a href="/kutuphane.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm">
+            <img src="/defter.png" alt="Kütüphane" class="w-6 h-6 object-contain" />
+            <span>Kütüphane</span>
+          </a>
+          <a href="/oyun-dukkani.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm">
+            <img src="/konsol.png" alt="Oyunlar" class="w-6 h-6 object-contain" />
+            <span>Oyunlar</span>
+          </a>
+          <a href="/magaza" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm">
+            <img src="/canta.png" alt="Mağaza" class="w-6 h-6 object-contain" />
+            <span>Mağaza</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Alt Kısım: Giriş Butonu -->
+      <div class="pt-6 border-t border-black/10">
+        <a href="/ogrenci-paneli.html" class="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-extrabold py-3.5 px-4 rounded-2xl shadow-md transition-all active:scale-95 no-underline">
+          Giriş Yap
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 3. ANA İÇERİK: EL YAZISI BAŞLIK & 4'LÜ KART IZGARASI -->
+  <!-- 2. ANA İÇERİK: SOLDA 4'LÜ KART (2X2), SAĞDA EL YAZISI BAŞLIK & w4.png -->
   <!-- ========================================================================= -->
-  <main class="relative z-20 w-full max-w-6xl mx-auto flex flex-col items-center justify-center px-4 sm:px-6 pt-6 pb-14 md:pb-20 my-auto">
+  <main class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-end justify-between px-4 sm:px-8 md:px-12 relative overflow-hidden md:overflow-visible">
     
-    <!-- El Yazısı Animasyonlu Başlık ('Ömer Hoca - Matematik Öğretmeni') -->
-    <div class="relative inline-block -rotate-1 px-4 mb-8 md:mb-12 text-center">
-      <h1 class="handwriting-anim text-3xl sm:text-4xl md:text-5xl font-bold font-handwriting text-slate-900 tracking-wide pb-1">
-        Ömer Hoca <span class="text-[#6b46ff]">- Matematik Öğretmeni</span>
-      </h1>
+    <!-- SOL BÖLÜM: 4'LÜ KART IZGARASI (2x2 Grid) -->
+    <div class="w-full md:w-1/2 flex items-center justify-center md:justify-center py-5 sm:py-6 md:py-0 md:self-center z-20">
+      <div class="grid grid-cols-2 gap-3.5 sm:gap-5 md:gap-6 w-full max-w-[340px] sm:max-w-[400px] md:max-w-[430px] lg:max-w-[470px]">
+        
+        <!-- 1. KART: ÖZEL DERS -->
+        <a href="/ozel-ders.html" 
+           class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] sm:rounded-[2rem] md:rounded-[2.25rem] lg:rounded-[2.5rem] flex flex-col items-center justify-center p-3 sm:p-5 shadow-xl shadow-purple-950/20 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
+           style="animation-delay: 50ms;">
+          <!-- İkon: Roket -->
+          <div class="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+            <img src="/roket.png" 
+                 alt="Özel Ders İkonu" 
+                 class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300 ease-out" />
+          </div>
+          <!-- Başlık -->
+          <h2 class="font-extrabold text-sm sm:text-base md:text-lg lg:text-xl text-[#d4ff00] mt-1.5 sm:mt-2.5 text-center tracking-tight">
+            Özel Ders
+          </h2>
+          <!-- Kavisli Alt Çizgi -->
+          <svg class="w-14 sm:w-18 md:w-20 lg:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+          </svg>
+        </a>
 
-      <!-- Soldan Sağa Çizilen Zarif Akıcı Alt Çizgi (Smooth Swoosh Underline) -->
-      <svg
-        class="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-slate-900 overflow-visible pointer-events-none"
-        viewBox="0 0 350 16"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M 4 8 C 110 13, 240 13, 346 7"
-          stroke="currentColor"
-          stroke-width="2.8"
-          stroke-linecap="round"
-          class="handwriting-underline"
-        />
-      </svg>
+        <!-- 2. KART: KÜTÜPHANE -->
+        <a href="/kutuphane.html" 
+           class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] sm:rounded-[2rem] md:rounded-[2.25rem] lg:rounded-[2.5rem] flex flex-col items-center justify-center p-3 sm:p-5 shadow-xl shadow-purple-950/20 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
+           style="animation-delay: 150ms;">
+          <!-- İkon: Defter -->
+          <div class="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+            <img src="/defter.png" 
+                 alt="Kütüphane İkonu" 
+                 class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300 ease-out" />
+          </div>
+          <!-- Başlık -->
+          <h2 class="font-extrabold text-sm sm:text-base md:text-lg lg:text-xl text-[#d4ff00] mt-1.5 sm:mt-2.5 text-center tracking-tight">
+            Kütüphane
+          </h2>
+          <!-- Kavisli Alt Çizgi -->
+          <svg class="w-14 sm:w-18 md:w-20 lg:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+          </svg>
+        </a>
+
+        <!-- 3. KART: OYUNLAR -->
+        <a href="/oyun-dukkani.html" 
+           class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] sm:rounded-[2rem] md:rounded-[2.25rem] lg:rounded-[2.5rem] flex flex-col items-center justify-center p-3 sm:p-5 shadow-xl shadow-purple-950/20 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
+           style="animation-delay: 250ms;">
+          <!-- İkon: Konsol -->
+          <div class="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+            <img src="/konsol.png" 
+                 alt="Oyunlar İkonu" 
+                 class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300 ease-out" />
+          </div>
+          <!-- Başlık -->
+          <h2 class="font-extrabold text-sm sm:text-base md:text-lg lg:text-xl text-[#d4ff00] mt-1.5 sm:mt-2.5 text-center tracking-tight">
+            Oyunlar
+          </h2>
+          <!-- Kavisli Alt Çizgi -->
+          <svg class="w-14 sm:w-18 md:w-20 lg:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+          </svg>
+        </a>
+
+        <!-- 4. KART: MAĞAZA -->
+        <a href="/magaza" 
+           class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] sm:rounded-[2rem] md:rounded-[2.25rem] lg:rounded-[2.5rem] flex flex-col items-center justify-center p-3 sm:p-5 shadow-xl shadow-purple-950/20 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
+           style="animation-delay: 350ms;">
+          <!-- İkon: Çanta -->
+          <div class="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+            <img src="/canta.png" 
+                 alt="Mağaza İkonu" 
+                 class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300 ease-out" />
+          </div>
+          <!-- Başlık -->
+          <h2 class="font-extrabold text-sm sm:text-base md:text-lg lg:text-xl text-[#d4ff00] mt-1.5 sm:mt-2.5 text-center tracking-tight">
+            Mağaza
+          </h2>
+          <!-- Kavisli Alt Çizgi -->
+          <svg class="w-14 sm:w-18 md:w-20 lg:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+          </svg>
+        </a>
+
+      </div>
     </div>
 
-    <!-- 4 Mor Kart Izgarası: Mobilde 2'li (2 Satır), Masaüstünde 4'lü (Tek Satır) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-6xl mx-auto px-4">
+    <!-- SAĞ / ALT BÖLÜM: EL YAZISI BAŞLIK, MOR KUBBE & PROFİL FOTOĞRAFI (w4.png) -->
+    <div class="w-full md:w-1/2 flex flex-col justify-end items-center self-end relative z-10 mt-6 md:mt-0 p-0">
+      
+      <!-- El Yazısı Animasyonlu Başlık - Taşkınlığı önlemek için max-w ile sınırlandırılmış ve fontu dengelenmiş -->
+      <div class="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] lg:max-w-[480px] flex justify-center mb-2 sm:mb-3 md:mb-4 px-2 z-20">
+        <div class="relative inline-block max-w-full -rotate-1 text-center">
+          <h1 class="handwriting-anim text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-handwriting text-slate-900 tracking-wide pb-1">
+            Ömer Hoca <span className="text-[#6b46ff]">- Matematik Öğretmeni</span>
+          </h1>
 
-      <!-- 1. KART: ÖZEL DERS (Gecikme: 50ms) -->
-      <a href="/ozel-ders.html" 
-         class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] md:rounded-[2.25rem] flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 shadow-xl shadow-purple-950/20 hover:-translate-y-4 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
-         style="animation-delay: 50ms;">
-        <!-- İkon: Roket -->
-        <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-          <img src="/roket.png" 
-               alt="Özel Ders İkonu" 
-               class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300 ease-out" />
+          <!-- Soldan Sağa Çizilen Zarif Akıcı Alt Çizgi (Smooth Swoosh Underline) -->
+          <svg
+            class="absolute -bottom-1.5 sm:-bottom-2 left-0 w-full h-2.5 sm:h-3.5 text-slate-900 overflow-visible pointer-events-none"
+            viewBox="0 0 350 16"
+            fill="none"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M 4 8 C 110 13, 240 13, 346 7"
+              stroke="currentColor"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              class="handwriting-underline"
+            />
+          </svg>
         </div>
-        <!-- Başlık -->
-        <h2 class="font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl text-[#d4ff00] mt-2 sm:mt-3 md:mt-4 text-center tracking-tight">
-          Özel Ders
-        </h2>
-        <!-- Kavisli Alt Çizgi -->
-        <svg class="w-16 sm:w-20 md:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
-        </svg>
-      </a>
+      </div>
 
-      <!-- 2. KART: KÜTÜPHANE (Gecikme: 150ms) -->
-      <a href="/kutuphane" 
-         class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] md:rounded-[2.25rem] flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 shadow-xl shadow-purple-950/20 hover:-translate-y-4 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
-         style="animation-delay: 150ms;">
-        <!-- İkon: Defter -->
-        <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-          <img src="/defter.png" 
-               alt="Kütüphane İkonu" 
-               class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300 ease-out" />
-        </div>
-        <!-- Başlık -->
-        <h2 class="font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl text-[#d4ff00] mt-2 sm:mt-3 md:mt-4 text-center tracking-tight">
-          Kütüphane
-        </h2>
-        <!-- Kavisli Alt Çizgi -->
-        <svg class="w-16 sm:w-20 md:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
-        </svg>
-      </a>
+      <!-- Profil Fotoğrafı ve Mor Kubbe Alanı -->
+      <div class="relative w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[540px] xl:max-w-[600px] flex justify-center items-end">
+        
+        <!-- Mor Kubbe (Arka Plan Yarım Daire / Arch) -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] md:w-[95%] h-[60%] sm:h-[62%] md:h-[65%] rounded-t-full bg-[#6b46ff] z-0 pointer-events-none"></div>
 
-      <!-- 3. KART: OYUNLAR (Gecikme: 250ms) -->
-      <a href="/oyun-dukkani" 
-         class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] md:rounded-[2.25rem] flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 shadow-xl shadow-purple-950/20 hover:-translate-y-4 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
-         style="animation-delay: 250ms;">
-        <!-- İkon: Konsol -->
-        <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-          <img src="/konsol.png" 
-               alt="Oyunlar İkonu" 
-               class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300 ease-out" />
-        </div>
-        <!-- Başlık -->
-        <h2 class="font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl text-[#d4ff00] mt-2 sm:mt-3 md:mt-4 text-center tracking-tight">
-          Oyunlar
-        </h2>
-        <!-- Kavisli Alt Çizgi -->
-        <svg class="w-16 sm:w-20 md:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
-        </svg>
-      </a>
-
-      <!-- 4. KART: MAĞAZA (Gecikme: 350ms) -->
-      <a href="/magaza" 
-         class="animate-pop-in group bg-[#6b46ff] w-full aspect-square rounded-[1.75rem] md:rounded-[2.25rem] flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 shadow-xl shadow-purple-950/20 hover:-translate-y-4 hover:scale-105 hover:shadow-2xl hover:shadow-purple-950/40 transition-all duration-300 ease-out cursor-pointer active:scale-95 no-underline"
-         style="animation-delay: 350ms;">
-        <!-- İkon: Çanta -->
-        <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-          <img src="/canta.png" 
-               alt="Mağaza İkonu" 
-               class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300 ease-out" />
-        </div>
-        <!-- Başlık -->
-        <h2 class="font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl text-[#d4ff00] mt-2 sm:mt-3 md:mt-4 text-center tracking-tight">
-          Mağaza
-        </h2>
-        <!-- Kavisli Alt Çizgi -->
-        <svg class="w-16 sm:w-20 md:w-24 h-2 sm:h-2.5 text-[#d4ff00] mt-1 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 8.5C28 11.5 72 10.5 97 3.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
-        </svg>
-      </a>
-
+        <!-- Profil Görseli (w4.png) - Altı Ekrana Sıfır Yapışık -->
+        <img src="/w4.png" 
+             alt="Ömer Hoca" 
+             class="relative z-10 w-full h-auto max-h-[48vh] sm:max-h-[52vh] md:max-h-[68vh] lg:max-h-[74vh] object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] block" />
+      </div>
     </div>
+
   </main>
+
+  <!-- ========================================================================= -->
+  <!-- 3. ALT BİLGİ (FOOTER) / YASAL BAĞLANTILAR -->
+  <!-- ========================================================================= -->
+  <footer class="w-full flex flex-wrap justify-center items-center gap-x-3 sm:gap-x-4 gap-y-1.5 text-xs md:text-sm text-slate-700/80 font-medium pt-8 pb-4 px-4 z-20 text-center flex-shrink-0">
+    <a href="/cerez-politikasi.html" class="hover:text-slate-950 hover:underline transition-colors no-underline">Çerez Politikası</a>
+    <span class="text-slate-400 select-none">|</span>
+    <a href="/iptal-iade-kosullari.html" class="hover:text-slate-950 hover:underline transition-colors no-underline">İptal ve İade Koşulları</a>
+    <span class="text-slate-400 select-none">|</span>
+    <a href="/kvkk.html" class="hover:text-slate-950 hover:underline transition-colors no-underline">KVKK</a>
+    <span class="text-slate-400 select-none">|</span>
+    <a href="/kullanim-kosullari.html" class="hover:text-slate-950 hover:underline transition-colors no-underline">Kullanım Koşulları</a>
+  </footer>
+
+  <!-- Drawer Menü JS Etkileşimi -->
+  <script>
+    const openBtn = document.getElementById('open-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    const drawerMenu = document.getElementById('drawer-menu');
+
+    function openDrawer() {
+      drawerMenu.classList.remove('hidden');
+    }
+
+    function closeDrawer() {
+      drawerMenu.classList.add('hidden');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+  </script>
 
 </body>
 </html>
