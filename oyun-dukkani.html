@@ -38,11 +38,11 @@
   <!-- ========================================================================= -->
   <!-- 1. SOL KENAR ÇUBUĞU (Sidebar - Ana Sayfa, Kütüphane, Oyun Dükkanı, Admin) -->
   <!-- ========================================================================= -->
-  <aside class="w-full md:w-20 lg:w-20 bg-yellow-400 md:bg-white border-b-0 md:border-r border-slate-200/80 flex md:flex-col justify-between items-center py-3 md:py-6 px-4 md:px-0 z-30 flex-shrink-0">
+  <aside class="w-full md:w-20 lg:w-20 bg-[#d4ff00] md:bg-white border-b-0 md:border-r border-slate-200/80 flex md:flex-col justify-between items-center py-3 md:py-6 px-4 md:px-0 z-30 flex-shrink-0">
     
     <!-- Üst: Rakun Logosu -->
     <div class="flex flex-col items-center gap-2">
-      <a href="/" class="p-2 rounded-2xl hover:bg-yellow-300/60 md:hover:bg-slate-100 transition-all group flex items-center justify-center" title="Ana Sayfaya Dön">
+      <a href="/" class="p-2 rounded-2xl hover:bg-black/10 md:hover:bg-slate-100 transition-all group flex items-center justify-center" title="Ana Sayfaya Dön">
         <img src="/b25.png" alt="Rakun Logo" class="h-10 w-auto object-contain transform group-hover:scale-105 transition-transform" />
       </a>
       <div class="hidden md:block w-8 h-[1px] bg-slate-100 my-2"></div>
@@ -51,7 +51,7 @@
     <!-- Orta: Navigasyon İkonları -->
     <nav class="flex md:flex-col items-center gap-2 md:gap-4">
       <!-- Ana Sayfa Linki -->
-      <a href="/" class="p-3 rounded-2xl text-slate-800 md:text-slate-400 hover:text-slate-950 md:hover:text-blue-600 hover:bg-yellow-300/60 md:hover:bg-blue-50 transition-all flex items-center justify-center group relative" title="Ana Sayfa">
+      <a href="/" class="p-3 rounded-2xl text-slate-800 md:text-slate-400 hover:text-slate-950 md:hover:text-[#6b46ff] hover:bg-black/10 md:hover:bg-purple-50 transition-all flex items-center justify-center group relative" title="Ana Sayfa">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
         </svg>
@@ -59,7 +59,7 @@
       </a>
 
       <!-- Kütüphane -->
-      <a href="/kutuphane" class="p-3 rounded-2xl text-slate-800 md:text-slate-400 hover:text-slate-950 md:hover:text-blue-600 hover:bg-yellow-300/60 md:hover:bg-blue-50 transition-all flex items-center justify-center group relative" title="Kütüphane">
+      <a href="/kutuphane" class="p-3 rounded-2xl text-slate-800 md:text-slate-400 hover:text-slate-950 md:hover:text-[#6b46ff] hover:bg-black/10 md:hover:bg-purple-50 transition-all flex items-center justify-center group relative" title="Kütüphane">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
         </svg>
@@ -67,7 +67,7 @@
       </a>
 
       <!-- Oyun Dükkanı (Aktif Sayfa) -->
-      <a href="/oyun-dukkani" class="p-3 rounded-2xl bg-slate-950 text-yellow-400 shadow-lg shadow-black/20 transition-all flex items-center justify-center group relative" title="Oyun Dükkanı">
+      <a href="/oyun-dukkani" class="p-3 rounded-2xl bg-[#6b46ff] text-white shadow-lg shadow-purple-950/25 transition-all flex items-center justify-center group relative" title="Oyun Dükkanı">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <line x1="6" y1="12" x2="10" y2="12"></line>
           <line x1="8" y1="10" x2="8" y2="14"></line>
@@ -81,7 +81,7 @@
 
     <!-- Alt: Oyun Admin Paneli Giriş İkonu -->
     <div class="flex items-center">
-      <a href="/oyun-admin" class="w-10 h-10 rounded-2xl bg-yellow-300/80 md:bg-slate-100 border border-yellow-500/40 md:border-slate-200 flex items-center justify-center text-slate-900 md:text-slate-700 font-bold hover:bg-yellow-300 md:hover:bg-slate-200 transition-all shadow-sm group relative" title="Oyun Yönetici Paneli">
+      <a href="/oyun-admin" class="w-10 h-10 rounded-2xl bg-black/10 md:bg-slate-100 border border-black/10 md:border-slate-200 flex items-center justify-center text-slate-900 md:text-slate-700 font-bold hover:bg-black/20 md:hover:bg-slate-200 transition-all shadow-sm group relative" title="Oyun Yönetici Paneli">
         <svg class="w-5 h-5 text-slate-800 md:text-slate-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -99,7 +99,7 @@
   <main class="flex-1 bg-slate-50 flex flex-col h-full overflow-hidden">
     
     <!-- Üst Arama Çubuğu -->
-    <header class="px-5 md:px-8 pt-2 md:pt-6 pb-6 md:pb-6 bg-yellow-400 md:bg-slate-50/80 backdrop-blur-md border-b-0 md:border-b border-slate-200/60 rounded-b-[2.5rem] md:rounded-none shadow-lg md:shadow-none flex-shrink-0 z-10">
+    <header class="px-5 md:px-8 pt-2 md:pt-6 pb-6 md:pb-6 bg-[#d4ff00] md:bg-slate-50/80 backdrop-blur-md border-b-0 md:border-b border-slate-200/60 rounded-b-[2.5rem] md:rounded-none shadow-lg md:shadow-none flex-shrink-0 z-10">
       <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
         
         <!-- Arama Çubuğu -->
@@ -114,7 +114,7 @@
             id="search-input"
             oninput="window.handleSearch()"
             placeholder="🎮 Oyun ara..." 
-            class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200/80 rounded-2xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all shadow-sm"
+            class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200/80 rounded-2xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#6b46ff]/30 focus:border-[#6b46ff] transition-all shadow-sm"
           />
         </div>
 
@@ -130,7 +130,7 @@
       <div class="mt-3 flex items-center justify-between lg:hidden">
         <span id="mobile-game-count" class="text-xs font-bold text-slate-900/80">Yükleniyor...</span>
         <button onclick="window.playFeaturedGame()" class="px-4 py-2 bg-slate-950 text-white rounded-xl text-xs font-black flex items-center gap-2 shadow-md active:scale-95 transition-all">
-          <span class="text-yellow-400 text-sm">⭐</span>
+          <span class="text-[#d4ff00] text-sm">⭐</span>
           Günün Oyunu
         </button>
       </div>
@@ -177,22 +177,22 @@
   <!-- ========================================================================= -->
   <!-- 3. SAĞ PANEL: ÖNERİLEN OYUN / GÜNÜN OYUNU (1:1 Kare Kapak) -->
   <!-- ========================================================================= -->
-  <aside id="filter-sidebar" class="w-full lg:w-80 xl:w-96 bg-yellow-400 text-slate-950 flex flex-col justify-between p-6 md:p-8 flex-shrink-0 z-20 overflow-y-auto hidden lg:flex border-l border-yellow-500/30">
+  <aside id="filter-sidebar" class="w-full lg:w-80 xl:w-96 bg-[#d4ff00] text-slate-950 flex flex-col justify-between p-6 md:p-8 flex-shrink-0 z-20 overflow-y-auto hidden lg:flex border-l border-black/10">
     
     <div>
       <!-- Sağ Panel Başlık -->
       <div class="flex items-center justify-between mb-6">
         <div>
-          <span class="text-xs font-black uppercase tracking-wider text-yellow-950/70">ÖNERİLEN OYUN</span>
+          <span class="text-xs font-black uppercase tracking-wider text-slate-900/70">ÖNERİLEN OYUN</span>
           <h2 class="text-2xl font-black text-slate-950 tracking-tight">Günün Oyunu</h2>
         </div>
-        <div class="w-11 h-11 rounded-2xl bg-yellow-300/80 flex items-center justify-center text-slate-900 shadow-sm text-xl">
+        <div class="w-11 h-11 rounded-2xl bg-black/10 flex items-center justify-center text-slate-900 shadow-sm text-xl">
           ⭐
         </div>
       </div>
 
       <!-- Günün / Önerilen Oyunu Kartı (1:1 Kare Görsel) -->
-      <div id="featured-card-container" class="bg-white rounded-3xl p-5 shadow-xl border border-yellow-200 relative overflow-hidden transition-all duration-300">
+      <div id="featured-card-container" class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 relative overflow-hidden transition-all duration-300">
         
         <!-- Üst 1:1 Kare Kapak Görseli -->
         <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-slate-950 mb-4 shadow-inner">
@@ -204,7 +204,7 @@
           />
           
           <div class="absolute top-3 left-3">
-            <span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-lg shadow-sm flex items-center gap-1">
+            <span class="px-2.5 py-1 bg-[#d4ff00] text-slate-950 text-[10px] font-black rounded-lg shadow-sm flex items-center gap-1">
               ⭐ Günün Tavsiyesi
             </span>
           </div>
@@ -216,8 +216,8 @@
         </h3>
 
         <!-- Öne Çıkan Oyun Butonu -->
-        <button id="featured-btn" onclick="window.playFeaturedGame()" class="w-full bg-slate-950 hover:bg-slate-800 text-white font-black py-3.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.98]">
-          <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+        <button id="featured-btn" onclick="window.playFeaturedGame()" class="w-full bg-[#6b46ff] hover:bg-[#5835ea] text-white font-black py-3.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-purple-950/20 active:scale-[0.98]">
+          <svg class="w-4 h-4 text-[#d4ff00]" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
           Hemen Oyna
@@ -225,8 +225,8 @@
       </div>
 
       <!-- Bilgi Kutucuğu -->
-      <div class="mt-6 bg-yellow-300/60 border border-yellow-500/30 rounded-2xl p-4 text-center">
-        <p class="text-xs font-bold text-yellow-950">
+      <div class="mt-6 bg-black/5 border border-black/10 rounded-2xl p-4 text-center">
+        <p class="text-xs font-bold text-slate-900">
           💡 Günün oyunu öğretmenlerimiz tarafından her hafta yeni kazanımlara göre güncellenmektedir.
         </p>
       </div>
@@ -234,8 +234,8 @@
     </div>
 
     <!-- Alt Destek Linki -->
-    <div class="pt-4 mt-6 border-t border-yellow-500/30 text-center">
-      <a href="/#iletisim" class="text-xs font-extrabold text-slate-950 underline hover:text-slate-800 transition-colors inline-block">
+    <div class="pt-4 mt-6 border-t border-black/10 text-center">
+      <a href="/#iletisim" class="text-xs font-extrabold text-slate-950 underline hover:text-[#6b46ff] transition-colors inline-block">
         Ömer Hoca ile İletişime Geçin
       </a>
     </div>
@@ -264,8 +264,8 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <button onclick="window.launchGameFullscreen()" class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black py-3.5 px-5 rounded-2xl text-xs transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <button onclick="window.launchGameFullscreen()" class="flex-1 bg-[#6b46ff] hover:bg-[#5835ea] text-white font-black py-3.5 px-5 rounded-2xl text-xs transition-all shadow-md shadow-purple-950/20 active:scale-95 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-current text-[#d4ff00]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           Oyunu Başlat
         </button>
         <button onclick="window.closeGameModal()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs transition-all">
@@ -383,7 +383,7 @@
               />
               ${game.isFeatured ? `
                 <div class="absolute top-2.5 right-2.5">
-                  <span class="px-2.5 py-1 bg-yellow-400 text-slate-950 text-[10px] font-black rounded-lg shadow-md flex items-center gap-1">
+                  <span class="px-2.5 py-1 bg-[#d4ff00] text-slate-950 text-[10px] font-black rounded-lg shadow-md flex items-center gap-1">
                     ⭐ Önerilen
                   </span>
                 </div>
@@ -392,15 +392,15 @@
 
             <!-- 2. Alt Kısım: Oyun Adı ve Hemen Oyna Butonu -->
             <div class="flex flex-col gap-3">
-              <h3 class="text-sm sm:text-base font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-yellow-600 transition-colors">
+              <h3 class="text-sm sm:text-base font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-[#6b46ff] transition-colors">
                 ${game.title}
               </h3>
 
               <button 
                 onclick="window.playGame('${game.id}')" 
-                class="w-full bg-slate-950 hover:bg-yellow-400 hover:text-slate-950 text-white font-black py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 group/btn"
+                class="w-full bg-[#6b46ff] hover:bg-[#5835ea] text-white font-black py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-purple-950/20 active:scale-95 group/btn"
               >
-                <svg class="w-3.5 h-3.5 fill-current text-yellow-400 group-hover/btn:text-slate-950 transition-colors" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 fill-current text-[#d4ff00] group-hover/btn:scale-110 transition-transform" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
                 <span>Hemen Oyna</span>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Özel Ders — Ömer Hoca ile Yeni Nesil Matematik</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Caveat, Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+    .font-handwriting {
+      font-family: 'Caveat', cursive;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #6b46ff; }
+    }
+    @keyframes hide-caret {
+      to { border-right-color: transparent; }
+    }
+    .handwriting-anim {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      border-right: 3px solid #6b46ff;
+      animation: typing 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards,
+                 blink-caret 0.7s step-end infinite,
+                 hide-caret 0.1s 2.9s forwards;
+    }
+    @keyframes draw-line {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .handwriting-underline {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: draw-line 1.1s cubic-bezier(0.4, 0, 0.2, 1) 2.1s forwards;
+    }
+  </style>
+  <!-- Toast JS -->
+  <script src="toast.js"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("fbG_xqqONUwYd-nm7");
+    })();
+  </script>
+</head>
+<body class="bg-[#d4ff00] text-slate-900 min-h-screen flex flex-col antialiased selection:bg-[#6b46ff] selection:text-[#d4ff00]">
+
+  <!-- ========================================================================= -->
+  <!-- 1. SLIDER BÖLÜMÜ (Ekranı Kaplayan Karusel Kapsayıcısı) -->
+  <!-- ========================================================================= -->
+  <section class="min-h-[calc(100vh-60px)] md:min-h-screen flex flex-col justify-between relative overflow-hidden bg-[#d4ff00]">
+    
+    <!-- Üst Navigasyon Çubuğu (Header) -->
+    <header class="flex-shrink-0 bg-[#d4ff00]/95 backdrop-blur-md border-b border-black/10 py-3 px-4 md:px-8 z-40">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        
+        <!-- Sol: Geri Dön Butonu -->
+        <a href="/" 
+           class="inline-flex items-center gap-2 bg-slate-950 text-white hover:bg-slate-800 font-bold px-3.5 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm shadow-md active:scale-95 transition-all group" 
+           title="Ana Sayfaya Dön">
+          <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Ana Sayfa</span>
+        </a>
+
+        <!-- Orta: Logo & Başlık -->
+        <a href="/" class="flex items-center gap-2 group" title="Ömer Hoca Ana Sayfası">
+          <img src="/b25.png" alt="Rakun Logo" class="h-8 md:h-9 w-auto object-contain transform group-hover:scale-105 transition-transform" />
+          <span class="font-black text-slate-950 text-sm md:text-base tracking-tight hidden sm:inline-block">
+            Ömer Hoca <span class="text-purple-700">•</span> Özel Ders
+          </span>
+        </a>
+
+        <!-- Sağ: Bilgi Al (İletişim Çekmecesi) -->
+        <button onclick="openContactDrawer()" 
+           class="inline-flex items-center gap-2 bg-[#6b46ff] hover:bg-purple-700 text-white font-black px-3.5 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+          <span>Bilgi Al</span>
+        </button>
+
+      </div>
+    </header>
+
+    <!-- El Yazısı Başlığı (Handwriting Headline) -->
+    <div class="w-full flex justify-center pt-8 pb-3 z-10 select-none px-4">
+      <div class="relative inline-block -rotate-2">
+        <h1 class="handwriting-anim text-2xl sm:text-3xl md:text-5xl font-bold font-handwriting text-slate-900 tracking-wide pb-1">
+          Ömer Hoca <span class="text-[#6b46ff]">- Matematik Öğretmeni</span>
+        </h1>
+        <!-- Animasyonlu El Çizimi Alt Çizgi (Hand-drawn squiggly underline) -->
+        <svg class="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-slate-900 overflow-visible pointer-events-none" viewBox="0 0 350 18" fill="none" preserveAspectRatio="none">
+          <path d="M 3 13 C 65 17, 125 7, 185 13 C 245 18, 295 8, 347 11" 
+                stroke="currentColor" 
+                stroke-width="3.5" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="handwriting-underline" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slider İçerik Alanı -->
+    <div id="slider-container" class="relative flex-1 w-full overflow-hidden flex items-center justify-center select-none py-4">
+
+      <!-- Sol Yön Oku -->
+      <button onclick="prevSlide()" 
+              class="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-slate-950/80 hover:bg-slate-950 text-[#d4ff00] backdrop-blur-md flex items-center justify-center shadow-xl active:scale-90 transition-all border border-white/10" 
+              title="Önceki Özellik"
+              aria-label="Önceki">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Sağ Yön Oku -->
+      <button onclick="nextSlide()" 
+              class="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-slate-950/80 hover:bg-slate-950 text-[#d4ff00] backdrop-blur-md flex items-center justify-center shadow-xl active:scale-90 transition-all border border-white/10" 
+              title="Sonraki Özellik"
+              aria-label="Sonraki">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Slayt Şeridi (Track) -->
+      <div id="slider-track" class="flex w-full h-full transition-transform duration-500 ease-out will-change-transform items-center">
+
+        <!-- SLAYT 1 (z1.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z1.png" alt="Öğrenciye Özel PDF'ler" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                01 • ÖĞRENCİYE ÖZEL PDF'LER
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Tamamen Sana Özel Hazırlanmış PDF Kaynaklar
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Her öğrencinin seviyesine ve hedefine uygun olarak özenle hazırlanan, MEB müfredatına ve yeni nesil soru tarzlarına tam uyumlu dijital dokümanlarla kesintisiz çalışma imkanı sağlıyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 2 (z2.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z2.png" alt="7/24 Soru Sorabilme" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                02 • 7/24 SORU SORABİLME
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Takıldığın Yerde Asla Yalnız Kalma
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Ders dışında çalışırken çözemediğin soruları dilediğin an bize iletebilirsin. 7/24 aktif soru çözüm desteğimiz sayesinde eksiklerini anında kapatarak ilerlemeni hızlandırıyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 3 (z3.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z3.png" alt="Akıllı Deneme Analizi" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                03 • AKILLI DENEME ANALİZİ
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Deneme Sonuçlarını Akıllı Analizle Değerlendir
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Çözdüğün denemelerdeki doğru ve yanlışlarını detaylı olarak analiz ediyoruz. Hangi konularda eksiğin olduğunu nokta atışı tespit ederek çalışma stratejini buna göre şekillendiriyoruz.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 4 (z4.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z4.png" alt="Konu ve Genel Denemeleri" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                04 • KONU VE GENEL DENEMELERİ
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Düzenli Denemelerle Sınav Provası
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Sadece konu çalışmak yetmez! Öğrendiklerini pekiştirmek ve sınav stresini yenmek için periyodik olarak uyguladığımız konu tarama ve genel deneme sınavlarıyla gerçek sınav deneyimini yaşa.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 5 (z5.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z5.png" alt="Kaynak ve Kitap Desteği" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                05 • KAYNAK VE KİTAP DESTEĞİ
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                İhtiyacın Olan Tüm Kaynaklar Elinin Altında
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Seviyene en uygun kaynakları özenle seçiyor ve süreç boyunca gerekli tüm kitap desteklerini sağlıyoruz. Kaynak arayışıyla vakit kaybetmeden doğrudan başarıya odaklan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 6 (z6.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z6.png" alt="Online Kütüphanede Ders Çalışma" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                06 • ONLİNE KÜTÜPHANEDE DERS ÇALIŞMA
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Odaklanmanı Sağlayacak Online Çalışma Ortamı
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0">
+                Evde çalışırken motivasyonun mu düşüyor? Diğer öğrencilerle birlikte verimli saatler geçirebileceğin, odaklanmayı artıran online kütüphane ortamımızda ders çalışma disiplini kazan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLAYT 7 (z7.png) -->
+        <div class="min-w-full w-full flex items-center justify-center px-4 md:px-16 py-4 flex-shrink-0">
+          <div class="max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-14 my-auto">
+            <div class="w-full md:w-1/2 flex justify-center items-center">
+              <img src="/z7.png" alt="Öğrenci Takibi ve Planlama" class="max-h-[35vh] sm:max-h-[42vh] md:max-h-[58vh] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.32)] select-none hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left px-2">
+              <span class="inline-block w-fit px-3 py-1 bg-slate-950 text-[#d4ff00] text-xs font-black rounded-lg uppercase tracking-wider mb-2 md:mb-3 shadow-sm mx-auto md:mx-0">
+                07 • ÖĞRENCİ TAKİBİ VE PLANLAMA
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 md:mb-4 leading-tight">
+                Kişiselleştirilmiş Takip ve Haftalık Planlama
+              </h2>
+              <p class="text-xs sm:text-sm md:text-lg text-slate-800 leading-relaxed font-medium max-w-lg mx-auto md:mx-0 mb-4">
+                Başarı tesadüf değildir. Hedeflerine ulaşman için haftalık çalışma programlarını birlikte hazırlıyor, düzenli veli bilgilendirmeleri ve sıkı bir takip sistemiyle motivasyonunu hep yüksek tutuyoruz.
+              </p>
+              <div>
+                <a href="#paketler" 
+                   class="inline-flex items-center gap-2 bg-[#6b46ff] hover:bg-purple-700 text-white font-black px-6 py-2.5 rounded-full text-sm shadow-md hover:scale-105 active:scale-95 transition-all">
+                  <span>Paketleri ve Fiyatları Gör</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Alt Navigasyon Barı: Sayaç, Noktalar ve 'Tüm Paketleri İncele' Butonu -->
+    <div class="flex-shrink-0 bg-[#d4ff00]/95 backdrop-blur-md border-t border-black/10 py-3.5 px-6 z-40">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        
+        <!-- Sol: Sayaç -->
+        <div class="text-xs font-black text-slate-900 tracking-wider">
+          <span id="slide-number">01</span> <span class="text-slate-500">/ 07</span>
+        </div>
+
+        <!-- Orta: 7 Adet Gösterge Noktası -->
+        <div id="dots-container" class="flex items-center gap-2">
+          <!-- JS ile doldurulur -->
+        </div>
+
+        <!-- Sağ: Yumuşak Kaydırma (Smooth Scroll) ile Paketlere İnen Buton -->
+        <a href="#paketler" 
+           class="inline-flex items-center gap-1.5 text-xs font-extrabold text-slate-900 hover:text-purple-700 transition-all group cursor-pointer bg-black/5 hover:bg-black/10 px-3.5 py-1.5 rounded-full border border-black/5">
+          <span>Tüm Paketleri İncele</span>
+          <svg class="w-3.5 h-3.5 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 2. FİYATLANDIRMA / PAKETLER BÖLÜMÜ (#paketler) -->
+  <!-- ========================================================================= -->
+  <section id="paketler" class="bg-[#d4ff00] text-slate-900 py-16 md:py-24 border-t border-black/10 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-0 sm:px-6">
+
+      <!-- Bölüm Başlığı & Açıklama -->
+      <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 px-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950 text-[#d4ff00] text-xs md:text-sm font-black tracking-wider uppercase mb-4 shadow-md">
+          🎯 Sana Özel Başarı Programları
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+          Hangi sınava hazırlanıyorsun?
+        </h2>
+        <p class="text-base sm:text-lg text-slate-800 font-medium leading-relaxed max-w-2xl mx-auto">
+          Hedefine ve seviyene en uygun birebir özel ders paketini seç, eksiklerini tamamlayarak sınav maratonunda fark yarat.
+        </p>
+      </div>
+
+      <!-- 3'lü Paket Kartları Izgarası (Mobilde Yatay Kaydırma, Masaüstünde 3'lü Grid) -->
+      <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-8 md:grid md:grid-cols-3 md:overflow-visible md:px-0 items-stretch scroll-smooth">
+
+        <!-- 1. KART: LGS ÖZEL DERS -->
+        <div class="w-[85vw] max-w-md shrink-0 snap-center overflow-hidden md:w-auto bg-white border-t-4 border-slate-900 rounded-3xl shadow-2xl hover:shadow-purple-950/20 hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between relative border border-slate-100">
+          <div>
+            <!-- Rozet -->
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1 bg-[#6b46ff]/10 text-[#6b46ff] px-3 py-1 rounded-full text-xs font-bold border border-[#6b46ff]/20">
+                🚨 Sınırlı Kontenjan
+              </span>
+              <span class="text-xs font-bold text-slate-500">8. Sınıf & LGS</span>
+            </div>
+
+            <!-- Paket Başlığı -->
+            <h3 class="text-2xl font-black text-slate-950 mb-2">LGS Özel Ders</h3>
+            <p class="text-xs text-slate-500 font-medium mb-4">Hedeflediğin fen ve anadolu liselerine giden yolda sağlam temel.</p>
+
+            <!-- Görsel / Önizleme Placeholder -->
+            <div class="mb-5 w-full rounded-2xl overflow-hidden relative border border-slate-100 shadow-inner group">
+              <img src="/lgs1.png" alt="LGS Özel Ders Kapağı" class="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/10 flex items-center justify-center pointer-events-none">
+                <span class="px-3 py-1 bg-slate-950/80 text-white text-xs font-bold rounded-full backdrop-blur-sm">LGS Hazırlık</span>
+              </div>
+            </div>
+
+            <!-- Konum & Hizmet Seçenekleri -->
+            <div class="grid grid-cols-2 gap-2 mb-6">
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                📍 Bolu Yüz Yüze
+              </div>
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                💻 Online Ders
+              </div>
+            </div>
+
+            <!-- Özellik Maddeleri -->
+            <p class="text-[11px] font-black text-slate-400 tracking-wider uppercase mb-3">PAKET İÇERİĞİ</p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 font-medium mb-8">
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Rakun App'e sınırsız erişim</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Öğrenciye özel PDF'ler</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Kitap ve doküman desteği</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Düzenli deneme ve takibi</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Online kütüphane ile beraber ders çalışma</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Öğrenciye Özel Eksik Konu Analizi</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>7/24 soru sorabilme</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Ücretsiz tanışma dersi</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Buton -->
+          <a href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20LGS%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum." 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm">
+            Ücretsiz Tanışma Dersine Başla
+          </a>
+        </div>
+
+        <!-- 2. KART: YKS ÖZEL DERS (Öne Çıkan) -->
+        <div class="w-[85vw] max-w-md shrink-0 snap-center overflow-hidden md:w-auto bg-white border-t-4 border-slate-900 rounded-3xl shadow-2xl hover:shadow-purple-950/20 hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between relative border border-slate-100">
+          <div>
+            <!-- Rozet -->
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1 bg-[#6b46ff] text-white px-3.5 py-1 rounded-full text-xs font-black shadow-sm">
+                🔥 En Çok Seçilen
+              </span>
+              <span class="text-xs font-bold text-slate-500">TYT - AYT - Geometri</span>
+            </div>
+
+            <!-- Paket Başlığı -->
+            <h3 class="text-2xl font-black text-slate-950 mb-2">YKS Özel Ders</h3>
+            <p class="text-xs text-slate-500 font-medium mb-4">Hedeflediğin üniversite ve bölüme ulaştıracak nokta atışı hazırlık.</p>
+
+            <!-- Görsel / Önizleme Placeholder -->
+            <div class="mb-5 w-full rounded-2xl overflow-hidden relative border border-slate-100 shadow-inner group">
+              <img src="/yks1.png" alt="YKS Özel Ders Kapağı" class="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/10 flex items-center justify-center pointer-events-none">
+                <span class="px-3 py-1 bg-slate-950/80 text-white text-xs font-bold rounded-full backdrop-blur-sm">YKS Hazırlık</span>
+              </div>
+            </div>
+
+            <!-- Konum & Hizmet Seçenekleri -->
+            <div class="grid grid-cols-2 gap-2 mb-6">
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                📍 Bolu Yüz Yüze
+              </div>
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                💻 Online Ders
+              </div>
+            </div>
+
+            <!-- Özellik Maddeleri -->
+            <p class="text-[11px] font-black text-slate-400 tracking-wider uppercase mb-3">PAKET İÇERİĞİ</p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 font-medium mb-8">
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Rakun App'e sınırsız erişim</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Öğrenciye özel PDF'ler</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Kitap ve doküman desteği</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Düzenli deneme ve takibi</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Online kütüphane ile beraber ders çalışma</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Öğrenciye Özel Eksik Konu Analizi</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>7/24 soru sorabilme</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Ücretsiz tanışma dersi</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Buton -->
+          <a href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20YKS%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum." 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm">
+            Ücretsiz Tanışma Dersine Başla
+          </a>
+        </div>
+
+        <!-- 3. KART: ARA SINIF ÖZEL DERS -->
+        <div class="w-[85vw] max-w-md shrink-0 snap-center overflow-hidden md:w-auto bg-white border-t-4 border-slate-900 rounded-3xl shadow-2xl hover:shadow-purple-950/20 hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between relative border border-slate-100">
+          <div>
+            <!-- Rozet -->
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1 bg-[#6b46ff]/10 text-[#6b46ff] px-3 py-1 rounded-full text-xs font-bold border border-[#6b46ff]/20">
+                ⭐ Temelden Zirveye
+              </span>
+              <span class="text-xs font-bold text-slate-500">5, 6, 7, 9, 10, 11. Sınıf</span>
+            </div>
+
+            <!-- Paket Başlığı -->
+            <h3 class="text-2xl font-black text-slate-950 mb-2">Ara Sınıf Özel Ders</h3>
+            <p class="text-xs text-slate-500 font-medium mb-4">Okul derslerinde başarı ve sınavlara erkenden güçlü hazırlık.</p>
+
+            <!-- Görsel / Önizleme Placeholder -->
+            <div class="mb-5 w-full rounded-2xl overflow-hidden relative border border-slate-100 shadow-inner group">
+              <img src="/arasınıf1.png" alt="Ara Sınıf Özel Ders Kapağı" class="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-black/10 flex items-center justify-center pointer-events-none">
+                <span class="px-3 py-1 bg-slate-950/80 text-white text-xs font-bold rounded-full backdrop-blur-sm">Okul & Temel</span>
+              </div>
+            </div>
+
+            <!-- Konum & Hizmet Seçenekleri -->
+            <div class="grid grid-cols-2 gap-2 mb-6">
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                📍 Bolu Yüz Yüze
+              </div>
+              <div class="bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold py-2.5 px-2 rounded-xl text-center">
+                💻 Online Ders
+              </div>
+            </div>
+
+            <!-- Özellik Maddeleri -->
+            <p class="text-[11px] font-black text-slate-400 tracking-wider uppercase mb-3">PAKET İÇERİĞİ</p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 font-medium mb-8">
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Rakun App'e sınırsız erişim</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Maarif modele uygun PDF'ler</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Yazılılara özel kamplar</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Kitap ve doküman desteği</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Düzenli deneme ve takibi</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Online kütüphane ile beraber ders çalışma</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-[#6b46ff] font-extrabold mt-0.5">✓</span>
+                <span>Öğrenciye Özel Eksik Konu Analizi</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Buton -->
+          <a href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20ara%20sınıf%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum." 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm">
+            Ücretsiz Tanışma Dersine Başla
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. ALT BİLGİ (Footer) -->
+  <!-- ========================================================================= -->
+  <footer class="bg-[#d4ff00] border-t border-black/10 py-8 px-6 text-center text-xs md:text-sm font-semibold text-slate-800">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <img src="/b25.png" alt="Rakun Logo" class="h-6 w-auto object-contain" />
+        <span>© 2026 Ömer Hoca Özel Ders & Kampüs. Tüm hakları saklıdır.</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-900 font-bold">
+        <a href="/" class="hover:underline">Ana Sayfa</a>
+        <span>•</span>
+        <a href="/kutuphane" class="hover:underline">Kütüphane</a>
+        <span>•</span>
+        <a href="/oyun-dukkani" class="hover:underline">Oyunlar</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 4. SLIDER JAVASCRIPT MOTORU -->
+  <!-- ========================================================================= -->
+  <script>
+    let currentIndex = 0;
+    const totalSlides = 7;
+    const track = document.getElementById('slider-track');
+    const dotsContainer = document.getElementById('dots-container');
+    const slideNumber = document.getElementById('slide-number');
+
+    function createDots() {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', `Slayt ${i + 1}`);
+        dot.onclick = () => goToSlide(i);
+        dot.className = i === currentIndex 
+          ? 'w-8 h-2.5 bg-slate-950 rounded-full transition-all duration-300' 
+          : 'w-2.5 h-2.5 bg-slate-950/30 hover:bg-slate-950/60 rounded-full transition-all duration-300 cursor-pointer';
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentIndex = index;
+      
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slideNumber.textContent = `0${currentIndex + 1}`;
+
+      const dots = dotsContainer.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i === currentIndex) {
+          dots[i].className = 'w-8 h-2.5 bg-slate-950 rounded-full transition-all duration-300';
+        } else {
+          dots[i].className = 'w-2.5 h-2.5 bg-slate-950/30 hover:bg-slate-950/60 rounded-full transition-all duration-300 cursor-pointer';
+        }
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        goToSlide(totalSlides - 1);
+      }
+    }
+
+    function nextSlide() {
+      if (currentIndex < totalSlides - 1) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      // Sadece slider görünürken veya odaktayken çalışması için
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const container = document.getElementById('slider-container');
+
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diffX = touchStartX - touchEndX;
+      const threshold = 45;
+      if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) nextSlide();
+        else prevSlide();
+      }
+    }
+
+    createDots();
+
+    // ══════════════════════════════════════════
+    // İLETİŞİM DRAWER (Sağdan Açılan Panel)
+    // ══════════════════════════════════════════
+    function openContactDrawer() {
+      const drawer = document.getElementById('contact-drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      if (drawer && overlay) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      }
+    }
+    window.openContactDrawer = openContactDrawer;
+
+    function closeDrawer() {
+      const drawer = document.getElementById('contact-drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      if (drawer) drawer.classList.add('translate-x-full');
+      if (overlay) overlay.classList.add('hidden');
+      
+      // Animasyon bittikten sonra formu sıfırla
+      setTimeout(() => {
+        const formContainer = document.getElementById('drawer-form-container');
+        const btnContainer = document.getElementById('drawer-btn-container');
+        const success = document.getElementById('drawer-success');
+        if (formContainer) formContainer.classList.remove('hidden');
+        if (btnContainer) btnContainer.classList.remove('hidden');
+        if (success) {
+          success.classList.add('hidden');
+          success.classList.remove('flex');
+        }
+        
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Gönder';
+          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }, 300);
+    }
+    window.closeDrawer = closeDrawer;
+
+    function sendDrawerEmail(e) {
+      if (e) e.preventDefault();
+      
+      const form = document.getElementById('drawer-form');
+      const adSoyad  = document.getElementById('d-adsoyad').value.trim();
+      const rol      = document.querySelector('input[name="d-rol"]:checked')?.value || '';
+      const telefon  = document.getElementById('d-telefon').value.trim();
+      const aciklama = document.getElementById('d-aciklama').value.trim();
+
+      if (!adSoyad || !telefon || !aciklama) {
+        if (typeof toast !== 'undefined' && toast.error) {
+          toast.error('Lütfen tüm alanları doldurunuz.');
+        } else {
+          alert('Lütfen tüm alanları doldurunuz.');
+        }
+        return;
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Gönderiliyor...';
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      emailjs.send("service_tk0hzdk", "template_ljoux8s", {
+        from_name: adSoyad,
+        reply_to: telefon,
+        message: aciklama,
+        adSoyad: adSoyad,
+        rol: rol,
+        telefon: telefon,
+        aciklama: aciklama
+      }).then(function() {
+        form.reset();
+        document.getElementById('drawer-form-container').classList.add('hidden');
+        document.getElementById('drawer-btn-container').classList.add('hidden');
+        document.getElementById('drawer-success').classList.remove('hidden');
+        document.getElementById('drawer-success').classList.add('flex');
+      }, function(error) {
+        if (typeof toast !== 'undefined' && toast.error) {
+          toast.error('Gönderim sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+        } else {
+          alert('Gönderim sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+        }
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Gönder';
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+    }
+    window.sendDrawerEmail = sendDrawerEmail;
+  </script>
+
+  <!-- ══════════════════════════════════════════
+       İLETİŞİM DRAWER (Sağdan Açılan Panel)
+  ══════════════════════════════════════════ -->
+
+  <!-- Overlay (Arka Plan Örtüsü) -->
+  <div id="drawer-overlay" class="fixed inset-0 z-[9998] bg-black/50 hidden transition-opacity" onclick="closeDrawer()"></div>
+
+  <!-- Drawer Panel -->
+  <div id="contact-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 z-[9999] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    
+    <!-- Drawer Başlık -->
+    <div class="flex items-center justify-between px-6 py-5 bg-[#6b46ff] text-white flex-shrink-0">
+      <div>
+        <h2 class="text-xl font-black tracking-tight">İletişim Formu</h2>
+        <p class="text-purple-100 text-sm mt-0.5">Size en kısa sürede dönüş yapacağız.</p>
+      </div>
+      <button onclick="closeDrawer()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors focus:outline-none cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <!-- Başarı Mesajı (Gizli) -->
+    <div id="drawer-success" class="flex-1 px-6 py-12 hidden flex-col items-center justify-center text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+      </div>
+      <h3 class="text-2xl font-black text-gray-900 mb-3">Talebiniz Alındı!</h3>
+      <p class="text-green-600 font-bold text-lg">24 saat içinde size geri dönüş yapacağız.</p>
+    </div>
+
+    <!-- Form Alanı (Kaydırılabilir) -->
+    <div id="drawer-form-container" class="flex-1 overflow-y-auto px-6 py-6">
+      <form id="drawer-form" class="space-y-5" onsubmit="sendDrawerEmail(event)">
+
+        <!-- Ad Soyad -->
+        <div>
+          <label for="d-adsoyad" class="block text-sm font-bold text-gray-700 mb-1.5">Ad ve Soyad</label>
+          <input type="text" id="d-adsoyad" name="AdSoyad" placeholder="Örn: Ahmet Yılmaz" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#6b46ff] focus:ring-2 focus:ring-[#6b46ff]/20 transition-all font-medium text-gray-900">
+        </div>
+
+        <!-- Öğrenci / Veli -->
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">Öğrenci misiniz, Veli misiniz?</label>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="d-rol" value="Öğrenci" class="w-4 h-4 accent-[#6b46ff]" checked>
+              <span class="text-sm font-medium text-gray-700">Öğrenci</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="d-rol" value="Veli" class="w-4 h-4 accent-[#6b46ff]">
+              <span class="text-sm font-medium text-gray-700">Veli</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Telefon -->
+        <div>
+          <label for="d-telefon" class="block text-sm font-bold text-gray-700 mb-1.5">Telefon Numarası</label>
+          <input type="tel" id="d-telefon" name="Telefon" placeholder="0 (5__) ___ __ __" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#6b46ff] focus:ring-2 focus:ring-[#6b46ff]/20 transition-all font-medium text-gray-900">
+        </div>
+
+        <!-- Açıklama -->
+        <div>
+          <label for="d-aciklama" class="block text-sm font-bold text-gray-700 mb-1.5">Açıklama</label>
+          <textarea id="d-aciklama" name="Aciklama" rows="5" placeholder="Mesajınızı buraya yazabilirsiniz..." required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#6b46ff] focus:ring-2 focus:ring-[#6b46ff]/20 transition-all font-medium text-gray-900 resize-none"></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Gönder Butonu (Sabit Alt) -->
+    <div id="drawer-btn-container" class="px-6 py-5 border-t border-gray-100 flex-shrink-0">
+      <button type="button" id="submit-btn" onclick="sendDrawerEmail(event)" class="w-full bg-slate-950 text-[#d4ff00] hover:bg-slate-800 py-4 rounded-xl font-black text-lg active:scale-[0.98] transition-all shadow-lg shadow-black/20 cursor-pointer">
+        Gönder
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
