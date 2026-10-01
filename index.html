@@ -108,17 +108,17 @@
   <!-- ========================================================================= -->
   <!-- AÇILIR MOBİL / YAN ÇEKMECE MENÜ (DRAWER) -->
   <!-- ========================================================================= -->
-  <div id="drawer-menu" class="fixed inset-0 z-50 flex hidden">
+  <div id="drawer-menu" class="fixed inset-0 z-50 flex pointer-events-none invisible transition-all duration-500 ease-in-out">
     <!-- Karartma Overlay -->
-    <div id="drawer-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"></div>
+    <div id="drawer-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ease-in-out opacity-0"></div>
 
     <!-- Menü İçerik Paneli -->
-    <div class="relative w-72 sm:w-80 max-w-full bg-[#d4ff00] h-full shadow-2xl p-6 flex flex-col justify-between z-10 border-r border-black/10">
+    <div id="drawer-panel" class="relative w-72 sm:w-80 max-w-full bg-[#d4ff00] h-full shadow-2xl p-6 flex flex-col justify-between z-10 border-r border-black/10 transform -translate-x-full transition-transform duration-500 ease-in-out">
       <div>
         <!-- Üst Bar: Kapat Butonu & Logo -->
         <div class="flex items-center justify-between pb-6 border-b border-black/10">
           <img src="/b25.png" alt="Rakun Logo" class="h-8 w-auto object-contain" />
-          <button id="close-menu-btn" class="w-9 h-9 rounded-full bg-[#6b46ff] text-white flex items-center justify-center font-bold text-lg hover:bg-[#5835ea] transition-colors" aria-label="Kapat">
+          <button id="close-menu-btn" class="w-9 h-9 rounded-full bg-[#6b46ff] text-white flex items-center justify-center font-bold text-lg hover:bg-[#5835ea] active:scale-95 transition-all cursor-pointer" aria-label="Kapat">
             ✕
           </button>
         </div>
@@ -306,14 +306,31 @@
     const openBtn = document.getElementById('open-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
     const drawerOverlay = document.getElementById('drawer-overlay');
+    const drawerPanel = document.getElementById('drawer-panel');
     const drawerMenu = document.getElementById('drawer-menu');
+    let drawerTimeout = null;
 
     function openDrawer() {
-      drawerMenu.classList.remove('hidden');
+      if (drawerTimeout) clearTimeout(drawerTimeout);
+      drawerMenu.classList.remove('pointer-events-none', 'invisible');
+      drawerMenu.classList.add('pointer-events-auto', 'visible');
+      // Reflow tetikleyerek CSS transition'ın sorunsuz başlamasını sağla
+      void drawerMenu.offsetWidth;
+      drawerOverlay.classList.remove('opacity-0');
+      drawerOverlay.classList.add('opacity-100');
+      drawerPanel.classList.remove('-translate-x-full');
+      drawerPanel.classList.add('translate-x-0');
     }
 
     function closeDrawer() {
-      drawerMenu.classList.add('hidden');
+      drawerOverlay.classList.remove('opacity-100');
+      drawerOverlay.classList.add('opacity-0');
+      drawerPanel.classList.remove('translate-x-0');
+      drawerPanel.classList.add('-translate-x-full');
+      drawerTimeout = setTimeout(() => {
+        drawerMenu.classList.remove('pointer-events-auto', 'visible');
+        drawerMenu.classList.add('pointer-events-none', 'invisible');
+      }, 500);
     }
 
     if (openBtn) openBtn.addEventListener('click', openDrawer);

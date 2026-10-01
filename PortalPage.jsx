@@ -158,79 +158,87 @@ export default function PortalPage() {
       {/* ========================================================================= */}
       {/* AÇILIR MOBİL / YAN ÇEKMECE MENÜ (DRAWER) */}
       {/* ========================================================================= */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          {/* Karartma Overlay */}
-          <div
-            onClick={() => setIsMenuOpen(false)}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
-          />
+      <div
+        className={`fixed inset-0 z-50 flex transition-all duration-500 ease-in-out ${
+          isMenuOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible'
+        }`}
+      >
+        {/* Karartma Overlay */}
+        <div
+          onClick={() => setIsMenuOpen(false)}
+          className={`fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ease-in-out ${
+            isMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
 
-          {/* Menü İçerik Paneli */}
-          <div className="relative w-72 sm:w-80 max-w-full bg-[#d4ff00] h-full shadow-2xl p-6 flex flex-col justify-between z-10 border-r border-black/10">
-            <div>
-              {/* Üst Bar: Kapat Butonu & Logo */}
-              <div className="flex items-center justify-between pb-6 border-b border-black/10">
-                <img src="/b25.png" alt="Rakun Logo" className="h-8 w-auto object-contain" />
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="w-9 h-9 rounded-full bg-[#6b46ff] text-white flex items-center justify-center font-bold text-lg hover:bg-[#5835ea] transition-colors"
-                  aria-label="Kapat"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Sayfa Bağlantıları */}
-              <nav className="mt-6 flex flex-col gap-3">
-                <Link
-                  href="/ozel-ders"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
-                >
-                  <img src="/roket.png" alt="Özel Ders" className="w-6 h-6 object-contain" />
-                  <span>Özel Ders</span>
-                </Link>
-                <Link
-                  href="/kutuphane"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
-                >
-                  <img src="/defter.png" alt="Kütüphane" className="w-6 h-6 object-contain" />
-                  <span>Kütüphane</span>
-                </Link>
-                <Link
-                  href="/oyun-dukkani"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
-                >
-                  <img src="/konsol.png" alt="Oyunlar" className="w-6 h-6 object-contain" />
-                  <span>Oyunlar</span>
-                </Link>
-                <Link
-                  href="/magaza"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
-                >
-                  <img src="/canta.png" alt="Mağaza" className="w-6 h-6 object-contain" />
-                  <span>Mağaza</span>
-                </Link>
-              </nav>
-            </div>
-
-            {/* Alt Kısım: Giriş Butonu */}
-            <div className="pt-6 border-t border-black/10">
-              <Link
-                href="/ogrenci-paneli"
+        {/* Menü İçerik Paneli */}
+        <div
+          className={`relative w-72 sm:w-80 max-w-full bg-[#d4ff00] h-full shadow-2xl p-6 flex flex-col justify-between z-10 border-r border-black/10 transform transition-transform duration-500 ease-in-out ${
+            isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div>
+            {/* Üst Bar: Kapat Butonu & Logo */}
+            <div className="flex items-center justify-between pb-6 border-b border-black/10">
+              <img src="/b25.png" alt="Rakun Logo" className="h-8 w-auto object-contain" />
+              <button
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-extrabold py-3.5 px-4 rounded-2xl shadow-md transition-all active:scale-95 no-underline"
+                className="w-9 h-9 rounded-full bg-[#6b46ff] text-white flex items-center justify-center font-bold text-lg hover:bg-[#5835ea] active:scale-95 transition-all cursor-pointer"
+                aria-label="Kapat"
               >
-                Giriş Yap
-              </Link>
+                ✕
+              </button>
             </div>
+
+            {/* Sayfa Bağlantıları */}
+            <nav className="mt-6 flex flex-col gap-3">
+              <Link
+                href="/ozel-ders"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
+              >
+                <img src="/roket.png" alt="Özel Ders" className="w-6 h-6 object-contain" />
+                <span>Özel Ders</span>
+              </Link>
+              <Link
+                href="/kutuphane"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
+              >
+                <img src="/defter.png" alt="Kütüphane" className="w-6 h-6 object-contain" />
+                <span>Kütüphane</span>
+              </Link>
+              <Link
+                href="/oyun-dukkani"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
+              >
+                <img src="/konsol.png" alt="Oyunlar" className="w-6 h-6 object-contain" />
+                <span>Oyunlar</span>
+              </Link>
+              <Link
+                href="/magaza"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/70 hover:bg-[#6b46ff] text-slate-900 hover:text-white font-extrabold transition-all no-underline shadow-sm"
+              >
+                <img src="/canta.png" alt="Mağaza" className="w-6 h-6 object-contain" />
+                <span>Mağaza</span>
+              </Link>
+            </nav>
+          </div>
+
+          {/* Alt Kısım: Giriş Butonu */}
+          <div className="pt-6 border-t border-black/10">
+            <Link
+              href="/ogrenci-paneli"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-extrabold py-3.5 px-4 rounded-2xl shadow-md transition-all active:scale-95 no-underline"
+            >
+              Giriş Yap
+            </Link>
           </div>
         </div>
-      )}
+      </div>
 
       {/* ========================================================================= */}
       {/* 2. ANA İÇERİK: SOLDA 4'LÜ KART (2X2), SAĞDA EL YAZISI BAŞLIK & w4.png */}

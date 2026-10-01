@@ -70,6 +70,35 @@ const features = [
   },
 ];
 
+// Öğrenci ve Veli Yorumları Verisi
+const testimonials = [
+  {
+    name: 'Merve T.',
+    tag: '8. Sınıf Velisi',
+    text: 'Ömer hocamla tanışmadan önce kızımın matematik netleri yerlerdeydi açıkçası. LGS stresinden sürekli ağlıyodu. Hocamın sabrı ve kızıma özel hazırladığı pdf ler sayesinde şuan çok iyi durumdayız. İyiki yollarımız kesişmiş 🙏',
+  },
+  {
+    name: 'Burak',
+    tag: '12. Sınıf (YKS)',
+    text: 'ya abartmıyorum mat netlerim resmen ikiye katlandı 🚀 Eskiden denemelerde matematiği görünce direkt atlıyodum şimdi ilk mat çözüyorum djdjdj. 7/24 soru atıyorum gece gündüz demeden cevaplıyor hocam',
+  },
+  {
+    name: 'Elif Su',
+    tag: '7. Sınıf Öğrencisi',
+    text: 'ömer hocanın dersleri çok eğlenceli geçiyo hiç sıkılmıyorum normalde matematiği hiç sevmezdim ama bu sene okul yazılılarından hep 90 üstü aldıım 🥳',
+  },
+  {
+    name: 'Hakan Bey',
+    tag: '11. Sınıf Velisi',
+    text: 'Oğlumun ergenlik dönemi malum masaya oturtamıyorduk, sürekli oyun başındaydı. Ömer hocanın koçluk sistemi ve haftalık takibi sayesinde düzene girdi herşey. Kütüphane sisteminde diğer çocukları görünce gaza gelip kendi isteğiyle çalışmaya başladı. Emeğinize sağlık hocam.',
+  },
+  {
+    name: 'Zeynep',
+    tag: 'Mezun Öğrenci',
+    text: 'Çözemediğim bir soru olduğunda soruyu hocama atıyorum ve anında taktikli çözümü geliyo.. inanılmaz bi sistem gerçekten. eskiden yapamadığım soruda sinirlenip kitabı kapatırdım şimdi çözümünü öğreniyorum ve devam ediyorum 💪 hedef tıp inşallah',
+  },
+];
+
 export default function OzelDersPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = features.length;
@@ -427,8 +456,8 @@ export default function OzelDersPage() {
             <div className="w-[85vw] max-w-md shrink-0 snap-center overflow-hidden md:w-auto bg-white border-t-4 border-slate-900 rounded-3xl shadow-2xl hover:shadow-purple-950/20 hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between relative border border-slate-100">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1 bg-[#6b46ff]/10 text-[#6b46ff] px-3 py-1 rounded-full text-xs font-bold border border-[#6b46ff]/20">
-                    🚨 Sınırlı Kontenjan
+                  <span className="inline-flex items-center gap-1 bg-[#6b46ff] text-white px-3.5 py-1 rounded-full text-xs font-black shadow-sm">
+                    🔥 En Çok Seçilen
                   </span>
                   <span className="text-xs font-bold text-slate-500">8. Sınıf & LGS</span>
                 </div>
@@ -497,24 +526,20 @@ export default function OzelDersPage() {
                 </ul>
               </div>
 
-              <a
-                href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20LGS%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm"
+              <button
+                type="button"
+                onClick={() => setIsDrawerOpen(true)}
+                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm cursor-pointer"
               >
                 Ücretsiz Tanışma Dersine Başla
-              </a>
+              </button>
             </div>
 
             {/* 2. YKS Özel Ders */}
             <div className="w-[85vw] max-w-md shrink-0 snap-center overflow-hidden md:w-auto bg-white border-t-4 border-slate-900 rounded-3xl shadow-2xl hover:shadow-purple-950/20 hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between relative border border-slate-100">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1 bg-[#6b46ff] text-white px-3.5 py-1 rounded-full text-xs font-black shadow-sm">
-                    🔥 En Çok Seçilen
-                  </span>
-                  <span className="text-xs font-bold text-slate-500">TYT - AYT - Geometri</span>
+                <div className="flex items-center justify-end mb-4">
+                  <span className="text-xs font-bold text-slate-500">TYT - AYT - Matematik</span>
                 </div>
 
                 <h3 className="text-2xl font-black text-slate-950 mb-2">YKS Özel Ders</h3>
@@ -581,14 +606,13 @@ export default function OzelDersPage() {
                 </ul>
               </div>
 
-              <a
-                href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20YKS%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm"
+              <button
+                type="button"
+                onClick={() => setIsDrawerOpen(true)}
+                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm cursor-pointer"
               >
                 Ücretsiz Tanışma Dersine Başla
-              </a>
+              </button>
             </div>
 
             {/* 3. Ara Sınıf Özel Ders */}
@@ -661,20 +685,72 @@ export default function OzelDersPage() {
                 </ul>
               </div>
 
-              <a
-                href="https://wa.me/905058729226?text=Merhaba%20Ömer%20Hocam,%20ara%20sınıf%20özel%20ders%20paketi%20hakkında%20bilgi%20almak%20ve%20tanışma%20dersine%20başlamak%20istiyorum."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm"
+              <button
+                type="button"
+                onClick={() => setIsDrawerOpen(true)}
+                className="w-full block text-center bg-[#6b46ff] hover:bg-[#5835ea] text-white font-bold py-3.5 px-4 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.98] text-sm cursor-pointer"
               >
                 Ücretsiz Tanışma Dersine Başla
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. FOOTER */}
+      {/* 3. ÖĞRENCİ VE VELİ YORUMLARI (TESTIMONIALS) */}
+      <section className="bg-[#d4ff00] text-slate-900 py-16 md:py-24 border-t border-black/10 relative overflow-hidden">
+        <div className="w-full">
+          {/* Bölüm Başlığı */}
+          <div className="text-center max-w-3xl mx-auto mb-8 px-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#6b46ff]/10 text-[#6b46ff] text-xs md:text-sm font-semibold mb-3 border border-[#6b46ff]/20">
+              ✨ Memnuniyet Oranımız %100
+            </div>
+            <h2 className="text-slate-900 text-3xl md:text-4xl font-bold text-center">
+              Öğrenci ve Velilerimiz Neler Söylüyor?
+            </h2>
+          </div>
+
+          {/* Yorum Kartları (Hem Mobilde Hem Masaüstünde Yatay Kaydırma / Carousel) */}
+          <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 px-4 md:px-8 pb-8 w-full max-w-full scroll-smooth cursor-grab active:cursor-grabbing [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-black/5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#6b46ff]/60 hover:[&::-webkit-scrollbar-thumb]:bg-[#6b46ff] [&::-webkit-scrollbar-thumb]:rounded-full">
+            {testimonials.map((item, idx) => (
+              <div
+                key={idx}
+                className="shrink-0 snap-center w-[85vw] md:w-[400px] bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 md:p-8 flex flex-col justify-between border border-slate-100 whitespace-normal break-words"
+              >
+                <div className="whitespace-normal break-words">
+                  {/* Tırnak İkonu */}
+                  <svg className="w-8 h-8 text-[#6b46ff] opacity-50 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                  {/* Yorum Metni */}
+                  <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal whitespace-normal break-words">
+                    "{item.text}"
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-end justify-between gap-2">
+                  <div>
+                    <h3 className="font-bold text-slate-900 text-base">{item.name}</h3>
+                    <span className="inline-block bg-[#6b46ff] text-white text-xs px-2.5 py-0.5 rounded-full font-bold mt-1 shadow-sm">
+                      {item.tag}
+                    </span>
+                  </div>
+                  {/* 5 Yıldız */}
+                  <div className="flex items-center gap-0.5 text-amber-400 shrink-0" aria-label="5 yıldız">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 fill-current text-amber-400" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FOOTER */}
       <footer className="bg-[#d4ff00] border-t border-black/10 py-8 px-6 text-center text-xs md:text-sm font-semibold text-slate-800">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
