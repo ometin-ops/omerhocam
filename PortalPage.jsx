@@ -227,8 +227,52 @@ export default function PortalPage() {
             </nav>
           </div>
 
-          {/* Alt Kısım: Giriş Butonu */}
-          <div className="pt-6 border-t border-black/10">
+          {/* Alt Kısım: Sosyal Medya & Giriş Butonu */}
+          <div className="pt-5 border-t border-black/10 flex flex-col gap-3.5">
+            {/* Sosyal Medya Bağlantıları */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-700 px-1">
+                Sosyal Medya
+              </span>
+              
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/omerhoca.tv/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-white/70 hover:bg-[#6b46ff] text-slate-800 hover:text-white font-bold text-xs sm:text-sm transition-all group no-underline shadow-xs hover:-translate-y-0.5"
+              >
+                <div className="w-8 h-8 rounded-lg bg-[#6b46ff]/10 group-hover:bg-white/20 flex items-center justify-center text-[#6b46ff] group-hover:text-white transition-colors shrink-0">
+                  <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="leading-tight font-extrabold">Instagram</span>
+                  <span className="text-[10px] text-slate-600 group-hover:text-white/80 font-semibold">@omerhoca.tv</span>
+                </div>
+              </a>
+
+              {/* YouTube */}
+              <a
+                href="https://www.youtube.com/@omerhocatv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-white/70 hover:bg-[#6b46ff] text-slate-800 hover:text-white font-bold text-xs sm:text-sm transition-all group no-underline shadow-xs hover:-translate-y-0.5"
+              >
+                <div className="w-8 h-8 rounded-lg bg-[#6b46ff]/10 group-hover:bg-white/20 flex items-center justify-center text-[#6b46ff] group-hover:text-white transition-colors shrink-0">
+                  <svg className="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="leading-tight font-extrabold">YouTube</span>
+                  <span className="text-[10px] text-slate-600 group-hover:text-white/80 font-semibold">@omerhocatv</span>
+                </div>
+              </a>
+            </div>
+
+            {/* Giriş Butonu */}
             <Link
               href="/ogrenci-paneli"
               onClick={() => setIsMenuOpen(false)}
@@ -319,6 +363,42 @@ export default function PortalPage() {
           {/* Profil Fotoğrafı ve Mor Kubbe Alanı */}
           <div className="relative w-full max-w-[340px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[540px] xl:max-w-[600px] flex justify-center items-end">
             
+            {/* Sol Sosyal Medya İkonu: Instagram */}
+            <a
+              href="https://www.instagram.com/omerhoca.tv/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute left-0 sm:-left-3 md:-left-8 lg:-left-12 top-[22%] sm:top-[25%] md:top-[24%] z-20 flex flex-col items-center gap-1 group no-underline select-none cursor-pointer hover:-translate-y-1.5 transition-all duration-300"
+              aria-label="Instagram @omerhoca.tv"
+            >
+              <div className="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-2xl bg-white/90 backdrop-blur-md shadow-lg shadow-purple-950/15 flex items-center justify-center text-[#6b46ff] group-hover:bg-[#6b46ff] group-hover:text-[#d4ff00] group-hover:scale-105 group-hover:shadow-2xl transition-all duration-300 border border-white/80">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </div>
+              <span className="text-[10px] sm:text-xs font-bold text-slate-900 group-hover:text-[#6b46ff] transition-colors bg-white/80 backdrop-blur-xs px-2.5 py-0.5 rounded-full shadow-xs border border-white/60">
+                @omerhoca.tv
+              </span>
+            </a>
+
+            {/* Sağ Sosyal Medya İkonu: YouTube */}
+            <a
+              href="https://www.youtube.com/@omerhocatv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute right-0 sm:-right-3 md:-right-8 lg:-right-12 top-[22%] sm:top-[25%] md:top-[24%] z-20 flex flex-col items-center gap-1 group no-underline select-none cursor-pointer hover:-translate-y-1.5 transition-all duration-300"
+              aria-label="YouTube @omerhocatv"
+            >
+              <div className="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-2xl bg-white/90 backdrop-blur-md shadow-lg shadow-purple-950/15 flex items-center justify-center text-[#6b46ff] group-hover:bg-[#6b46ff] group-hover:text-[#d4ff00] group-hover:scale-105 group-hover:shadow-2xl transition-all duration-300 border border-white/80">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <span className="text-[10px] sm:text-xs font-bold text-slate-900 group-hover:text-[#6b46ff] transition-colors bg-white/80 backdrop-blur-xs px-2.5 py-0.5 rounded-full shadow-xs border border-white/60">
+                @omerhocatv
+              </span>
+            </a>
+
             {/* Mor Kubbe (Arka Plan Yarım Daire / Arch) */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] md:w-[95%] h-[60%] sm:h-[62%] md:h-[65%] rounded-t-full bg-[#6b46ff] z-0 pointer-events-none" />
 
