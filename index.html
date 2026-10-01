@@ -198,8 +198,10 @@
   <!-- ========================================================================= -->
   <main class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-end justify-between px-4 sm:px-8 md:px-12 relative overflow-hidden md:overflow-visible">
     
-    <!-- SOL BÖLÜM: 4'LÜ KART IZGARASI (2x2 Grid) -->
-    <div class="w-full md:w-1/2 flex items-center justify-center md:justify-center py-5 sm:py-6 md:py-0 md:self-center z-20">
+    <!-- SOL BÖLÜM: 4'LÜ KART IZGARASI & SAYAÇLAR (SÜTUN YAPISI) -->
+    <div class="w-full md:w-1/2 flex flex-col items-center md:items-start gap-6 md:gap-8 mt-4 z-20">
+      
+      <!-- 4'lü Mor Kart Grubu -->
       <div class="grid grid-cols-2 gap-3.5 sm:gap-5 md:gap-6 w-full max-w-[340px] sm:max-w-[400px] md:max-w-[430px] lg:max-w-[470px]">
         
         <!-- 1. KART: ÖZEL DERS -->
@@ -283,6 +285,71 @@
         </a>
 
       </div>
+
+      <!-- Masaüstü: 4'lü Kart Grubunun Tam Altındaki Sınav Sayaçları -->
+      <div class="hidden md:block w-full max-w-[340px] sm:max-w-[400px] md:max-w-[430px] lg:max-w-[470px] select-none">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center md:justify-start">
+          <!-- 1. Sayaç: LGS 2027 -->
+          <div class="flex-1 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1.5 px-0.5">
+              <span class="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+                🎯 LGS 2027'ye Kalan Zaman
+              </span>
+              <span class="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+                12 Haz 09:30
+              </span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5 text-center">
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-days text-sm sm:text-base font-black text-[#d4ff00] leading-none">0</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-hours text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-minutes text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-seconds text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Sayaç: YKS 2027 -->
+          <div class="flex-1 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1.5 px-0.5">
+              <span class="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+                🚀 YKS 2027'ye Kalan Zaman
+              </span>
+              <span class="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+                19 Haz 10:15
+              </span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5 text-center">
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-days text-sm sm:text-base font-black text-[#d4ff00] leading-none">0</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-hours text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-minutes text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-seconds text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- SAĞ / ALT BÖLÜM: EL YAZISI BAŞLIK, MOR KUBBE & PROFİL FOTOĞRAFI (w4.png) -->
@@ -292,7 +359,7 @@
       <div class="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] lg:max-w-[480px] flex justify-center mb-2 sm:mb-3 md:mb-4 px-2 z-20">
         <div class="relative inline-block max-w-full -rotate-1 text-center">
           <h1 class="handwriting-anim text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-handwriting text-slate-900 tracking-wide pb-1">
-            Ömer Hoca <span className="text-[#6b46ff]">- Matematik Öğretmeni</span>
+            Ömer Hoca <span class="text-[#6b46ff]">- Matematik Öğretmeni</span>
           </h1>
 
           <!-- Soldan Sağa Çizilen Zarif Akıcı Alt Çizgi (Smooth Swoosh Underline) -->
@@ -356,6 +423,71 @@
              alt="Ömer Hoca" 
              class="relative z-10 w-full h-auto max-h-[48vh] sm:max-h-[52vh] md:max-h-[68vh] lg:max-h-[74vh] object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] block" />
       </div>
+
+      <!-- Mobil: Profil Fotoğrafının Altındaki Sınav Sayaçları (Footer'ın hemen üstü) -->
+      <div class="block md:hidden w-full max-w-[340px] sm:max-w-[420px] mt-5 px-1 z-20 select-none">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 w-full">
+          <!-- 1. Sayaç: LGS 2027 -->
+          <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1.5 px-0.5">
+              <span class="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+                🎯 LGS 2027'ye Kalan Zaman
+              </span>
+              <span class="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+                12 Haz 09:30
+              </span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5 text-center">
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-days text-sm sm:text-base font-black text-[#d4ff00] leading-none">0</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-hours text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-minutes text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="lgs-seconds text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Sayaç: YKS 2027 -->
+          <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1.5 px-0.5">
+              <span class="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+                🚀 YKS 2027'ye Kalan Zaman
+              </span>
+              <span class="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+                19 Haz 10:15
+              </span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5 text-center">
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-days text-sm sm:text-base font-black text-[#d4ff00] leading-none">0</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-hours text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-minutes text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+              </div>
+              <div class="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+                <span class="yks-seconds text-sm sm:text-base font-black text-[#d4ff00] leading-none">00</span>
+                <span class="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -373,8 +505,47 @@
     <a href="/kullanim-kosullari.html" class="hover:text-slate-950 hover:underline transition-colors no-underline">Kullanım Koşulları</a>
   </footer>
 
-  <!-- Drawer Menü JS Etkileşimi -->
+  <!-- ========================================================================= -->
+  <!-- 4. ÇEREZ POLİTİKASI POP-UP (COOKIE CONSENT BANNER) -->
+  <!-- ========================================================================= -->
+  <div id="cookie-consent-banner" class="fixed bottom-3 sm:bottom-5 inset-x-3 sm:inset-x-6 max-w-2xl mx-auto z-50 hidden transition-all duration-300">
+    <div class="bg-slate-950/95 text-white backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-2xl border border-white/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
+      <div class="flex items-start sm:items-center gap-3">
+        <span class="text-2xl select-none shrink-0">🍪</span>
+        <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+          Size daha iyi bir deneyim sunabilmek için çerezleri kullanıyoruz. Sitemizi kullanmaya devam ederek
+          <a href="/cerez-politikasi.html" class="underline text-[#d4ff00] hover:text-white font-bold transition-colors">
+            Çerez Politikamızı
+          </a>
+          kabul etmiş olursunuz.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 sm:gap-2.5 w-full md:w-auto shrink-0 justify-end flex-wrap sm:flex-nowrap">
+        <button
+          id="reject-cookie-btn"
+          class="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 active:scale-95 text-slate-300 hover:text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer whitespace-nowrap"
+        >
+          Reddet
+        </button>
+        <button
+          id="necessary-cookie-btn"
+          class="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 active:scale-95 text-slate-300 hover:text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer whitespace-nowrap"
+        >
+          Sadece Zorunlu
+        </button>
+        <button
+          id="accept-all-cookie-btn"
+          class="flex-1 sm:flex-none text-center bg-[#6b46ff] hover:bg-[#5835ea] active:scale-95 text-white font-extrabold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
+        >
+          Kabul Et
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Menü JS Etkileşimi & Sayaç / Çerez Scriptleri -->
   <script>
+    // 1. Drawer Menü
     const openBtn = document.getElementById('open-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
     const drawerOverlay = document.getElementById('drawer-overlay');
@@ -408,6 +579,62 @@
     if (openBtn) openBtn.addEventListener('click', openDrawer);
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+    // 2. Sınav Sayaçları (LGS 2027 & YKS 2027)
+    const lgsTarget = new Date('2027-06-12T09:30:00+03:00').getTime();
+    const yksTarget = new Date('2027-06-19T10:15:00+03:00').getTime();
+
+    function updateTimers() {
+      const now = Date.now();
+
+      const lgsDiff = Math.max(0, lgsTarget - now);
+      const lgsDays = Math.floor(lgsDiff / (1000 * 60 * 60 * 24));
+      const lgsHours = String(Math.floor((lgsDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+      const lgsMins = String(Math.floor((lgsDiff / (1000 * 60)) % 60)).padStart(2, '0');
+      const lgsSecs = String(Math.floor((lgsDiff / 1000) % 60)).padStart(2, '0');
+
+      document.querySelectorAll('.lgs-days').forEach(el => el.textContent = lgsDays);
+      document.querySelectorAll('.lgs-hours').forEach(el => el.textContent = lgsHours);
+      document.querySelectorAll('.lgs-minutes').forEach(el => el.textContent = lgsMins);
+      document.querySelectorAll('.lgs-seconds').forEach(el => el.textContent = lgsSecs);
+
+      const yksDiff = Math.max(0, yksTarget - now);
+      const yksDays = Math.floor(yksDiff / (1000 * 60 * 60 * 24));
+      const yksHours = String(Math.floor((yksDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+      const yksMins = String(Math.floor((yksDiff / (1000 * 60)) % 60)).padStart(2, '0');
+      const yksSecs = String(Math.floor((yksDiff / 1000) % 60)).padStart(2, '0');
+
+      document.querySelectorAll('.yks-days').forEach(el => el.textContent = yksDays);
+      document.querySelectorAll('.yks-hours').forEach(el => el.textContent = yksHours);
+      document.querySelectorAll('.yks-minutes').forEach(el => el.textContent = yksMins);
+      document.querySelectorAll('.yks-seconds').forEach(el => el.textContent = yksSecs);
+    }
+
+    updateTimers();
+    setInterval(updateTimers, 1000);
+
+    // 3. Çerez Politikası Pop-Up Mantığı
+    const cookieBanner = document.getElementById('cookie-consent-banner');
+    const acceptAllBtn = document.getElementById('accept-all-cookie-btn');
+    const necessaryBtn = document.getElementById('necessary-cookie-btn');
+    const rejectBtn = document.getElementById('reject-cookie-btn');
+
+    try {
+      if (!localStorage.getItem('cookieConsent') && cookieBanner) {
+        cookieBanner.classList.remove('hidden');
+      }
+    } catch (e) {}
+
+    function setCookiePreference(val) {
+      try {
+        localStorage.setItem('cookieConsent', val);
+      } catch (e) {}
+      if (cookieBanner) cookieBanner.classList.add('hidden');
+    }
+
+    if (acceptAllBtn) acceptAllBtn.addEventListener('click', () => setCookiePreference('all'));
+    if (necessaryBtn) necessaryBtn.addEventListener('click', () => setCookiePreference('necessary'));
+    if (rejectBtn) rejectBtn.addEventListener('click', () => setCookiePreference('rejected'));
   </script>
 
 </body>

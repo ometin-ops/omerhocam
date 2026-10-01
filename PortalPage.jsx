@@ -1,23 +1,130 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-/**
- * Yeni Nesil Portal Ana Sayfası (React / Next.js)
- * 
- * Güncellemeler:
- * 1. Favicon:
- *    - /fav1.png tarayıcı ikonu head içine eklendi
- * 2. El Yazısı Taşkınlık Düzeltmesi:
- *    - Font boyutu text-xl sm:text-2xl md:text-3xl lg:text-4xl seviyesine çekildi
- *    - Sağ taraftaki sütun sınırlarını aşmayacak şekilde max-w ile sınırlandı
- * 3. Alt Bilgi (Footer) / Yasal Bağlantılar:
- *    - Sayfa bitimine ortalanmış, fıstık yeşili zemin üzerinde şık footer eklendi
- *    - Çerez Politikası | İptal ve İade Koşulları | KVKK | Kullanım Koşulları
- */
+// Sınavlar İçin Canlı Geri Sayım Sayaçları (LGS 2027 & YKS 2027)
+function CountdownTimers() {
+  const [lgsTime, setLgsTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [yksTime, setYksTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    // LGS 2027: 12 Haziran 2027 09:30:00 (Türkiye saati GMT+3)
+    const lgsTarget = new Date('2027-06-12T09:30:00+03:00').getTime();
+    // YKS 2027 TYT: 19 Haziran 2027 10:15:00 (Türkiye saati GMT+3)
+    const yksTarget = new Date('2027-06-19T10:15:00+03:00').getTime();
+
+    const updateTimers = () => {
+      const now = Date.now();
+
+      const lgsDiff = Math.max(0, lgsTarget - now);
+      setLgsTime({
+        days: Math.floor(lgsDiff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((lgsDiff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((lgsDiff / (1000 * 60)) % 60),
+        seconds: Math.floor((lgsDiff / 1000) % 60),
+      });
+
+      const yksDiff = Math.max(0, yksTarget - now);
+      setYksTime({
+        days: Math.floor(yksDiff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((yksDiff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((yksDiff / (1000 * 60)) % 60),
+        seconds: Math.floor((yksDiff / 1000) % 60),
+      });
+    };
+
+    updateTimers();
+    const interval = setInterval(updateTimers, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center md:justify-start select-none">
+      {/* 1. Sayaç: LGS 2027 */}
+      <div className="flex-1 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+        <div className="flex items-center justify-between mb-1.5 px-0.5">
+          <span className="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+            🎯 LGS 2027'ye Kalan Zaman
+          </span>
+          <span className="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+            12 Haz 09:30
+          </span>
+        </div>
+        <div className="grid grid-cols-4 gap-1.5 text-center">
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{lgsTime.days}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(lgsTime.hours).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(lgsTime.minutes).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(lgsTime.seconds).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Sayaç: YKS 2027 */}
+      <div className="flex-1 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-purple-950/10 border border-white flex flex-col justify-between">
+        <div className="flex items-center justify-between mb-1.5 px-0.5">
+          <span className="text-[11px] sm:text-xs font-black text-slate-900 tracking-tight flex items-center gap-1">
+            🚀 YKS 2027'ye Kalan Zaman
+          </span>
+          <span className="text-[9px] font-bold bg-[#6b46ff]/10 text-[#6b46ff] px-2 py-0.5 rounded-full">
+            19 Haz 10:15
+          </span>
+        </div>
+        <div className="grid grid-cols-4 gap-1.5 text-center">
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{yksTime.days}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Gün</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(yksTime.hours).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saat</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(yksTime.minutes).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Dakika</span>
+          </div>
+          <div className="bg-[#6b46ff] text-white rounded-xl py-1.5 px-1 flex flex-col items-center shadow-xs">
+            <span className="text-sm sm:text-base font-black text-[#d4ff00] leading-none">{String(yksTime.seconds).padStart(2, '0')}</span>
+            <span className="text-[8px] font-bold text-white/80 uppercase mt-0.5">Saniye</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PortalPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showCookieConsent, setShowCookieConsent] = useState(false);
+
+  useEffect(() => {
+    try {
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        setShowCookieConsent(true);
+      }
+    } catch (e) {
+      // localStorage may be disabled in some environments
+    }
+  }, []);
+
+  const handleCookieConsent = (type = 'all') => {
+    try {
+      localStorage.setItem('cookieConsent', type);
+    } catch (e) {}
+    setShowCookieConsent(false);
+  };
 
   const portalItems = [
     {
@@ -285,12 +392,14 @@ export default function PortalPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. ANA İÇERİK: SOLDA 4'LÜ KART (2X2), SAĞDA EL YAZISI BAŞLIK & w4.png */}
+      {/* 2. ANA İÇERİK: SOLDA 4'LÜ KART & SAYAÇLAR, SAĞDA EL YAZISI BAŞLIK & w4.png */}
       {/* ========================================================================= */}
       <main className="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-end justify-between px-4 sm:px-8 md:px-12 relative overflow-hidden md:overflow-visible">
         
-        {/* SOL BÖLÜM: 4'LÜ KART IZGARASI (2x2 Grid) */}
-        <div className="w-full md:w-1/2 flex items-center justify-center md:justify-center py-5 sm:py-6 md:py-0 md:self-center z-20">
+        {/* SOL BÖLÜM: 4'LÜ KART IZGARASI & SAYAÇLAR (SÜTUN YAPISI) */}
+        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-6 md:gap-8 mt-4 z-20">
+          
+          {/* 4'lü Mor Kart Grubu */}
           <div className="grid grid-cols-2 gap-3.5 sm:gap-5 md:gap-6 w-full max-w-[340px] sm:max-w-[400px] md:max-w-[430px] lg:max-w-[470px]">
             {portalItems.map((item) => (
               <Link
@@ -329,6 +438,11 @@ export default function PortalPage() {
                 </svg>
               </Link>
             ))}
+          </div>
+
+          {/* Masaüstü: 4'lü Kart Grubunun Tam Altındaki Sınav Sayaçları */}
+          <div className="hidden md:block w-full max-w-[340px] sm:max-w-[400px] md:max-w-[430px] lg:max-w-[470px]">
+            <CountdownTimers />
           </div>
         </div>
 
@@ -409,6 +523,11 @@ export default function PortalPage() {
               className="relative z-10 w-full h-auto max-h-[48vh] sm:max-h-[54vh] md:max-h-[68vh] lg:max-h-[74vh] object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.25)] block"
             />
           </div>
+
+          {/* Mobil: Profil Fotoğrafının Altındaki Sınav Sayaçları (Footer'ın hemen üstü) */}
+          <div className="block md:hidden w-full max-w-[340px] sm:max-w-[420px] mt-5 px-1 z-20">
+            <CountdownTimers />
+          </div>
         </div>
 
       </main>
@@ -433,6 +552,46 @@ export default function PortalPage() {
           Kullanım Koşulları
         </Link>
       </footer>
+
+      {/* ========================================================================= */}
+      {/* 4. ÇEREZ POLİTİKASI POP-UP (COOKIE CONSENT BANNER) */}
+      {/* ========================================================================= */}
+      {showCookieConsent && (
+        <div className="fixed bottom-3 sm:bottom-5 inset-x-3 sm:inset-x-6 max-w-2xl mx-auto z-50 animate-pop-in">
+          <div className="bg-slate-950/95 text-white backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-2xl border border-white/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
+            <div className="flex items-start sm:items-center gap-3">
+              <span className="text-2xl select-none shrink-0">🍪</span>
+              <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+                Size daha iyi bir deneyim sunabilmek için çerezleri kullanıyoruz. Sitemizi kullanmaya devam ederek{' '}
+                <Link href="/cerez-politikasi" className="underline text-[#d4ff00] hover:text-white font-bold transition-colors">
+                  Çerez Politikamızı
+                </Link>{' '}
+                kabul etmiş olursunuz.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-2.5 w-full md:w-auto shrink-0 justify-end flex-wrap sm:flex-nowrap">
+              <button
+                onClick={() => handleCookieConsent('rejected')}
+                className="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 active:scale-95 text-slate-300 hover:text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer whitespace-nowrap"
+              >
+                Reddet
+              </button>
+              <button
+                onClick={() => handleCookieConsent('necessary')}
+                className="flex-1 sm:flex-none text-center bg-white/10 hover:bg-white/20 active:scale-95 text-slate-300 hover:text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 transition-all cursor-pointer whitespace-nowrap"
+              >
+                Sadece Zorunlu
+              </button>
+              <button
+                onClick={() => handleCookieConsent('all')}
+                className="flex-1 sm:flex-none text-center bg-[#6b46ff] hover:bg-[#5835ea] active:scale-95 text-white font-extrabold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
+              >
+                Kabul Et
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

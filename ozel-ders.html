@@ -856,6 +856,8 @@
       }
     }
     window.openContactDrawer = openContactDrawer;
+    window.openDrawer = openContactDrawer;
+    window.openContactModal = openContactDrawer;
 
     function closeDrawer() {
       const drawer = document.getElementById('contact-drawer');
@@ -1015,6 +1017,47 @@
         Gönder
       </button>
     </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. DALGALANAN SABİT İLETİŞİM / BİLGİ AL BUTONU -->
+  <!-- ========================================================================= -->
+  <div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 select-none">
+    <button
+      type="button"
+      onclick="openContactDrawer()"
+      class="relative group flex items-center justify-center cursor-pointer focus:outline-none"
+      aria-label="İletişim ve Bilgi Al Formunu Aç"
+    >
+      <!-- Yavaş ve Zarif Dışa Yayılan Dalga (3s Ping & Pulse Efektleri) -->
+      <span
+        class="absolute -inset-2 rounded-full bg-[#6b46ff] opacity-40 animate-ping pointer-events-none"
+        style="animation-duration: 3s; animation-timing-function: cubic-bezier(0, 0, 0.2, 1);"
+      ></span>
+      <span
+        class="absolute -inset-3.5 rounded-full bg-[#6b46ff]/20 animate-pulse pointer-events-none"
+        style="animation-duration: 3s;"
+      ></span>
+
+      <!-- Dairesel Mor Buton -->
+      <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#6b46ff] hover:bg-[#5835ea] active:scale-95 text-[#d4ff00] shadow-2xl shadow-purple-950/50 border-2 border-white flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+        <svg
+          class="w-7 h-7 md:w-8 md:h-8 fill-none stroke-current stroke-[2.2] transform group-hover:rotate-12 transition-transform duration-300"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a.75.75 0 01-.874-.95 4.47 4.47 0 00.32-1.341C3.67 17.135 3 14.707 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+          />
+        </svg>
+      </div>
+
+      <!-- Hover Tooltip (Bilgi Al) -->
+      <span class="absolute right-full mr-3.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-slate-950 text-[#d4ff00] font-black text-xs shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap hidden sm:block">
+        Bilgi Al 🚀
+      </span>
+    </button>
   </div>
 
 </body>
